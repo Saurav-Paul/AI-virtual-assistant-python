@@ -3,7 +3,7 @@ from datetime import datetime
 def get_time() :
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
-    print("Current Time =", current_time)
+    # print("Current Time =", current_time)
     tm = current_time.split(sep=':')
     apm = 'pm'
     if int(tm[0]) < 12 :
