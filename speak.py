@@ -9,4 +9,6 @@ def speak(sentence):
     Gtts.save(filename)
     print('Gtts saved now will play the sound')
     playsound.playsound(filename)
+    print('removeing file')
+    os.remove(filename)
 
