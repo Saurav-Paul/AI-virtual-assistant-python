@@ -17,7 +17,7 @@ def speak_voice(sentence):
         os.remove(filename)
     except :
         logger.critical('Dependency error - (speak_voice): need gTTs ,playsound .')
-        speak_text('You have some depenency missing sir')
+        speak_text('You have some depenency missing sir unless i can not speak sir :( ')
 
 def speak_text(sentence):
     """ It will takes a text sentence and reply as bot"""
@@ -26,7 +26,7 @@ def speak_text(sentence):
 
 def speak(sentence):
     """This functin will determine if bot will speak or only reply"""
-    if it['voice_reply']:
+    if it['voice_reply'] or it['voice_read+voice_reply']:
         speak_voice(sentence)
     if it['text_reply']:
         speak_text(sentence)

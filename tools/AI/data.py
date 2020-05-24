@@ -11,7 +11,7 @@ def get_time() :
         if int(tm[0]) == 0 :
             tm[0] = '12'
     
-    else :
+    elif int(tm[0]) > 12 :
         tm[0] = str( int(tm[0]) - 12 )
     current_time = 'Sir, now is {hour} : {min} '.format(hour=tm[0],min=tm[1]) + apm 
     print(current_time)
