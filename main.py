@@ -1,5 +1,5 @@
-from tools.voice.speak import speak
-from tools.voice.get_audio import get_audio
+from tools.interaction.speak import speak
+from tools.interaction.get_audio import get_audio
 from tools.AI.ai import ai
 
 
