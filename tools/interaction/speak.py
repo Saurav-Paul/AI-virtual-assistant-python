@@ -1,19 +1,26 @@
 
-from gtts import gTTS
-import os , time , playsound
-from settings.settings import interaction_setting as it
+from settings.settings import interaction_setting as it 
+from settings.logs import *
 
 def speak_voice(sentence):
-    Gtts = gTTS(text=sentence,lang='en')
-    print('Gtts setted')
-    filename = 'voice.mp3'
-    Gtts.save(filename)
-    print('Gtts saved now will play the sound')
-    playsound.playsound(filename)
-    print('removeing file')
-    os.remove(filename)
+    """" This function takes a text sentence and in return it will speak that sentence """
+    try :
+        from gtts import gTTS
+        import os , playsound
+        Gtts = gTTS(text=sentence,lang='en')
+        logger.info('Gtts setted')
+        filename = 'voice.mp3'
+        Gtts.save(filename)
+        logger.info('Gtts saved now will play the sound')
+        playsound.playsound(filename)
+        logger.info('removeing file')
+        os.remove(filename)
+    except :
+        logger.critical('Dependency error - (speak_voice): need gTTs ,playsound .')
+        speak_text('You have some depenency missing sir')
 
 def speak_text(sentence):
+    """ It will takes a text sentence and reply as bot"""
     bot = '(^-^)-> '
     print(bot,sentence)
 
