@@ -9,7 +9,6 @@ def ai(msg) :
     for line in data :
         if msg in line:
             reply = data[line]
-            pritn('Found')
             return reply
     if 'wiki' in msg:
         reply = wiki_search(msg)
