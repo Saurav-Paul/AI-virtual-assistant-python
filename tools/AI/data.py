@@ -14,14 +14,14 @@ def get_time() :
     
     elif int(tm[0]) > 12 :
         tm[0] = str( int(tm[0]) - 12 )
-    current_time = 'Sir, now is {hour} : {min} '.format(hour=tm[0],min=tm[1]) + apm 
+    current_time = 'Sir, now is {hour} : {min} '.format(hour=tm[0],min=tm[1]) + apm +'.'
 
     return current_time
 
 data = {
-    'how are you' : 'I am fine, thank you sir',
-    'good morning' : 'Good morning to you sir' , 
-    'good night' : 'Good night to you sir' ,
+    'how are you' : 'I am fine, thank you sir.',
+    'good morning' : 'Good morning to you sir.' , 
+    'good night' : 'Good night to you sir.' ,
     'what is the time' : get_time(),
 }
 

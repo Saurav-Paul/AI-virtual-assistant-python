@@ -16,8 +16,8 @@ def ai(msg) :
                 reply = data[line]
                 return reply
         logger.info('not found in data')
-        if 'wiki' in msg:
-            reply = wiki_search(msg)
+        if 'wiki' in msg or 'wikipedia' in msg:
+            reply = wiki_search(msg,2)
         else :
             reply = ask_question(msg)
         

@@ -4,9 +4,11 @@ from settings.logs import *
 
 def speak_voice(sentence):
     """" This function takes a text sentence and in return it will speak that sentence """
+    logger.info('attempting to speak')
     try :
         from gtts import gTTS
         import os , playsound
+        print("(..voice is loading, Sir..)")
         Gtts = gTTS(text=sentence,lang='en')
         logger.debug('Gtts setted')
         filename = 'voice.mp3'
@@ -26,9 +28,12 @@ def speak_text(sentence):
 
 def speak(sentence):
     """This functin will determine if bot will speak or only reply"""
-    if it['voice_reply'] or it['voice_read+voice_reply']:
-        speak_voice(sentence)
+    not_ok = True
     if it['text_reply']:
         speak_text(sentence)
-    else :
+        not_ok = False
+    if it['voice_reply'] or it['voice_read+voice_reply']:
+        speak_voice(sentence)
+        not_ok = False
+    if not_ok :
         print('Sir your speaking and writing cabapity is disibled. Please enbale it from settings.')
