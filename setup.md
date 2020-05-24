@@ -17,3 +17,5 @@
     - lxml==4.4.1
     - google==2.0.2
     - beautifulsoup4==4.8.0
+* install wolframalpha
+    * pip install wolframalpha

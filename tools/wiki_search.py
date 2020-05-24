@@ -6,7 +6,7 @@ def wiki_search(msg) :
         msg = ""
         i = 0
         for line in results :
-            if i == 4 :
+            if i == 1 :
                 break
             msg += line
             i += 1
