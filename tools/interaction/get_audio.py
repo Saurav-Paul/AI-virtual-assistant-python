@@ -35,5 +35,5 @@ def get_audio():
         return get_audio_text()
     else: 
         logger.error('Your mircrophone audio and read text both are disabled, enable them from settings')
-        print('Your BOT do not have listing power, give him the power from settings -_-')
+        print('Your BOT do not have any listing power, give him the power from settings -_-')
         return 'NONE'

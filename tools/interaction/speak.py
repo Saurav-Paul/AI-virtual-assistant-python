@@ -8,12 +8,12 @@ def speak_voice(sentence):
         from gtts import gTTS
         import os , playsound
         Gtts = gTTS(text=sentence,lang='en')
-        logger.info('Gtts setted')
+        logger.debug('Gtts setted')
         filename = 'voice.mp3'
         Gtts.save(filename)
-        logger.info('Gtts saved now will play the sound')
+        logger.debug('Gtts saved now will play the sound')
         playsound.playsound(filename)
-        logger.info('removeing file')
+        logger.debug('removeing file')
         os.remove(filename)
     except :
         logger.critical('Dependency error - (speak_voice): need gTTs ,playsound .')
@@ -21,7 +21,7 @@ def speak_voice(sentence):
 
 def speak_text(sentence):
     """ It will takes a text sentence and reply as bot"""
-    bot = '(^-^)-> '
+    bot = '\n(^-^)-> '
     print(bot,sentence)
 
 def speak(sentence):

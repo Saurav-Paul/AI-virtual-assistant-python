@@ -1,6 +1,12 @@
 import wikipedia
+from settings.logs import *
 
 def wiki_search(msg) :
+    """ This function will search through wikipedia and will reply information
+        Written by Saurav Paul.
+    """
+    logger.info('Searching to wikipedia.') 
+            print('(Thinking...Hmmm)')   
     try :
         results = wikipedia.page(msg).content.split(sep='.')
         msg = ""
@@ -12,5 +18,6 @@ def wiki_search(msg) :
             i += 1
         return msg 
     except :
-        return "sorry sir, i don't know about " + msg
+        logger.info("Haven't found anything relevant in wikipedia")
+        return "Sorry sir, i don't know about " + msg
 
