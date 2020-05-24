@@ -1,4 +1,4 @@
-
+from settings.settings import bot
 from datetime import datetime
 def get_time() :
     """This function will return current time
@@ -14,18 +14,20 @@ def get_time() :
     
     elif int(tm[0]) > 12 :
         tm[0] = str( int(tm[0]) - 12 )
-    current_time = 'Sir, now is {hour} : {min} '.format(hour=tm[0],min=tm[1]) + apm 
+    current_time = 'Sir, now is {hour} : {min} '.format(hour=tm[0],min=tm[1]) + apm +'.'
 
     return current_time
 
 data = {
-    'how are you' : 'I am fine, thank you sir',
-    'good morning' : 'Good morning to you sir' , 
-    'good night' : 'Good night to you sir' ,
+    'how are you' : 'I am fine, thank you sir.',
+    'good morning' : 'Good morning to you sir.' , 
+    'good night' : 'Good night to you sir.' ,
     'what is the time' : get_time(),
+    'tell me the time' : get_time() ,
+    'what is your name' : ('my name is ' + bot['name'] + '.'),
 }
 
-bye = [
-    'bye','tata' , 'exit' , 'quit' ,'stop' ,
-]
+wiki = [  'search wikipedia','find wikipedia','wikipedia find' ,'wikipedia it','wikipedia', 'search wiki','wiki it','find wiki','wiki find','wiki' ]
+youtube = ['search youtube','youtube search', 'youtube it','find youtube' ,'youtube find' , 'youtube']
+google = ['search google', 'google search','find google','google find','google it' , 'google','search it' ,'search','find it', 'find']
 

@@ -2,7 +2,8 @@ from tools.interaction.speak import speak
 from tools.interaction.get_audio import get_audio
 from tools.AI.ai import ai
 from settings.logs import *
-from tools.AI.data import bye
+from data.data import bye
+from tools.string_processing import string_process
 
 def check_done(msg):
     for i in bye:
@@ -14,7 +15,7 @@ def main() :
     logger.info('Bot starts.')
     speak('Hello sir, how can i help you?')
     while True :
-        get = get_audio().lower().strip()
+        get =string_process(get_audio())
         if check_done(get):
             break
         msg = ai(get)

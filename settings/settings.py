@@ -6,3 +6,9 @@ interaction_setting = {
     'voice_read+voice_reply' : False ,
     'text_read' : True ,
 }
+bot = {
+    'name' : 'Jarvis',
+    'gender' : 'Female',
+    'Owner' : 'Saurav Paul'
+    
+}
