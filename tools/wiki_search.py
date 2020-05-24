@@ -17,7 +17,7 @@ def wiki_search(msg, lim = 1) :
         for line in results :
             if i == lim :
                 break
-            msg += line
+            msg += line +'. '
             i += 1
         return msg 
     except :
