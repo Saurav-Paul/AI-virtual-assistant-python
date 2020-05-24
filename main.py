@@ -11,7 +11,7 @@ def check_done(msg):
     return False
 
 def main() :
-    logger.info('Bot starts')
+    logger.info('Bot starts.')
     speak('Hello sir, how can i help you?')
     while True :
         get = get_audio().lower().strip()
@@ -20,7 +20,7 @@ def main() :
         msg = ai(get)
         speak(msg)
     speak('Good Bye, Sir.')
-    logger.info('Bot stopped')
+    logger.info('Bot stopped.')
     
 
 main() 
