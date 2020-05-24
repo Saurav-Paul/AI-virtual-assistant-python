@@ -25,7 +25,3 @@ data = {
     'what is the time' : get_time(),
 }
 
-bye = [
-    'bye','tata' , 'exit' , 'quit' ,'stop' ,
-]
-
