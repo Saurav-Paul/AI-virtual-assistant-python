@@ -12,9 +12,10 @@ def ai(msg) :
     reply = "I don't know what to do, sir ."
     try :
         for line in data :
-            if line.find(msg) != -1:
+            if msg.find(line) != -1:
                 reply = data[line]
                 return reply
+        logger.info('not found in data')
         if 'wiki' in msg:
             reply = wiki_search(msg)
         else :

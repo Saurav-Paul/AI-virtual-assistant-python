@@ -14,7 +14,7 @@ def main() :
     logger.info('Bot starts')
     speak('Hello sir, how can i help you?')
     while True :
-        get = get_audio().lower()
+        get = get_audio().lower().strip()
         if check_done(get):
             break
         msg = ai(get)

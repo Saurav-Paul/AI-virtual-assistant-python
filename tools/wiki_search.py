@@ -6,7 +6,7 @@ def wiki_search(msg) :
         Written by Saurav Paul.
     """
     logger.info('Searching to wikipedia.') 
-            print('(Thinking...Hmmm)')   
+    print('(Thinking...)')   
     try :
         results = wikipedia.page(msg).content.split(sep='.')
         msg = ""
