@@ -1,9 +1,23 @@
 
 from tools.assistant import ask_question
-from tools.AI.data import data
+from tools.AI.data import data , youtube , wiki , google
 from tools.wiki_search import wiki_search
 from settings.logs import *
 from tools.browser.search import *
+
+def check(msg,mp):
+    logger.info('check->' + msg)
+    for word in mp :
+        if word in msg:
+            return True
+    return False
+
+
+def rep(msg,mp):
+    for word in mp :
+        if word in msg:
+            return msg.replace(word,'')
+    return msg
 
 def ai(msg) :
     """ Little ai for reacting to the msg .
@@ -17,12 +31,22 @@ def ai(msg) :
                 reply = data[line]
                 return reply
         logger.info('not found in data')
-        if 'wiki' in msg or 'wikipedia' in msg:
-            reply = wiki_search(msg,2)
+        if check(msg,youtube):
+            msg = rep(msg,youtube)
+            search_youtube(msg)
+            reply = 'check browser.'
+        elif check(msg,wiki):
+            msg = rep(msg,wiki)
+            search_wiki(msg)
+            reply = 'check browser.'
+        elif check(msg,google):
+            msg = rep(msg,google)
+            search_google(msg)
+            reply = 'check browser.'
         else :
             reply = ask_question(msg)
-        
         return reply
     except :
+        logger.info('Getting some error in ai')
         return reply
 

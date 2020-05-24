@@ -1,4 +1,4 @@
-
+from settings.settings import bot
 from datetime import datetime
 def get_time() :
     """This function will return current time
@@ -24,9 +24,10 @@ data = {
     'good night' : 'Good night to you sir.' ,
     'what is the time' : get_time(),
     'tell me the time' : get_time() ,
+    'what is your name' : ('my name is ' + bot['name'] + '.'),
 }
 
-wiki = ['wiki','wikipedia' , 'wikipedia it', 'wiki it', 'search wiki' , 'search wikipedia']
-youtube = ['search youtube', 'youtube it', 'youtube']
-google = ['search google', 'google it' , 'google','search' , 'search it']
+wiki = [  'search wikipedia','find wikipedia','wikipedia find' ,'wikipedia it','wikipedia', 'search wiki','wiki it','find wiki','wiki find','wiki' ]
+youtube = ['search youtube','youtube search', 'youtube it','find youtube' ,'youtube find' , 'youtube']
+google = ['search google', 'google search','find google','google find','google it' , 'google','search it' ,'search','find it', 'find']
 

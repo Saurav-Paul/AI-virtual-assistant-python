@@ -24,4 +24,3 @@ def search_youtube(msg):
     q = 'https://www.youtube.com/results?search_query='
     webbrowser.open(q+make_query(msg))
 
-search_google('Saurav Paul CEO')
