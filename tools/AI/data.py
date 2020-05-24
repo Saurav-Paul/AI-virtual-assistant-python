@@ -1,9 +1,10 @@
 
 from datetime import datetime
 def get_time() :
+    """This function will return current time
+        written by Saurav Paul"""
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
-    # print("Current Time =", current_time)
     tm = current_time.split(sep=':')
     apm = 'pm'
     if int(tm[0]) < 12 :
@@ -11,10 +12,9 @@ def get_time() :
         if int(tm[0]) == 0 :
             tm[0] = '12'
     
-    else :
+    elif int(tm[0]) > 12 :
         tm[0] = str( int(tm[0]) - 12 )
     current_time = 'Sir, now is {hour} : {min} '.format(hour=tm[0],min=tm[1]) + apm 
-    print(current_time)
 
     return current_time
 
@@ -24,4 +24,8 @@ data = {
     'good night' : 'Good night to you sir' ,
     'what is the time' : get_time(),
 }
+
+bye = [
+    'bye','tata' , 'exit' , 'quit' ,'stop' ,
+]
 
