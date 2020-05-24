@@ -3,6 +3,7 @@ from tools.assistant import ask_question
 from tools.AI.data import data
 from tools.wiki_search import wiki_search
 from settings.logs import *
+from tools.browser.search import *
 
 def ai(msg) :
     """ Little ai for reacting to the msg .
