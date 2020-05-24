@@ -12,8 +12,8 @@ def ai(msg) :
             return reply
     if 'wiki' in msg:
         reply = wiki_search(msg)
-    # else :
-    #     reply = ask_question(msg)
+    else :
+        reply = ask_question(msg)
     
     return reply
 
