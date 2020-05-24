@@ -9,12 +9,22 @@ def check_done(msg):
         if i in msg:
             return True
     return False
+def string_process(msg):
+    lt = list(msg.split())
+    msg = ""
+    i = 0 
+    for word in lt:
+        if i :
+            msg += ' '
+        i += 1
+        msg += word
+    return msg.lower()
 
 def main() :
     logger.info('Bot starts.')
     speak('Hello sir, how can i help you?')
     while True :
-        get = get_audio().lower().strip()
+        get =string_process(get_audio())
         if check_done(get):
             break
         msg = ai(get)
