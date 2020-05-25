@@ -24,7 +24,7 @@ def speak_voice(sentence):
 def speak_text(sentence):
     """ It will takes a text sentence and reply as bot"""
     bot = '\n(^-^)-> '
-    print(bot,sentence)
+    print(bot,sentence.capitalize())
 
 def speak(sentence):
     """This functin will determine if bot will speak or only reply"""

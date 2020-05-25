@@ -1,7 +1,7 @@
 import wikipedia
 from settings.logs import *
 from tools.string_processing import wiki_string
-
+from tools.browser.search import search_google
 def wiki_search(msg, lim = 1) :
     """ This function will search through wikipedia and will reply information
         Written by Saurav Paul.
@@ -22,5 +22,6 @@ def wiki_search(msg, lim = 1) :
         return msg 
     except :
         logger.info("Haven't found anything relevant in wikipedia")
-        return "Sorry sir, i don't know about " + msg + '.'
+        search_google(msg)
+        return "I don't know sir, but I can show you ,check browser."
 
