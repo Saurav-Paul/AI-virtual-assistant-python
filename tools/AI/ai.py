@@ -1,10 +1,12 @@
 
 from tools.assistant import ask_question
-from tools.AI.data import data , youtube , wiki , google , youtube_play , goto_keys
+from tools.AI.data import data , youtube , wiki , google , youtube_play , goto_keys , install_keys
 from tools.wiki_search import wiki_search
 from settings.logs import *
 from tools.browser.search import *
 from tools.browser.goto import find_goto_address
+from system.install import install
+
 def check(msg,mp):
     logger.info('check->' + msg)
     for word in mp :
@@ -52,6 +54,9 @@ def ai(msg) :
             msg = rep(msg,google)
             search_google(msg)
             reply = 'check browser.'
+        elif check(msg,install_keys):
+            msg = rep(msg,install_keys)
+            reply = install(msg)
         else :
             reply = ask_question(msg)
         return reply

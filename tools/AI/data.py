@@ -32,3 +32,4 @@ youtube = ['search youtube','youtube search', 'youtube it','find youtube' ,'yout
 google = ['search google', 'google search','find google','google find','google it' , 'google','search it' ,'search','find it', 'find']
 youtube_play = ['play youtube', 'youtube play']
 goto_keys = ['goto','go to']
+install_keys = ['install']
