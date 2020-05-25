@@ -5,7 +5,9 @@ from tools.browser.search import search_google
 from settings.settings import bot
 
 def ask_question(question) :
-    """Ask me anything, I will use my reply using wolframalpha api
+    """Ask me anything, I will use give my reply using wolframalpha api.if I don't find the answer
+        I will search google.
+        Don't worry I have alternative ;p 
         Written by Saurav Paul."""
     logger.info('Asking wolframalpha.')
     try :
