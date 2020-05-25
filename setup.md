@@ -19,3 +19,5 @@
     - beautifulsoup4==4.8.0
 * install wolframalpha
     * pip install wolframalpha
+* pickle
+    * pip install pickle-mixin
