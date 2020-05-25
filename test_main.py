@@ -16,12 +16,9 @@ def check_done(msg):
 def main() :
     logger.info('Bot starts.')
     speak('Hello sir, how can i help you?')
-    while True :
-        get =string_process(get_audio())
-        if check_done(get):
-            break
-        msg = ai(get)
-        speak(msg)
+    get = 'goto light oj'
+    msg = ai(get)
+    speak(msg)
     speak('Good Bye, Sir.')
     logger.info('Bot stopped.')
     

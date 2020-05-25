@@ -16,6 +16,9 @@ def ask_question(question) :
         answer = next(res.results).text
         if 'Wolfram|Alpha' in answer:
             answer = answer.replace('Wolfram|Alpha',bot['name'])
+        if 'data not available' in answer:
+            answer = 'check browser.'
+            search_google(question)
         return answer
     except :
         logger.info('Wolframalpha do not know the answer.')

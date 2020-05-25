@@ -44,6 +44,6 @@ def chatbot_query(query, index=0):
         if len(result) == 0: result = fallback
         return result
 
-ans = chatbot_query('what is the time in bangladesh')
+ans = chatbot_query('codeforces')
 print(ans)
 # speak(ans)

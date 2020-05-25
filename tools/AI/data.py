@@ -30,4 +30,5 @@ data = {
 wiki = [  'search wikipedia','find wikipedia','wikipedia find' ,'wikipedia it','wikipedia', 'search wiki','wiki it','find wiki','wiki find','wiki' ]
 youtube = ['search youtube','youtube search', 'youtube it','find youtube' ,'youtube find' , 'youtube']
 google = ['search google', 'google search','find google','google find','google it' , 'google','search it' ,'search','find it', 'find']
-
+youtube_play = ['play youtube', 'youtube play']
+goto_keys = ['goto']

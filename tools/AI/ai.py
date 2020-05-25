@@ -1,10 +1,10 @@
 
 from tools.assistant import ask_question
-from tools.AI.data import data , youtube , wiki , google
+from tools.AI.data import data , youtube , wiki , google , youtube_play , goto_keys
 from tools.wiki_search import wiki_search
 from settings.logs import *
 from tools.browser.search import *
-
+from tools.browser.goto import find_goto_address
 def check(msg,mp):
     logger.info('check->' + msg)
     for word in mp :
@@ -16,8 +16,8 @@ def check(msg,mp):
 def rep(msg,mp):
     for word in mp :
         if word in msg:
-            return msg.replace(word,'')
-    return msg
+            return msg.replace(word,'').strip().capitalize()
+    return msg.strip().capitalize()
 
 def ai(msg) :
     """ Little ai for reacting to the msg .
@@ -30,8 +30,17 @@ def ai(msg) :
             if msg.find(line) != -1:
                 reply = data[line]
                 return reply
-        logger.info('not found in data')
-        if check(msg,youtube):
+        logger.info('Not found in common data')
+        if check(msg,youtube_play):
+            msg = rep(msg,youtube_play)
+            logger.info(msg)
+            find_goto_address(msg)
+            reply = 'Enjoy sir. :D'
+        elif check(msg,goto_keys):
+            msg = rep(msg,goto_keys)
+            find_goto_address(msg)
+            reply = 'check browser'
+        elif check(msg,youtube):
             msg = rep(msg,youtube)
             search_youtube(msg)
             reply = 'check browser.'
