@@ -31,4 +31,4 @@ wiki = [  'search wikipedia','find wikipedia','wikipedia find' ,'wikipedia it','
 youtube = ['search youtube','youtube search', 'youtube it','find youtube' ,'youtube find' , 'youtube']
 google = ['search google', 'google search','find google','google find','google it' , 'google','search it' ,'search','find it', 'find']
 youtube_play = ['play youtube', 'youtube play']
-goto_keys = ['goto']
+goto_keys = ['goto','go to']

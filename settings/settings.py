@@ -3,7 +3,7 @@
 interaction_setting = {
     'voice_reply' : False,
     'text_reply' : True ,
-    'voice_read+voice_reply' : False ,
+    'voice_read+voice_reply' : True ,
     'text_read' : True ,
 }
 bot = {
@@ -12,3 +12,4 @@ bot = {
     'Owner' : 'Saurav Paul'
     
 }
+START_SCREEN_NAME = bot['name']

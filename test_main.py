@@ -6,6 +6,7 @@ from tools.AI.ai import ai
 from settings.logs import *
 from data.data import bye
 from tools.string_processing import string_process
+from system.asci_banner import asci_banner
 
 def check_done(msg):
     for i in bye:
@@ -15,11 +16,7 @@ def check_done(msg):
 
 def main() :
     logger.info('Bot starts.')
-    speak('Hello sir, how can i help you?')
-    get = 'goto light oj'
-    msg = ai(get)
-    speak(msg)
-    speak('Good Bye, Sir.')
+    asci_banner('Hello Saurav')
     logger.info('Bot stopped.')
     
 

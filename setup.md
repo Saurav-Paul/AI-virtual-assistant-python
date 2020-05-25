@@ -21,3 +21,5 @@
     * pip install wolframalpha
 * pickle
     * pip install pickle-mixin
+* pyfiglet
+    * pip install pyfiglet

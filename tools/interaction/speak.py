@@ -1,6 +1,7 @@
 
 from settings.settings import interaction_setting as it 
 from settings.logs import *
+from system.screen_text import thoughts_processing
 
 def speak_voice(sentence):
     """" This function takes a text sentence and in return it will speak that sentence """
@@ -8,7 +9,7 @@ def speak_voice(sentence):
     try :
         from gtts import gTTS
         import os , playsound
-        print("(..voice is loading, Sir..)")
+        thoughts_processing('voice is loading, Sir')
         Gtts = gTTS(text=sentence,lang='en')
         logger.debug('Gtts setted')
         filename = 'voice.mp3'
@@ -19,7 +20,7 @@ def speak_voice(sentence):
         os.remove(filename)
     except :
         logger.critical('Dependency error - (speak_voice): need gTTs ,playsound .')
-        speak_text('You have some depenency missing sir unless i can not speak sir :( ')
+        speak_text('You have some depenency missing sir, i can not speak without them, sir :( ')
 
 def speak_text(sentence):
     """ It will takes a text sentence and reply as bot"""

@@ -1,6 +1,7 @@
 
 from settings.settings import interaction_setting as it 
 from settings.logs import *
+from system.screen_text import thoughts_processing
 
 def get_audio_text():
     msg = input("(Write Something)-> ")
@@ -11,18 +12,25 @@ def get_audio_microphone():
         import speech_recognition as sr
         r = sr.Recognizer()
         logger.info("Ready to listen")
+        input('(Press enter to give voice commands...')
         with sr.Microphone() as source:
             r.adjust_for_ambient_noise(source)
-            logger.info('adjusted ambient noise')
+            logger.info('adjusted ambient noise') 
+            print('(Say someting) ->',sep=' ')
             audio = r.listen(source,timeout=8, phrase_time_limit=20)   
             said = ""
             logger.info('audio listened')
-            print('(Say someting) ->',sep=' ')
+            thoughts_processing('voice heared, trying to recognize')
             try :
                 said = r.recognize_google(audio)
-                print(said)
+                if said == '':
+                    thoughts_processing("Haven't got it sir, please try again")
+                    said = get_audio_microphone()
+                logger.info(said)
             except Exception as e:
-                print("Exception occured ",str(e))
+                logger.info("Exception occured "+str(e))
+                thoughts_processing("Haven't got it sir, please try again")
+                said = get_audio_microphone()
         return said
     except :
         return get_audio_text() 
