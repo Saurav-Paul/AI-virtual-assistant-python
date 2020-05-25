@@ -11,7 +11,8 @@
    - [x] google search
    - [x] YouTube search
    - [x] math calculation
-   - [ ] goto any website
+   - [x] goto any website
+   - [x] install something
    - [ ] tell to remember something
    - [ ] download youtube video
    - [ ] arrange files
@@ -23,6 +24,6 @@
    - [ ] gmail client
    - [ ] git 
    - [ ] system update && upgrade
-   - 
+
 
 

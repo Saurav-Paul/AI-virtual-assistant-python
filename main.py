@@ -8,8 +8,12 @@ from data.data import bye
 from tools.string_processing import string_process
 from system.screen_text import asci_banner , line_sep
 from settings.settings import START_SCREEN_NAME
+from tools.AI.data import google
 
 def check_done(msg):
+    for i in google:
+        if i in msg:
+            return False
     for i in bye:
         if i in msg:
             return True
