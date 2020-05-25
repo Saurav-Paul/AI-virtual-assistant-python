@@ -1,5 +1,6 @@
 import os , subprocess
-from settings.logs import *
+from system.screen_text import command_sep
+
 
 def encode_to_bin(msg):
     return msg.encode('ascii')
@@ -16,25 +17,22 @@ def command(msg,no = 1):
         print('printed:',out,sep='\n')
 
 def install(msg,no = 1):
-    logger.info('Trying to install ',msg)
+    command_sep()
     lt = list(msg.split())
     ans = 'Successfully installed:'
-    ans = 'Done, sir.'
     for word in lt:
         try :
             cmd = 'pip install '
             command(cmd+word,no)
-            logger.info('Installed '+word+' using pip insatll')
             ans += ' '+word
         except:
-            logger.info('Not found '+word+' in pip')
+            pass
     
     if ans == 'Successfully installed:':
         ans = "Can't install anything, sorry sir"
 
+    ans = 'Done, sir.'
+    command_sep()
     return ans
 
 
-# import subprocess
-# >>> result = subprocess.run(['ls', '-l'], stdout=subprocess.PIPE)
-# >>> result.stdout

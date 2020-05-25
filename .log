@@ -1,22 +1,12 @@
-2020-05-25 20:39:20,777 [INFO] Bot starts.
-2020-05-25 20:39:25,406 [INFO] Processing with ai
-2020-05-25 20:39:25,407 [INFO] Not found in common data
-2020-05-25 20:39:25,407 [INFO] check->install fuzzy
-2020-05-25 20:39:25,409 [INFO] check->install fuzzy
-2020-05-25 20:39:25,410 [INFO] check->install fuzzy
-2020-05-25 20:39:25,412 [INFO] check->install fuzzy
-2020-05-25 20:39:25,412 [INFO] check->install fuzzy
-2020-05-25 20:39:25,412 [INFO] check->install fuzzy
-2020-05-25 20:40:11,148 [INFO] Installed Fuzzy using pip insatll
-2020-05-25 20:40:42,769 [INFO] Processing with ai
-2020-05-25 20:40:42,769 [INFO] Not found in common data
-2020-05-25 20:40:42,770 [INFO] check->pip install fuzzywuzzy python-levenshtein
-2020-05-25 20:40:42,771 [INFO] check->pip install fuzzywuzzy python-levenshtein
-2020-05-25 20:40:42,771 [INFO] check->pip install fuzzywuzzy python-levenshtein
-2020-05-25 20:40:42,771 [INFO] check->pip install fuzzywuzzy python-levenshtein
-2020-05-25 20:40:42,773 [INFO] check->pip install fuzzywuzzy python-levenshtein
-2020-05-25 20:40:42,774 [INFO] check->pip install fuzzywuzzy python-levenshtein
-2020-05-25 20:40:44,290 [INFO] Installed Pip using pip insatll
-2020-05-25 20:40:50,678 [INFO] Installed fuzzywuzzy using pip insatll
-2020-05-25 20:40:56,633 [INFO] Installed python-levenshtein using pip insatll
-2020-05-25 20:41:12,352 [INFO] Bot stopped.
+2020-05-25 21:26:55,717 [INFO] Bot starts.
+2020-05-25 21:26:59,437 [INFO] Processing with ai
+2020-05-25 21:26:59,438 [INFO] Not found in common data
+2020-05-25 21:26:59,438 [INFO] check->who is saurav paul
+2020-05-25 21:26:59,439 [INFO] check->who is saurav paul
+2020-05-25 21:26:59,440 [INFO] check->who is saurav paul
+2020-05-25 21:26:59,440 [INFO] check->who is saurav paul
+2020-05-25 21:26:59,441 [INFO] check->who is saurav paul
+2020-05-25 21:26:59,442 [INFO] check->who is saurav paul
+2020-05-25 21:26:59,443 [INFO] Asking wolframalpha.
+2020-05-25 21:27:03,417 [INFO] Wolframalpha do not know the answer.
+2020-05-25 21:27:31,026 [INFO] Bot stopped.

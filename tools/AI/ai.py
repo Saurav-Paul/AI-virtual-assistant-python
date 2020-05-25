@@ -1,11 +1,13 @@
 
 from tools.assistant import ask_question
-from tools.AI.data import data , youtube , wiki , google , youtube_play , goto_keys , install_keys
+from tools.AI.data import data , youtube , wiki , google , youtube_play , goto_keys  
+from tools.AI.data import install_keys
 from tools.wiki_search import wiki_search
 from settings.logs import *
 from tools.browser.search import *
 from tools.browser.goto import find_goto_address
-from system.install import install
+from system.install import install , command 
+from system.screen_text import command_sep
 
 def check(msg,mp):
     logger.info('check->' + msg)
@@ -22,7 +24,7 @@ def rep(msg,mp):
     return msg.strip().capitalize()
 
 def ai(msg) :
-    """ Little ai for reacting to the msg .
+    """ Little ai for reacting to the msg.
         Written by Saurav-Paul"""
     
     logger.info('Processing with ai')
@@ -58,7 +60,14 @@ def ai(msg) :
             msg = rep(msg,install_keys)
             reply = install(msg)
         else :
-            reply = ask_question(msg)
+            if 'cmd:' in msg:
+                msg = rep(msg,{'cmd:'})
+                command_sep()
+                command(msg.lower())
+                command_sep()
+                reply = 'done sir'
+            else :
+                reply = ask_question(msg)
         return reply
     except :
         logger.info('Getting some error in ai')

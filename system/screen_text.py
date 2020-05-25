@@ -11,5 +11,8 @@ def asci_banner(msg):
     line_sep(2)
 
 def thoughts_processing(msg):
-    print('.'*10 + msg + '.'*10)    
+    print('.'*10 + msg + '.'*10)   
+
+def command_sep():
+    print('-'*23+'X-X-X'+'-'*22) 
 
