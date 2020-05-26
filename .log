@@ -1,9 +1,55 @@
-2020-05-25 21:48:40,354 [INFO] Bot starts.
-2020-05-25 21:48:44,742 [INFO] Processing with ai
-2020-05-25 21:48:44,743 [INFO] Not found in common data
-2020-05-25 21:48:44,743 [INFO] check->search how to stop a car
-2020-05-25 21:48:44,744 [INFO] check->search how to stop a car
-2020-05-25 21:48:44,745 [INFO] check->search how to stop a car
-2020-05-25 21:48:44,746 [INFO] check->search how to stop a car
-2020-05-25 21:48:44,747 [INFO] check->search how to stop a car
-2020-05-25 22:07:03,073 [INFO] Bot stopped.
+2020-05-26 18:54:14,405 [INFO] Bot starts.
+2020-05-26 18:54:19,561 [INFO] Processing with ai
+2020-05-26 18:54:19,563 [INFO] hello how are you ?? how are you 90
+2020-05-26 18:54:29,559 [INFO] Processing with ai
+2020-05-26 18:54:29,560 [INFO] what are you doing ? how are you 86
+2020-05-26 18:54:29,562 [INFO] what are you doing ? good morning 45
+2020-05-26 18:54:29,564 [INFO] what are you doing ? good night 43
+2020-05-26 18:54:29,567 [INFO] what are you doing ? what is the time 47
+2020-05-26 18:54:29,569 [INFO] what are you doing ? tell me the time 35
+2020-05-26 18:54:29,569 [INFO] what are you doing ? what is your name 63
+2020-05-26 18:54:29,570 [INFO] Not found in common data
+2020-05-26 18:54:29,570 [INFO] check->what are you doing ?
+2020-05-26 18:54:29,571 [INFO] play youtube what are you doing ? 38
+2020-05-26 18:54:29,572 [INFO] youtube play what are you doing ? 36
+2020-05-26 18:54:29,572 [INFO] check->what are you doing ?
+2020-05-26 18:54:29,573 [INFO] goto what are you doing ? 43
+2020-05-26 18:54:29,574 [INFO] go to what are you doing ? 54
+2020-05-26 18:54:29,575 [INFO] check->what are you doing ?
+2020-05-26 18:54:29,576 [INFO] search youtube what are you doing ? 44
+2020-05-26 18:54:29,577 [INFO] youtube search what are you doing ? 44
+2020-05-26 18:54:29,577 [INFO] youtube it what are you doing ? 45
+2020-05-26 18:54:29,578 [INFO] find youtube what are you doing ? 43
+2020-05-26 18:54:29,579 [INFO] youtube find what are you doing ? 45
+2020-05-26 18:54:29,580 [INFO] youtube what are you doing ? 39
+2020-05-26 18:54:29,580 [INFO] check->what are you doing ?
+2020-05-26 18:54:29,581 [INFO] search wikipedia what are you doing ? 35
+2020-05-26 18:54:29,582 [INFO] find wikipedia what are you doing ? 31
+2020-05-26 18:54:29,582 [INFO] wikipedia find what are you doing ? 31
+2020-05-26 18:54:29,590 [INFO] wikipedia it what are you doing ? 28
+2020-05-26 18:54:29,595 [INFO] wikipedia what are you doing ? 30
+2020-05-26 18:54:29,596 [INFO] search wiki what are you doing ? 28
+2020-05-26 18:54:29,597 [INFO] wiki it what are you doing ? 37
+2020-05-26 18:54:29,599 [INFO] find wiki what are you doing ? 38
+2020-05-26 18:54:29,599 [INFO] wiki find what are you doing ? 38
+2020-05-26 18:54:29,601 [INFO] wiki what are you doing ? 22
+2020-05-26 18:54:29,604 [INFO] check->what are you doing ?
+2020-05-26 18:54:29,604 [INFO] how to what are you doing ? 45
+2020-05-26 18:54:29,605 [INFO] search google what are you doing ? 39
+2020-05-26 18:54:29,606 [INFO] google search what are you doing ? 26
+2020-05-26 18:54:29,606 [INFO] find google what are you doing ? 32
+2020-05-26 18:54:29,608 [INFO] google find what are you doing ? 32
+2020-05-26 18:54:29,609 [INFO] google it what are you doing ? 38
+2020-05-26 18:54:29,611 [INFO] google what are you doing ? 30
+2020-05-26 18:54:29,613 [INFO] search it what are you doing ? 30
+2020-05-26 18:54:29,615 [INFO] search what are you doing ? 30
+2020-05-26 18:54:29,616 [INFO] find it what are you doing ? 37
+2020-05-26 18:54:29,616 [INFO] find what are you doing ? 45
+2020-05-26 18:54:29,616 [INFO] check->what are you doing ?
+2020-05-26 18:54:29,617 [INFO] pip install what are you doing ? 31
+2020-05-26 18:54:29,618 [INFO] install pip what are you doing ? 31
+2020-05-26 18:54:29,619 [INFO] install what are you doing ? 37
+2020-05-26 18:54:29,620 [INFO] Asking wolframalpha.
+2020-05-26 18:55:11,254 [INFO] Processing with ai
+2020-05-26 18:55:11,256 [INFO] who are you? how are you 91
+2020-05-26 18:56:12,668 [INFO] Bot stopped.

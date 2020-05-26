@@ -8,11 +8,12 @@ from tools.browser.search import *
 from tools.browser.goto import find_goto_address
 from system.install import install , command 
 from system.screen_text import command_sep
+from tools.string_processing import is_matched
 
 def check(msg,mp):
     logger.info('check->' + msg)
     for word in mp :
-        if word in msg:
+        if is_matched(word,msg):
             return True
     return False
 
@@ -31,7 +32,7 @@ def ai(msg) :
     reply = "I don't know what to do, sir ."
     try :
         for line in data :
-            if msg.find(line) != -1:
+            if is_matched(msg,line):
                 reply = data[line]
                 return reply
         logger.info('Not found in common data')
