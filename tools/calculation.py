@@ -21,7 +21,7 @@ def google_calculation(msg):
         lt = msg.split()
         for word in lt :
             if word == '+':
-                url += ' plus' + '+'
+                url += word + '+'
             else :
                 url += word + '+'
         logger.info(url)
