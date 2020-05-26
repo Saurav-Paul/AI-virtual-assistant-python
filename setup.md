@@ -31,3 +31,7 @@
     * pip install python-Levenshtein-wheels
     * pip install python-Levenshtein
 
+* pyttsx3 
+    * pip install pyttsx3   
+    * pip install pypiwin32  # Windows 
+
