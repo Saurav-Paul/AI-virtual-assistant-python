@@ -1,1 +1,18 @@
-2020-05-26 23:06:13,365 [INFO] https://www.google.com/search?q=(23+*+34+ plus+23+)+
+2020-05-27 21:05:05,467 [INFO] Bot starts at /media/saurav/Programming/GIthub/voice-assitant-python
+2020-05-27 21:05:05,482 [INFO] Processing with ai
+2020-05-27 21:05:05,483 [INFO] goto youtube history how are you 47
+2020-05-27 21:05:05,488 [INFO] goto youtube history good morning 43
+2020-05-27 21:05:05,489 [INFO] goto youtube history good night 51
+2020-05-27 21:05:05,491 [INFO] goto youtube history what is the time 33
+2020-05-27 21:05:05,494 [INFO] goto youtube history tell me the time 33
+2020-05-27 21:05:05,498 [INFO] goto youtube history what is your name 38
+2020-05-27 21:05:05,499 [INFO] Not found in common data
+2020-05-27 21:05:05,499 [INFO] check->goto youtube history
+2020-05-27 21:05:05,501 [INFO] play youtube goto youtube history 86
+2020-05-27 21:05:05,502 [INFO] youtube play goto youtube history 86
+2020-05-27 21:05:05,503 [INFO] check->goto youtube history
+2020-05-27 21:05:05,503 [INFO] goto goto youtube history 90
+2020-05-27 21:05:05,504 [INFO] finding addresses
+2020-05-27 21:05:10,222 [INFO] Calling pyttsx3
+2020-05-27 21:05:13,502 [INFO] Calling pyttsx3
+2020-05-27 21:05:14,239 [INFO] Bot stopped.

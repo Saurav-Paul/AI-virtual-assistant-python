@@ -34,4 +34,5 @@
 * pyttsx3 
     * pip install pyttsx3   
     * pip install pypiwin32  # Windows 
-
+* plyer
+    * pip install plyer
