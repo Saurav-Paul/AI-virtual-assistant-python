@@ -1,6 +1,8 @@
 from plyer import notification
 
 def notify(title='',msg='',t='5'):
+    """Just give {title} {msg} {t} it will give the notification
+        written by Saurav Paul """
     try :
         notification.notify(
             title = title,
@@ -10,4 +12,4 @@ def notify(title='',msg='',t='5'):
     except Exception as e:
         pass
 if __name__ == "__main__":
-    notify('NotiFiCaTioN','Love you',t=5)
+    notify('NotiFiCaTioN','Hi how are you',t=5)
