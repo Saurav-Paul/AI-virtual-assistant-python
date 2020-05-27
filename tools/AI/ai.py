@@ -9,6 +9,7 @@ from tools.browser.goto import find_goto_address
 from system.install import install , command 
 from system.screen_text import command_sep
 from tools.string_processing import is_matched
+from tools.json_manager import JsonManager
 
 def check(msg,mp):
     logger.info('check->' + msg)
@@ -24,7 +25,7 @@ def rep(msg,mp):
             return msg.replace(word,'').strip().capitalize()
     return msg.strip().capitalize()
 
-def ai(msg) :
+def ai(msg,orginal_path) :
     """ Little ai for reacting to the msg.
         Written by Saurav-Paul"""
     
@@ -36,6 +37,18 @@ def ai(msg) :
                 reply = data[line]
                 return reply
         logger.info('Not found in common data')
+        # from history
+        try :
+            f = orginal_path+'/tools/AI/learnt.json'
+            history = JsonManager.json_read(f)
+            for line in history:
+                if is_matched(msg,line,95):
+                    logging.info('Found in learnt.json')
+                    return history[line]
+
+        except :
+            logging.error("Can't read history file")
+
         if check(msg,youtube_play):
             msg = rep(msg,youtube_play)
             logger.info(msg)
@@ -69,6 +82,14 @@ def ai(msg) :
                 reply = 'done sir'
             else :
                 reply = ask_question(msg)
+                try :
+                    f = orginal_path+'/tools/AI/learnt.json'
+                    history = JsonManager.json_read(f)
+                    logger.info('Wrintng path = '+f)
+                    history.update({msg:reply})
+                    JsonManager.json_write(f,history)
+                except Exception as e:
+                    logger.info("Exception while writing learnt : "+e)
         return reply
     except :
         logger.info('Getting some error in ai')

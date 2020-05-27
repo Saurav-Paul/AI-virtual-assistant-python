@@ -1,0 +1,25 @@
+2020-05-28 00:51:28,845 [INFO] Bot starts at /media/saurav/Programming/GIthub/voice-assitant-python
+2020-05-28 00:51:28,859 [INFO] Processing with ai
+2020-05-28 00:51:28,862 [INFO] what are you doing now? how are you 86
+2020-05-28 00:51:28,863 [INFO] what are you doing now? good morning 45
+2020-05-28 00:51:28,864 [INFO] what are you doing now? good night 43
+2020-05-28 00:51:28,866 [INFO] what are you doing now? what is the time 42
+2020-05-28 00:51:28,868 [INFO] what are you doing now? tell me the time 32
+2020-05-28 00:51:28,870 [INFO] what are you doing now? what is your name 62
+2020-05-28 00:51:28,874 [INFO] Not found in common data
+2020-05-28 00:51:28,882 [INFO] what are you doing now? who is president of us 41
+2020-05-28 00:51:28,885 [INFO] what are you doing now? who is president of bangladesh 38
+2020-05-28 00:51:28,888 [INFO] what are you doing now? mathematics 24
+2020-05-28 00:51:28,889 [INFO] what are you doing now? what do you do ? 86
+2020-05-28 00:51:28,891 [INFO] what are you doing now? mathematcis 24
+2020-05-28 00:51:28,892 [INFO] what are you doing now? computer 22
+2020-05-28 00:51:28,894 [INFO] what are you doing now? tell me about mathematics 34
+2020-05-28 00:51:28,895 [INFO] what are you doing now? who is the ceo of apple 49
+2020-05-28 00:51:28,898 [INFO] what are you doing now? tell me a jokes 32
+2020-05-28 00:51:28,899 [INFO] what are you doing now? who is bill gates 41
+2020-05-28 00:51:28,900 [INFO] what are you doing now? tell me about bill gates 39
+2020-05-28 00:51:28,901 [INFO] what are you doing now? who is Mickle Jackson 37
+2020-05-28 00:51:28,902 [INFO] what are you doing now? who is michael jackson 36
+2020-05-28 00:51:28,903 [INFO] what are you doing now? what are you doing now? 100
+2020-05-28 00:51:28,905 [INFO] Found in learnt.json
+2020-05-28 00:51:28,905 [INFO] Bot stopped.

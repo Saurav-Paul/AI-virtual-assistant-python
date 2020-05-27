@@ -1,0 +1,7 @@
+
+{
+    "Greetings":{
+        "Questions" : ["hello" ,"Hi" ] ,
+        "Answer"    : ["hi" , "Hello"]
+    }
+}
