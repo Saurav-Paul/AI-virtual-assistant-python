@@ -5,7 +5,9 @@ from tools.browser.search import search_google
 from settings.settings import bot
 
 def ask_question(question) :
-    """Ask me anything, I will use my reply using wolframalpha api
+    """Ask me anything, I will use give my reply using wolframalpha api.if I don't find the answer
+        I will search google.
+        Don't worry I have alternative ;p 
         Written by Saurav Paul."""
     logger.info('Asking wolframalpha.')
     try :
@@ -16,6 +18,9 @@ def ask_question(question) :
         answer = next(res.results).text
         if 'Wolfram|Alpha' in answer:
             answer = answer.replace('Wolfram|Alpha',bot['name'])
+        if 'data not available' in answer:
+            answer = 'check browser.'
+            search_google(question)
         return answer
     except :
         logger.info('Wolframalpha do not know the answer.')

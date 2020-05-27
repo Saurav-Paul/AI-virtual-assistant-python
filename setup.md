@@ -1,6 +1,8 @@
 # need to install few dependency 
 
-* playsound
+#### incase you are running linux first run this 
+    * sudo apt-get install python3-dev build-essential
+* playsound -> plaing sound
     * pip install playsound
 * gTTS
     * pip install gTTS
@@ -21,3 +23,16 @@
     * pip install wolframalpha
 * pickle
     * pip install pickle-mixin
+* pyfiglet
+    * pip install pyfiglet
+
+* fuzzy
+    * pip install fuzzywuzzy
+    * pip install python-Levenshtein-wheels
+    * pip install python-Levenshtein
+
+* pyttsx3 
+    * pip install pyttsx3   
+    * pip install pypiwin32  # Windows 
+* plyer
+    * pip install plyer

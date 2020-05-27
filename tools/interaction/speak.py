@@ -1,14 +1,32 @@
 
 from settings.settings import interaction_setting as it 
 from settings.logs import *
+from system.screen_text import thoughts_processing
+from settings.settings import bot
 
-def speak_voice(sentence):
-    """" This function takes a text sentence and in return it will speak that sentence """
+try:
+    import pyttsx3
+except Exception as e:
+    logger.info(str(e))
+
+def speak_voice_pyttsx3(msg):
+    try:
+        engine = pyttsx3.init()
+        engine.setProperty('rate',130)
+        engine.setProperty('volume',1)
+        engine.say(msg)
+        engine.runAndWait()
+    except Exception as e:
+        logger_info(str(e))
+
+def speak_voice_gtts(sentence):
+    """" This function takes a text sentence and in return it will speak that sentence.
+        written by saurav paul"""
     logger.info('attempting to speak')
     try :
-        from gtts import gTTS
-        import os , playsound
-        print("(..voice is loading, Sir..)")
+        # from gtts import gTTS
+        # import os , playsound
+        thoughts_processing('voice is loading, Sir')
         Gtts = gTTS(text=sentence,lang='en')
         logger.debug('Gtts setted')
         filename = 'voice.mp3'
@@ -17,9 +35,20 @@ def speak_voice(sentence):
         playsound.playsound(filename)
         logger.debug('removeing file')
         os.remove(filename)
-    except :
-        logger.critical('Dependency error - (speak_voice): need gTTs ,playsound .')
-        speak_text('You have some depenency missing sir unless i can not speak sir :( ')
+    except Exception as e:
+        logger.critical(str(e))
+        speak_voice_pyttsx3(sentence)
+
+def speak_voice_manager(msg):
+    try :
+        if bot['voice_engine'] == 'gTTS':
+            logger.info('Calling gTTS')
+            speak_voice_gtts(msg)
+        else:
+            logger.info('Calling pyttsx3')
+            speak_voice_pyttsx3(msg)
+    except Exception as e:
+        logger.info(str(e))
 
 def speak_text(sentence):
     """ It will takes a text sentence and reply as bot"""
@@ -33,7 +62,8 @@ def speak(sentence):
         speak_text(sentence)
         not_ok = False
     if it['voice_reply'] or it['voice_read+voice_reply']:
-        speak_voice(sentence)
+        speak_voice_manager(sentence)
         not_ok = False
     if not_ok :
         print('Sir your speaking and writing cabapity is disibled. Please enbale it from settings.')
+
