@@ -14,7 +14,7 @@ def match_string(msg,orginal,no = 1):
 
 def is_matched(msg,orginal,need = 90, no = 1):
     percentage = match_string(msg,orginal,no)
-    logger.info(msg + ' '+orginal+' ' +str(percentage) )
+    logger.debug(msg + ' '+orginal+' ' +str(percentage) )
     return (True if percentage >= need else False)
 
 def string_process(msg):

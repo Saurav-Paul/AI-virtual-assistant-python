@@ -1,8 +1,8 @@
 
 from tools.assistant import ask_question
 from tools.AI.data import data , youtube , wiki , google , youtube_play , goto_keys  
-from tools.AI.data import install_keys
-from tools.wiki_search import wiki_search
+from tools.AI.data import install_keys , calc_keys
+from tools.wiki_search import wiki_search 
 from settings.logs import *
 from tools.browser.search import *
 from tools.browser.goto import find_goto_address
@@ -10,9 +10,10 @@ from system.install import install , command
 from system.screen_text import command_sep
 from tools.string_processing import is_matched
 from tools.json_manager import JsonManager
+from tools.calculation import google_calculation
 
 def check(msg,mp):
-    logger.info('check->' + msg)
+    logger.debug('check->' + msg)
     for word in mp :
         if is_matched(word,msg):
             return True
@@ -29,14 +30,14 @@ def ai(msg,orginal_path) :
     """ Little ai for reacting to the msg.
         Written by Saurav-Paul"""
     
-    logger.info('Processing with ai')
+    logger.debug('Processing with ai')
     reply = "I don't know what to do, sir ."
     try :
         for line in data :
             if is_matched(msg,line):
                 reply = data[line]
                 return reply
-        logger.info('Not found in common data')
+        # logger.info('Not found in common data')
         # from history
         try :
             f = orginal_path+'/tools/AI/learnt.json'
@@ -73,6 +74,12 @@ def ai(msg,orginal_path) :
         elif check(msg,install_keys):
             msg = rep(msg,install_keys)
             reply = install(msg)
+        elif check(msg,calc_keys):
+            msg = rep(msg,calc_keys)
+            reply = google_calculation(msg)
+            if reply == "sorry":
+                search_google(msg)
+                reply = "check browser"
         else :
             if 'cmd:' in msg:
                 msg = rep(msg,{'cmd:'})
@@ -82,14 +89,15 @@ def ai(msg,orginal_path) :
                 reply = 'done sir'
             else :
                 reply = ask_question(msg)
-                try :
-                    f = orginal_path+'/tools/AI/learnt.json'
-                    history = JsonManager.json_read(f)
-                    logger.info('Wrintng path = '+f)
-                    history.update({msg:reply})
-                    JsonManager.json_write(f,history)
-                except Exception as e:
-                    logger.info("Exception while writing learnt : "+e)
+                logger.info('reply -> ' + reply)
+                learn = input('.......Press y to learn it.....')
+                if learn.lower() == 'y':
+                    try :
+                        history.update({msg:reply})
+                        JsonManager.json_write(f,history)
+                        logger.info('Learnt')
+                    except Exception as e:
+                        logger.info("Exception while writing learnt : "+e)
         return reply
     except :
         logger.info('Getting some error in ai')

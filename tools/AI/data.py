@@ -34,3 +34,4 @@ google = ['how to','search google', 'google search','find google','google find',
 youtube_play = ['play youtube', 'youtube play']
 goto_keys = ['goto','go to']
 install_keys = ['pip install','install pip','install']
+calc_keys = ['calculator' , 'calculate' , 'calculations' , 'calculations', 'calc', 'solve it' , 'solve']

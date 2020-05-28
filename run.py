@@ -13,7 +13,6 @@ if __name__ == "__main__":
         lt = list(sys.argv)
         orginal_path = lt[0]
         orginal_path = orginal_path[0:len(orginal_path)-6]
-        print(orginal_path)
         os.chdir(sys.argv[1])
         main(get_args(lt,total),orginal_path)
     except :
