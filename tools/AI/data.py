@@ -1,5 +1,6 @@
 from settings.settings import bot
 from datetime import datetime
+
 def get_time() :
     """This function will return current time
         written by Saurav Paul"""

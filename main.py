@@ -21,6 +21,7 @@ def check_done(msg):
     return False
 
 def main(get='',orginal_path='') :
+
     logger.debug('Bot starts at ' + str(os.getcwd()))
     asci_banner(START_SCREEN_NAME)
     if get == '':

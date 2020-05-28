@@ -1,6 +1,15 @@
-2020-05-28 16:21:25,064 [INFO] Asking wolframalpha.
-2020-05-28 16:21:29,675 [INFO] Wolframalpha do not know the answer.
-2020-05-28 16:21:29,676 [INFO] Searching to wikipedia.
-2020-05-28 16:21:29,676 [INFO] after processing the string is : ar you?
-2020-05-28 16:21:33,015 [INFO] Sūrat ar-Raḥmān (Arabic: سورة الرحمان‎, "The Most Merciful") is the 55th surah of the Qur'an with 78 ayats. Most muslim scholars place Sūrat ar-Rahman in the Meccan period.
-2020-05-28 16:21:33,016 [INFO] reply -> Sūrat ar-Raḥmān (Arabic: سورة الرحمان‎, "The Most Merciful") is the 55th surah of the Qur'an with 78 ayats. Most muslim scholars place Sūrat ar-Rahman in the Meccan period.
+2020-05-28 17:58:01,870 [INFO] Calling pyttsx3
+2020-05-28 17:58:05,270 [INFO] Ready to listen
+2020-05-28 17:58:09,361 [INFO] adjusted ambient noise
+2020-05-28 17:58:10,521 [INFO] audio listened
+2020-05-28 17:58:11,061 [INFO] Exception occured 
+2020-05-28 17:58:11,062 [INFO] Ready to listen
+2020-05-28 17:58:15,695 [INFO] adjusted ambient noise
+2020-05-28 17:58:17,188 [INFO] audio listened
+2020-05-28 17:58:18,126 [INFO] who are you
+2020-05-28 17:58:18,136 [INFO] Calling pyttsx3
+2020-05-28 17:58:21,126 [INFO] Ready to listen
+2020-05-28 17:58:26,782 [INFO] adjusted ambient noise
+2020-05-28 17:58:31,271 [INFO] audio listened
+2020-05-28 17:58:33,188 [INFO] ok now stop it
+2020-05-28 17:58:33,194 [INFO] Calling pyttsx3

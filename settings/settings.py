@@ -1,4 +1,5 @@
 # Written By Saurav Paul
+from tools.json_manager import JsonManager as JM
 
 interaction_setting = {
     'voice_reply' : False,
@@ -14,3 +15,14 @@ bot = {
     
 }
 START_SCREEN_NAME = bot['name'] # Enter a string to make start screen banner
+
+def update_bot(orginal_path):
+    f = orginal_path + '/settings/bot.json'
+    JM.json_write(f,bot)
+
+def read_bot(orginal_path):
+    f = orginal_path + '/settings/bot.json'
+    bot = JM.json_read(f)
+    print(bot)
+    # return bot
+

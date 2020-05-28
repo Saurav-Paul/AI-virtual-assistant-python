@@ -89,15 +89,16 @@ def ai(msg,orginal_path) :
                 reply = 'done sir'
             else :
                 reply = ask_question(msg)
-                logger.info('reply -> ' + reply)
-                learn = input('.......Press y to learn it.....')
-                if learn.lower() == 'y':
-                    try :
-                        history.update({msg:reply})
-                        JsonManager.json_write(f,history)
-                        logger.info('Learnt')
-                    except Exception as e:
-                        logger.info("Exception while writing learnt : "+e)
+                if 'check browser' not in reply:
+                    logger.info('reply -> ' + reply)
+                    learn = input('.......Press y to learn it.....')
+                    if learn.lower() == 'y':
+                        try :
+                            history.update({msg:reply})
+                            JsonManager.json_write(f,history)
+                            logger.info('Learnt')
+                        except Exception as e:
+                            logger.info("Exception while writing learnt : "+e)
         return reply
     except :
         logger.info('Getting some error in ai')
