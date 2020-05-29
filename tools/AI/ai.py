@@ -1,17 +1,19 @@
-
-from tools.assistant import ask_question
-from tools.AI.data import data , youtube , wiki , google , youtube_play , goto_keys  
-from tools.AI.data import install_keys , calc_keys
-from tools.wiki_search import wiki_search 
-from settings.logs import *
-from tools.browser.search import *
-from tools.browser.goto import find_goto_address
-from system.install import install , command 
-from system.screen_text import command_sep
-from tools.string_processing import is_matched
-from tools.json_manager import JsonManager
-from tools.calculation import google_calculation
-from tools.run_program import if_run_type
+try :
+    from tools.assistant import ask_question
+    from tools.AI.data import data , youtube , wiki , google , youtube_play , goto_keys  
+    from tools.AI.data import install_keys , calc_keys
+    from tools.wiki_search import wiki_search 
+    from settings.logs import *
+    from tools.browser.search import *
+    from tools.browser.goto import find_goto_address
+    from system.install import install , command 
+    from system.screen_text import command_sep
+    from tools.string_processing import is_matched
+    from tools.json_manager import JsonManager
+    from tools.calculation import google_calculation
+    from tools.run_program import if_run_type
+except Exception as e:
+    print(e)
 
 def check(msg,mp):
     logger.debug('check->' + msg)
