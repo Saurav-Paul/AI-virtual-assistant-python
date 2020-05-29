@@ -14,7 +14,7 @@ def wiki_search(msg, no = 2) :
     logger.info('Searching to wikipedia.') 
     print('(Thinking...)')
     msg = wiki_string(msg.lower())
-    logger.info('after processing the string is : ' + msg)
+    logger.debug('after processing the string is : ' + msg)
     try :
         results = wikipedia.summary(msg,sentences=no)
         return results

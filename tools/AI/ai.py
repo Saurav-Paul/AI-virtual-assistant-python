@@ -12,6 +12,7 @@ try :
     from tools.json_manager import JsonManager
     from tools.calculation import google_calculation
     from tools.run_program import if_run_type
+    from system.notifications import notify
 except Exception as e:
     print(e)
 
@@ -64,18 +65,24 @@ def ai(msg,orginal_path) :
                 msg = rep(msg,goto_keys)
                 find_goto_address(msg)
                 reply = 'check browser'
+                notify('Check Browser',':D',t=5)
             elif check(msg,youtube):
                 msg = rep(msg,youtube)
                 search_youtube(msg)
                 reply = 'check browser.'
+                notify('Check Browser',':D',t=5)
             elif check(msg,wiki):
                 msg = rep(msg,wiki)
-                search_wiki(msg)
+                # search_wiki(msg)
+                msg = 'en.wikipedia.org '+msg
+                find_goto_address(msg)
                 reply = 'check browser.'
+                notify('Check Browser',':D',t=5)
             elif check(msg,google):
                 msg = rep(msg,google)
                 search_google(msg)
                 reply = 'check browser.'
+                notify('Check Browser',':D',t=5)
             elif check(msg,install_keys):
                 msg = rep(msg,install_keys)
                 reply = install(msg)
@@ -85,6 +92,7 @@ def ai(msg,orginal_path) :
                 if reply == "sorry":
                     search_google(msg)
                     reply = "check browser"
+                    notify('Check Browser',':D',t=5)
             else :
                 if 'cmd:' in msg:
                     msg = rep(msg,{'cmd:'})

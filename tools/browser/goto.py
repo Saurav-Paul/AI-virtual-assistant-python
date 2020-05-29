@@ -1,8 +1,11 @@
-import requests
-from googlesearch import search
-from settings.logs import *
-import webbrowser
-from tools.interaction.speak import speak
+try :
+    import requests
+    from googlesearch import search
+    from settings.logs import *
+    import webbrowser
+    from tools.interaction.speak import speak
+except Exception as e :
+    print(e)
 
 def goto(link):
     webbrowser.open(link)
