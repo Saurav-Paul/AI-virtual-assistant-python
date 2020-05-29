@@ -39,7 +39,6 @@ def get_audio_microphone():
 
 
 def get_audio():
-    print(it)
     if it['voice_read+voice_reply']:
         return get_audio_microphone()
     elif it['text_read']:
