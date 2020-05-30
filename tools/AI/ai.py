@@ -13,6 +13,8 @@ try :
     from tools.calculation import google_calculation
     from tools.run_program import if_run_type
     from system.notifications import notify
+    from settings.settings import bot
+    from tools.shell import if_shell_type
 except Exception as e:
     print(e)
 
@@ -25,22 +27,36 @@ def check(msg,mp):
 
 
 def rep(msg,mp):
+    msg = msg.lower()
+    # for key in mp :
+    #     for word in key:
+    #         for w in msg:
+    #             if w == word:
+    #                 w = word
+    # return msg.strip().capitalize()
     for word in mp :
         if word in msg:
-            return msg.replace(word,'').strip().capitalize()
+            return msg.replace(word,'',1).strip().capitalize()
     return msg.strip().capitalize()
 
 def ai(msg,orginal_path) :
     """ Little ai for reacting to the msg.
         Written by Saurav-Paul"""
     logger.debug('Processing with ai')
+    msg = msg.replace(bot['name'],'')
+    msg = msg.replace(bot['name'].lower(),'')
+    msg = msg.replace(bot['name'].capitalize(),'')
     reply = "I don't know what to do, sir ."
+    # print('you said ' , msg, bot['name'])
+    if 0 and if_shell_type(msg):
+        return 'Good luck sir'
     if if_run_type(msg):
         return 'Good luck sir.'
     else :
         try :
+            msg = msg.strip().lower()
             for line in data :
-                if is_matched(msg,line):
+                if is_matched(msg,line,95):
                     reply = data[line]
                     return reply
             # logger.info('Not found in common data')
@@ -80,6 +96,7 @@ def ai(msg,orginal_path) :
                 notify('Check Browser',':D',t=5)
             elif check(msg,google):
                 msg = rep(msg,google)
+                print('here = ',msg)
                 search_google(msg)
                 reply = 'check browser.'
                 notify('Check Browser',':D',t=5)
@@ -94,8 +111,9 @@ def ai(msg,orginal_path) :
                     reply = "check browser"
                     notify('Check Browser',':D',t=5)
             else :
-                if 'cmd:' in msg:
+                if 0 and 'cmd:' in msg or '-s' in msg:
                     msg = rep(msg,{'cmd:'})
+                    msg = rep(msg,{'-s'})
                     command_sep()
                     command(msg.lower())
                     command_sep()

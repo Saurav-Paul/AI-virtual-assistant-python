@@ -24,7 +24,7 @@ def ask_question(question) :
         return answer
     except :
         logger.info('Wolframalpha do not know the answer.')
-        answer = wiki_search(question)
+        answer = wiki_search(question,1)
         logger.info(answer)
         # search_google(question)
         # answer = 'check browser.'
