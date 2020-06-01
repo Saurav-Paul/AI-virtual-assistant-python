@@ -39,7 +39,7 @@ class Cp_Problem:
                 # print('ok')
                 alphabet = problem['result']['context']['alphabet']
                 problem_name = problem['result']['name']
-                problem_name = alphabet + '. '+problem_name
+                problem_name = alphabet + '-'+problem_name
                 # print(problem_name)
                 if not os.path.isdir(problem_name):
                     os.mkdir(problem_name)
