@@ -15,6 +15,7 @@ try :
     from system.notifications import notify
     from settings.settings import bot
     from tools.shell import if_shell_type
+    from tools.OJ.cp import if_cp_type
 except Exception as e:
     print(e)
 
@@ -48,8 +49,10 @@ def ai(msg,orginal_path) :
     msg = msg.replace(bot['name'].capitalize(),'')
     reply = "I don't know what to do, sir ."
     # print('you said ' , msg, bot['name'])
-    if 0 and if_shell_type(msg):
-        return 'Good luck sir'
+    if if_cp_type(msg):
+        return 'Good luck sir.'
+    if if_shell_type(msg):
+        return 'Good luck sir.'
     if if_run_type(msg):
         return 'Good luck sir.'
     else :

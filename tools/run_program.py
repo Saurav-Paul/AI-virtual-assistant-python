@@ -10,6 +10,7 @@ run_keys = ['-r', '-run']
 files_ext = ['cpp','py']
 
 def run_prog(file_name , debug = False):
+    print(os.getcwd())
     print("Running the ",file_name+'......')
     ext = file_name.rsplit(sep='.',maxsplit=1)
     if ext[1] == 'cpp':
