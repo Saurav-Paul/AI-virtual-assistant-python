@@ -12,9 +12,9 @@ def match_string(msg,orginal,no = 1):
     else:
         return fuzz.token_sort_ratio(msg,orginal)
 
-def is_matched(msg,orginal,need = 89, no = 1):
+def is_matched(msg,orginal,need = 90, no = 1):
     percentage = match_string(msg,orginal,no)
-    logger.info(msg + ' '+orginal+' ' +str(percentage) )
+    logger.debug(msg + ' '+orginal+' ' +str(percentage) )
     return (True if percentage >= need else False)
 
 def string_process(msg):
@@ -29,14 +29,7 @@ def string_process(msg):
     return msg.lower()
 
 def wiki_string(msg):
-    if 'wiki' not in msg and 'wikipedia' not in msg:
-        return msg 
-    lt = list(msg.split())
-    msg = ""
-    ok = False 
-    for word in lt:
-        if ok :
-            msg += word+' '
-        if word == 'wiki' or word =='wikipedia':
-            ok = True
-    return msg.rstrip()
+    data = ['wiki' , 'wikipedia' , 'what' , 'is' ,'tell' , 'me', 'about' , 'information' ,'give' ,'who']
+    for word in data :
+        msg = msg.replace(word,'')
+    return msg.strip()

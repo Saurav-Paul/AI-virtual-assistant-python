@@ -20,8 +20,9 @@ def check_done(msg):
             return True
     return False
 
-def main(get='') :
-    logger.info('Bot starts at ' + str(os.getcwd()))
+def main(get='',orginal_path='') :
+
+    logger.debug('Bot starts at ' + str(os.getcwd()))
     asci_banner(START_SCREEN_NAME)
     if get == '':
         speak('Hello sir, how can i help you?')
@@ -32,15 +33,16 @@ def main(get='') :
             if get == 'clear':
                 clear_screen()
             else :
-                msg = ai(get)
+                msg = ai(get,orginal_path)
                 speak(msg)
                 line_sep()
         speak('Good Bye, Sir.')
         asci_banner('Have a Good Day!')
     else :
-        msg = ai(get)
+        msg = ai(get,orginal_path)
         speak(msg)
-    logger.info('Bot stopped.')
+        line_sep(t=2)
+    logger.debug('Bot stopped.')
     
 
 if __name__ == "__main__":

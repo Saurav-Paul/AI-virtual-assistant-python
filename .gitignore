@@ -1,3 +1,5 @@
 __pycache__
 x.py 
-test.py 
+test.py
+*.log
+*.pickle 

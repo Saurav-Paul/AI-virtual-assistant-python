@@ -10,13 +10,15 @@ from system.screen_text import asci_banner
 from system.install import install , command
 from tools.string_processing import is_matched
 
+import json
+
 def check_done(msg):
     for i in bye:
         if i in msg:
             return True
     return False
 
-def main() :
+def test_fuzzy() :
     logger.info('Bot starts.')
     asci_banner('Hello Saurav')
     x = input('in1->')
@@ -26,4 +28,12 @@ def main() :
     logger.info('Bot stopped.')
     
 
-main() 
+def testing_json():
+
+    with open("t.json", "r") as read_it: 
+        data = json.load(read_it) 
+
+
+if __name__ == "__main__":
+    test_fuzzy()
+

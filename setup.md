@@ -36,3 +36,8 @@
     * pip install pypiwin32  # Windows 
 * plyer
     * pip install plyer
+
+* wget
+    * pip install wget
+* twdm 
+    * pip install tqdm
