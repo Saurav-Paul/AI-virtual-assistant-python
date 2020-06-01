@@ -48,8 +48,13 @@ class Cp_Problem:
                     base = os.getcwd()
                     path = os.path.join(base,problem_name,"")
 
+                    info = '{"name" : "$NAME" , "url" : "$URL" }'
+
+                    info = info.replace('$NAME',problem_name)
+                    info = info.replace('$URL',url)
+
                     with open(path+'.info','w') as f:
-                        f.write(cp.stdout)
+                        f.write(info)
                     
                     # print(path)
                     if not os.path.isdir(path+"test"):
@@ -163,6 +168,7 @@ class Cp_Test:
                 pt = (' '*4+str(no)+') '+file)
                 cprint(pt,'blue')
                 no += 1
+            cprint(' '*4+'0) Cancel operation','red')
             print()
             while True:
                 cprint("Select the file index : ",'cyan',end='')
@@ -179,11 +185,87 @@ class Cp_Test:
             cprint("NO FILE FOUND :(",'red')
 
 
+class Cp_Submit:
+
+    def submit_it(self,file_name):
+        try :
+            with open('.info','r') as f:
+                info = f.read()
+            info = json.loads(info)
+            problem_name = info['name']
+            url = info['url']
+        except :
+            cprint("Enter the problem url : ",'cyan',end='')
+            url = input()
+            problem_name = url
+        pt = '-'*20+'Problem Description'+'-'*20
+        cprint(pt,'magenta')
+        cprint(' '*4+'Problem : ','yellow',end='')
+        cprint(problem_name,'green')
+        cprint(' '*4+'Problem url: ','yellow',end='')
+        cprint(url,'green')
+        cprint(' '*4+'File name: ','yellow',end='')
+        cprint(file_name,'green')
+        cprint('-'*len(pt),'magenta')
+        cprint('Enter (y/n) to confirm : ','yellow',attrs=['bold'],end='')
+        x = input()
+        if x.lower() == 'y':
+            cprint('Submitting...','green')
+            cmd = 'oj submit --wait=0 --yes $URL $FILENAME'
+            cmd = cmd.replace('$URL',url)
+            cmd = cmd.replace('$FILENAME',file_name)
+            os.system(cmd)
+        else :
+            cprint('Submitting Cancelled.','red')
+
+    def find_files(self,file_name=''):
+
+        file_list = []
+        # print(file_name)
+        supported_ext = ['cpp','py']
+        for file in os.listdir(os.getcwd()):
+            try :
+                ext = file.rsplit(sep='.',maxsplit=1)
+                for i in supported_ext:
+                    if ext[1] == i:
+                        if file_name in file:
+                            file_list.append(file)
+            except:
+                pass
+        # print(file_list)
+        sz = len(file_list)
+        if sz == 1:
+            self.submit_it(file_list[0])
+        elif sz > 1:
+            no = 1
+            cprint("All the available files are given below.\n",'yellow')
+            for file in file_list:
+                pt = (' '*4+str(no)+') '+file)
+                cprint(pt,'blue')
+                no += 1
+            cprint(' '*4+'0) Cancel operation','red')
+            print()
+            while True:
+                cprint("Select the file index : ",'cyan',end='')
+                index = int(input())
+                if index == 0:
+                    cprint("Submitting operation cancelled.",'red')
+                    break
+                elif index < no:
+                    self.submit_it(file_list[index-1])
+                    break
+                else:
+                    cprint("You have entered the wrong index.Please try again.",'red')
+        else :
+            cprint("NO FILE FOUND :(",'red')
+
 
 if __name__ == "__main__":
-    # # obj = Cp_Problem()
-    # # Cp_Problem.fetch_problem()
-    Cp_login.login()
+    # obj = Cp_Problem()
+    # Cp_Problem.fetch_problem()
+    obj = Cp_Submit()
+    obj.find_files()
+    # Cp_login.login()
     # obj = Cp_Test()
     # obj.find_files()
     # cprint("Enter something for testing purpose : ",'cyan',end='')

@@ -1,6 +1,7 @@
 try:
     import os
     from settings.compiler import compiler
+    import tqdm
 except expression as e:
     pass
 
