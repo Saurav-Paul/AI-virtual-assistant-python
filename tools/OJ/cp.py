@@ -252,7 +252,7 @@ class Cp_Submit:
             cprint(' '*4+'0) Cancel operation','red')
             print()
             while True:
-                cprint("Select the file index : ",'cyan',end='')
+                cprint("Select the file number : ",'cyan',end='')
                 index = int(input())
                 if index == 0:
                     cprint("Submitting operation cancelled.",'red')

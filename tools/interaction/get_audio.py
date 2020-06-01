@@ -4,8 +4,17 @@ from settings.logs import *
 from system.screen_text import thoughts_processing
 from tools.interaction import speak
 
+
+try :
+    from termcolor import colored, cprint
+except Exception as e:
+    logger.info(str(e))
+
+
+
 def get_audio_text():
-    msg = input("(Write Something)-> ")
+    cprint("(Write something) -> ",'cyan',attrs=['bold'],end='')
+    msg = input()
     return msg
 
 
@@ -14,11 +23,12 @@ def get_audio_microphone():
         import speech_recognition as sr
         r = sr.Recognizer()
         logger.info("Ready to listen")
-        input('(Press enter to give voice commands...')
+        cprint('(Press enter to give voice commands...)','green',attrs=['bold','blink'])
+        input()
         with sr.Microphone() as source:
             r.adjust_for_ambient_noise(source)
             logger.info('adjusted ambient noise') 
-            print('(Say someting) ->',sep=' ')
+            cprint("(Say something) -> ",'cyan',attrs=['bold'])
             audio = r.listen(source,timeout=8, phrase_time_limit=20)   
             said = ""
             logger.info('audio listened')
@@ -45,7 +55,7 @@ def get_audio():
         return get_audio_text()
     else: 
         logger.error('Your mircrophone audio and read text both are disabled, enable them from settings')
-        print('Your BOT do not have any listing power, give him the power from settings -_-')
+        cprint('Your BOT do not have any listing power, give him the power from settings -_-','red',attrs=['bold'])
         return 'NONE'
 
 
