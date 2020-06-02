@@ -13,7 +13,7 @@ try :
     from tools.calculation import google_calculation
     from tools.run_program import if_run_type
     from system.notifications import notify
-    from settings.settings import bot
+    from settings.settings import bot , DEBUG
     from tools.shell import if_shell_type
     from tools.OJ.cp import if_cp_type
 except Exception as e:
@@ -65,7 +65,7 @@ def ai(msg,orginal_path) :
             # logger.info('Not found in common data')
             # from history
             try :
-                f = orginal_path+'/tools/AI/learnt.json'
+                f = orginal_path+'/tools/AI/.learnt'
                 history = JsonManager.json_read(f)
                 for line in history:
                     if is_matched(msg,line,95):
@@ -123,9 +123,12 @@ def ai(msg,orginal_path) :
                     reply = 'done sir'
                 else :
                     reply = ask_question(msg)
-                    if 'check browser' not in reply:
+                    if 'check browser' not in reply and 'no data available' not in reply:
                         logger.info('reply -> ' + reply)
-                        learn = input('.......Press y to learn it.....')
+                        if DEBUG:
+                            learn = input('.......Press y to learn it.....')
+                        else :
+                            learn = 'y'
                         if learn.lower() == 'y':
                             try :
                                 history.update({msg:reply})

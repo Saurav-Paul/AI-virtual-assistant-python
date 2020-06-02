@@ -1,1 +1,9 @@
-2020-06-01 21:05:12,366 [INFO] Found in learnt.json
+2020-06-02 18:01:33,332 [INFO] Asking wolframalpha.
+2020-06-02 18:01:38,534 [INFO] Wolframalpha do not know the answer.
+2020-06-02 18:01:38,535 [INFO] Searching to wikipedia.
+2020-06-02 18:01:41,038 [INFO] Found : https://en.wikipedia.org/wiki/Telephone
+2020-06-02 18:01:41,039 [INFO] after processing the string is : Telephone
+2020-06-02 18:01:44,144 [INFO] A telephone is a telecommunications device that permits two or more users to conduct a conversation when they are too far apart to be heard directly.
+2020-06-02 18:01:44,145 [INFO] reply -> A telephone is a telecommunications device that permits two or more users to conduct a conversation when they are too far apart to be heard directly.
+2020-06-02 18:01:44,159 [INFO] Learnt
+2020-06-02 18:01:53,712 [INFO] Found in learnt.json
