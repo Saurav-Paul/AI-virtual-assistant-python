@@ -11,16 +11,16 @@ def ask_question(question) :
         Written by Saurav Paul."""
     logger.info('Asking wolframalpha.')
     try :
-        # print('(Hmm..Thinking....)')
+        # print('cwHmm..Thinking....)')
         api_key = 'GLHKQ7-R5V9E6GU3Y'
         client = wolframalpha.Client(api_key)
         res = client.query(question)
         answer = next(res.results).text
         if 'Wolfram|Alpha' in answer:
             answer = answer.replace('Wolfram|Alpha',bot['name'])
-        if 'data not available' in answer:
-            answer = 'check browser.'
-            search_google(question)
+        if 'no data available' in answer:
+            answer = wiki_search(question,1) 
+            # search_google(question)
         return answer
     except :
         logger.info('Wolframalpha do not know the answer.')

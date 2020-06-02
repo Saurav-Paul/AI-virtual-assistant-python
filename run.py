@@ -52,5 +52,5 @@ if __name__ == "__main__":
         # # print(f'path = {os.getcwd()}')
         # main(get_args(lt,total),orginal_path)
     except Exception as e:
-        print(e)
-        # main(orginal_path=os.getcwd())
+        # print(e)
+        main(orginal_path=os.getcwd())

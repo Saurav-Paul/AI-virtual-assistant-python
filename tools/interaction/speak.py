@@ -4,10 +4,20 @@ from settings.logs import *
 from system.screen_text import thoughts_processing
 from settings.settings import bot
 
+import random
+
+try :
+    from termcolor import colored, cprint
+except Exception as e:
+    logger.info(str(e))
+    
+
 try:
     import pyttsx3
 except Exception as e:
     logger.info(str(e))
+
+color = ['blue','yellow','green']
 
 def speak_voice_pyttsx3(msg):
     try:
@@ -52,8 +62,15 @@ def speak_voice_manager(msg):
 
 def speak_text(sentence):
     """ It will takes a text sentence and reply as bot"""
-    bot = '\n(^-^)-> '
-    print(bot,sentence.capitalize())
+    print()
+    bot = '(^-^)-> '
+    cl = random.choice(color)
+    cprint(bot,cl,attrs=['bold'],end=' ')
+    # cprint(cl,cl)
+    x = sentence.capitalize()
+    cprint(x,cl)
+
+    
 
 def speak(sentence):
     """This functin will determine if bot will speak or only reply"""
@@ -65,5 +82,5 @@ def speak(sentence):
         speak_voice_manager(sentence)
         not_ok = False
     if not_ok :
-        print('Sir your speaking and writing cabapity is disibled. Please enbale it from settings.')
+        cprint('Sir your speaking and writing cabapity is disibled. Please enbale it from settings.','red')
 

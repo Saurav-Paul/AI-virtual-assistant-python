@@ -1,8 +1,13 @@
 try:
     import os
     from settings.compiler import compiler
-    import tqdm
+    from tqdm import tqdm
 except expression as e:
+    pass
+
+try :
+    from termcolor import colored, cprint
+except Exception as e:
     pass
 
 
@@ -10,8 +15,9 @@ run_keys = ['-r', '-run']
 files_ext = ['cpp','py']
 
 def run_prog(file_name , debug = False):
-    print(os.getcwd())
-    print("Running the ",file_name+'......')
+    # print(os.getcwd())
+    pt = ("Running the " +file_name+'......')
+    cprint(pt,'yellow')
     ext = file_name.rsplit(sep='.',maxsplit=1)
     if ext[1] == 'cpp':
         if debug :
@@ -21,23 +27,31 @@ def run_prog(file_name , debug = False):
 
         cmd = cmd.replace('{filename}',file_name)
         cmd = cmd.replace('{executable}',ext[0])
-        print('-'*23+file_name+'-'*22+'\n') 
+        cmd_part = cmd.split(sep='&&')
+        with tqdm(total=1,desc='Compilation') as pbar:
+            os.system(cmd_part[0])
+            pbar.update(1)
+        pt = ('-'*23+file_name+'-'*22+'\n') 
+        cprint(pt,'magenta')
         try :
-            os.system(cmd)
+            os.system(cmd_part[1])
         except:
-            print("Sorry sir can't run.")
-        print('\n'+'-'*23+'-'*len(file_name)+'-'*22) 
+            cprint("Sorry sir can't run.",'red')
+        x = ('\n'+'-'*23+'-'*len(file_name)+'-'*22)
+        cprint(x,'magenta')
     elif ext[1] == 'py':
         cmd = compiler['python']
         cmd = cmd.replace('{filename}',file_name)
-        print('-'*23+file_name+'-'*22) 
+        x = ('-'*23+file_name+'-'*22) 
+        cprint(x,'magenta')
         try :
             os.system(cmd)
         except:
-            print("Sorry sir can't run.")
-        print('-'*23+'-'*len(file_name)+'-'*22) 
+            cprint("Sorry sir can't run.",'red')
+        x = ('-'*23+'-'*len(file_name)+'-'*22) 
+        cprint(x,'magenta')
     else :
-        print('Unknown file format.')
+        cprint('Unknown file format.','red')
 
 
 def find_files(lt):
@@ -71,26 +85,33 @@ def find_files(lt):
                         pass
     no = len(file_list)
     if no > 1:
-        print('Select the file -> ')
+        cprint('All the available files...\n','yellow')
         no = 1
         for i in file_list:
-            print(' '*5+str(no)+") "+ i)
+            x = ' '*5+str(no)+") "+ i
+            cprint(x,'blue')
             no += 1
-            
+        x = (' '*5+'0) stop operation')
+        cprint(x,'red')
+        print()
         try :
                 while True :
-                    index = int(input('Enter the file number :'))
-                    if index > 0 and index < no :
+                    cprint('Enter the file number : ','cyan',end='')
+                    index = int(input())
+                    if index == 0:
+                        cprint('Operation Cancelled.','red')
+                        break
+                    elif index > 0 and index < no :
                         run_prog(file_list[index-1],debug)
                         break 
                     else :
-                        print('Wrong file index. Please try again.')
+                        cprint('Wrong file index. Please try again.','red')
         except :
-            raise ValueError('Some value error happend')
+            cprint("Some error happended.",'red',attrs=['bold'])
     elif no == 1:
         run_prog(file_list[0],debug)
     else :
-        print('There is not any python or c++ file')
+        cprint('There is not any python or c++ file available.','yellow')
 
 def if_run_type(msg):
     lt = msg.split()

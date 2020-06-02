@@ -15,6 +15,81 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+
+
+class Cp_my_tester:
+
+    def sub_process(self,cmd,value):
+
+        x = subprocess.Popen(cmd,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
+        with x.stdin as f:
+            f.write(value.encode())
+            result = (x.communicate()[0]).decode('utf-8')
+            print(result)
+        
+        return result
+
+    def test(self,file_name):
+        path = os.getcwd()
+
+        if not os.path.isdir('test'):
+            cprint("Test folder not available.",'red',attrs=['bold'])
+            return
+        
+        file_path = os.path.join(path,'test')
+        lt = os.listdir(file_path)
+        print(lt)
+        if len(lt) == 0 :
+            cprint('Not test file available.')
+            return 
+        cmd = f'g++ {file_name} -o test.out'
+        t = time.time()
+        os.system(cmd)
+        t = time.time() - t
+        print(f'Compilation time {t}')
+        passed = 0 
+        failed = 0
+        for file in lt:
+            ext = file.rsplit(sep='.',maxsplit=1)
+            print(f'file = {ext}')
+            if ext[1] == 'in':
+                out = ext[0] + '.out'
+                if os.path.isfile(os.path.join(file_path,out)):
+                    print(f'testing {file} with {out}')
+                    with open(os.path.join(file_path,file),'r') as f:
+                        value = f.read()
+                    t = time.time()
+                    result = self.sub_process(['./test.out'],value)
+                    print(f'Time taken = {time.time()-t}')
+                    print('code :\n',result)
+                    with open(os.path.join(file_path,out)) as f:
+                        ans = f.read()
+                    print('Expected :\n',ans)
+                    if result == ans:
+                        cprint('Passed','green')
+                        passed += 1
+                    else :
+                        cprint('WA','red')
+                        failed += 1
+                else:
+                    print(f'{out} not found.')
+        if passed + failed == 0 :
+            cprint('No test data available','red')
+            return
+        cprint(f'Status : {passed}/{passed+failed}','yellow')
+        if failed == 0:
+            cprint("Passed....",'green')
+        else :
+            cprint("Failed....",'red')
+
+
+
+
+
+
+
+
+
 class Cp_Problem:
 
     def fetch_problem(self,url = ''):
@@ -252,7 +327,7 @@ class Cp_Submit:
             cprint(' '*4+'0) Cancel operation','red')
             print()
             while True:
-                cprint("Select the file index : ",'cyan',end='')
+                cprint("Select the file number : ",'cyan',end='')
                 index = int(input())
                 if index == 0:
                     cprint("Submitting operation cancelled.",'red')
@@ -264,6 +339,61 @@ class Cp_Submit:
                     cprint("You have entered the wrong index.Please try again.",'red')
         else :
             cprint("NO FILE FOUND :(",'red')
+
+class Cp_add_test:
+
+    @property
+    def take_input(self):
+        content = ''
+        while True:
+            try :
+                line = input()
+            except EOFError:
+                break
+            content += line +'\n'
+
+        return content
+
+
+    def add_case(self , no = 1):
+        """  function for adding testcases """
+        try :
+            pt='-'*20+'-'*10+'-'*20
+            cprint(pt,'magenta')
+            pt = (' '*17+"...Adding Testcase..."+'\n')
+            print(clr(pt,'blue'))
+            
+            if not os.path.isdir('test'):
+                os.mkdir('test')
+            path_name = os.path.join(os.getcwd(),'test')
+            # print(path_name)
+            lt = os.listdir(path_name)
+            # print(lt)
+            ase = len(lt)
+            no = int(ase/2)+1
+
+            cprint('Enter the input(Press Ctrl+d after done):','yellow')
+            x = self.take_input
+
+            cprint('Enter the output(Press Ctrl+d after done):','yellow')
+            y = self.take_input
+
+
+            fileName_in = 'Sample-'+str(no).zfill(2)+'.in'
+            fileName_out = 'Sample-'+str(no).zfill(2)+'.out'
+            # print(fileName_in)
+            no += 1
+            with open(os.path.join(path_name,fileName_in),'w') as fin:
+                fin.write(x)
+            with open(os.path.join(path_name,fileName_out) ,'w') as fout:
+                fout.write(y)
+
+            cprint('Testcase added Sucessfully. :D','green',attrs=['bold'])
+
+            pt='-'*20+'-'*10+'-'*20
+            cprint(pt,'magenta')
+        except:
+            cprint("Can't add testcase. :( ",'red',attrs=['bold'])
 
 def cp_manager(msg):
     
@@ -278,6 +408,9 @@ def cp_manager(msg):
     elif 'login' in msg:
         obj = Cp_login()
         obj.login()
+    elif 'add' in msg:
+        obj = Cp_add_test()
+        obj.add_case()
     elif 'test' in msg:
         msg = msg.replace('test','')
         msg = msg.replace(' ','')
@@ -300,9 +433,11 @@ def if_cp_type(msg):
 if __name__ == "__main__":
     # obj = Cp_Problem()
     # Cp_Problem.fetch_problem()
-    obj = Cp_Submit()
-    obj.find_files()
+    # obj = Cp_Submit()
+    # obj.find_files()
     # Cp_login.login()
+    obj = Cp_add_test()
+    obj.add_case()
     # obj = Cp_Test()
     # obj.find_files()
     # cprint("Enter something for testing purpose : ",'cyan',end='')
