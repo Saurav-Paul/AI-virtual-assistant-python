@@ -19,18 +19,58 @@ class bcolors:
 
 class Cp_my_tester:
 
+
+    def diff_print(self,name,value):
+        print('  '+name+' :')
+        for x in value:
+            x = '  '+ x
+            print(x)
+        
+    def different(self,value,output,expected,case):
+        x = output.split('\n')
+        y = expected.split('\n')
+        i = value.split('\n')
+        pt  = '  '+'-'*5+'Problem Found in '+case+'-'*5
+        cprint(pt,'yellow')
+        # print('Input :')
+        # print(value)
+        self.diff_print('Input',i)
+        self.diff_print('Output',x)
+        self.diff_print('Expected',y)
+        # print('Output :')
+        # print(output)
+        # print("Expected :")
+        # print(expected)
+        print("  Difference :")
+        for wx,wy in zip_longest(x,y,fillvalue=''):
+            print('  ',end='')
+            for o , e in zip_longest(wx,wy,fillvalue=''):
+                if(o == e):
+                    cprint(o,'green',end='')
+                else :
+                    cprint(o,'red',end='')
+                    cprint(e,'yellow',end='')
+            print()
+        cprint('  '+'-'*(len(pt)-2),'yellow')
+
     def sub_process(self,cmd,value):
 
         x = subprocess.Popen(cmd,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
         with x.stdin as f:
             f.write(value.encode())
             result = (x.communicate()[0]).decode('utf-8')
-            print(result)
+            # print(result)
         
         return result
 
     def test(self,file_name):
         path = os.getcwd()
+        print(path)
+        pt='-'*20+file_name+'-'*20
+        cprint(pt,'magenta')
+        pt = (' '*17+"...Testing...")
+        cprint(pt,'blue')
+        print()
 
         if not os.path.isdir('test'):
             cprint("Test folder not available.",'red',attrs=['bold'])
@@ -38,7 +78,7 @@ class Cp_my_tester:
         
         file_path = os.path.join(path,'test')
         lt = os.listdir(file_path)
-        print(lt)
+        # print(lt)
         if len(lt) == 0 :
             cprint('Not test file available.')
             return 
@@ -46,47 +86,78 @@ class Cp_my_tester:
         t = time.time()
         os.system(cmd)
         t = time.time() - t
-        print(f'Compilation time {t}')
+        t = '{:.4f}'.format(t)
+        pt = (f' #  Compilation time {t} s')
+        cprint(pt,'blue')
         passed = 0 
         failed = 0
+        test_files =[]
+        cases = 0
         for file in lt:
             ext = file.rsplit(sep='.',maxsplit=1)
-            print(f'file = {ext}')
+            # print(f'file = {ext}')
             if ext[1] == 'in':
                 out = ext[0] + '.out'
                 if os.path.isfile(os.path.join(file_path,out)):
-                    print(f'testing {file} with {out}')
-                    with open(os.path.join(file_path,file),'r') as f:
-                        value = f.read()
-                    t = time.time()
-                    result = self.sub_process(['./test.out'],value)
-                    print(f'Time taken = {time.time()-t}')
-                    print('code :\n',result)
-                    with open(os.path.join(file_path,out)) as f:
-                        ans = f.read()
-                    print('Expected :\n',ans)
-                    if result == ans:
-                        cprint('Passed','green')
-                        passed += 1
-                    else :
-                        cprint('WA','red')
-                        failed += 1
+                   test_files.append((file,out))
+                   cases += 1
                 else:
-                    print(f'{out} not found.')
-        if passed + failed == 0 :
-            cprint('No test data available','red')
+                    # print(f'{out} not found.')
+                    pass
+        
+        if cases == 0:
+            cprint(" # No testcase available.",'red')
             return
-        cprint(f'Status : {passed}/{passed+failed}','yellow')
-        if failed == 0:
-            cprint("Passed....",'green')
+        if cases == 1:
+            cprint(" # 1 testcase found.",'yellow')
         else :
-            cprint("Failed....",'red')
+            cprint(f' # {cases} testcases found','yellow')
 
+        st = -1.0
+        slowest = ''
+        for f in test_files:
+            file = f[0]
+            out = f[1]
+            # print(f'testing {file} with {out}')
+            ext = file.rsplit(sep='.',maxsplit=1)
+            with open(os.path.join(file_path,file),'r') as f:
+                value = f.read()
+            t = time.time()
+            result = self.sub_process(['./test.out'],value)
 
+            t = time.time() - t
+            if t > st:
+                st = t
+                slowest = ext[0]
+            t = '{:.4}'.format(t)
+            # print('code :\n',result)
+            print()
+            cprint('  * '+ext[0],'yellow')
+            cprint('  * Time : '+t+' s','cyan')
+            with open(os.path.join(file_path,out)) as f:
+                ans = f.read()
+            # print('Expected :\n',ans)
+            if result == ans:
+                cprint('  * Passed','green')
+                passed += 1
+            else :
+                cprint('  * WA','red')
+                failed += 1
+                self.different(value,result,ans,ext[0])
 
+        print()
+        st = f'{st:.4f}'
+        pt = f' # Slowest : {st} [{slowest}]'
+        cprint(pt,'blue')
+        pt = (f' # Status : {passed} / {passed+failed} ')
+        cprint(pt,'yellow')
+        if failed == 0:
+            cprint(" # Passed....",'green')
+        else :
+            cprint(" # Failed....",'red')
 
-
-
+        pt='-'*20+'-'*len(file_name)+'-'*20
+        cprint(pt,'magenta')
 
 
 
@@ -411,6 +482,9 @@ def cp_manager(msg):
     elif 'add' in msg:
         obj = Cp_add_test()
         obj.add_case()
+    elif 'testing' in msg:
+        obj = Cp_my_tester()
+        obj.test('test1.cpp')
     elif 'test' in msg:
         msg = msg.replace('test','')
         msg = msg.replace(' ','')
