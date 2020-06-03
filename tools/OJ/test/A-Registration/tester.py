@@ -145,6 +145,48 @@ class Cp_my_tester:
         pt='-'*20+'-'*len(file_name)+'-'*20
         cprint(pt,'magenta')
 
+    def find_files(self,file_name=''):
+
+        file_list = []
+        # print(file_name)
+        supported_ext = ['cpp','py']
+        # print(os.getcwd)
+        for file in os.listdir(os.getcwd()):
+            try :
+                ext = file.rsplit(sep='.',maxsplit=1)
+                for i in supported_ext:
+                    if ext[1] == i:
+                        if file_name in file:
+                            file_list.append(file)
+            except:
+                pass
+        # print(file_list)
+        sz = len(file_list)
+        if sz == 1:
+            self.test_it(file_list[0])
+        elif sz > 1:
+            no = 1
+            cprint("All the available files are given below.\n",'yellow')
+            for file in file_list:
+                pt = (' '*4+str(no)+') '+file)
+                cprint(pt,'blue')
+                no += 1
+            cprint(' '*4+'0) Cancel operation','red')
+            print()
+            while True:
+                cprint("Select the file index : ",'cyan',end='')
+                index = int(input())
+                if index == 0:
+                    cprint("Testing operation cancelled.",'red')
+                    break
+                elif index < no:
+                    self.test(file_list[index-1])
+                    break
+                else:
+                    cprint("You have entered the wrong index.Please try again.",'red')
+        else :
+            cprint("NO FILE FOUND :(",'red')
+
 if __name__ == "__main__":
     obj = Cp_my_tester()
-    obj.test('test1.cpp')
+    obj.find_files()

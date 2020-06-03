@@ -2,6 +2,7 @@ import os
 import subprocess
 import json
 from termcolor import colored as clr , cprint
+import time
 
 cp_keys = ['-cp','-Cp']
 
@@ -65,7 +66,7 @@ class Cp_my_tester:
 
     def test(self,file_name):
         path = os.getcwd()
-        print(path)
+        # print(path, file_name)
         pt='-'*20+file_name+'-'*20
         cprint(pt,'magenta')
         pt = (' '*17+"...Testing...")
@@ -158,6 +159,48 @@ class Cp_my_tester:
 
         pt='-'*20+'-'*len(file_name)+'-'*20
         cprint(pt,'magenta')
+
+    def find_files(self,file_name=''):
+
+        file_list = []
+        # print(file_name)
+        supported_ext = ['cpp','py']
+        # print(os.getcwd)
+        for file in os.listdir(os.getcwd()):
+            try :
+                ext = file.rsplit(sep='.',maxsplit=1)
+                for i in supported_ext:
+                    if ext[1] == i:
+                        if file_name in file:
+                            file_list.append(file)
+            except:
+                pass
+        # print(file_list)
+        sz = len(file_list)
+        if sz == 1:
+            self.test_it(file_list[0])
+        elif sz > 1:
+            no = 1
+            cprint("All the available files are given below.\n",'yellow')
+            for file in file_list:
+                pt = (' '*4+str(no)+') '+file)
+                cprint(pt,'blue')
+                no += 1
+            cprint(' '*4+'0) Cancel operation','red')
+            print()
+            while True:
+                cprint("Select the file index : ",'cyan',end='')
+                index = int(input())
+                if index == 0:
+                    cprint("Testing operation cancelled.",'red')
+                    break
+                elif index < no:
+                    self.test(file_list[index-1])
+                    break
+                else:
+                    cprint("You have entered the wrong index.Please try again.",'red')
+        else :
+            cprint("NO FILE FOUND :(",'red')
 
 
 
@@ -482,11 +525,13 @@ def cp_manager(msg):
     elif 'add' in msg:
         obj = Cp_add_test()
         obj.add_case()
-    elif 'testing' in msg:
-        obj = Cp_my_tester()
-        obj.test('test1.cpp')
     elif 'test' in msg:
         msg = msg.replace('test','')
+        msg = msg.replace(' ','')
+        obj = Cp_my_tester()
+        obj.find_files(msg)
+    elif 'test -oj' in msg:
+        msg = msg.replace('test -oj','')
         msg = msg.replace(' ','')
         obj = Cp_Test()
         obj.find_files(msg)
