@@ -16,13 +16,15 @@ try :
     from settings.settings import bot , DEBUG
     from tools.shell import if_shell_type
     from tools.OJ.cp import if_cp_type
+    from termcolor import cprint
+    import os
 except Exception as e:
     print(e)
 
-def check(msg,mp):
+def check(msg,mp,need = 90):
     logger.debug('check->' + msg)
     for word in mp :
-        if is_matched(word,msg):
+        if is_matched(word,msg,need):
             return True
     return False
 
@@ -69,12 +71,17 @@ def ai(msg,orginal_path) :
                 history = JsonManager.json_read(f)
                 for line in history:
                     if is_matched(msg,line,95):
-                        logging.info('Found in learnt.json')
+                        logging.info('Learnt this before')
                         return history[line]
 
             except :
                 logging.error("Can't read history file")
-
+            if(check(msg,['change dir','change directory','chdir','-cd'],100)):
+                # print(os.getcwd())
+                cprint('Enter the path: ','cyan',end='')
+                path = input()
+                os.chdir(path)
+                return 'Directory changed.'
             if check(msg,youtube_play):
                 msg = rep(msg,youtube_play)
                 logger.info(msg)
@@ -137,7 +144,8 @@ def ai(msg,orginal_path) :
                             except Exception as e:
                                 logger.info("Exception while writing learnt : "+e)
             return reply
-        except :
+        except Exception as e:
             logger.info('Getting some error in ai')
+            logger.info(e)
             return reply
 
