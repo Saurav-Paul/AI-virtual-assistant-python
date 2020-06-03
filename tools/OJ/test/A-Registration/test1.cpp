@@ -8,7 +8,9 @@ int main(){
     cin >> s >> p;
     
     s += p[p.size()-1];
-
+    while(1){
+        continue;
+    }
     cout << (s==p?"Yes":"No") << endl ;
 
     return 0 ;

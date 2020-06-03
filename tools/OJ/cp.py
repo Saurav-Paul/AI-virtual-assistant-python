@@ -3,6 +3,8 @@ import subprocess
 import json
 from termcolor import colored as clr , cprint
 import time
+from itertools import zip_longest
+
 
 cp_keys = ['-cp','-Cp']
 
@@ -20,6 +22,7 @@ class bcolors:
 
 class Cp_my_tester:
 
+    TLE = 4
 
     def diff_print(self,name,value):
         print('  '+name+' :')
@@ -55,14 +58,16 @@ class Cp_my_tester:
         cprint('  '+'-'*(len(pt)-2),'yellow')
 
     def sub_process(self,cmd,value):
-
-        x = subprocess.Popen(cmd,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
-        with x.stdin as f:
-            f.write(value.encode())
-            result = (x.communicate()[0]).decode('utf-8')
-            # print(result)
-        
-        return result
+        tle = False
+        try :
+            x = subprocess.call(cmd,stdin=subprocess.PIPE,stdout=subprocess.PIPE,timeout=self.TLE)
+            with x.stdin as f:
+                f.write(value.encode())
+                result = (x.communicate()[0]).decode('utf-8')
+        except :
+            result = "$TLE$"
+            tle = True
+        return (result,tle)
 
     def test(self,file_name):
         path = os.getcwd()
@@ -97,15 +102,17 @@ class Cp_my_tester:
         for file in lt:
             ext = file.rsplit(sep='.',maxsplit=1)
             # print(f'file = {ext}')
-            if ext[1] == 'in':
-                out = ext[0] + '.out'
-                if os.path.isfile(os.path.join(file_path,out)):
-                   test_files.append((file,out))
-                   cases += 1
-                else:
-                    # print(f'{out} not found.')
-                    pass
-        
+            try :
+                if ext[1] == 'in':
+                    out = ext[0] + '.out'
+                    if os.path.isfile(os.path.join(file_path,out)):
+                        test_files.append((file,out))
+                        cases += 1
+                    else:
+                        # print(f'{out} not found.')
+                        pass
+            except :
+                pass
         if cases == 0:
             cprint(" # No testcase available.",'red')
             return
@@ -116,6 +123,7 @@ class Cp_my_tester:
 
         st = -1.0
         slowest = ''
+        is_tle = False
         for f in test_files:
             file = f[0]
             out = f[1]
@@ -125,6 +133,8 @@ class Cp_my_tester:
                 value = f.read()
             t = time.time()
             result = self.sub_process(['./test.out'],value)
+            tle = result[1]
+            result = result[0]
 
             t = time.time() - t
             if t > st:
@@ -134,7 +144,13 @@ class Cp_my_tester:
             # print('code :\n',result)
             print()
             cprint('  * '+ext[0],'yellow')
-            cprint('  * Time : '+t+' s','cyan')
+            cprint('  * Time : ','cyan',end='')
+            if tle :
+                cprint('TLE','red')
+                is_tle = True
+            else :
+                cprint(t,'cyan')
+            
             with open(os.path.join(file_path,out)) as f:
                 ans = f.read()
             # print('Expected :\n',ans)
@@ -144,13 +160,20 @@ class Cp_my_tester:
             else :
                 cprint('  * WA','red')
                 failed += 1
-                self.different(value,result,ans,ext[0])
+                if tle == False:
+                    self.different(value,result,ans,ext[0])
+                else :
+                    is_tle = True
 
         print()
         st = f'{st:.4f}'
-        pt = f' # Slowest : {st} [{slowest}]'
-        cprint(pt,'blue')
-        pt = (f' # Status : {passed} / {passed+failed} ')
+        pt = f' # Slowest : '
+        cprint(pt,'blue', end='')
+        if is_tle :
+            cprint('TLE','red',end='')
+        cprint(' ['+slowest+']','blue')
+        
+        pt = (f' # Status : {passed} accpeted / {passed+failed} (total)')
         cprint(pt,'yellow')
         if failed == 0:
             cprint(" # Passed....",'green')
@@ -529,6 +552,7 @@ def cp_manager(msg):
         msg = msg.replace('test','')
         msg = msg.replace(' ','')
         obj = Cp_my_tester()
+        # obj.TLE = 1
         obj.find_files(msg)
     elif 'test -oj' in msg:
         msg = msg.replace('test -oj','')
