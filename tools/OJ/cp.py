@@ -57,17 +57,28 @@ class Cp_my_tester:
             print()
         cprint('  '+'-'*(len(pt)-2),'yellow')
 
+    # def sub_process(self,cmd,value):
+    #     tle = False
+    #     try :
+    #         x = subprocess.call(cmd,stdin=subprocess.PIPE,stdout=subprocess.PIPE,timeout=self.TLE)
+    #         with x.stdin as f:
+    #             f.write(value.encode())
+    #             result = (x.communicate()[0]).decode('utf-8')
+    #     except :
+    #         result = "$TLE$"
+    #         tle = True
+    #     return (result,tle)
+
+
     def sub_process(self,cmd,value):
-        tle = False
-        try :
-            x = subprocess.call(cmd,stdin=subprocess.PIPE,stdout=subprocess.PIPE,timeout=self.TLE)
-            with x.stdin as f:
-                f.write(value.encode())
-                result = (x.communicate()[0]).decode('utf-8')
-        except :
-            result = "$TLE$"
-            tle = True
-        return (result,tle)
+
+        x = subprocess.Popen(cmd,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
+        with x.stdin as f:
+            f.write(value.encode())
+            result = (x.communicate()[0]).decode('utf-8')
+            # print(result)
+        
+        return (result,False)
 
     def test(self,file_name):
         path = os.getcwd()
@@ -88,13 +99,22 @@ class Cp_my_tester:
         if len(lt) == 0 :
             cprint('Not test file available.')
             return 
-        cmd = f'g++ {file_name} -o test.out'
-        t = time.time()
-        os.system(cmd)
-        t = time.time() - t
-        t = '{:.4f}'.format(t)
-        pt = (f' #  Compilation time {t} s')
-        cprint(pt,'blue')
+        ext = file_name.rsplit(sep='.',maxsplit=1)
+        type = ''
+        if len(ext) > 1 :
+            if ext[1] == 'cpp':
+                type = 'cpp'
+            elif ext[1] == 'py':
+                type = 'py'
+        
+        if type == 'cpp':
+            cmd = f'g++ {file_name} -o test.out'
+            t = time.time()
+            os.system(cmd)
+            t = time.time() - t
+            t = '{:.4f}'.format(t)
+            pt = (f' #  Compilation time {t} s')
+            cprint(pt,'blue')
         passed = 0 
         failed = 0
         test_files =[]
@@ -132,7 +152,12 @@ class Cp_my_tester:
             with open(os.path.join(file_path,file),'r') as f:
                 value = f.read()
             t = time.time()
-            result = self.sub_process(['./test.out'],value)
+            if type == 'cpp':
+                result = self.sub_process(['./test.out'],value)
+            elif type =='py':
+                result = self.sub_process(['python3',file_name],value)
+            else:
+                result = ('',False)
             tle = result[1]
             result = result[0]
 
@@ -173,7 +198,7 @@ class Cp_my_tester:
             cprint('TLE','red',end='')
         cprint(' ['+slowest+']','blue')
         
-        pt = (f' # Status : {passed} accpeted / {passed+failed} (total)')
+        pt = (f' # Status : {passed}/{passed+failed} (AC/Total)')
         cprint(pt,'yellow')
         if failed == 0:
             cprint(" # Passed....",'green')
@@ -548,16 +573,16 @@ def cp_manager(msg):
     elif 'add' in msg:
         obj = Cp_add_test()
         obj.add_case()
+    elif 'test -oj' in msg:
+        msg = msg.replace('test -oj','')
+        msg = msg.replace(' ','')
+        obj = Cp_Test()
+        obj.find_files(msg)
     elif 'test' in msg:
         msg = msg.replace('test','')
         msg = msg.replace(' ','')
         obj = Cp_my_tester()
         # obj.TLE = 1
-        obj.find_files(msg)
-    elif 'test -oj' in msg:
-        msg = msg.replace('test -oj','')
-        msg = msg.replace(' ','')
-        obj = Cp_Test()
         obj.find_files(msg)
     else :
         cprint('Arguments Error','red')
