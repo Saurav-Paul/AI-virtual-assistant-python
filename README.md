@@ -23,6 +23,7 @@
    - [x] math calculation
    - [x] goto any website
    - [x] install something
+   - [x] learn from answer
    - [ ] tell to remember something
    - [ ] download youtube video
    - [ ] arrange files
