@@ -9,7 +9,7 @@
   - [x] run program
   - [ ] parse contest
   - [ ] bruteforce solution
-  - 
+  
 ## More eaturess
    - [x] voice output
    - [x] voice input
