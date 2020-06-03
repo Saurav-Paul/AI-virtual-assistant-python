@@ -178,7 +178,7 @@ class Cp_my_tester:
         # print(file_list)
         sz = len(file_list)
         if sz == 1:
-            self.test_it(file_list[0])
+            self.test(file_list[0])
         elif sz > 1:
             no = 1
             cprint("All the available files are given below.\n",'yellow')
