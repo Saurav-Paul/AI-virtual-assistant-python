@@ -823,7 +823,7 @@ class Cp_bruteforce:
             cprint(f'[ Time : {t:.4f} sec ]','cyan')
 
         print()
-        cprint(f' # Slowest : {st:4f} sec.','blue')
+        cprint(f' # Slowest : {st:.4f} sec.','blue')
         cprint(f' # Accepted.','green')
 
         print()
