@@ -4,6 +4,6 @@ using namespace std;
 int main(){
     int n;
     cin >> n;
-    cout << (!n&1?"even":"odd") << endl;
+    cout << (n&1?"odd":"even") << endl;
     return 0 ;
 }

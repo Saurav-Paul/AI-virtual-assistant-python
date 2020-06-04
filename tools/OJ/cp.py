@@ -165,7 +165,8 @@ class Cp_my_tester:
             if t > st:
                 st = t
                 slowest = ext[0]
-            t = '{:.4}'.format(t)
+            # t = '{:.4}'.format(t)
+            t = f'{t:.4f}'
             # print('code :\n',result)
             print()
             cprint('  * '+ext[0],'yellow')
@@ -196,6 +197,8 @@ class Cp_my_tester:
         cprint(pt,'blue', end='')
         if is_tle :
             cprint('TLE','red',end='')
+        else :
+            cprint(st,'blue',end='')
         cprint(' ['+slowest+']','blue')
         
         pt = (f' # Status : {passed}/{passed+failed} (AC/Total)')
@@ -447,7 +450,7 @@ class Cp_Submit:
         cprint(problem_name,'green')
         cprint(' '*4+'Problem url: ','yellow',end='')
         cprint(url,'green')
-        cprint(' '*4+'File name: ','yellow',end='')
+        cprint(' '*4+'File name: ','yellow',end='')gg
         cprint(file_name,'green')
         cprint('-'*len(pt),'magenta')
         cprint('Enter (y/n) to confirm : ','yellow',attrs=['bold'],end='')
@@ -557,6 +560,152 @@ class Cp_add_test:
         except:
             cprint("Can't add testcase. :( ",'red',attrs=['bold'])
 
+
+class Cp_bruteforce:
+
+    def find_files(self,file_name=''):
+        
+        file_list = []
+        # print(f'FIle name is {file_name}')
+        supported_ext = ['cpp','py']
+        for file in os.listdir(os.getcwd()):
+            try :
+                ext = file.rsplit(sep='.',maxsplit=1)
+                for i in supported_ext:
+                    if ext[1] == i:
+                        if file_name in file:
+                            file_list.append(file)
+            except:
+                pass
+        # print(file_list)
+        sz = len(file_list)
+        if sz == 1:
+            return (file_list[0],True)
+        elif sz > 1:
+            cprint(' '*17+'...Choose '+file_name +' file...'+'\n','blue')
+            no = 1
+            cprint("All the available files are given below.\n",'yellow')
+            for file in file_list:
+                pt = (' '*4+str(no)+') '+file)
+                cprint(pt,'blue')
+                no += 1
+            cprint(' '*4+'0) Cancel operation','red')
+            print()
+            while True:
+                cprint("Select the file number : ",'cyan',end='')
+                index = int(input())
+                if index == 0:
+                    cprint("Bruteforcing operation cancelled.",'red')
+                    return ('Cancelled',False)
+                    break
+                elif index < no:
+                    return (file_list[index-1],True)
+                    break
+                else:
+                    cprint("You have entered the wrong index.Please try again.",'red')
+        else :
+            cprint("NO FILE FOUND :(",'red')
+            return ('FILE NOT FOUND',False)
+
+    def diff_print(self,name,value):
+        print('  '+name+' :')
+        for x in value:
+            x = '  '+ x
+            print(x)
+        
+    def different(self,value,output,expected,case):
+        x = output.split('\n')
+        y = expected.split('\n')
+        i = value.split('\n')
+        pt  = '  '+'-'*5+'Problem Found in '+case+'-'*5
+        cprint(pt,'yellow')
+        # print('Input :')
+        # print(value)
+        self.diff_print('Input',i)
+        self.diff_print('Output',x)
+        self.diff_print('Expected',y)
+        # print('Output :')
+        # print(output)
+        # print("Expected :")
+        # print(expected)
+        print("  Difference :")
+        for wx,wy in zip_longest(x,y,fillvalue=''):
+            print('  ',end='')
+            for o , e in zip_longest(wx,wy,fillvalue=''):
+                if(o == e):
+                    cprint(o,'green',end='')
+                else :
+                    cprint(o,'red',end='')
+                    cprint(e,'yellow',end='')
+            print()
+        cprint('  '+'-'*(len(pt)-2),'yellow')
+
+
+
+    def sub_process(self,cmd,value,iput):
+
+        x = subprocess.Popen(cmd,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
+        # print('here')
+        with x.stdin as f:
+            if iput:
+                f.write(value.encode())
+            result = (x.communicate()[0]).decode('utf-8')
+            # print(result)
+        
+        return (result,False)
+
+    def cmd_manager(self,file_name,value,ext,iput = True):
+        pass
+        if ext == 'py':
+            cmd = ['python3',file_name]
+        elif ext == 'cpp':
+            ext = file_name.rsplit(sep='.',maxsplit=1)
+            cmd = './'+ext[0]
+            cmd = [cmd]
+        else:
+            cprint('command manager failed.','red')
+            return ''
+        return self.sub_process(cmd,value,iput)[0]
+
+    def run(self):
+        pass
+        print('hello')
+        brute_file = self.find_files('brute')
+        print(brute_file)
+        if brute_file[1] == False:
+            return
+        print(brute_file[0])
+        gen_file = self.find_files('gen')
+        print(gen_file)
+        print(gen_file[1])
+        if gen_file[1] == False:
+            return
+        test_file = self.find_files('')
+        if test_file[1] == False:
+            return
+
+        test_file = test_file[0]
+        brute_file = brute_file[0]
+        gen_file = gen_file[0]
+        print(test_file)
+        cprint('How may time do you want to stress? : ','cyan',end ='')
+        no = int(input())
+        # testing....
+        brute_ext = brute_file.rsplit(sep='.',maxsplit=1)[1]
+        gen_ext = gen_file.rsplit(sep='.',maxsplit=1)[1]
+        test_ext = test_file.rsplit(sep='.',maxsplit=1)[1]
+        print(brute_ext,gen_ext,test_ext)
+        if brute_ext == 'cpp':
+            print('cpp = ',brute_file)
+
+        for i in range(no):
+            pass
+            iput = self.cmd_manager(gen_file,'',gen_ext,False)
+            print(iput)
+
+            
+
+
 def cp_manager(msg):
     
     if 'parse' in msg:
@@ -584,6 +733,9 @@ def cp_manager(msg):
         obj = Cp_my_tester()
         # obj.TLE = 1
         obj.find_files(msg)
+    elif 'bruteforce' in msg:
+        obj = Cp_bruteforce()
+        obj.run()
     else :
         cprint('Arguments Error','red')
 
