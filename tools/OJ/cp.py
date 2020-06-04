@@ -140,7 +140,7 @@ class Cp_my_tester:
             cprint(" # 1 testcase found.",'yellow')
         else :
             cprint(f' # {cases} testcases found','yellow')
-
+        
         st = -1.0
         slowest = ''
         is_tle = False
@@ -520,7 +520,7 @@ class Cp_add_test:
         return content
 
 
-    def add_case(self , no = 1):
+    def add_case(self , no = 1,name='Sample-'):
         """  function for adding testcases """
         try :
             pt='-'*20+'-'*10+'-'*20
@@ -544,8 +544,8 @@ class Cp_add_test:
             y = self.take_input
 
 
-            fileName_in = 'Sample-'+str(no).zfill(2)+'.in'
-            fileName_out = 'Sample-'+str(no).zfill(2)+'.out'
+            fileName_in = name+str(no).zfill(2)+'.in'
+            fileName_out = name+str(no).zfill(2)+'.out'
             # print(fileName_in)
             no += 1
             with open(os.path.join(path_name,fileName_in),'w') as fin:
@@ -670,6 +670,34 @@ class Cp_bruteforce:
             return ''
         return self.sub_process(cmd,value,iput)[0]
 
+
+    def add_case(self ,x,y, no = 1,name='Genarated-'):
+        """  function for adding testcases """
+        try :
+            
+            if not os.path.isdir('test'):
+                os.mkdir('test')
+            path_name = os.path.join(os.getcwd(),'test')
+            # print(path_name)
+            lt = os.listdir(path_name)
+            # print(lt)
+            ase = len(lt)
+            no = int(ase/2)+1
+
+            fileName_in = name+str(no).zfill(2)+'.in'
+            fileName_out = name+str(no).zfill(2)+'.out'
+            # print(fileName_in)
+            no += 1
+            with open(os.path.join(path_name,fileName_in),'w') as fin:
+                fin.write(x)
+            with open(os.path.join(path_name,fileName_out) ,'w') as fout:
+                fout.write(y)
+
+            cprint('Testcase added Sucessfully. :D','green',attrs=['bold'])
+
+        except:
+            cprint("Can't add testcase. :( ",'red',attrs=['bold'])
+
     def run(self):
         pass
         print('hello')
@@ -770,6 +798,18 @@ class Cp_bruteforce:
                 self.different(iput,result,ans)
                 print()
                 cprint(' # Failed. :(','red')
+                with open('hack.in','w') as f:
+                    f.write(iput)
+                with open('hack.out','w') as f:
+                    f.write(ans)
+                
+                print()
+                cprint('Do you want to add this case to your testcases list? (Y/N) : ','cyan',attrs = ['bold'],end='')
+                want = input()
+                want.lower()
+                if want == 'y' or want =='yes':
+                    # cprint('Test case added successfully.','green')
+                    self.add_case(iput,ans)
                 return
             
             cprint(f'[ Time : {t:.4f} sec ]','cyan')
