@@ -73,13 +73,22 @@ class Cp_my_tester:
         if len(lt) == 0 :
             cprint('Not test file available.')
             return 
-        cmd = f'g++ {file_name} -o test.out'
-        t = time.time()
-        os.system(cmd)
-        t = time.time() - t
-        t = '{:.4f}'.format(t)
-        pt = (f' #  Compilation time {t} s')
-        cprint(pt,'blue')
+        ext = file_name.rsplit(sep='.',maxsplit=1)
+        type = ''
+        if len(ext) > 1 :
+            if ext[1] == 'cpp':
+                type = 'cpp'
+            elif ext[1] == 'py':
+                type = 'py'
+        
+        if type == 'cpp':
+            cmd = f'g++ {file_name} -o test.out'
+            t = time.time()
+            os.system(cmd)
+            t = time.time() - t
+            t = '{:.4f}'.format(t)
+            pt = (f' #  Compilation time {t} s')
+            cprint(pt,'blue')
         passed = 0 
         failed = 0
         test_files =[]
@@ -116,8 +125,13 @@ class Cp_my_tester:
             with open(os.path.join(file_path,file),'r') as f:
                 value = f.read()
             t = time.time()
-            result = self.sub_process(['./test.out'],value)
-
+            # print(type)
+            if type == 'cpp':
+                result = self.sub_process(['./test.out'],value)
+            elif type =='py':
+                result = self.sub_process(['python3',file_name],value)
+            else:
+                result = ''
             t = time.time() - t
             if t > st:
                 st = t

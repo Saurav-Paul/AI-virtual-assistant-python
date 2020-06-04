@@ -37,7 +37,7 @@ def main(get='',orginal_path='') :
                 speak(msg)
                 line_sep()
         speak('Good Bye, Sir.')
-        asci_banner('Have a Good Day!')
+        asci_banner('BYE!')
     else :
         msg = ai(get,orginal_path)
         speak(msg)

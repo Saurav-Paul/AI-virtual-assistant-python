@@ -1,5 +1,6 @@
 from settings.settings import bot
 from datetime import datetime
+import time
 
 def get_time() :
     """This function will return current time
@@ -19,13 +20,16 @@ def get_time() :
 
     return current_time
 
+def digital_time():
+    return 'Sir now is '+time.strftime("%-I:%M %p")
+
 data = {
     'who are you' : 'I am '+ bot['name'] +'.',
     'how are you' : 'I am fine, thank you sir.',
     'good morning' : 'Good morning to you sir.' , 
     'good night' : 'Good night to you sir.' ,
-    'what is the time' : get_time(),
-    'tell me the time' : get_time() ,
+    'what is the time' : digital_time(),
+    'tell me the time' : digital_time() ,
     'what is your name' : ('my name is ' + bot['name'] + '.'),
     
 }
