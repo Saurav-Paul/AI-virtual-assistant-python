@@ -582,7 +582,10 @@ class Cp_bruteforce:
         if sz == 1:
             return (file_list[0],True)
         elif sz > 1:
-            cprint(' '*17+'...Choose '+file_name +' file...'+'\n','blue')
+            xp = file_name
+            if xp == '':
+                xp = 'test'
+            cprint(' '*17+'...Choose '+xp +' file...'+'\n','blue')
             no = 1
             cprint("All the available files are given below.\n",'yellow')
             for file in file_list:
@@ -613,11 +616,11 @@ class Cp_bruteforce:
             x = '  '+ x
             print(x)
         
-    def different(self,value,output,expected,case):
+    def different(self,value,output,expected):
         x = output.split('\n')
         y = expected.split('\n')
         i = value.split('\n')
-        pt  = '  '+'-'*5+'Problem Found in '+case+'-'*5
+        pt  = '  '+'-'*5+'Problem Found'+'-'*5
         cprint(pt,'yellow')
         # print('Input :')
         # print(value)
@@ -671,13 +674,13 @@ class Cp_bruteforce:
         pass
         print('hello')
         brute_file = self.find_files('brute')
-        print(brute_file)
+        # print(brute_file)
         if brute_file[1] == False:
             return
-        print(brute_file[0])
+        # print(brute_file[0])
         gen_file = self.find_files('gen')
-        print(gen_file)
-        print(gen_file[1])
+        # print(gen_file)
+        # print(gen_file[1])
         if gen_file[1] == False:
             return
         test_file = self.find_files('')
@@ -687,49 +690,97 @@ class Cp_bruteforce:
         test_file = test_file[0]
         brute_file = brute_file[0]
         gen_file = gen_file[0]
-        print(test_file)
+        # print(test_file)
         cprint('How may time do you want to stress? : ','cyan',end ='')
         no = int(input())
+        if no < 1:
+            cprint('You want to bruteforce test less than 1 time? Seriously man? (-_-)','red')
+            return
         # testing....
         brute_ext = brute_file.rsplit(sep='.',maxsplit=1)[1]
         gen_ext = gen_file.rsplit(sep='.',maxsplit=1)[1]
         test_ext = test_file.rsplit(sep='.',maxsplit=1)[1]
-        print(brute_ext,gen_ext,test_ext)
+        # print(brute_ext,gen_ext,test_ext)
         if brute_ext == 'cpp':
-            print('cpp = ',brute_file)
+            # print('cpp = ',brute_file)
             ext = brute_file.rsplit(sep='.',maxsplit=1)[0]
             cmd = "g++ "+brute_file+" -o "+ext
             with tqdm(total=1.0,desc=brute_file+' compiling',initial=.25) as pbar:
                 os.system(cmd)
                 pbar.update(.75)
+            print()
         if gen_ext == 'cpp':
-            print('cpp = ',gen_file)
+            # print('cpp = ',gen_file)
             ext = gen_file.rsplit(sep='.',maxsplit=1)[0]
             cmd = "g++ "+gen_file+" -o "+ext
             with tqdm(total=1.0,desc=gen_file+' compiling',initial=.25) as pbar:
                 os.system(cmd)
                 pbar.update(.75)
+            print()
         if test_ext == 'cpp':
-            print('cpp = ',test_file)
+            # print('cpp = ',test_file)
             ext = test_file.rsplit(sep='.',maxsplit=1)[0]
             cmd = "g++ "+test_file+" -o "+ext
             with tqdm(total=1.0,desc=test_file+' compiling',initial=.25) as pbar:
                 os.system(cmd)
                 pbar.update(.75)
+            print()
+        digit = len(str(no))
+        print()
+        st = -1.0
+
+        pt='-'*20+test_file+'-'*20
+        cprint(pt,'magenta')
+        pt = (' '*13+"...Bruteforcing...")
+        print()
+        cprint(f' # Test File  : ','yellow',end='')
+        cprint(f'{test_file}','cyan')
+        cprint(f' # Brute File : ','yellow',end='')
+        cprint(f'{brute_file}','cyan')
+        cprint(f' # Gen File   : ','yellow',end='')
+        cprint(f'{gen_file}','cyan')
+        cprint(f' # Stress     : ','yellow',end='')
+        cprint(f'{no} ','cyan',end=' ')
+        if no < 2:
+            cprint('time','cyan')
+        else :
+            cprint('times','cyan')
+        print()
+        cprint(pt,'blue')
+        print()
+
         for i in range(no):
             pass
             iput = self.cmd_manager(gen_file,'',gen_ext,False)
             # print(iput)
             ans = self.cmd_manager(brute_file,iput,brute_ext,True)
             # print(ans)
+            t = time.time()
             result = self.cmd_manager(test_file,iput,brute_ext,True)
             # print(ans)
-            
+            t = time.time() - t
+            cprint('  * '+str(i+1).zfill(digit)+') ','yellow',end='')
+            if t > st:
+                st = t
             if result == ans:
-                cprint('  *'+str(i+1)+') Passed...','green')
+                cprint('Passed...','green',end=' ')
             else :
-                cprint('  *'+str(i+1)+') Failed...','red')
+                cprint('Failed...','red',end=' ')
+                cprint(f'[ Time : {t:.4f} sec ]','cyan')
+                self.different(iput,result,ans)
+                print()
+                cprint(' # Failed. :(','red')
+                return
+            
+            cprint(f'[ Time : {t:.4f} sec ]','cyan')
 
+        print()
+        cprint(f' # Slowest : {st:4f} sec.','blue')
+        cprint(f' # Accepted.','green')
+
+        print()
+        pt='-'*20+'-'*len(test_file)+'-'*20
+        cprint(pt,'magenta')
             
 
 
