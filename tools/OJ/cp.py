@@ -669,6 +669,7 @@ class Cp_bruteforce:
         else:
             cprint('command manager failed.','red')
             return ''
+        # print(cmd)
         return self.sub_process(cmd,value,iput)[0]
 
 
@@ -730,7 +731,7 @@ class Cp_bruteforce:
         brute_ext = brute_file.rsplit(sep='.',maxsplit=1)[1]
         gen_ext = gen_file.rsplit(sep='.',maxsplit=1)[1]
         test_ext = test_file.rsplit(sep='.',maxsplit=1)[1]
-        # print(brute_ext,gen_ext,test_ext)
+        print(brute_ext,gen_ext,test_ext)
         if brute_ext == 'cpp':
             # print('cpp = ',brute_file)
             ext = brute_file.rsplit(sep='.',maxsplit=1)[0]
@@ -786,10 +787,15 @@ class Cp_bruteforce:
             ans = self.cmd_manager(brute_file,iput,brute_ext,True)
             # print(ans)
             t = time.time()
-            result = self.cmd_manager(test_file,iput,brute_ext,True)
+            result = self.cmd_manager(test_file,iput,test_ext,True)
             # print(ans)
             t = time.time() - t
             cprint('  * '+str(i+1).zfill(digit)+') ','yellow',end='')
+            
+            # if(iput == '4\n'):
+            #     print(ans)
+            #     print(result)
+            #     break
             if t > st:
                 st = t
             if result == ans:
