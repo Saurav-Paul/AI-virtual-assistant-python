@@ -140,7 +140,7 @@ class Cp_my_tester:
             cprint(" # 1 testcase found.",'yellow')
         else :
             cprint(f' # {cases} testcases found','yellow')
-        
+
         st = -1.0
         slowest = ''
         is_tle = False
@@ -208,6 +208,7 @@ class Cp_my_tester:
         else :
             cprint(" # Failed....",'red')
 
+        print()
         pt='-'*20+'-'*len(file_name)+'-'*20
         cprint(pt,'magenta')
 
@@ -520,7 +521,7 @@ class Cp_add_test:
         return content
 
 
-    def add_case(self , no = 1,name='Sample-'):
+    def add_case(self , no = 1,name='Custom-'):
         """  function for adding testcases """
         try :
             pt='-'*20+'-'*10+'-'*20
@@ -700,7 +701,7 @@ class Cp_bruteforce:
 
     def run(self):
         pass
-        print('hello')
+        
         brute_file = self.find_files('brute')
         # print(brute_file)
         if brute_file[1] == False:
@@ -719,12 +720,13 @@ class Cp_bruteforce:
         brute_file = brute_file[0]
         gen_file = gen_file[0]
         # print(test_file)
-        cprint('How may time do you want to stress? : ','cyan',end ='')
+        cprint('How may times do you want to stress? : ','cyan',end ='')
         no = int(input())
         if no < 1:
             cprint('You want to bruteforce test less than 1 time? Seriously man? (-_-)','red')
             return
         # testing....
+        print()
         brute_ext = brute_file.rsplit(sep='.',maxsplit=1)[1]
         gen_ext = gen_file.rsplit(sep='.',maxsplit=1)[1]
         test_ext = test_file.rsplit(sep='.',maxsplit=1)[1]
