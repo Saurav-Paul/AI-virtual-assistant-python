@@ -4,7 +4,7 @@ import json
 from termcolor import colored as clr , cprint
 import time
 from itertools import zip_longest
-
+from tqdm import tqdm
 
 cp_keys = ['-cp','-Cp']
 
@@ -450,7 +450,7 @@ class Cp_Submit:
         cprint(problem_name,'green')
         cprint(' '*4+'Problem url: ','yellow',end='')
         cprint(url,'green')
-        cprint(' '*4+'File name: ','yellow',end='')gg
+        cprint(' '*4+'File name: ','yellow',end='')
         cprint(file_name,'green')
         cprint('-'*len(pt),'magenta')
         cprint('Enter (y/n) to confirm : ','yellow',attrs=['bold'],end='')
@@ -697,11 +697,38 @@ class Cp_bruteforce:
         print(brute_ext,gen_ext,test_ext)
         if brute_ext == 'cpp':
             print('cpp = ',brute_file)
-
+            ext = brute_file.rsplit(sep='.',maxsplit=1)[0]
+            cmd = "g++ "+brute_file+" -o "+ext
+            with tqdm(total=1.0,desc=brute_file+' compiling',initial=.25) as pbar:
+                os.system(cmd)
+                pbar.update(.75)
+        if gen_ext == 'cpp':
+            print('cpp = ',gen_file)
+            ext = gen_file.rsplit(sep='.',maxsplit=1)[0]
+            cmd = "g++ "+gen_file+" -o "+ext
+            with tqdm(total=1.0,desc=gen_file+' compiling',initial=.25) as pbar:
+                os.system(cmd)
+                pbar.update(.75)
+        if test_ext == 'cpp':
+            print('cpp = ',test_file)
+            ext = test_file.rsplit(sep='.',maxsplit=1)[0]
+            cmd = "g++ "+test_file+" -o "+ext
+            with tqdm(total=1.0,desc=test_file+' compiling',initial=.25) as pbar:
+                os.system(cmd)
+                pbar.update(.75)
         for i in range(no):
             pass
             iput = self.cmd_manager(gen_file,'',gen_ext,False)
-            print(iput)
+            # print(iput)
+            ans = self.cmd_manager(brute_file,iput,brute_ext,True)
+            # print(ans)
+            result = self.cmd_manager(test_file,iput,brute_ext,True)
+            # print(ans)
+            
+            if result == ans:
+                cprint('  *'+str(i+1)+') Passed...','green')
+            else :
+                cprint('  *'+str(i+1)+') Failed...','red')
 
             
 

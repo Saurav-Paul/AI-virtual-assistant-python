@@ -28,9 +28,9 @@ def run_prog(file_name , debug = False):
         cmd = cmd.replace('{filename}',file_name)
         cmd = cmd.replace('{executable}',ext[0])
         cmd_part = cmd.split(sep='&&')
-        with tqdm(total=1,desc='Compilation') as pbar:
+        with tqdm(total=1.0,desc='Compilation',initial=.25) as pbar:
             os.system(cmd_part[0])
-            pbar.update(1)
+            pbar.update(.75)
         pt = ('-'*23+file_name+'-'*22+'\n') 
         cprint(pt,'magenta')
         try :
