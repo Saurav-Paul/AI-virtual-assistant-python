@@ -857,8 +857,50 @@ class Cp_setup:
         except Exception as e:
             print(e)
             cprint("Sorry, Sir can't genarate automatically gen file. ")
+    def template(self,file_name='sol.cpp'):
+        try :
+            # print('Genarating template')
+            from settings.compiler import template_path , coder_name
+            from system.get_time import digital_time
+            
+            # print(template_path)
+            ext = file_name.rsplit(sep='.',maxsplit=1)
+            if(len(ext) == 1) :
+                ext = 'cpp'
+                file_name = file_name+'.cpp'
+            else :
+                ext = ext[1]
+            
+            if ext == 'cpp':
+                path = template_path['c++']
+            elif ext == 'py':
+                path = template_path['python']
+            else :
+                cprint('File format not supported. Currently only support c++ and python.','red')
+            try :
+                # path = f"'{path}'"
+                # path = 't.cpp'
+                with open(path,'r') as f:
+                    code = f.read()
 
+                code = code.replace('$%CODER%$',coder_name)
+                code = code.replace('$%DATE_TIME%$',digital_time())
+
+                with open(file_name,'w') as f:
+                    f.write(code)
+                # print(code)
+                cprint(f'{file_name} created succussfully, sir.','green')
+            except Exception as e:
+                cprint(e,'red')
+                cprint("Path doesn't exist. Sorry sir.",'red')
+                return
+        except Exception as e:
+            cprint(e,'red')
+            cprint("Can't genarate  template.",'red')
+            return 
+    
     def setup(self):
+        self.template()
         self.gen_py()
         pass         
 
@@ -873,6 +915,19 @@ def cp_manager(msg):
         msg = msg.replace(' ','')
         obj = Cp_Submit()
         obj.find_files(msg)
+    elif '-t' in msg or 'template' in msg:
+        msg = msg.replace('-t','')
+        msg = msg.replace('template','')
+        msg = msg.split()
+
+        if (len(msg)) == 0:
+            msg = 'sol.cpp'
+        else :
+            msg = msg[0]
+
+        obj = Cp_setup()
+        obj.template(file_name=msg)
+
     elif 'login' in msg:
         obj = Cp_login()
         obj.login()
@@ -896,6 +951,9 @@ def cp_manager(msg):
     elif 'brute' in msg:
         obj = Cp_bruteforce()
         obj.run()
+    elif 'gen' in msg:
+        obj = Cp_setup()
+        obj.gen_py()
     else :
         cprint('Arguments Error','red')
 
