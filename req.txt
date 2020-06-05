@@ -103,6 +103,7 @@ speedtest-cli==2.0.0
 sympy==1.6
 system-service==0.3
 systemd-python==234
+tcgen==0.1.2
 termcolor==1.1.0
 toml==0.10.1
 tqdm==4.46.0
