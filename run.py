@@ -9,6 +9,7 @@ def get_args(lt,lim):
     return get.strip()
 
 def all_args(lt):
+    print(lt)
     ok = False
     arg = ''
     for w in lt:
