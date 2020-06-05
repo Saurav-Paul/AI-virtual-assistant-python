@@ -1,3 +1,5 @@
-import random
+from random import randint, choice
 
-print(random.randint(1,10))
+n = randint(4, 100)
+print(n)
+
