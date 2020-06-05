@@ -721,7 +721,7 @@ class Cp_bruteforce:
         brute_file = brute_file[0]
         gen_file = gen_file[0]
         # print(test_file)
-        cprint('How may times do you want to stress? : ','cyan',end ='')
+        cprint('How many times do you want to stress? : ','cyan',end ='')
         no = int(input())
         if no < 1:
             cprint('You want to bruteforce test less than 1 time? Seriously man? (-_-)','red')
@@ -829,7 +829,38 @@ class Cp_bruteforce:
         print()
         pt='-'*20+'-'*len(test_file)+'-'*20
         cprint(pt,'magenta')
-            
+
+class Cp_setup:
+
+    def sub_process(self,cmd):
+        try:
+            x = subprocess.Popen(cmd,stdout=subprocess.PIPE)
+            # print('here')
+            result = (x.communicate()[0]).decode('utf-8')
+        except :
+            result = ''
+        # print(result)
+        return (result)
+
+    def gen_py(self):
+        pass
+        try :
+            cmd = ['python3','-m','tcgen','--path','test']
+            result = self.sub_process(cmd)
+            # print('result is \n',result)
+            if result == '':
+                cprint("Can't generated gen file automatically. Sorry sir. :( ",'red')
+                return
+            with open('gen.py','w') as f:
+                f.write(result)
+            cprint('gen.py genarated successfully. :D','green')
+        except Exception as e:
+            print(e)
+            cprint("Sorry, Sir can't genarate automatically gen file. ")
+
+    def setup(self):
+        self.gen_py()
+        pass         
 
 
 def cp_manager(msg):
@@ -859,7 +890,10 @@ def cp_manager(msg):
         obj = Cp_my_tester()
         # obj.TLE = 1
         obj.find_files(msg)
-    elif 'bruteforce' in msg:
+    elif 'setup' in msg:
+        obj = Cp_setup()
+        obj.setup()
+    elif 'brute' in msg:
         obj = Cp_bruteforce()
         obj.run()
     else :
