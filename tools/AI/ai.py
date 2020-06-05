@@ -17,6 +17,7 @@ try :
     from tools.shell import if_shell_type
     from tools.OJ.cp import if_cp_type
     from termcolor import cprint
+    from tools.downloader import wget_downloader
     import os
 except Exception as e:
     print(e)
@@ -104,9 +105,14 @@ def ai(msg,orginal_path) :
                 find_goto_address(msg)
                 reply = 'check browser.'
                 notify('Check Browser',':D',t=5)
+            elif msg == 'download':
+                cprint('Enter the url : ','cyan',end='')
+                url = input()
+                wget_downloader(url)
+                reply = 'Done.'
             elif check(msg,google):
                 msg = rep(msg,google)
-                print('here = ',msg)
+                # print('here = ',msg)
                 search_google(msg)
                 reply = 'check browser.'
                 notify('Check Browser',':D',t=5)
