@@ -32,7 +32,7 @@ def setup():
             ok = False
 
     if ok:
-        print('\nSetup succesful.')
+        print('\nSetup is completed.')
 
 
 if __name__ == "__main__":
