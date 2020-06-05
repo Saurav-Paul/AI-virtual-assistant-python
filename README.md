@@ -8,7 +8,7 @@
   - [x] submit code
   - [x] run program
   - [ ] parse contest
-  - [ ] bruteforce solution
+  - [x] bruteforce solution
   
 ## More eaturess
    - [x] voice output
