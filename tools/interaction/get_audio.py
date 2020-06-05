@@ -44,7 +44,8 @@ def get_audio_microphone():
                 thoughts_processing("Haven't got it sir, please try again")
                 said = get_audio_microphone()
         return said
-    except :
+    except Exception as e:
+        logger.info(e)
         return get_audio_text() 
 
 
