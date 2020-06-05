@@ -5,7 +5,7 @@ interaction_setting = {
     'voice_reply' : False,
     'text_reply' : True ,
     'voice_read+voice_reply' : False ,
-    'text_read' : True ,
+    'text_read' : True,
 }
 bot = {
     'name' : 'Jarvis', # You can change bot name from here
@@ -26,4 +26,4 @@ def read_bot(orginal_path):
     print(bot)
     # return bot
 
-DEBUG = False
+DEBUG = True

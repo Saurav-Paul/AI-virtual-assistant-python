@@ -1,8 +1,20 @@
 
-from os import system
+from os import system,name
 
 def setup():
     # system('pip3 install -i requirements.txt')
+    # for windows 
+    if name == 'nt':
+        print("System found : Windows.")
+        system('pip3 install pypiwin32') 
+
+    # for mac and linux(here, os.name is 'posix') 
+    else:
+        print("System found : Linux.")
+        system('sudo apt-get install python3-dev build-essential')
+        system('sudo apt-get install python3-pyaudio')
+        system('pip3 install pyttsx3==2.87') 
+
     with open('requirements.txt') as f:
         need = f.read()
     
