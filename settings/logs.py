@@ -5,7 +5,7 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
         logging.FileHandler(".log",'w'),
-        # logging.StreamHandler()
+        logging.StreamHandler()
     ]
 )
 logger=logging.getLogger()

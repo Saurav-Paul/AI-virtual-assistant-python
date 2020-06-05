@@ -2,6 +2,7 @@ from settings.logs import *
 from tools.string_processing import wiki_string
 from tools.browser.search import search_google
 from tools.browser.goto import find_address
+from termcolor import cprint
 
 try :
     import wikipedia
@@ -22,7 +23,7 @@ def wiki_search(msg, no = 2) :
         Written by Saurav Paul.
     """
     logger.info('Searching to wikipedia.') 
-    print('(Thinking...)')
+    cprint('(Thinking...)','yellow')
     rem = msg
     msg = wiki_string(msg.lower())
     msg = make_wiki_key(msg)
