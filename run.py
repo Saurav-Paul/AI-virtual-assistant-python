@@ -9,7 +9,6 @@ def get_args(lt,lim):
     return get.strip()
 
 def all_args(lt):
-    # print(lt)
     ok = False
     arg = ''
     for w in lt:
@@ -38,26 +37,15 @@ if __name__ == "__main__":
         if '-arg' in lt:
             orginal_path = lt[0]
             orginal_path = orginal_path[0:len(orginal_path)-6]
-            # going to change a few bit -_-
             p = str(sys.argv)
-            # x = p.split(sep='-arg')
-            # print(x)
-            # read_bot(orginal_path)
             file_path = make_path(lt,total)
-            # print(lt)
             os.chdir(file_path)
-            # print(file_path)
             arg = all_args(lt)
             main(arg,orginal_path)
         else :
             arg = get_args(lt,len(lt))
-            # print(arg)
             main(arg.strip() , orginal_path=os.getcwd())
-        # print(f'all the args {arg}.')
-        # print(lt)
-        # os.chdir(sys.argv[1])
-        # # print(f'path = {os.getcwd()}')
-        # main(get_args(lt,total),orginal_path)
+
     except Exception as e:
         # print(e)
         main(orginal_path=os.getcwd())
