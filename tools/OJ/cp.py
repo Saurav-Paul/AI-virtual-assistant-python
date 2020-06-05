@@ -731,7 +731,7 @@ class Cp_bruteforce:
         brute_ext = brute_file.rsplit(sep='.',maxsplit=1)[1]
         gen_ext = gen_file.rsplit(sep='.',maxsplit=1)[1]
         test_ext = test_file.rsplit(sep='.',maxsplit=1)[1]
-        print(brute_ext,gen_ext,test_ext)
+        # print(brute_ext,gen_ext,test_ext)
         if brute_ext == 'cpp':
             # print('cpp = ',brute_file)
             ext = brute_file.rsplit(sep='.',maxsplit=1)[0]
