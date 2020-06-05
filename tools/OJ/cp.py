@@ -721,7 +721,7 @@ class Cp_bruteforce:
         brute_file = brute_file[0]
         gen_file = gen_file[0]
         # print(test_file)
-        cprint('How may times do you want to stress? : ','cyan',end ='')
+        cprint('How many times do you want to stress? : ','cyan',end ='')
         no = int(input())
         if no < 1:
             cprint('You want to bruteforce test less than 1 time? Seriously man? (-_-)','red')
