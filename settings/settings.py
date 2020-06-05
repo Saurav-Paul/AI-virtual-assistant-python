@@ -26,4 +26,4 @@ def read_bot(orginal_path):
     print(bot)
     # return bot
 
-DEBUG = True
+DEBUG = False
