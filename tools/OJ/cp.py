@@ -853,7 +853,7 @@ class Cp_setup:
                 return
             with open('gen.py','w') as f:
                 f.write(result)
-            cprint('gen.py genarated successfully. :D','green')
+            cprint('gen.py genarated successfully, sir. :D','green')
         except Exception as e:
             print(e)
             cprint("Sorry, Sir can't genarate automatically gen file. ")
@@ -889,7 +889,7 @@ class Cp_setup:
                 with open(file_name,'w') as f:
                     f.write(code)
                 # print(code)
-                cprint(f'{file_name} created succussfully, sir.','green')
+                cprint(f'{file_name} created succussfully, sir. :D','green')
             except Exception as e:
                 cprint(e,'red')
                 cprint("Path doesn't exist. Sorry sir.",'red')
@@ -898,9 +898,17 @@ class Cp_setup:
             cprint(e,'red')
             cprint("Can't genarate  template.",'red')
             return 
-    
+    def brute(self):
+        try :
+            with open('brute.cpp','w') as f:
+                f.write('/* Bruteforce */')
+            cprint('brute.cpp created successfully, sir. :D','green')
+        except :
+            cprint("Cant't create brute.cpp",'red')
+
     def setup(self):
         self.template()
+        self.brute()
         self.gen_py()
         pass         
 
