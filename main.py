@@ -28,6 +28,7 @@ def main(get='',orginal_path='') :
         speak('Hello sir, how can i help you?')
         while True :
             get =string_process(get_audio())
+            print()
             if check_done(get):
                 break
             if get == 'clear':

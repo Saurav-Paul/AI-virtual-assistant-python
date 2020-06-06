@@ -58,3 +58,5 @@ It can give voice reply and take your voice command. You can turn off or on thes
 Here -cp represent competitive programming,
 
 After giving the command it will ask for the problem URL. Just give the URL,it will parse the problem. There will be created a folder according to the problem name. And it will contain all the sample test cases of that problem.
+
+![parsing-problem](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/parsing%20problem.png)
