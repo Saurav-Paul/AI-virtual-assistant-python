@@ -18,7 +18,7 @@ def setup():
     with open('requirements.txt') as f:
         need = f.read()
     
-    # print(need)
+    system("pip install wheel")
     lt = need.split('\n')
     # print(lt)
     ok = True
