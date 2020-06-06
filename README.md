@@ -13,13 +13,14 @@ It can give voice reply and take your voice command. You can turn off or on thes
 - [x] [genarate file with template](#genarate-file-with-template)
 - [x] [test code against testcases](#Test-solution)
 - [x] [add testcase](#Add-testcase)
+- [x] [bruteforce test solution](#Test-solution-with-bruteforce)
+- [x] genarate gen.py automatcially
 - [x] login online judges
 - [x] submit code
-- [x] bruteforce test solution
-- [x] genarate gen.py automatcially
+
 <!-- - [ ] parse contest -->
   
-## More eaturess
+## More Featuress
 
 - [x] voice output
 - [x] voice input
@@ -161,3 +162,23 @@ Adding testcase is really very easy. Just give the command,
 Yes, that simple :sunglasses: .
 
 It will ask for input and output for your new case. Then it will add this case.
+
+## Test solution with bruteforce
+
+If you have any doubts about your optimal solution, then you can write a brute-force solution and write a random test case generator. You can test your optimal solution with a brute force solution using a random test case.
+
+For that, you need three files.
+
+    1. Main solution
+    2. Bruteforce solution
+    3. Testcase Generator (My AI can generate it automatically)
+
+Then run this command,
+
+> Jarvis -cp brute
+
+It will ask for the number of times you want to generate random test cases and test solutions (Stress).
+
+It will match output with the brute-force solution's output. If it failed, it will show the differences and ask you to add this to your test case so that you can test this later. Otherwise, it will show Accepted :smile: .
+
+![bruteforce-solution](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20bruteforce.png)
