@@ -165,20 +165,20 @@ It will ask for input and output for your new case. Then it will add this case.
 
 ## Test solution with bruteforce
 
-If you have any doubt about your optimal solution, then you can write a bruteforce solution and write a random testcase genarator. You can test your optimal solution with brute force solution using random testcase.
+If you have any doubts about your optimal solution, then you can write a brute-force solution and write a random test case generator. You can test your optimal solution with a brute force solution using a random test case.
 
-For that you need three files.
+For that, you need three files.
 
     1. Main solution
     2. Bruteforce solution
-    3. Testcase Genarator (My AI can genarate it automatically)
+    3. Testcase Generator (My AI can generate it automatically)
 
 Then run this command,
 
 > Jarvis -cp brute
 
-It will ask for number of time you want to genarate random testcase and test solution(Stress).
+It will ask for the number of times you want to generate random test cases and test solutions (Stress).
 
-It will match output with bruteforce solution's output. If it failed, it will show the differences and ask you to add this to your testcase so that you can test this later. Otherwise it will show Accepted :smile: .
+It will match output with the brute-force solution's output. If it failed, it will show the differences and ask you to add this to your test case so that you can test this later. Otherwise, it will show Accepted :smile: .
 
 ![bruteforce-solution](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20bruteforce.png)
