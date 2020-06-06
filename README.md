@@ -64,15 +64,15 @@ After giving the command it will ask for the problem URL. Just give the URL,it w
 
 ## Genarate File with Template
 
-You can easily genarate your file with template by the given command,
+You can easily generate your file with the template by the given command,
 
 > jarvis -cp -t "file_name"
 
-If you don't specify the file_name it will be automatically created as "sol.cpp" . You can create python or c++ file.
+If you don't specify the file_name it will be automatically created as "sol.cpp". You can create a python or c++ file.
 
 You have to specify your template path. Just open settins/compiler.py file and find template_path and give your path for c++ and python.
 
-You can use variable in your template file which you will be replaced,
+You can use variables in your template file which you will be replaced,
 
 variable available,
 

@@ -538,10 +538,10 @@ class Cp_add_test:
             ase = len(lt)
             no = int(ase/2)+1
 
-            cprint('Enter the input(Press Ctrl+d or alt+space+c after done):','yellow')
+            cprint('Enter the input(Press Ctrl+d or Ctrl+z after done):','yellow')
             x = self.take_input
 
-            cprint('Enter the output(Press Ctrl+d or alt+space+c after done):','yellow')
+            cprint('Enter the output(Press Ctrl+d or Ctrl+z after done):','yellow')
             y = self.take_input
 
 
