@@ -8,10 +8,10 @@ It can give voice reply and take your voice command. You can turn off or on thes
 
 ## Programming Features
 
-- [x] [Run c++ or python program](#run-python-or-c++-program)
+- [x] [Run c++ or python program](#run-python-or-cpp-program)
 - [x] [parse problemset](#Parsing-Problem-from-online-judge)
 - [x] [genarate file with template](#genarate-file-with-template)
-- [x] test code against testcases
+- [x] [test code against testcases](#Test-solution)
 - [x] add testcase
 - [x] login online judges
 - [x] submit code
@@ -50,7 +50,7 @@ It can give voice reply and take your voice command. You can turn off or on thes
 
 
 
-## Run python or c++ program
+## Run python or cpp program
 
 Any python or c++ files from the current directory can be run using one command. The command is given below,
 > jarvis -r "file_name"
@@ -137,3 +137,17 @@ int main(){
 ```
 
 ![genarating file](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/template_c%2B%2B.png)
+
+## Test solution
+
+After parsing problem set, the solution can be tested by the given command,
+
+> Jarvis -cp test
+
+
+it will run all the sample and custom cases from the test folder(Test folder contains all the sample cases after parsing problem set) and check whether your solution is passed. It will show the taken time for running each case. If your code failed any test cases it will show the differences between the correct answer and your output. If every case passed then it will show passed.
+
+It is not necessary to have a parsed problem set for using this command. You can make a test folder and add input(.in) and output(.out) case into that folder and then run this command.
+
+
+![Test-solution](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20testing%20program.png)
