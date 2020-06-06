@@ -12,7 +12,7 @@ It can give voice reply and take your voice command. You can turn off or on thes
 - [x] [parse problemset](#Parsing-Problem-from-online-judge)
 - [x] [genarate file with template](#genarate-file-with-template)
 - [x] [test code against testcases](#Test-solution)
-- [x] add testcase
+- [x] [add testcase](#Add-testcase)
 - [x] login online judges
 - [x] submit code
 - [x] bruteforce test solution
@@ -145,9 +145,19 @@ After parsing problem set, the solution can be tested by the given command,
 > Jarvis -cp test
 
 
-it will run all the sample and custom cases from the test folder(Test folder contains all the sample cases after parsing problem set) and check whether your solution is passed. It will show the taken time for running each case. If your code failed any test cases it will show the differences between the correct answer and your output. If every case passed then it will show passed.
+It will run all the sample and custom cases from the test folder(Test folder contains all the sample cases after parsing problem set) and check whether your solution is passed. It will show the taken time for running each case. If your code failed any test cases it will show the differences between the correct answer and your output. If every case passed then it will show passed.
 
 It is not necessary to have a parsed problem set for using this command. You can make a test folder and add input(.in) and output(.out) case into that folder and then run this command.
 
 
 ![Test-solution](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20testing%20program.png)
+
+## Add Testcase
+
+Adding testcase is really very easy. Just give the command,
+
+> Jarvis -cp add
+
+Yes, that simple :sunglasses: .
+
+It will ask for input and output for your new case. Then it will add this case.
