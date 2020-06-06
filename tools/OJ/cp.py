@@ -538,10 +538,10 @@ class Cp_add_test:
             ase = len(lt)
             no = int(ase/2)+1
 
-            cprint('Enter the input(Press Ctrl+d after done):','yellow')
+            cprint('Enter the input(Press Ctrl+d or alt+space+c after done):','yellow')
             x = self.take_input
 
-            cprint('Enter the output(Press Ctrl+d after done):','yellow')
+            cprint('Enter the output(Press Ctrl+d or alt+space+c after done):','yellow')
             y = self.take_input
 
 
@@ -880,6 +880,13 @@ class Cp_setup:
             try :
                 # path = f"'{path}'"
                 # path = 't.cpp'
+                if os.path.isfile(file_name):
+                    cprint(f"{file_name} already exist, do you want to replace it?(Y/N) :",'cyan',end='')
+                    want = input()
+                    want = want.lower()
+                    if want !='y' and want!='yes':
+                        cprint(f"{file_name} creation cancelled.",'red')
+                        return
                 with open(path,'r') as f:
                     code = f.read()
 
@@ -891,20 +898,28 @@ class Cp_setup:
                 # print(code)
                 cprint(f'{file_name} created succussfully, sir. :D','green')
             except Exception as e:
-                cprint(e,'red')
-                cprint("Path doesn't exist. Sorry sir.",'red')
+                # cprint(e,'red')
+                cprint("template path doesn't exist. Sorry sir.",'red')
+                cprint("check settings/compiler.py to change your template path :D .",'yellow')
                 return
         except Exception as e:
             cprint(e,'red')
             cprint("Can't genarate  template.",'red')
             return 
-    def brute(self):
+    def brute(self,file_name='brute.cpp'):
         try :
-            with open('brute.cpp','w') as f:
-                f.write('/* Bruteforce */')
-            cprint('brute.cpp created successfully, sir. :D','green')
+            if os.path.isfile(file_name):
+                cprint(f"{file_name} already exist, do you want to replace it?(Y/N) :",'cyan',end='')
+                want = input()
+                want = want.lower()
+                if want !='y' and want!='yes':
+                    cprint(f"{file_name} creation cancelled.",'red')
+                    return
+            with open(file_name,'w') as f:
+                f.write('/* Bruteforce */\n')
+            cprint(f'{file_name} created successfully, sir. :D','green')
         except :
-            cprint("Cant't create brute.cpp",'red')
+            cprint(f"Cant't create {file_name}",'red')
 
     def setup(self):
         self.template()
