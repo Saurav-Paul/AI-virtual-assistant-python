@@ -8,13 +8,13 @@ It can give voice reply and take your voice command. You can turn off or on thes
 
 ## Programming Features
 
+- [x] [Run c++ or python program](#run-python-or-c++-program)
 - [x] [parse problemset](#Parsing-Problem-from-online-judge)
 - [x] [genarate file with template](#genarate-file-with-template)
 - [x] test code against testcases
 - [x] add testcase
 - [x] login online judges
 - [x] submit code
-- [x] run program
 - [x] bruteforce test solution
 - [x] genarate gen.py automatcially
 <!-- - [ ] parse contest -->
@@ -49,6 +49,15 @@ It can give voice reply and take your voice command. You can turn off or on thes
 - [ ] Search facility -->
 
 
+
+## Run python or c++ program
+
+Any python or c++ files from the current directory can be run using one command. The command is given below,
+> jarvis -r "file_name"
+
+If you don't specify the file_name, it will list all the available python and c++ files in the current directory and you have to choose.
+
+![Running program](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20run%20program.png)
 
  ## Parsing Problem from online judge
 
