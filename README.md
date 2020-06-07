@@ -15,8 +15,8 @@ It can give voice reply and take your voice command. You can turn off or on thes
 - [x] [add testcase](#Add-testcase)
 - [x] [bruteforce test solution](#Test-solution-with-bruteforce)
 - [x] [Generate-testcase-genarator-automatically](#Generate-testcase-genarator-automatically)
-- [x] [login online judges](login-and-submit-to-online-judge)
-- [x] [submit code](Login-and-Submit-to-online-Judge)
+- [x] [login online judges](#login-and-submit-to-online-judge)
+- [x] [submit code](#Login-and-Submit-to-online-Judge)
 
 <!-- - [ ] parse contest -->
   
