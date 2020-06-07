@@ -10,13 +10,13 @@ It can give voice reply and take your voice command. You can turn off or on thes
 
 - [x] [Run c++ or python program](#run-python-or-cpp-program)
 - [x] [parse problemset](#Parsing-Problem-from-online-judge)
-- [x] [genarate file with template](#genarate-file-with-template)
+- [x] [generate file with template](#generate-file-with-template)
 - [x] [test code against testcases](#Test-solution)
 - [x] [add testcase](#Add-testcase)
 - [x] [bruteforce test solution](#Test-solution-with-bruteforce)
-- [x] genarate gen.py automatcially
-- [x] login online judges
-- [x] submit code
+- [x] [Generate-testcase-genarator-automatically](#Generate-testcase-genarator-automatically)
+- [x] [login online judges](login-and-submit-to-online-judge)
+- [x] [submit code](Login-and-Submit-to-online-Judge)
 
 <!-- - [ ] parse contest -->
   
@@ -72,7 +72,7 @@ After giving the command it will ask for the problem URL. Just give the URL,it w
 
 ![parsing-problem](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/parsing%20problem.png)
 
-## Genarate File with Template
+## Generate File with Template
 
 You can easily generate your file with the template by the given command,
 
@@ -182,3 +182,34 @@ It will ask for the number of times you want to generate random test cases and t
 It will match output with the brute-force solution's output. If it failed, it will show the differences and ask you to add this to your test case so that you can test this later. Otherwise, it will show Accepted :smile: .
 
 ![bruteforce-solution](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20bruteforce.png)
+
+## Generate testcase genarator automatically
+
+Test case generator can be generated using the given command,
+
+> Jarvis -cp gen
+
+It will analyze all the sample cases and generate gen.py(Test case generator) automatically. Yes, sometimes it might fail (In case of complex test cases).
+In this case, you have to write a generator manually (You can write in python or c++).
+
+There is also one command, to generate gen.py, brute.cpp(empty file) and sol.cpp(with your template). The command is given below,
+
+> Jarvis -cp setup
+
+![testcase generator](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20automatically%20setup.png)
+
+## Login and submit to online Judge
+
+For login write the given command,
+
+> Jarvis -cp login
+
+It will ask for a judge link, your username, and a password.
+
+For submitting code just write the given command,
+
+> Jarvis -cp submit
+
+N.B.: I have used online-judge-api-client for login and submitting codes.
+
+![login and submitting demo](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20login%20and%20submit.png)
