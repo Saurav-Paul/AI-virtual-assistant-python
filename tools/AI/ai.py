@@ -40,13 +40,14 @@ def rep(msg,mp):
     # return msg.strip().capitalize()
     for word in mp :
         if word in msg:
-            return msg.replace(word,'',1).strip().capitalize()
-    return msg.strip().capitalize()
+            return msg.replace(word,'',1).strip()
+    return msg.strip()
 
 def ai(msg,orginal_path) :
     """ Little ai for reacting to the msg.
         Written by Saurav-Paul"""
     logger.debug('Processing with ai')
+    msg = msg.replace('  ',' ')
     msg = msg.replace(bot['name'],'')
     msg = msg.replace(bot['name'].lower(),'')
     msg = msg.replace(bot['name'].capitalize(),'')

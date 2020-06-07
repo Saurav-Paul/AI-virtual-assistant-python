@@ -27,11 +27,11 @@ It can give voice reply and take your voice command. You can turn off or on thes
 - [x] [taking voice command](#speaking-and-voice-command)
 - [x] [Speech Recognition](#speech-recognition)
 - [x] [Ai to answer quesion](#AI-to-answer-question)
-- [x] goto any website
-- [x] wiki search
-- [x] google search
-- [x] YouTube search & play videos
-- [x] soving math
+- [x] [goto any website](#goto-website)
+- [x] [solving math](#solve-math)
+- [x] [wiki search](#wiki-search)
+- [x] [google search](#search-google)
+- [x] [YouTube search & play videos](#search-youtube)
 - [x] install python module
 - [x] learn from answer
 - [x] download files
@@ -234,13 +234,13 @@ Jarvis can recognize the speech using google voice recognition API.
 
 As the name suggests you can have chat with it. You can ask jarvis a question, it will reply to you with his intelligence.
 
-## goto websites
+## goto website
 
 To be honest this is one of my favorite features. You can ask Jarvis to go to any websites as with wish. It will open that in your browser.
 
 The command is given below,
 
->Jarvis goto codeforces contest
+>Jarvis goto "website name"
 
 It will open codeforces contest page for you. Basically, you can ask him to go to any website you want.
 
@@ -250,6 +250,40 @@ It is okay to make some typing mistakes while writing a website name. It will st
 
 
 
+## Solve Math
+
+This ai can solve simple math. Just ask him to solve it will solve it for you.
+
+The command is given below,
+
+> jarvis solve ( "math" )
+
+![math-solving-demo](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20math%20solving%20.png)
+
+## wiki search
+
+For searching something on wikipedia the command is given below,
+
+> jarvis search wikipedia "your text"
+
+## Search google
+
+For searching something on google the command is given below,
+
+> jarvis search google "your text"
+
+## Search youtube
+
+For searching something on youtube the command is given below,
+
+> jarvis search youtube "your text"
+
+## Play video on youtube
+
+> jarvis play youtube "song name"
+
+
+        
 ---
 # Installation
 
