@@ -233,6 +233,19 @@ Installation is simple, just follow these steps...
 
 ```bash
 jarvis () {
-python3 {path for the project folder}/run.py $PWD -arg $@
+python3 {path to the project folder}/run.py $PWD -arg $@
 }
 ```
+
+It will work fine in Linux. It should also work on Mac Os.
+But unfortunately, it has some issues running on Windows(Because cmd has some problems). But still, it can be run on windows using windows subsystem for Linux.
+
+### Installation Problem
+
+    - If you face some problems while installation. In that case, you have to install these package manually. It occurs because some python module need a different version for a different distribution.
+
+    - If your voice command does not work properly, you have to install pyaudio manually.
+
+
+
+* If you want to contribute on this project you are welcome *
