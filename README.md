@@ -51,6 +51,11 @@ It can give voice reply and take your voice command. You can turn off or on thes
 
 
 
+---
+
+### [click here to go to Installation](#Installation)
+---
+
 ## Run python or cpp program
 
 Any python or c++ files from the current directory can be run using one command. The command is given below,
@@ -213,3 +218,34 @@ For submitting code just write the given command,
 N.B.: I have used online-judge-api-client for login and submitting codes.
 
 ![login and submitting demo](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20login%20and%20submit.png)
+
+---
+
+# Installation
+
+Installation is simple, just follow these steps...
+
+    1. Clone or download this repository
+    2. Open and find setup.py
+    3. Run setup.py using your python3 , It will install all the dependency needed for this project. It might take several minutes.
+    4. For accessing virtual assistant from any place, add this function to your ~/.bashrc, In my case, I like to call by the name "jarvis". You can replace the jarvis by whatever name you want.
+
+
+```bash
+jarvis () {
+python3 {path to the project folder}/run.py $PWD -arg $@
+}
+```
+
+It will work fine in Linux. It should also work on Mac Os.
+But unfortunately, it has some issues running on Windows(Because cmd has some problems). But still, it can be run on windows using windows subsystem for Linux.
+
+### Installation Problem
+
+    - If you face some problems while installation. In that case, you have to install these package manually. It occurs because some python module need a different version for a different distribution.
+
+    - If your voice command does not work properly, you have to install pyaudio manually.
+
+
+
+* If you want to contribute on this project you are welcome *
