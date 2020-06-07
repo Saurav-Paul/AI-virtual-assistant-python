@@ -32,10 +32,10 @@ It can give voice reply and take your voice command. You can turn off or on thes
 - [x] [wiki search](#wiki-search)
 - [x] [google search](#search-google)
 - [x] [YouTube search & play videos](#search-youtube)
-- [x] install python module
-- [x] learn from answer
-- [x] download files
-- [x] access from anywhere
+- [x] [install python module]()
+- [x] [learn from answer]()
+- [x] [download files](#download-files)
+- [x] [access from anywhere]()
 <!-- - [ ] tell to remember something
 - [ ] download youtube video
 - [ ] arrange files -->
@@ -282,7 +282,13 @@ For searching something on youtube the command is given below,
 
 > jarvis play youtube "song name"
 
+## Download Files
 
+For downloading the command is given below,
+
+> jarvis download
+
+Then it will ask for the download link.
         
 ---
 # Installation
