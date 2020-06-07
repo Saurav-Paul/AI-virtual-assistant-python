@@ -225,10 +225,11 @@ N.B.: I have used online-judge-api-client for login and submitting codes.
 
 Installation is simple, just follow these steps...
 
-    1. Clone or download this repository
-    2. Open and find setup.py
-    3. Run setup.py using your python3 , It will install all the dependency needed for this project. It might take several minutes.
-    4. For accessing virtual assistant from any place, add this function to your ~/.bashrc, In my case, I like to call by the name "jarvis". You can replace the jarvis by whatever name you want.
+1. Clone or download this repository
+2. Open and find setup.py
+3. Run setup.py using your python3 , It will install all the dependency needed for this project.
+It might take several minutes.
+4. For accessing virtual assistant from any place, add this function to your ~/.bashrc, In my case, I like to call by the name "jarvis". You can replace the jarvis by whatever name you want.
 
 
 ```bash
@@ -242,9 +243,9 @@ But unfortunately, it has some issues running on Windows(Because cmd has some pr
 
 ### Installation Problem
 
-    - If you face some problems while installation. In that case, you have to install these package manually. It occurs because some python module need a different version for a different distribution.
+- If you face some problems while installation. In that case, you have to install these package manually. It occurs because some python module need a different version for a different distribution.
 
-    - If your voice command does not work properly, you have to install pyaudio manually.
+- If your voice command does not work properly, you have to install pyaudio manually.
 
 
 
