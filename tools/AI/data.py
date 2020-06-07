@@ -33,6 +33,7 @@ data = {
     'what is your name' : ('my name is ' + bot['name'] + '.'),
     'who am i' : 'You are '+bot['Boss'] + '.',
     'tell me my name' : 'Your name is '+bot['Boss']+'.',
+    "what's up" : 'I am fine, thank you sir.',
     
 }
 

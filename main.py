@@ -25,7 +25,7 @@ def main(get='',orginal_path='') :
     logger.debug('Bot starts at ' + str(os.getcwd()))
     asci_banner(START_SCREEN_NAME)
     if get == '':
-        speak('Hello sir, how can i help you?')
+        speak('Hello sir, how can I help you?')
         while True :
             get =string_process(get_audio())
             print()
