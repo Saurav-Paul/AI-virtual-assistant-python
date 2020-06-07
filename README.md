@@ -16,25 +16,23 @@ It can give voice reply and take your voice command. You can turn off or on thes
 - [x] [add testcase](#Add-testcase)
 - [x] [bruteforce test solution](#Test-solution-with-bruteforce)
 - [x] [Generate-testcase-genarator-automatically](#Generate-testcase-genarator-automatically)
-- [x] [login online judges](#login-and-submit-to-online-judge)
+- [x] [login online judge](#login-and-submit-to-online-judge)
 - [x] [submit code](#Login-and-Submit-to-online-Judge)
 
 <!-- - [ ] parse contest -->
   
 ## Other Features
 
-- [x] voice output
-- [x] voice input
-- [x] reply using text
-- [x] taking voice command
-- [x] Speech Recognition
-- [x] Ai to answer quesion
+- [x] [Speaking Capability](#speaking-and-voice-command)
+- [x] [taking voice command](#speaking-and-voice-command)
+- [x] [Speech Recognition](#speech-recognition)
+- [x] [Ai to answer quesion](#AI-to-answer-question)
+- [x] goto any website
 - [x] wiki search
 - [x] google search
-- [x] YouTube search
-- [x] math calculation
-- [x] goto any website
-- [x] install something
+- [x] YouTube search & play videos
+- [x] soving math
+- [x] install python module
 - [x] learn from answer
 - [x] download files
 - [x] access from anywhere
@@ -222,6 +220,37 @@ N.B.: I have used online-judge-api-client for login and submitting codes.
 
 ---
 
+## Speaking and voice command
+
+This ai can speak with you. It will reply in voice and text both. You can toggle them from settings/settings.py file.
+
+You can also give voice commands. But you have turned this feature on from settings/settings.py file.
+
+## Speech Recognition
+
+Jarvis can recognize the speech using google voice recognition API.
+
+## AI to answer question
+
+As the name suggests you can have chat with it. You can ask jarvis a question, it will reply to you with his intelligence.
+
+## goto websites
+
+To be honest this is one of my favorite features. You can ask Jarvis to go to any websites as with wish. It will open that in your browser.
+
+The command is given below,
+
+>Jarvis goto codeforces contest
+
+It will open codeforces contest page for you. Basically, you can ask him to go to any website you want.
+
+It is okay to make some typing mistakes while writing a website name. It will still find it out.
+
+![goto-demo](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20goto.png)
+
+
+
+---
 # Installation
 
 Installation is simple, just follow these steps...
