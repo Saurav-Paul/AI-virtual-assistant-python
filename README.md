@@ -3,8 +3,9 @@
 
 It is a terminal-based virtual assistant especially made for competitive programming. It has a lot of features, including running python or c++ file, parsing problem set with test cases and test against all the cases in one click, test with brute force solution, and many more. It will help you to boost your programming skill and help you to do a good performance in the programming contest.
 
-It can give voice reply and take your voice command. You can turn off or on these features. Basic settings can be easily changed from settings.py file.
+It can give voice reply and take your voice command. You can turn off or on these features. Basic settings can be easily changed from settings/settings.py file.
 
+![Welcome](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20welcome%20screen.png)
 
 ## Programming Features
 
@@ -20,7 +21,7 @@ It can give voice reply and take your voice command. You can turn off or on thes
 
 <!-- - [ ] parse contest -->
   
-## More Featuress
+## Other Features
 
 - [x] voice output
 - [x] voice input
@@ -229,7 +230,7 @@ Installation is simple, just follow these steps...
 2. Open and find setup.py
 3. Run setup.py using your python3 , It will install all the dependency needed for this project.
 It might take several minutes.
-4. For accessing virtual assistant from any place, add this function to your ~/.bashrc, In my case, I like to call by the name "jarvis". You can replace the jarvis by whatever name you want.
+4. For accessing virtual assistant from any place, add this function to your ~/.bashrc, In my case, I like to call by the name "jarvis". You can replace the name jarvis by whatever name you want.
 
 
 ```bash
@@ -241,7 +242,7 @@ python3 {path to the project folder}/run.py $PWD -arg $@
 It will work fine in Linux. It should also work on Mac Os.
 But unfortunately, it has some issues running on Windows(Because cmd has some problems). But still, it can be run on windows using windows subsystem for Linux.
 
-### Installation Problem
+### Issues
 
 - If you face some problems while installation. In that case, you have to install these package manually. It occurs because some python module need a different version for a different distribution.
 
