@@ -25,7 +25,7 @@ def google_calculation(msg):
         lt = msg.split()
         for word in lt :
             url += word + '+'
-        logger.debug('Got url : ' + url)
+        logger.info('Got url : ' + url)
         source = requests.get(url).text
         bs = BeautifulSoup(source,'lxml')
         key = 'BNeawe iBp4i AP7Wnd'
