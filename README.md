@@ -32,10 +32,10 @@ It can give voice reply and take your voice command. You can turn off or on thes
 - [x] [wiki search](#wiki-search)
 - [x] [google search](#search-google)
 - [x] [YouTube search & play videos](#search-youtube)
-- [x] [install python module]()
-- [x] [learn from answer]()
+- [x] [install python module](#)
+- [x] [learn from answer](#)
 - [x] [download files](#download-files)
-- [x] [access from anywhere]()
+- [x] [access from anywhere](#)
 <!-- - [ ] tell to remember something
 - [ ] download youtube video
 - [ ] arrange files -->
