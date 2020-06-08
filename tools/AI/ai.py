@@ -1,7 +1,7 @@
 try :
     from tools.assistant import ask_question
     from tools.AI.data import data , youtube , wiki , google , youtube_play , goto_keys  
-    from tools.AI.data import install_keys , calc_keys
+    from tools.AI.data import install_keys , calc_keys , should_not_learn
     from tools.wiki_search import wiki_search 
     from settings.logs import *
     from tools.browser.search import *
@@ -137,7 +137,13 @@ def ai(msg,orginal_path) :
                     reply = 'done sir'
                 else :
                     reply = ask_question(msg)
-                    if 'check browser' not in reply and 'no data available' not in reply:
+                    ok = True
+                    for word in should_not_learn:
+                        if word in msg or word in reply:
+                            ok = False
+                            break
+                    
+                    if ok:
                         logger.info('reply -> ' + reply)
                         if DEBUG:
                             learn = input('.......Press y to learn it.....')

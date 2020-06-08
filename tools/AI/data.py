@@ -45,3 +45,5 @@ youtube_play = ['play youtube', 'youtube play']
 goto_keys = ['goto','go to']
 install_keys = ['pip install','install pip','install']
 calc_keys = ['calculator' , 'calculate' , 'calculations' , 'calculations', 'calc', 'solve it' , 'solve']
+
+should_not_learn = ['date','today','check browser','no data available']
