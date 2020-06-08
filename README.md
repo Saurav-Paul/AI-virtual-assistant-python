@@ -18,7 +18,7 @@ It can give voice reply and take your voice command. You can turn off or on thes
 - [x] [Generate-testcase-genarator-automatically](#Generate-testcase-genarator-automatically)
 - [x] [login online judge](#login-and-submit-to-online-judge)
 - [x] [submit code](#Login-and-Submit-to-online-Judge)
-
+- [x] [Parse contest](#parsing-contest)
 <!-- - [ ] parse contest -->
   
 ## Other Features
@@ -217,6 +217,18 @@ For submitting code just write the given command,
 N.B.: I have used online-judge-api-client for login and submitting codes.
 
 ![login and submitting demo](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20login%20and%20submit.png)
+
+
+## Parsing contest
+
+Parsing contest is really very similar to the parsing problem. It will parse all the problems of that contest.
+
+A very simple command for this is given below,
+
+> jarvis -cp contest
+
+
+It will ask for the contest link. Then it will parse all the problems.
 
 ---
 
