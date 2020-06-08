@@ -108,7 +108,7 @@ class Cp_my_tester:
                 type = 'py'
         
         if type == 'cpp':
-            cmd = f'g++ {file_name} -o test.out'
+            cmd = f"g++ '{file_name}' -o test.out"
             t = time.time()
             os.system(cmd)
             t = time.time() - t
@@ -208,6 +208,7 @@ class Cp_my_tester:
         else :
             cprint(" # Failed....",'red')
 
+        os.remove('test.out')
         print()
         pt='-'*20+'-'*len(file_name)+'-'*20
         cprint(pt,'magenta')
