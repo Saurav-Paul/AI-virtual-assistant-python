@@ -2,7 +2,7 @@
 from tools.json_manager import JsonManager as JM
 
 interaction_setting = {
-    'voice_reply' : False,
+    'voice_reply' : True,
     'text_reply' : True ,
     'voice_read+voice_reply' : False ,
     'text_read' : True,
