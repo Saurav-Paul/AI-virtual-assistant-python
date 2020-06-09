@@ -470,7 +470,7 @@ class Cp_Submit:
         cprint('-'*len(pt),'magenta')
         cprint('Enter (y/n) to confirm : ','yellow',attrs=['bold'],end='')
         x = input()
-        if x.lower() == 'y':
+        if x.lower() == 'y' or x.lower == 'yes':
             cprint('Submitting...','green')
             cmd = 'oj submit --wait=0 --yes $URL $FILENAME'
             cmd = cmd.replace('$URL',url)
@@ -840,7 +840,7 @@ class Cp_bruteforce:
                 print()
                 cprint('Do you want to add this case to your testcases list? (Y/N) : ','cyan',attrs = ['bold'],end='')
                 want = input()
-                want.lower()
+                want = want.lower()
                 if want == 'y' or want =='yes':
                     # cprint('Test case added successfully.','green')
                     self.add_case(iput,ans)
