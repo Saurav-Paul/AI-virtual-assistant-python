@@ -43,7 +43,7 @@
 
 * wget
     * pip3 install wget
-* twdm 
+* tqdm 
     * pip3 install tqdm
 
 
