@@ -1,9 +1,12 @@
 # need to install few dependency 
 
-#### incase you are running linux first run this 
-    * sudo apt-get install python3-dev build-essential
+## incase you are running linux first run this 
+
+* sudo apt-get install python3-dev build-essential
 * playsound -> plaing sound
-    * pip3 install playsound
+
+  * pip3 install playsound
+
 * gTTS
     * pip3 install gTTS
 * S peechRecognition
