@@ -8,7 +8,10 @@ try :
     from tqdm import tqdm
     import threading
     import socket
-    from settings.compiler import competitive_companion_port
+    from settings.compiler import competitive_companion_port, parse_problem_with_template
+    from settings.compiler import template_path , coder_name
+    from system.get_time import digital_time
+
 except Exception as e:
     print(e)
 
@@ -1097,10 +1100,56 @@ class Cp_contest():
         except Exception as e:
             cprint(e,'red')
 
-class Cp_extension:
+class Cp_ext:
 
     HOST = '127.0.0.1'
     PORT = competitive_companion_port
+
+    def template(self,file_path,file_name='sol.cpp'):
+        try :
+
+            
+            # print(template_path)
+            ext = file_name.rsplit(sep='.',maxsplit=1)
+            if(len(ext) == 1) :
+                ext = 'cpp'
+                file_name = file_name+'.cpp'
+            else :
+                ext = ext[1]
+            
+            if ext == 'cpp':
+                path = template_path['c++']
+            elif ext == 'py':
+                path = template_path['python']
+            else :
+                cprint('File format not supported. Currently only support c++ and python.','red')
+            try :
+                # path = f"'{path}'"
+                # path = 't.cpp'
+                if os.path.isfile(file_name):
+                    return
+
+                if os.path.isfile(path):
+                    with open(path,'r') as f:
+                        code = f.read()
+                else :
+                    code = ''
+
+                code = code.replace('$%CODER%$',coder_name)
+                code = code.replace('$%DATE_TIME%$',digital_time())
+                
+                with open(file_path+file_name,'w') as f:
+                    f.write(code)
+                # print(code)
+                # cprint(f'{file_name} created succussfully, sir. :D','green')
+            except Exception as e:
+                # print(e)
+                pass
+                return
+        except Exception as e:
+            # cprint(e,'red')
+            # cprint("Can't genarate  template.",'red')
+            return        
 
     def rectify(self,s):
         try:
@@ -1145,6 +1194,9 @@ class Cp_extension:
             with open(path+'.info','w') as f:
                 f.write(info)
             
+            if parse_problem_with_template:
+                self.template(path)
+
             testcases = dic['tests']
             # print(testcases)
             # return
@@ -1169,8 +1221,9 @@ class Cp_extension:
             os.chdir(base)
 
         except Exception as e:
+            print(e)
             cprint("Can't fetch.",'red')
-            
+       
 
     def listen(self):
 
@@ -1179,7 +1232,7 @@ class Cp_extension:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.bind((self.HOST,self.PORT))
             cprint("Listening (Click competitive companion extension)....",'yellow')
-            timeout = 20
+            timeout = 60
             cnt = 0
             ok = True
             while ok:
@@ -1206,7 +1259,7 @@ class Cp_extension:
                                 
                 except :
                     ok = False
-                    
+
         cprint(f'Total {cnt} problems fetched.','blue')
 
 
@@ -1215,7 +1268,7 @@ class Cp_extension:
 def cp_manager(msg):
     
     if 'parse' in msg or 'listen' in msg:
-        obj = Cp_extension()
+        obj = Cp_ext()
         obj.listen()
     elif 'problem' in msg:
         obj = Cp_Problem()
