@@ -10,6 +10,7 @@ It can give voice reply and take your voice command. You can turn off or on thes
 ## Programming Features
 
 - [x] [Run c++ or python program](#run-python-or-cpp-program)
+- [x] [Competitive Companion Support](#)
 - [x] [parse problemset](#Parsing-Problem-from-online-judge)
 - [x] [generate file with template](#generate-file-with-template)
 - [x] [test code against testcases](#Test-solution)
@@ -66,11 +67,27 @@ If you don't specify the file_name, it will list all the available python and c+
 
  ## Parsing Problem from online judge
 
- Problems can be parsed by given command,
+
+Competitive Companion support makes parsing problems really very easy. Just give the command,
 
 > jarvis -cp parse
 
+or,
+
+> jarvis -cp listen
+
 Here -cp represent competitive programming,
+
+It will start listening, then you can just click the competitive companion browser extension. It will parse the problem.
+
+After parsing there will create a new folder according to the contest name and in that folder will be another folder according to the problem name. And it will contain all the sample test cases of that problem.
+
+![parsing-problem](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20parse%20using%20competitive%20companion.png)
+
+Also, the problem can be parsed without competitive companion though I don't recommend this. the command is given below,
+
+> jarvis -cp problem
+
 
 After giving the command it will ask for the problem URL. Just give the URL,it will parse the problem. There will be created a folder according to the problem name. And it will contain all the sample test cases of that problem.
 
@@ -221,9 +238,14 @@ N.B.: I have used online-judge-api-client for login and submitting codes.
 
 ## Parsing contest
 
-Parsing contest is really very similar to the parsing problem. It will parse all the problems of that contest.
+Parsing contest is the same as parsing problems using the competitive companion. Just write command,
 
-A very simple command for this is given below,
+> jarvis -cp parse
+
+then it will start listening, then just open the contest link and click the browser extension, it will parse all the problems and create a folder for each contest with their test cases.
+
+
+Also, the contest can be parsed without competitive companion though I don't recommend this. the command is given below,
 
 > jarvis -cp contest
 

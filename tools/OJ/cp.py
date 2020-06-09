@@ -8,6 +8,7 @@ try :
     from tqdm import tqdm
     import threading
     import socket
+    from settings.compiler import competitive_companion_port
 except Exception as e:
     print(e)
 
@@ -1099,7 +1100,7 @@ class Cp_contest():
 class Cp_extension:
 
     HOST = '127.0.0.1'
-    PORT = 9999   
+    PORT = competitive_companion_port
 
     def rectify(self,s):
         try:
@@ -1173,10 +1174,11 @@ class Cp_extension:
 
     def listen(self):
 
-        x = ''
+        cprint(' '*17+'...Parsing Problem...'+' '*17,'blue')
+        print()
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.bind((self.HOST,self.PORT))
-            cprint("Listening....",'yellow')
+            cprint("Listening (Click competitive companion extension)....",'yellow')
             timeout = 20
             cnt = 0
             ok = True
@@ -1201,15 +1203,12 @@ class Cp_extension:
                             else:
                                 t = threading.Thread(target=self.create,args=(result,))
                                 t.start()
-                                x = result
+                                
                 except :
                     ok = False
+                    
         cprint(f'Total {cnt} problems fetched.','blue')
-        x = self.rectify(x)
-        # print(x)
-        # p = threading.Thread(target=self.create,args=(x,))
-        # p.start()
-        # p.join()
+
 
 
 

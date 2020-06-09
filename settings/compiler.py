@@ -14,3 +14,4 @@ template_path = {
 }
 
 coder_name = bot['Boss']
+competitive_companion_port = 9090
