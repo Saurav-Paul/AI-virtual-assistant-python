@@ -14,11 +14,14 @@
     * pip3 install google
 * wikipedia
     * pip3 install wikipedia
+
+
 * install them through pip3
     - requests==2.22.0
     - lxml==4.4.1
     - google==2.0.2
     - beautifulsoup4==4.8.0
+
 * install wolframalpha
     * pip3 install wolframalpha
 * pickle
@@ -40,8 +43,9 @@
 
 * wget
     * pip3 install wget
-* twdm 
+* tqdm 
     * pip3 install tqdm
+
 
 * pip3 install online-judge-api-client
 * pip3 install online-judge-tools

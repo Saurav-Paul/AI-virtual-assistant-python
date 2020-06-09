@@ -13,7 +13,7 @@ def setup():
         print("System found : Linux.")
         system('sudo apt-get install python3-dev build-essential')
         system('sudo apt-get install python3-pyaudio')
-        system('pip3 install pyttsx3==2.87') 
+        system('pip3 install pyttsx3') 
 
     with open('requirements.txt') as f:
         need = f.read()
