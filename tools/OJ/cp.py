@@ -1,12 +1,15 @@
-import os
-import subprocess
-import json
-from termcolor import colored as clr , cprint
-import time
-from itertools import zip_longest
-from tqdm import tqdm
-import threading
-import socket
+try :
+    import os
+    import subprocess
+    import json
+    from termcolor import colored as clr , cprint
+    import time
+    from itertools import zip_longest
+    from tqdm import tqdm
+    import threading
+    import socket
+except Exception as e:
+    print(e)
 
 cp_keys = ['-cp','-Cp']
 
@@ -91,11 +94,16 @@ class Cp_my_tester:
         cprint(pt,'blue')
         print()
 
-        if not os.path.isdir('test'):
+        case_folder = 'testcases'
+        if os.path.isdir(case_folder):
+            pass
+        elif os.path.isdir('test'):
+            case_folder = 'test'
+        else:
             cprint("Test folder not available.",'red',attrs=['bold'])
             return
         
-        file_path = os.path.join(path,'test')
+        file_path = os.path.join(path,case_folder)
         lt = os.listdir(file_path)
         # print(lt)
         if len(lt) == 0 :
@@ -308,9 +316,9 @@ class Cp_Problem:
                         f.write(info)
                     
                     # print(path)
-                    if not os.path.isdir(path+"test"):
-                        os.mkdir(path+"test")
-                    path = os.path.join(path,'test')
+                    if not os.path.isdir(path+"testcases"):
+                        os.mkdir(path+"testcases")
+                    path = os.path.join(path,'testcases')
                     no = 1
                     for case in testcases:
                         # print(case)
@@ -535,9 +543,15 @@ class Cp_add_test:
             pt = (' '*17+"...Adding Testcase..."+'\n')
             print(clr(pt,'blue'))
             
-            if not os.path.isdir('test'):
-                os.mkdir('test')
-            path_name = os.path.join(os.getcwd(),'test')
+            folder_name = 'testcases'
+            if os.path.isdir(folder_name):
+                pass
+            elif os.path.isdir('test'):
+                folder_name = 'test'
+            else :
+                os.mkdir(folder_name)
+            
+            path_name = os.path.join(os.getcwd(),folder_name)
             # print(path_name)
             lt = os.listdir(path_name)
             # print(lt)
@@ -683,9 +697,15 @@ class Cp_bruteforce:
         """  function for adding testcases """
         try :
             
-            if not os.path.isdir('test'):
-                os.mkdir('test')
-            path_name = os.path.join(os.getcwd(),'test')
+            test_folder = 'testcases'
+            if os.path.isdir('testcases'):
+                test_folder = 'testcases'
+            elif os.path.isdir('test'):
+                test_folder = 'test'
+            else :
+                os.mkdir('testcases')
+            
+            path_name = os.path.join(os.getcwd(),test_folder)
             # print(path_name)
             lt = os.listdir(path_name)
             # print(lt)
@@ -851,7 +871,15 @@ class Cp_setup:
     def gen_py(self):
         pass
         try :
-            cmd = ['python3','-m','tcgen','--path','test']
+            case_folder = ''
+            if os.path.isdir('testcases'):
+                case_folder = 'testcases'
+            elif os.path.isdir('test'):
+                case_folder = 'test'
+            else :
+                cprint("testcases folder not available, Can't generate gen.py file. :(",'red')
+                return
+            cmd = ['python3','-m','tcgen','--path',case_folder]
             result = self.sub_process(cmd)
             # print('result is \n',result)
             if result == '':
@@ -980,9 +1008,9 @@ class Cp_contest():
                         f.write(info)
                     
                     # print(path)
-                    if not os.path.isdir(path+"test"):
-                        os.mkdir(path+"test")
-                    path = os.path.join(path,'test')
+                    if not os.path.isdir(path+"testcases"):
+                        os.mkdir(path+"testcases")
+                    path = os.path.join(path,'testcases')
                     no = 1
                     for case in testcases:
                         # print(case)
