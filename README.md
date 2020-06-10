@@ -3,7 +3,11 @@
 
 It is a terminal-based virtual assistant especially made for competitive programming. It has a lot of features, including running python or c++ file, parsing problem set with test cases and test against all the cases in one click, test with brute force solution, and many more. It will help you to boost your programming skill and help you to do a good performance in the programming contest.
 
-It can give voice reply and take your voice command. You can turn off or on these features. Basic settings can be easily changed from settings/settings.py file.
+It can give voice reply and take your voice command. You can turn off or on these features. Basic settings can be easily changed from config option.
+
+The config can be open by the given command,
+
+> jarvis -config
 
 ![Welcome](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20welcome%20screen.png)
 
@@ -52,6 +56,8 @@ It can give voice reply and take your voice command. You can turn off or on thes
 
 
 ---
+
+### [setup competitive companion](#setup-competitive-companion)
 
 ### [click here to go to Installation](#Installation)
 ---
@@ -204,7 +210,7 @@ It will match output with the brute-force solution's output. If it failed, it wi
 
 ![bruteforce-solution](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20bruteforce.png)
 
-## Generate testcase genarator automatically
+## Generate testcase generator automatically
 
 Test case generator can be generated using the given command,
 
@@ -256,9 +262,13 @@ It will ask for the contest link. Then it will parse all the problems.
 
 ## Speaking and voice command
 
-This ai can speak with you. It will reply in voice and text both. You can toggle them from settings/settings.py file.
+This ai can speak with you. It will reply in voice and text both. You can toggle them from config.
 
-You can also give voice commands. But you have turned this feature on from settings/settings.py file.
+You can also give voice commands. But you have turned this feature on from config.
+
+For opening config option just write the following command,
+
+>jarvis -config
 
 ## Speech Recognition
 
@@ -324,6 +334,22 @@ For downloading the command is given below,
 
 Then it will ask for the download link.
         
+
+---
+
+## Setup Competitive Companion
+
+Competitive companion is a browser extension that helps to parse problems from various online judges in just one click.
+
+For setting the competitive companion, you have to install the extension to your browser. Just search google, you will find the extension.
+
+After installing, right-click on the extension and click manage extension. Then go to 'Preference' and write custom port 8080.
+Because the default port number in my project is 8080. If you want to change the port, you can change from the config.
+
+To open config write the following command,
+
+> jarvis -config
+
 ---
 # Installation
 
@@ -338,7 +364,7 @@ It might take several minutes.
 
 ```bash
 jarvis () {
-python3 {path to the project folder}/run.py $PWD -arg $@
+python3 "path to the project folder"/run.py $PWD -arg $@
 }
 ```
 
