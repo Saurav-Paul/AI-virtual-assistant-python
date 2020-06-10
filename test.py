@@ -1,4 +1,5 @@
+from tools.run_program import if_run_type
 
-from settings.config import if_config_type
-
-print(if_config_type('-config'))
+int i = 0 
+msg = input('input the arguments -> ')
+print(if_run_type(msg))
