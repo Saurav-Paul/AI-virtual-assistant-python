@@ -1,6 +1,8 @@
 from main import main
 import sys , os
 from settings.settings import read_bot
+from system.path import getpath
+
 
 def get_args(lt,lim):
     get = ''
@@ -35,11 +37,14 @@ if __name__ == "__main__":
         total = len(sys.argv)
         lt = list(sys.argv)
         if '-arg' in lt:
-            orginal_path = lt[0]
-            orginal_path = orginal_path[0:len(orginal_path)-6]
+            # orginal_path = lt[0]
+            # orginal_path = orginal_path[0:len(orginal_path)-6]
+            # print(orginal_path)
+            orginal_path = getpath(__file__)
             p = str(sys.argv)
             file_path = make_path(lt,total)
             os.chdir(file_path)
+            print(orginal_path)
             arg = all_args(lt)
             main(arg,orginal_path)
         else :
