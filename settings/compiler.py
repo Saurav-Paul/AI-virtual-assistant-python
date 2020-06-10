@@ -44,10 +44,18 @@ try :
 
     section = 'template_path'
     x = obj.read(conf_path,section= section)
-    print(template_path)
+
     template_path['c++'] = x['cpp']
     template_path['python'] = x['python']
-    print(template_path)
+
+    section = 'compiler'
+    x = obj.read(conf_path,section)
+
+    compiler['c++'] = x['cpp']
+    compiler['c++ debug'] = x['cpp_debug']
+    compiler['python'] = x['python']
+
+
 
 except Exception as e:
     print(e)
