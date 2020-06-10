@@ -1,2 +1,2 @@
 
-from settings.settings import *
+from settings.compiler import *

@@ -22,7 +22,7 @@ bot = {
 }
 
 conf_path = os.path.join(getpath(__file__),'settings.conf')
-print(conf_path)
+
 try :
 
     section = 'bot'

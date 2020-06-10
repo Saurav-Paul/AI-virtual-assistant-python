@@ -1,5 +1,10 @@
-
+from tools.ConfigParser import ConfigParser_manager as CM
+from system.path import getpath
+import os
+from termcolor import cprint
 from settings.settings import bot
+
+positive = ['yes','1','true']
 
 compiler = {
     "c++" : "g++ '{filename}' -o '{executable}' && ./'{executable}'",
@@ -17,3 +22,33 @@ coder_name = bot['boss']
 competitive_companion_port = 8080
 
 parse_problem_with_template = True # If true, after parsing all the codes will contain a file name sol.cpp (with your template)
+
+
+conf_path = os.path.join(getpath(__file__),'settings.conf')
+
+try :
+
+    section = 'cp'
+    obj = CM()
+    x = obj.read(conf_path,section = section)
+    coder_name = x['coder_name']
+    if coder_name == "${boss}":
+        coder_name = bot['boss']
+
+    competitive_companion_port = x['competitive_companion_port']
+    parse_problem_with_template = x['parse_problem_with_template']
+    if parse_problem_with_template.lower() in positive:
+        parse_problem_with_template = True
+    else:
+        parse_problem_with_template = False
+
+    section = 'template_path'
+    x = obj.read(conf_path,section= section)
+    print(template_path)
+    template_path['c++'] = x['cpp']
+    template_path['python'] = x['python']
+    print(template_path)
+
+except Exception as e:
+    print(e)
+    cprint("Settings error.",'red')

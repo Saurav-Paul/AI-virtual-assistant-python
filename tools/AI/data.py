@@ -34,6 +34,7 @@ data = {
     'who am i' : 'You are '+bot['boss'] + '.',
     'tell me my name' : 'Your name is '+bot['boss']+'.',
     "what's up" : 'I am fine, thank you sir.',
+    "who is your boss" : "My boss is "+bot['boss']+'.',
     
 }
 
