@@ -35,7 +35,7 @@ try :
     if coder_name == "${boss}":
         coder_name = bot['boss']
 
-    competitive_companion_port = x['competitive_companion_port']
+    competitive_companion_port = int(x['competitive_companion_port'])
     parse_problem_with_template = x['parse_problem_with_template']
     if parse_problem_with_template.lower() in positive:
         parse_problem_with_template = True
