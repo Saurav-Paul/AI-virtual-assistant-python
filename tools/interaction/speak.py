@@ -78,7 +78,7 @@ def speak(sentence):
     if it['text_reply']:
         speak_text(sentence)
         not_ok = False
-    if it['voice_reply'] or it['voice_read+voice_reply']:
+    if it['voice_reply'] or it['voice_read_voice_reply']:
         speak_voice_manager(sentence)
         not_ok = False
     if not_ok :

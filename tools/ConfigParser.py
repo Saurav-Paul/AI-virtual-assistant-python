@@ -3,12 +3,15 @@ import configparser
 class ConfigParser_manager:
 
     def read(self,file_name,section=''):
-        config = configparser.ConfigParser()
-        config.read(file_name)
-        if section != '':
-            return dict(config[section])
-        
-        return config
+        try :
+            config = configparser.ConfigParser()
+            config.read(file_name)
+            if section != '':
+                return dict(config[section])
+            
+            return config
+        except :
+            return ''
 
     def update(self,file_name,value,section='user'):
         config = configparser.ConfigParser()
@@ -23,11 +26,13 @@ class ConfigParser_manager:
 if __name__ == "__main__":
     obj = ConfigParser_manager()
     # obj.update('Test.conf')
-    dic = obj.read('Test.conf',section='user')
+
+    section = 'demo'
+    dic = obj.read('Test.conf',section=section)
     print(dic)
-    dic['name'] = 'Bot'
-    obj.update('Test.conf',dic,section='user')
-    print(getpath(__file__))
+    dic[section] = 'Saurav'
+    obj.update('Test.conf',dic,section=section)
+    # print(getpath(__file__))
 
 
 

@@ -31,8 +31,8 @@ data = {
     'what is the time' : digital_time(),
     'tell me the time' : digital_time() ,
     'what is your name' : ('my name is ' + bot['name'] + '.'),
-    'who am i' : 'You are '+bot['Boss'] + '.',
-    'tell me my name' : 'Your name is '+bot['Boss']+'.',
+    'who am i' : 'You are '+bot['boss'] + '.',
+    'tell me my name' : 'Your name is '+bot['boss']+'.',
     "what's up" : 'I am fine, thank you sir.',
     
 }

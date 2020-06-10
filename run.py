@@ -44,7 +44,7 @@ if __name__ == "__main__":
             p = str(sys.argv)
             file_path = make_path(lt,total)
             os.chdir(file_path)
-            print(orginal_path)
+            # print(orginal_path)
             arg = all_args(lt)
             main(arg,orginal_path)
         else :

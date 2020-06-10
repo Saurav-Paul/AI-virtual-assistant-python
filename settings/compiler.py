@@ -13,7 +13,7 @@ template_path = {
     'python':'/media/saurav/Programming/GIthub/Code-Lab/geany/ai_template.py',
 }
 
-coder_name = bot['Boss']
+coder_name = bot['boss']
 competitive_companion_port = 8080
 
 parse_problem_with_template = True # If true, after parsing all the codes will contain a file name sol.cpp (with your template)
