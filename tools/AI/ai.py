@@ -18,6 +18,7 @@ try :
     from tools.OJ.cp import if_cp_type
     from termcolor import cprint
     from tools.downloader import wget_downloader
+    from settings.config import if_config_type
     import os
 except Exception as e:
     print(e)
@@ -54,6 +55,8 @@ def ai(msg,orginal_path) :
     reply = "I don't know what to do, sir ."
     # print('you said ' , msg, bot['name'])
     if if_cp_type(msg):
+        return 'Good luck sir.'
+    if if_config_type(msg):
         return 'Good luck sir.'
     if if_shell_type(msg):
         return 'Good luck sir.'

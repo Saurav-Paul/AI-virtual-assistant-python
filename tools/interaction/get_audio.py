@@ -50,7 +50,7 @@ def get_audio_microphone():
 
 
 def get_audio():
-    if it['voice_read+voice_reply']:
+    if it['voice_read_voice_reply']:
         return get_audio_microphone()
     elif it['text_read']:
         return get_audio_text()
