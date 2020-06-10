@@ -3,7 +3,7 @@ from system.path import getpath
 import os
 from termcolor import cprint
 from settings.settings import bot as bt
-
+from settings.settings import interaction_setting as its
 config_keys = ['-config','-settings']
 conf_path = os.path.join(getpath(__file__),'settings.conf')
 
@@ -131,17 +131,26 @@ class Config:
 
 
 
-    def config_list(self):
-        pt = '-'*22 + 'Config'+'-'*22
+    def Interaction(self,no):
+
+        options = [
+            'voice_reply',
+            'text_reply',
+            'voice_read_voice_reply',
+            'text_read'
+        ]
+        pt = '-'*22 + self.lt[no] +'-'*22
         cprint(pt,'magenta')
+        cprint(" Select the index to change,",'yellow')
+        
         print()
-        cprint(" All the available settings are given below,",'yellow')
-        print()
-        for i,w in enumerate(self.lt):
-            cprint(f'  {i+1}) {w}','blue')
+        
+        for i,w in enumerate(options):
+            cprint(f'  {i+1}) {w} : {its[w.lower()]}','blue')
         cprint('  0) Cancel','red')
         print()
         ok = True
+
         while ok:
             ok = False
             cprint(" Enter the index number : ",'cyan',end='')
@@ -150,12 +159,163 @@ class Config:
                 cprint(" Operation cancelled.",'red')
                 return
             elif no == 1:
-                cprint(f' You have selected {self.lt[no-1]} .','yellow')
-                self.bot(no-1)
-                return
+                cprint(f' You have selected {options[no-1]} .','yellow')
+                key = options[no-1]
+                if its[key] :
+                    cprint(f' Do you want to turn {key} to False?(Y/N) : ','cyan',end='')
+                    confirm = input()
+                    if confirm.lower() in yes:
+                        its[key] = False
+                        section = 'interaction_setting'
+                        x = self.obj.read(conf_path,section)
+                        x[key] = 'False'
+                        self.obj.update(conf_path,x,section)
+
+                        cprint(" Successfully updated.",'green')
+                    else :
+                        cprint("Cancelled.",'red')
+                else :
+                    cprint(f' Do you want to turn {key} to True?(Y/N) : ','cyan',end='')
+                    confirm = input()
+                    if confirm.lower() in yes:
+                        its[key] = True
+                        section = 'interaction_setting'
+                        x = self.obj.read(conf_path,section)
+                        x[key] = 'True'
+                        self.obj.update(conf_path,x,section)
+
+                        cprint(" Successfully updated.",'green')
+                    else :
+                        cprint("Cancelled.",'red')
+
+
+            elif no == 2:
+                cprint(f' You have selected {options[no-1]} .','yellow')
+                key = options[no-1]
+                if its[key] :
+                    cprint(f' Do you want to turn {key} to False?(Y/N) : ','cyan',end='')
+                    confirm = input()
+                    if confirm.lower() in yes:
+                        its[key] = False
+                        section = 'interaction_setting'
+                        x = self.obj.read(conf_path,section)
+                        x[key] = 'False'
+                        self.obj.update(conf_path,x,section)
+                        
+                        cprint(" Successfully updated.",'green')
+                    else :
+                        cprint("Cancelled.",'red')
+                else :
+                    cprint(f' Do you want to turn {key} to True?(Y/N) : ','cyan',end='')
+                    confirm = input()
+                    if confirm.lower() in yes:
+                        its[key] = True
+                        section = 'interaction_setting'
+                        x = self.obj.read(conf_path,section)
+                        x[key] = 'True'
+                        self.obj.update(conf_path,x,section)
+
+                        cprint(" Successfully updated.",'green')
+                    else :
+                        cprint("Cancelled.",'red')
+
+            elif no == 3:
+                cprint(f' You have selected {options[no-1]} .','yellow')
+                key = options[no-1]
+                if its[key] :
+                    cprint(f' Do you want to turn {key} to False?(Y/N) : ','cyan',end='')
+                    confirm = input()
+                    if confirm.lower() in yes:
+                        its[key] = False
+                        section = 'interaction_setting'
+                        x = self.obj.read(conf_path,section)
+                        x[key] = 'False'
+                        self.obj.update(conf_path,x,section)
+                        
+                        cprint(" Successfully updated.",'green')
+                    else :
+                        cprint("Cancelled.",'red')
+                else :
+                    cprint(f' Do you want to turn {key} to True?(Y/N) : ','cyan',end='')
+                    confirm = input()
+                    if confirm.lower() in yes:
+                        its[key] = True
+                        section = 'interaction_setting'
+                        x = self.obj.read(conf_path,section)
+                        x[key] = 'True'
+                        self.obj.update(conf_path,x,section)
+
+                        cprint(" Successfully updated.",'green')
+                    else :
+                        cprint("Cancelled.",'red')
+
+            elif no == 4:
+                cprint(f' You have selected {options[no-1]} .','yellow')
+                key = options[no-1]
+                if its[key] :
+                    cprint(f' Do you want to turn {key} to False?(Y/N) : ','cyan',end='')
+                    confirm = input()
+                    if confirm.lower() in yes:
+                        its[key] = False
+                        section = 'interaction_setting'
+                        x = self.obj.read(conf_path,section)
+                        x[key] = 'False'
+                        self.obj.update(conf_path,x,section)
+                        
+                        cprint(" Successfully updated.",'green')
+                    else :
+                        cprint("Cancelled.",'red')
+                else :
+                    cprint(f' Do you want to turn {key} to True?(Y/N) : ','cyan',end='')
+                    confirm = input()
+                    if confirm.lower() in yes:
+                        its[key] = True
+                        section = 'interaction_setting'
+                        x = self.obj.read(conf_path,section)
+                        x[key] = 'True'
+                        self.obj.update(conf_path,x,section)
+
+                        cprint(" Successfully updated.",'green')
+                    else :
+                        cprint("Cancelled.",'red')
+
             else :
                 ok = True
                 cprint(" You have selected wrong index. Please try again.",'red')
+
+
+
+
+    def config_list(self):
+        not_done = True
+        while not_done:
+
+            pt = '-'*22 + 'Config'+'-'*22
+            cprint(pt,'magenta')
+            print()
+            cprint(" All the available settings are given below,",'yellow')
+            print()
+            for i,w in enumerate(self.lt):
+                cprint(f'  {i+1}) {w}','blue')
+            cprint('  0) Exit','red')
+            print()
+            ok = True
+            while ok:
+                ok = False
+                cprint(" Enter the index number : ",'cyan',end='')
+                no = int(input())
+                if no == 0:
+                    cprint(" Exiting.",'red')
+                    not_done = False
+                elif no == 1:
+                    cprint(f' You have selected {self.lt[no-1]} .','yellow')
+                    self.bot(no-1)
+                elif no == 2:
+                    cprint(f' You have selected {self.lt[no-1]} .','yellow')
+                    self.Interaction(no-1)
+                else :
+                    ok = True
+                    cprint(" You have selected wrong index. Please try again.",'red')
 
 
 
