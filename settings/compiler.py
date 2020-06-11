@@ -60,3 +60,7 @@ try :
 except Exception as e:
     print(e)
     cprint("Settings error.",'red')
+
+def update_ccp(port):
+    global competitive_companion_port
+    competitive_companion_port = port
