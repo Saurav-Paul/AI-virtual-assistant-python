@@ -327,6 +327,18 @@ class Config:
         except Exception as e:
             cprint(e,'red')
 
+    def temp_path(self):
+        try :
+            cprint(" Temporary unvailable.",'red')
+        except Exception as e:
+            cprint(e,'red')
+
+    def compiler_option(self):
+        try :
+            cprint(" Temporary unvailable.",'red')
+        except Exception as e:
+            cprint(e,'red')
+
 
     def competitve_programming(self,no=2):
         optinos = [
@@ -360,10 +372,10 @@ class Config:
                 self.competitive_companion()
             elif no == 2:
                 cprint(f' You have selected {optinos[no-1]} .','yellow')
-                # self.change_gender()
+                self.temp_path()
             elif no == 3:
                 cprint(f' You have selected {optinos[no-1]} .','yellow')
-                # self.change_boss()
+                self.compiler_option()
             else :
                 ok = True
                 cprint(" You have selected wrong index. Please try again.",'red')
@@ -391,6 +403,7 @@ class Config:
                 no = int(input())
                 if no == 0:
                     cprint(" Exiting.",'red')
+                    cprint(" For some setting you might need to restart.",'yellow')
                     not_done = False
                 elif no == 1:
                     cprint(f' You have selected {self.lt[no-1]} .','yellow')
