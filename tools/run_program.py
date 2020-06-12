@@ -14,54 +14,89 @@ except Exception as e:
 run_keys = ['-r', '-run']
 files_ext = ['cpp','py']
 
-def run_prog(file_name , debug = False):
-    # print(os.getcwd())
-    pt = ("Running the " +file_name+'......')
-    cprint(pt,'yellow')
-    ext = file_name.rsplit(sep='.',maxsplit=1)
-    if ext[1] == 'cpp':
-        if debug :
-            cmd = compiler['c++ debug']
-        else :
-            cmd = compiler['c++']
+def run_prog(file_name , debug = False , com = False,no=1):
+    try :
+        # print(os.getcwd())
+        pt = ("Running the " +file_name+'......')
+        cprint(pt,'yellow')
+        ext = file_name.rsplit(sep='.',maxsplit=1)
+        if ext[1] == 'cpp':
+            if debug :
+                cmd = compiler['c++ debug']
+            else :
+                cmd = compiler['c++']
 
-        cmd = cmd.replace('{filename}',file_name)
-        cmd = cmd.replace('{executable}',ext[0])
-        cmd_part = cmd.split(sep='&&')
-        with tqdm(total=1.0,desc='Compilation',initial=.25) as pbar:
-            os.system(cmd_part[0])
-            pbar.update(.75)
-        pt = ('-'*23+file_name+'-'*22+'\n') 
-        cprint(pt,'magenta')
-        try :
-            os.system(cmd_part[1])
-        except:
-            cprint("Sorry sir can't run.",'red')
-        x = ('\n'+'-'*23+'-'*len(file_name)+'-'*22)
-        cprint(x,'magenta')
-    elif ext[1] == 'py':
-        cmd = compiler['python']
-        cmd = cmd.replace('{filename}',file_name)
-        x = ('-'*23+file_name+'-'*22) 
-        cprint(x,'magenta')
-        try :
-            os.system(cmd)
-        except:
-            cprint("Sorry sir can't run.",'red')
-        x = ('-'*23+'-'*len(file_name)+'-'*22) 
-        cprint(x,'magenta')
-    else :
-        cprint('Unknown file format.','red')
+            cmd = cmd.replace('{filename}',file_name)
+            cmd = cmd.replace('{executable}',ext[0])
+            cmd_part = cmd.split(sep='&&')
+            with tqdm(total=1.0,desc='Compilation',initial=.25) as pbar:
+                os.system(cmd_part[0])
+                pbar.update(.75)
+            pt = ('-'*23+file_name+'-'*22+'\n')
+            x = ('\n'+'-'*23+'-'*len(file_name)+'-'*22)
+            if not os.path.isfile(ext[0]):
+                return
+            
+            try :
+                for i in range(no):
+                    cprint(pt,'magenta')
+                    os.system(cmd_part[1])
+                    cprint(x,'magenta')
+                if com == False :
+                    os.remove(ext[0])
+            except:
+                cprint("Sorry sir can't run.",'red')
+            
+        elif ext[1] == 'py':
+            cmd = compiler['python']
+            cmd = cmd.replace('{filename}',file_name)
+            x = ('-'*23+file_name+'-'*22) 
+            cprint(x,'magenta')
+            try :
+                os.system(cmd)
+            except:
+                cprint("Sorry sir can't run.",'red')
+            x = ('-'*23+'-'*len(file_name)+'-'*22) 
+            cprint(x,'magenta')
+        else :
+            cprint('Unknown file format.','red')
+    except Exception as e:
+        cprint("Compilation Error",'red')
 
 
 def find_files(lt):
+    print(lt)
     debug = False
+    com = False
+    no = 1
     if '-d' in lt:
         debug = True
         try :
             lt.remove('-d')
         except :
             pass 
+    if '-c' in lt:
+        com = True
+        try :
+            lt.remove('-c')
+        except :
+            pass 
+    if '-dc' in lt:
+        com = True
+        debug = True
+        try :
+            lt.remove('-dc')
+        except :
+            pass 
+    if '-cd' in lt:
+        com = True
+        debug = True
+        try :
+            lt.remove('-cd')
+        except :
+            pass
+    
+    print(lt)
     num = len(lt)
     file_list=[]
     if num == 1:
@@ -102,19 +137,20 @@ def find_files(lt):
                         cprint('Operation Cancelled.','red')
                         break
                     elif index > 0 and index < no :
-                        run_prog(file_list[index-1],debug)
+                        run_prog(file_list[index-1],debug,com,no)
                         break 
                     else :
                         cprint('Wrong file index. Please try again.','red')
         except :
             cprint("Some error happended.",'red',attrs=['bold'])
     elif no == 1:
-        run_prog(file_list[0],debug)
+        run_prog(file_list[0],debug,com,no)
     else :
         cprint('There is not any python or c++ file available.','yellow')
 
 def if_run_type(msg):
     lt = msg.split()
+
     for key in run_keys:
         if key in lt:
             find_files(lt)
