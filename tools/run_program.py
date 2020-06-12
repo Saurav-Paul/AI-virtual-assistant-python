@@ -51,13 +51,14 @@ def run_prog(file_name , debug = False , com = False,no=1):
             cmd = compiler['python']
             cmd = cmd.replace('{filename}',file_name)
             x = ('-'*23+file_name+'-'*22) 
-            cprint(x,'magenta')
+            pt = ('-'*23+'-'*len(file_name)+'-'*22) 
             try :
-                os.system(cmd)
+                for i in range(no):
+                    cprint(x,'magenta')
+                    os.system(cmd)
+                    cprint(pt,'magenta')
             except:
                 cprint("Sorry sir can't run.",'red')
-            x = ('-'*23+'-'*len(file_name)+'-'*22) 
-            cprint(x,'magenta')
         else :
             cprint('Unknown file format.','red')
     except Exception as e:
