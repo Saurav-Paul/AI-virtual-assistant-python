@@ -4,6 +4,8 @@ import os
 from termcolor import cprint
 from settings.settings import bot as bt
 from settings.settings import interaction_setting as its
+from settings.settings import update_bot
+
 config_keys = ['-config','-settings']
 conf_path = os.path.join(getpath(__file__),'settings.conf')
 
@@ -34,6 +36,7 @@ class Config:
             x['gender'] = new_name
             self.obj.update(conf_path,x,section)
             bt['gender'] = new_name
+            update_bot(bt)
             cprint("Gender Changed successfully.",'green')
         else :
             cprint("Cancelled.",'red')
@@ -54,11 +57,13 @@ class Config:
             x['name'] = new_name
             self.obj.update(conf_path,x,section)
             bt['name'] = new_name
+            update_bot(bt)
             cprint("Name Changed successfully.",'green')
         else :
             cprint("Cancelled.",'red')
 
     def change_boss(self):
+        
         pt = '-'*22 + 'Boss Change' +'-'*22
         cprint(pt,'magenta')
         print()
@@ -73,6 +78,7 @@ class Config:
             x['boss'] = new_name
             self.obj.update(conf_path,x,section)
             bt['boss'] = new_name
+            update_bot(bt)
             cprint("Boss Changed successfully.",'green')
         else :
             cprint("Cancelled.",'red')
@@ -283,6 +289,227 @@ class Config:
                 ok = True
                 cprint(" You have selected wrong index. Please try again.",'red')
 
+    def competitive_companion(self):
+        try :
+            from settings.compiler import competitive_companion_port as ccp, update_ccp
+            pt = '-'*22 + 'Competitive Companion' +'-'*22
+            cprint(pt,'magenta')
+            print()
+
+            cprint(" Current port number : " + str(ccp),'yellow')
+
+            cprint('  1) Change port.','blue')
+            cprint('  0) Back.','red')
+
+            ok = True
+            while ok:
+                ok = False
+                cprint(' Enter the index number : ','cyan',end='')
+                no = int(input())
+                if no == 0:
+                    cprint(" Going back.",'red')
+                    self.competitve_programming()
+                elif no == 1:
+                    print()
+                    cprint(" Enter new port number(must be integer) : ",'cyan',end='')
+                    port = int(input())
+                    # ccp = port
+                    update_ccp(port)
+                    section = 'cp'
+                    x = self.obj.read(conf_path,section)
+                    x['competitive_companion_port'] = str(port)
+                    self.obj.update(conf_path,x,section)
+                    cprint(' Competitive companion port updated succussfully.','green')
+                    self.competitive_companion()
+                else:
+                    cprint(" You have choosen wrong index.",'red')
+                    ok = True
+        except Exception as e:
+            cprint(e,'red')
+
+    def cpp_template(self):
+        from settings.compiler import template_path as tp , update_tp
+        pt = '-'*22 + 'c++ Template' +'-'*22
+        cprint(pt,'magenta')
+        print()
+        cprint(f" Current Template : {tp['c++']}",'yellow')
+        cprint(" Do you want to update?(Y/N) : ",'cyan',end='')
+        confirm = input()
+        
+        if confirm.lower() not in yes:
+            cprint(" Cancelled.",'red')
+            return
+
+        ok = True
+        while ok :
+            ok = False
+            cprint(" Enter template path (enter cancel to cancel): ",'cyan',end='')
+            path = input()
+
+            if path.lower() == 'cancel':
+                cprint(" Cancelled.",'red')
+                return
+            elif os.path.isfile(path):
+                pt = '-'*22 +'code'+'-'*22
+                cprint(pt,'magenta')
+
+                with open(path) as f:
+                    code = f.read()
+                cprint(code,'yellow')
+
+                pt = '-'*46
+                cprint(pt,'magenta')
+
+                sec = 'template_path'
+                x = self.obj.read(conf_path,sec)
+                x['cpp'] = path
+                tp['c++'] = path
+                self.obj.update(conf_path,x,sec)
+                update_tp(tp)
+                cprint("C++ template updated successfully.",'green')
+            else :
+                ok = True
+                cprint("Path doesn't exist. Try again.",'red')
+
+
+   
+
+    def python_template(self):
+        from settings.compiler import template_path as tp , update_tp
+        pt = '-'*22 + 'Python Template' +'-'*22
+        cprint(pt,'magenta')
+        print()
+        cprint(f" Current Template : {tp['python']}",'yellow')
+        cprint(" Do you want to update?(Y/N) : ",'cyan',end='')
+        confirm = input()
+        
+        if confirm.lower() not in yes:
+            cprint(" Cancelled.",'red')
+            return
+
+        ok = True
+        while ok :
+            ok = False
+            cprint(" Enter template path (enter cancel to cancel): ",'cyan',end='')
+            path = input()
+
+            if path.lower() == 'cancel':
+                cprint(" Cancelled.",'red')
+                return
+            elif os.path.isfile(path):
+                pt = '-'*22 +'code'+'-'*22
+                cprint(pt,'magenta')
+
+                with open(path) as f:
+                    code = f.read()
+                cprint(code,'yellow')
+
+                pt = '-'*46
+                cprint(pt,'magenta')
+
+                sec = 'template_path'
+                x = self.obj.read(conf_path,sec)
+                x['python'] = path
+                tp['python'] = path
+                self.obj.update(conf_path,x,sec)
+                update_tp(tp)
+                cprint("Python template updated successfully.",'green')
+            else :
+                ok = True
+                cprint("Path doesn't exist. Try again.",'red')
+
+
+
+
+    def temp_path(self):
+        try :
+            
+            optinos = [
+                'C++',
+                'Python'
+            ]
+            pt = '-'*22 + 'Templates Path' +'-'*22
+            cprint(pt,'magenta')
+            print()
+            cprint(" All the available settings are given below,",'yellow')
+            
+            print()
+            # print(bt)
+            for i,w in enumerate(optinos):
+                cprint(f'  {i+1}) {w}','blue')
+            cprint('  0) Cancel','red')
+            print()
+            ok = True
+
+            while ok:
+                ok = False
+                cprint(" Enter the index number : ",'cyan',end='')
+                no = int(input())
+                if no == 0:
+                    cprint(" Operation cancelled.",'red')
+                    return
+                elif no == 1:
+                    cprint(f' You have selected {optinos[no-1]} .','yellow')
+                    self.cpp_template()
+                elif no == 2:
+                    cprint(f' You have selected {optinos[no-1]} .','yellow')
+                    self.python_template()
+                else :
+                    ok = True
+                    cprint(" You have selected wrong index. Please try again.",'red')
+
+
+
+        except Exception as e:
+            cprint(e,'red')
+
+    def compiler_option(self):
+        try :
+            cprint(" Temporary unvailable.",'red')
+        except Exception as e:
+            cprint(e,'red')
+
+
+    def competitve_programming(self,no=2):
+        optinos = [
+            'Competitive Companion.',
+            'Template Path.',
+            'Compiler'
+        ]
+
+        pt = '-'*22 + self.lt[no] +'-'*22
+        cprint(pt,'magenta')
+        print()
+        cprint(" All the available settings are given below,",'yellow')
+        
+        print()
+        # print(bt)
+        for i,w in enumerate(optinos):
+            cprint(f'  {i+1}) {w}','blue')
+        cprint('  0) Cancel','red')
+        print()
+        ok = True
+
+        while ok:
+            ok = False
+            cprint(" Enter the index number : ",'cyan',end='')
+            no = int(input())
+            if no == 0:
+                cprint(" Operation cancelled.",'red')
+                return
+            elif no == 1:
+                cprint(f' You have selected {optinos[no-1]} .','yellow')
+                self.competitive_companion()
+            elif no == 2:
+                cprint(f' You have selected {optinos[no-1]} .','yellow')
+                self.temp_path()
+            elif no == 3:
+                cprint(f' You have selected {optinos[no-1]} .','yellow')
+                self.compiler_option()
+            else :
+                ok = True
+                cprint(" You have selected wrong index. Please try again.",'red')
+
 
 
 
@@ -306,6 +533,7 @@ class Config:
                 no = int(input())
                 if no == 0:
                     cprint(" Exiting.",'red')
+                    cprint(" For some setting you might need to restart me.",'yellow')
                     not_done = False
                 elif no == 1:
                     cprint(f' You have selected {self.lt[no-1]} .','yellow')
@@ -313,6 +541,9 @@ class Config:
                 elif no == 2:
                     cprint(f' You have selected {self.lt[no-1]} .','yellow')
                     self.Interaction(no-1)
+                elif no == 3:
+                    cprint(f' You have selected {self.lt[no-1]} .','yellow')
+                    self.competitve_programming(no-1)
                 else :
                     ok = True
                     cprint(" You have selected wrong index. Please try again.",'red')
