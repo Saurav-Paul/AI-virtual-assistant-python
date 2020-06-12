@@ -69,6 +69,22 @@ Any python or c++ files from the current directory can be run using one command.
 
 If you don't specify the file_name, it will list all the available python and c++ files in the current directory and you have to choose.
 
+You can run in debug mode. Debug mode is running C++ file with custom flags. The command for running in debug mode is given below,
+
+> jarvis -r -d
+
+If you want to run the program more than one time you can do that. The command for running more than one time is given below,
+
+> jarvis -r -'number of times'
+
+If you want to keep executable file after running, you can use '-c' command,
+
+An example is given below,
+
+> jarvis -r -cd -3 'file_name'
+
+it will run jarvis in debug mode and it will run 3 times. And after execution, it will keep the executable file.
+
 ![Running program](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20run%20program.png)
 
  ## Parsing Problem from online judge
@@ -170,7 +186,7 @@ int main(){
 
 After parsing problem set, the solution can be tested by the given command,
 
-> Jarvis -cp test
+> jarvis -cp test
 
 
 It will run all the sample and custom cases from the test folder(Test folder contains all the sample cases after parsing problem set) and check whether your solution is passed. It will show the taken time for running each case. If your code failed any test cases it will show the differences between the correct answer and your output. If every case passed then it will show passed.
@@ -184,7 +200,7 @@ It is not necessary to have a parsed problem set for using this command. You can
 
 Adding testcase is really very easy. Just give the command,
 
-> Jarvis -cp add
+> jarvis -cp add
 
 Yes, that simple :sunglasses: .
 
@@ -202,7 +218,7 @@ For that, you need three files.
 
 Then run this command,
 
-> Jarvis -cp brute
+> jarvis -cp brute
 
 It will ask for the number of times you want to generate random test cases and test solutions (Stress).
 
@@ -214,14 +230,14 @@ It will match output with the brute-force solution's output. If it failed, it wi
 
 Test case generator can be generated using the given command,
 
-> Jarvis -cp gen
+> jarvis -cp gen
 
 It will analyze all the sample cases and generate gen.py(Test case generator) automatically. Yes, sometimes it might fail (In case of complex test cases).
 In this case, you have to write a generator manually (You can write in python or c++).
 
 There is also one command, to generate gen.py, brute.cpp(empty file) and sol.cpp(with your template). The command is given below,
 
-> Jarvis -cp setup
+> jarvis -cp setup
 
 ![testcase generator](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20automatically%20setup.png)
 
@@ -229,13 +245,13 @@ There is also one command, to generate gen.py, brute.cpp(empty file) and sol.cpp
 
 For login write the given command,
 
-> Jarvis -cp login
+> jarvis -cp login
 
 It will ask for a judge link, your username, and a password.
 
 For submitting code just write the given command,
 
-> Jarvis -cp submit
+> jarvis -cp submit
 
 N.B.: I have used online-judge-api-client for login and submitting codes.
 
@@ -336,6 +352,13 @@ Then it will ask for the download link.
         
 
 ---
+
+## Config
+
+If you want to change settings, write the given command,
+
+> jarvis -config
+
 
 ## Setup Competitive Companion
 
