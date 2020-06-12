@@ -327,9 +327,139 @@ class Config:
         except Exception as e:
             cprint(e,'red')
 
+    def cpp_template(self):
+        from settings.compiler import template_path as tp , update_tp
+        pt = '-'*22 + 'c++ Template' +'-'*22
+        cprint(pt,'magenta')
+        print()
+        cprint(f" Current Template : {tp['c++']}",'yellow')
+        cprint(" Do you want to update?(Y/N) : ",'cyan',end='')
+        confirm = input()
+        
+        if confirm.lower() not in yes:
+            cprint(" Cancelled.",'red')
+            return
+
+        ok = True
+        while ok :
+            ok = False
+            cprint(" Enter template path (enter cancel to cancel): ",'cyan',end='')
+            path = input()
+
+            if path.lower() == 'cancel':
+                cprint(" Cancelled.",'red')
+                return
+            elif os.path.isfile(path):
+                pt = '-'*22 +'code'+'-'*22
+                cprint(pt,'magenta')
+
+                with open(path) as f:
+                    code = f.read()
+                cprint(code,'yellow')
+
+                pt = '-'*46
+                cprint(pt,'magenta')
+
+                sec = 'template_path'
+                x = self.obj.read(conf_path,sec)
+                x['cpp'] = path
+                tp['c++'] = path
+                self.obj.update(conf_path,x,sec)
+                update_tp(tp)
+                cprint("C++ template updated successfully.",'green')
+            else :
+                ok = True
+                cprint("Path doesn't exist. Try again.",'red')
+
+
+   
+
+    def python_template(self):
+        from settings.compiler import template_path as tp , update_tp
+        pt = '-'*22 + 'Python Template' +'-'*22
+        cprint(pt,'magenta')
+        print()
+        cprint(f" Current Template : {tp['python']}",'yellow')
+        cprint(" Do you want to update?(Y/N) : ",'cyan',end='')
+        confirm = input()
+        
+        if confirm.lower() not in yes:
+            cprint(" Cancelled.",'red')
+            return
+
+        ok = True
+        while ok :
+            ok = False
+            cprint(" Enter template path (enter cancel to cancel): ",'cyan',end='')
+            path = input()
+
+            if path.lower() == 'cancel':
+                cprint(" Cancelled.",'red')
+                return
+            elif os.path.isfile(path):
+                pt = '-'*22 +'code'+'-'*22
+                cprint(pt,'magenta')
+
+                with open(path) as f:
+                    code = f.read()
+                cprint(code,'yellow')
+
+                pt = '-'*46
+                cprint(pt,'magenta')
+
+                sec = 'template_path'
+                x = self.obj.read(conf_path,sec)
+                x['python'] = path
+                tp['python'] = path
+                self.obj.update(conf_path,x,sec)
+                update_tp(tp)
+                cprint("Python template updated successfully.",'green')
+            else :
+                ok = True
+                cprint("Path doesn't exist. Try again.",'red')
+
+
+
+
     def temp_path(self):
         try :
-            cprint(" Temporary unvailable.",'red')
+            
+            optinos = [
+                'C++',
+                'Python'
+            ]
+            pt = '-'*22 + 'Templates Path' +'-'*22
+            cprint(pt,'magenta')
+            print()
+            cprint(" All the available settings are given below,",'yellow')
+            
+            print()
+            # print(bt)
+            for i,w in enumerate(optinos):
+                cprint(f'  {i+1}) {w}','blue')
+            cprint('  0) Cancel','red')
+            print()
+            ok = True
+
+            while ok:
+                ok = False
+                cprint(" Enter the index number : ",'cyan',end='')
+                no = int(input())
+                if no == 0:
+                    cprint(" Operation cancelled.",'red')
+                    return
+                elif no == 1:
+                    cprint(f' You have selected {optinos[no-1]} .','yellow')
+                    self.cpp_template()
+                elif no == 2:
+                    cprint(f' You have selected {optinos[no-1]} .','yellow')
+                    self.python_template()
+                else :
+                    ok = True
+                    cprint(" You have selected wrong index. Please try again.",'red')
+
+
+
         except Exception as e:
             cprint(e,'red')
 
@@ -403,7 +533,7 @@ class Config:
                 no = int(input())
                 if no == 0:
                     cprint(" Exiting.",'red')
-                    cprint(" For some setting you might need to restart.",'yellow')
+                    cprint(" For some setting you might need to restart me.",'yellow')
                     not_done = False
                 elif no == 1:
                     cprint(f' You have selected {self.lt[no-1]} .','yellow')

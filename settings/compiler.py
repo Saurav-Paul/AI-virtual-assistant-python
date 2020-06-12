@@ -64,3 +64,7 @@ except Exception as e:
 def update_ccp(port):
     global competitive_companion_port
     competitive_companion_port = port
+
+def update_tp(x):
+    global template_path
+    template_path = x
