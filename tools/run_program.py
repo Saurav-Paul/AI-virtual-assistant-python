@@ -65,10 +65,10 @@ def run_prog(file_name , debug = False , com = False,no=1):
 
 
 def find_files(lt):
-    print(lt)
+    # print(lt)
     debug = False
     com = False
-    no = 1
+    tm = 1
     if '-d' in lt:
         debug = True
         try :
@@ -96,7 +96,15 @@ def find_files(lt):
         except :
             pass
     
-    print(lt)
+    # print(lt)
+    for w in lt :
+        if '-' in w:
+            temp = w.replace('-','')
+            if temp.isnumeric() :
+                tm = int(temp)
+                lt.remove(w)
+    
+    # print(tm,lt)
     num = len(lt)
     file_list=[]
     if num == 1:
@@ -109,6 +117,7 @@ def find_files(lt):
                 pass
     else :
         arg = lt[1:]
+        # print(arg)
         for w in arg:
             for file in os.listdir(os.getcwd()):
                 if w.lower() in file.lower() :
@@ -137,14 +146,14 @@ def find_files(lt):
                         cprint('Operation Cancelled.','red')
                         break
                     elif index > 0 and index < no :
-                        run_prog(file_list[index-1],debug,com,no)
+                        run_prog(file_list[index-1],debug,com,tm)
                         break 
                     else :
                         cprint('Wrong file index. Please try again.','red')
         except :
             cprint("Some error happended.",'red',attrs=['bold'])
     elif no == 1:
-        run_prog(file_list[0],debug,com,no)
+        run_prog(file_list[0],debug,com,tm)
     else :
         cprint('There is not any python or c++ file available.','yellow')
 
