@@ -222,9 +222,8 @@ class Cp_my_tester:
         else :
             cprint(" # Failed....",'red')
 
-        if os.path.isfile('test.out')
+        if os.path.isfile('test.out'):
             os.remove('test.out')
-        
         print()
         pt='-'*20+'-'*len(file_name)+'-'*20
         cprint(pt,'magenta')
