@@ -20,6 +20,7 @@ try :
     from tools.downloader import wget_downloader
     from settings.config import if_config_type
     import os
+    import time
 except Exception as e:
     print(e)
 
@@ -139,7 +140,11 @@ def ai(msg,orginal_path) :
                     command_sep()
                     reply = 'done sir'
                 else :
+                    t = time.time()
                     reply = ask_question(msg)
+                    t = time.time()-t
+                    logger.info(str(t)+' sec')
+                    # cprint(t,'red')
                     ok = True
                     for word in should_not_learn:
                         if word in msg or word in reply:
@@ -149,7 +154,8 @@ def ai(msg,orginal_path) :
                     if ok:
                         logger.info('reply -> ' + reply)
                         if DEBUG:
-                            learn = input('.......Press y to learn it.....')
+                            cprint("(DUBUG MODE IS ON)Enter y to learn : ",'red',attrs=['bold'],end='')
+                            learn = input('')
                         else :
                             learn = 'y'
                         if learn.lower() == 'y':

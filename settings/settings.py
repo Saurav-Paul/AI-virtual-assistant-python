@@ -53,7 +53,7 @@ def read_bot(orginal_path):
     print(bot)
     # return bot
 
-DEBUG = False
+DEBUG = True
 
 def update_bot(x):
     global bot
