@@ -1,4 +1,5 @@
 import logging
+from settings.settings import DEBUG
 
 logging.basicConfig(
     level=logging.ERROR,
@@ -9,3 +10,6 @@ logging.basicConfig(
     ]
 )
 logger=logging.getLogger()
+
+if DEBUG:
+    logger.setLevel(20)

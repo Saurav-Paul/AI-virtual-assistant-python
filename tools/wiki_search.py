@@ -23,7 +23,7 @@ def wiki_search(msg, no = 2) :
         Written by Saurav Paul.
     """
     logger.info('Searching to wikipedia.') 
-    cprint('(Thinking...)','yellow')
+    cprint('\t\t(Thinking)','yellow')
     rem = msg
     msg = wiki_string(msg.lower())
     msg = make_wiki_key(msg)
