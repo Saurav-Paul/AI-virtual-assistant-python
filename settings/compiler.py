@@ -68,3 +68,7 @@ def update_ccp(port):
 def update_tp(x):
     global template_path
     template_path = x
+
+def update_compiler(x):
+    global compiler
+    compiler = x

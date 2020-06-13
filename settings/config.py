@@ -463,9 +463,177 @@ class Config:
         except Exception as e:
             cprint(e,'red')
 
+    def cpp_compiler(self):
+        try :
+            from settings.compiler import compiler, update_compiler
+            pt = '-'*22 + 'C++ Compiler' +'-'*22
+            cprint(pt,'magenta')
+            print()
+            # print(compiler)
+            ccp = compiler['c++']
+            # print(ccp)
+            cprint(" Current Compiling Command : ",'yellow',end='')
+            cprint(str(ccp),'cyan')
+            print()
+
+            cprint('  1) Change command.','blue')
+            cprint('  0) Back.','red')
+            print()
+
+            ok = True
+            while ok:
+                ok = False
+                cprint(' Enter the index number : ','cyan',end='')
+                no = int(input())
+                if no == 0:
+                    cprint(" Going back.",'red')
+                    self.competitve_programming()
+                elif no == 1:
+                    print()
+                    cprint(" Enter new command(wrong command might broke c++ compiling and testing) : ",'cyan',end='')
+                    command = input()
+                    # ccp = port
+                    section = 'compiler'
+                    x = self.obj.read(conf_path,section)
+                    x['cpp'] = str(command)
+                    self.obj.update(conf_path,x,section)
+                    compiler['c++'] = command
+                    update_compiler(compiler)
+                    cprint(' C++ compiling command updated succussfully.','green')
+                    self.cpp_compiler()
+                else:
+                    cprint(" You have choosen wrong index.",'red')
+                    ok = True
+        except Exception as e:
+            cprint(e,'red')
+    def cpp_debug_compiler(self):
+        try :
+            from settings.compiler import compiler, update_compiler
+            pt = '-'*22 + 'C++ Debug Compiler' +'-'*22
+            cprint(pt,'magenta')
+            print()
+            # print(compiler)
+            ccp = compiler['c++ debug']
+            # print(ccp)
+            cprint(" Current Compiling Command : ",'yellow',end='')
+            cprint(str(ccp),'cyan')
+            print()
+
+            cprint('  1) Change command.','blue')
+            cprint('  0) Back.','red')
+            print()
+
+            ok = True
+            while ok:
+                ok = False
+                cprint(' Enter the index number : ','cyan',end='')
+                no = int(input())
+                if no == 0:
+                    cprint(" Going back.",'red')
+                    self.competitve_programming()
+                elif no == 1:
+                    print()
+                    cprint(" Enter new command(wrong command might broke c++ debug compiling and testing) : ",'cyan',end='')
+                    command = input()
+                    # ccp = port
+                    section = 'compiler'
+                    x = self.obj.read(conf_path,section)
+                    x['cpp_debug'] = str(command)
+                    self.obj.update(conf_path,x,section)
+                    compiler['c++ debug'] = command
+                    update_compiler(compiler)
+                    cprint(' C++ debug compiling command updated succussfully.','green')
+                    self.cpp_debug_compiler()
+                else:
+                    cprint(" You have choosen wrong index.",'red')
+                    ok = True
+        except Exception as e:
+            cprint(e,'red')
+    def python_compiler(self):
+        try :
+            from settings.compiler import compiler, update_compiler
+            pt = '-'*22 + 'Python Run Command' +'-'*22
+            cprint(pt,'magenta')
+            print()
+            # print(compiler)
+            ccp = compiler['python']
+            # print(ccp)
+            cprint(" Current Run Command : ",'yellow',end='')
+            cprint(str(ccp),'cyan')
+            print()
+
+            cprint('  1) Change command.','blue')
+            cprint('  0) Back.','red')
+            print()
+
+            ok = True
+            while ok:
+                ok = False
+                cprint(' Enter the index number : ','cyan',end='')
+                no = int(input())
+                if no == 0:
+                    cprint(" Going back.",'red')
+                    self.competitve_programming()
+                elif no == 1:
+                    print()
+                    cprint(" Enter new command(wrong command might broke running python file) : ",'cyan',end='')
+                    command = input()
+                    # ccp = port
+                    section = 'compiler'
+                    x = self.obj.read(conf_path,section)
+                    x['python'] = str(command)
+                    self.obj.update(conf_path,x,section)
+                    compiler['python'] = command
+                    update_compiler(compiler)
+                    cprint(' Python running command updated succussfully.','green')
+                    self.python_compiler()
+                else:
+                    cprint(" You have choosen wrong index.",'red')
+                    ok = True
+        except Exception as e:
+            cprint(e,'red')
+
     def compiler_option(self):
         try :
-            cprint(" Temporary unvailable.",'red')
+            optinos = [
+                'C++',
+                'C++ Debug',
+                'python'
+            ]
+
+            pt = '-'*22 + "Compiler" +'-'*22
+            cprint(pt,'magenta')
+            print()
+            cprint(" All the available settings are given below,",'yellow')
+            
+            print()
+            # print(bt)
+            for i,w in enumerate(optinos):
+                cprint(f'  {i+1}) {w}','blue')
+            cprint('  0) Cancel','red')
+            print()
+            ok = True
+
+            while ok:
+                ok = False
+                cprint(" Enter the index number : ",'cyan',end='')
+                no = int(input())
+                if no == 0:
+                    cprint(" Operation cancelled.",'red')
+                    return
+                elif no == 1:
+                    cprint(f' You have selected {optinos[no-1]} .','yellow')
+                    self.cpp_compiler()
+                elif no == 2:
+                    cprint(f' You have selected {optinos[no-1]} .','yellow')
+                    self.cpp_debug_compiler()
+                elif no == 3:
+                    cprint(f' You have selected {optinos[no-1]} .','yellow')
+                    self.python_compiler()
+                else :
+                    ok = True
+                    cprint(" You have selected wrong index. Please try again.",'red')
+
         except Exception as e:
             cprint(e,'red')
 

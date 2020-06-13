@@ -1,9 +1,10 @@
 import wget, os , requests
+from termcolor import cprint
 def wget_downloader(url,path=''):
     try :
         wget.download(url,path)
     except :
-        print('link error')
+        cprint('link error...','red')
 
 # def downloader(url):
 #     chunk_size = 1024
