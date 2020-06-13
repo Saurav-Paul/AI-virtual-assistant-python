@@ -8,6 +8,8 @@ def make_query(msg):
     for word in lt:
         if i :
             q += '+'
+        if word == '+':
+            word = '%2B'
         q += word
         i += 1
     return q

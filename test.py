@@ -1,5 +1,8 @@
-from tools.run_program import if_run_type
+from tools.google_answer import google_answer
 
-int i = 0 
-msg = input('input the arguments -> ')
-print(if_run_type(msg))
+# x = input("Enter below : ")
+x=''
+
+x = google_answer(x)
+
+print(x)
