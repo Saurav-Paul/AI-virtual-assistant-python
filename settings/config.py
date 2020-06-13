@@ -327,6 +327,53 @@ class Config:
         except Exception as e:
             cprint(e,'red')
 
+    def dev_mode(self):
+
+        from settings.settings import update_dev
+
+        pt = '-'*10 + 'Welcome to secret mode for developer' +'-'*10
+        cprint(pt,'magenta')
+        print()
+        section = 'developer'
+        dev = self.obj.read(conf_path,section)
+        options = {
+            'Debug Mode ': dev['debug']
+        }
+        for i , w in enumerate(options):
+            cprint(f' {i+1}) {w} : {options[w]}','blue')
+
+        cprint(f' 0) Back','red')
+
+        ok = True
+        while ok:
+            cprint("Enter index number : ",'cyan',end = '')
+            no = int(input())
+            ok = False
+
+            if no == 0 :
+                cprint("Going Back.",'red')
+                return
+            elif no == 1:
+                cprint("Do you want to toggle Debug mode ?(Y/N) : ",'cyan',end='')
+                confirm = input()
+                if confirm.lower() == 'y':
+                    if dev['debug'] == 'True':
+                        dev['debug'] = 'False'
+                    else :
+                        dev['debug'] = 'True'
+                
+                    self.obj.update(conf_path,dev,section)
+                    update_dev(dev)
+                    cprint("Debug mode toggled successfully.",'green')
+                else :
+                    cprint("Cancelled.",'red')
+                self.dev_mode()
+            else :
+                cprint("Wrong index. Try again.")
+                ok = True
+        print()
+        cprint('-'*len(pt),'magenta')
+
     def cpp_template(self):
         from settings.compiler import template_path as tp , update_tp
         pt = '-'*22 + 'c++ Template' +'-'*22
@@ -549,6 +596,7 @@ class Config:
                     ok = True
         except Exception as e:
             cprint(e,'red')
+    
     def python_compiler(self):
         try :
             from settings.compiler import compiler, update_compiler
@@ -712,6 +760,8 @@ class Config:
                 elif no == 3:
                     cprint(f' You have selected {self.lt[no-1]} .','yellow')
                     self.competitve_programming(no-1)
+                elif no == 69:
+                    self.dev_mode()
                 else :
                     ok = True
                     cprint(" You have selected wrong index. Please try again.",'red')

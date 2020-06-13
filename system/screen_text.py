@@ -1,6 +1,5 @@
 import pyfiglet
 from os import system , name
-from settings.settings import START_SCREEN_NAME
 from random import choice
 
 try :
@@ -31,7 +30,7 @@ def command_sep():
 
 
 def clear_screen(): 
-
+    from settings.settings import START_SCREEN_NAME
     # for windows 
     if name == 'nt': 
         _ = system('cls') 

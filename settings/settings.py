@@ -21,6 +21,8 @@ bot = {
     
 }
 
+DEBUG = True
+
 conf_path = os.path.join(getpath(__file__),'settings.conf')
 
 try :
@@ -35,10 +37,16 @@ try :
             interaction_setting[i] = True
         else :
             interaction_setting[i] = False
+    section = 'developer'
+    x = obj.read(conf_path,section=section)
+    if x['debug'].lower() in positive:
+        DEBUG = True
+    else :
+        DEBUG = False
 
 
 except Exception as e:
-    print(e)
+    cprint(e,'red')
     cprint("Settings error.",'red')
 
 START_SCREEN_NAME = bot['name'] # Enter a string to make start screen banner
@@ -53,8 +61,16 @@ def read_bot(orginal_path):
     print(bot)
     # return bot
 
-DEBUG = True
-
 def update_bot(x):
     global bot
+    global START_SCREEN_NAME
     bot = x
+    START_SCREEN_NAME = bot['name']
+
+def update_dev(x):
+    global DEBUG
+    
+    if x['debug'].lower() in positive:
+        DEBUG = True
+    else :
+        DEBUG = False
