@@ -31,8 +31,6 @@ setup(
     'Development Status :: 4 - Beta',
     'Environment :: Console',
     # Indicate who your project is intended for
-    'Intended Audience :: Programmer',
-    'Topic :: Competitive Programmer :: ai virtual assitant',
 
     # Pick your license as you wish
     'License :: OSI Approved :: MIT License',

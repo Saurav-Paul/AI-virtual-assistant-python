@@ -59,7 +59,6 @@ The config can be open by the given command,
 
 ### [setup competitive companion](#Setup-competitive-companion)
 
-### [click here to go to Installation](#Installation)
 ---
 
 ## Run python or cpp program
@@ -376,32 +375,5 @@ To open config write the following command,
 > jarvis -config
 
 ---
-# Installation
-
-Installation is simple, just follow these steps...
-
-1. Clone or download this repository
-2. Open and find manual_setup.py
-3. Run manual_setup.py using your python3 , It will install all the dependency needed for this project.
-It might take several minutes.
-4. For accessing virtual assistant from any place, add this function to your ~/.bashrc, In my case, I like to call by the name "jarvis". You can replace the name jarvis by whatever name you want.
-
-
-```bash
-jarvis () {
-python3 "path to the project folder"/run.py $PWD -arg $@
-}
-```
-
-It will work fine in Linux. It should also work on Mac Os.
-But unfortunately, it has some issues running on Windows(Because cmd has some problems). But still, it can be run on windows using windows subsystem for Linux.
-
-### Issues
-
-- If you face some problems while installation. In that case, you have to install these package manually. It occurs because some python module need a different version for a different distribution.
-
-- If your voice command does not work properly, you have to install pyaudio manually.
-
-
 
 ### If you want to contribute on this project you are welcome.
