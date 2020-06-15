@@ -35,6 +35,13 @@ data = {
     'tell me my name' : 'Your name is '+bot['boss']+'.',
     "what's up" : 'I am fine, thank you sir.',
     "who is your boss" : "My boss is "+bot['boss']+'.',
+    "hello" :"hey",
+    "ok" :"okay",
+    "okay" :"ok",
+    "thank you" : "welcome",
+    "hey" : "hello",
+    "what about you" : "I am fine sir.",
+    "how about you" : "I am fine sir.",
     
 }
 

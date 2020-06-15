@@ -29,7 +29,7 @@ setup(
     #   4 - Beta
     #   5 - Production/Stable
     'Development Status :: 4 - Beta',
-
+    'Environment :: Console',
     # Indicate who your project is intended for
     'Intended Audience :: Programmer',
     'Topic :: Competitive Programmer :: ai virtual assitant',
@@ -76,8 +76,8 @@ setup(
     
     entry_points={
         'console_scripts': [
-            'ai = run:start',
-            'cp = system.fun:start',
+            'ai = run.run:start',
+            'jarvis = run.run:start',
         ],
     },
 )
