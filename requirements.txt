@@ -1,11 +1,8 @@
 beautifulsoup4
 fuzzywuzzy
 google
-gTTS
-gTTS-token
 lxml
 online-judge-api-client
-online-judge-template-generator
 online-judge-tools
 pickle-mixin
 playsound

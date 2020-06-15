@@ -34,8 +34,8 @@ def speak_voice_gtts(sentence):
         written by saurav paul"""
     logger.info('attempting to speak')
     try :
-        # from gtts import gTTS
-        # import os , playsound
+        from gtts import gTTS
+        import os , playsound
         thoughts_processing('voice is loading, Sir')
         Gtts = gTTS(text=sentence,lang='en')
         logger.debug('Gtts setted')
