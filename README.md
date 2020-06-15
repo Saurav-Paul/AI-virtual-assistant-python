@@ -5,6 +5,16 @@ It is a terminal-based virtual assistant especially made for competitive program
 
 It can give voice reply and take your voice command. You can turn off or on these features. Basic settings can be easily changed from config option.
 
+For installing write the given commands,
+
+> pip install wheel
+
+and 
+
+> pip install ai-virtual-assistant
+
+
+I recommand after installing checkout the config file.
 The config can be open by the given command,
 
 > jarvis -config
@@ -57,8 +67,9 @@ The config can be open by the given command,
 
 ---
 
-### [setup competitive companion](#Setup-competitive-companion)
+### [setup competitive companion](#Competitive-companion)
 
+### [Installation](#Installation)
 ---
 
 ## Run python or cpp program
@@ -360,7 +371,7 @@ If you want to change settings, write the given command,
 
 
 
-## Setup competitive companion
+## Competitive companion
 
 
 Competitive companion is a browser extension that helps to parse problems from various online judges in just one click.
@@ -375,5 +386,21 @@ To open config write the following command,
 > jarvis -config
 
 ---
+
+# Installation
+
+For installing write the given commands,
+
+> pip install wheel
+
+and 
+
+> pip install ai-virtual-assistant
+
+
+I recommand after installing checkout the config file.
+The config can be open by the given command,
+
+> jarvis -config
 
 ### If you want to contribute on this project you are welcome.
