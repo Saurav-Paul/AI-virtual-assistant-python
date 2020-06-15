@@ -5,7 +5,6 @@ lxml
 online-judge-api-client
 online-judge-tools
 pickle-mixin
-playsound
 ply
 plyer
 psutil

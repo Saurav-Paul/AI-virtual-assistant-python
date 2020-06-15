@@ -54,3 +54,28 @@ if __name__ == "__main__":
     except Exception as e:
         # print(e)
         main(orginal_path=os.getcwd())
+
+
+def start():
+    try :
+        total = len(sys.argv)
+        lt = list(sys.argv)
+        if '-arg' in lt:
+            # orginal_path = lt[0]
+            # orginal_path = orginal_path[0:len(orginal_path)-6]
+            # print(orginal_path)
+            orginal_path = getpath(__file__)
+            p = str(sys.argv)
+            file_path = make_path(lt,total)
+            os.chdir(file_path)
+            # print(orginal_path)
+            arg = all_args(lt)
+            main(arg,orginal_path)
+        else :
+            arg = get_args(lt,len(lt))
+            main(arg.strip() , orginal_path=os.getcwd())
+
+    except Exception as e:
+        # print(e)
+        main(orginal_path=os.getcwd())
+
