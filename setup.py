@@ -77,7 +77,7 @@ setup(
     entry_points={
         'console_scripts': [
             'ai = run:start',
-            'cp = fun:start',
+            'cp = system.fun:start',
         ],
     },
 )
