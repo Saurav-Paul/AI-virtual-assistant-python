@@ -57,7 +57,7 @@ The config can be open by the given command,
 
 ---
 
-### [setup competitive companion](#setup-competitive-companion)
+### [setup competitive companion](#Setup-competitive-companion)
 
 ### [click here to go to Installation](#Installation)
 ---
@@ -360,7 +360,9 @@ If you want to change settings, write the given command,
 > jarvis -config
 
 
-## Setup Competitive Companion
+
+## Setup competitive companion
+
 
 Competitive companion is a browser extension that helps to parse problems from various online judges in just one click.
 
