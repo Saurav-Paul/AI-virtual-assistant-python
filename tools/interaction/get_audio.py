@@ -23,7 +23,7 @@ def get_audio_microphone():
         import speech_recognition as sr
         r = sr.Recognizer()
         logger.info("Ready to listen")
-        cprint('(Press enter to give voice commands...)','green',attrs=['bold','blink'])
+        cprint('(Press enter to give voice commands...)','green',attrs=['bold','blink'],end='')
         input()
         with sr.Microphone() as source:
             r.adjust_for_ambient_noise(source)

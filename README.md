@@ -379,8 +379,8 @@ To open config write the following command,
 Installation is simple, just follow these steps...
 
 1. Clone or download this repository
-2. Open and find setup.py
-3. Run setup.py using your python3 , It will install all the dependency needed for this project.
+2. Open and find manual_setup.py
+3. Run manual_setup.py using your python3 , It will install all the dependency needed for this project.
 It might take several minutes.
 4. For accessing virtual assistant from any place, add this function to your ~/.bashrc, In my case, I like to call by the name "jarvis". You can replace the name jarvis by whatever name you want.
 
