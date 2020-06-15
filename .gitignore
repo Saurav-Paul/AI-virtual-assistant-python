@@ -5,3 +5,5 @@ test.py
 *.pickle 
 test.py
 test_main.py
+settings/settings.conf
+
