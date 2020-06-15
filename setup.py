@@ -29,10 +29,8 @@ setup(
     #   4 - Beta
     #   5 - Production/Stable
     'Development Status :: 4 - Beta',
-
+    'Environment :: Console',
     # Indicate who your project is intended for
-    'Intended Audience :: Programmer',
-    'Topic :: Competitive Programmer :: ai virtual assitant',
 
     # Pick your license as you wish
     'License :: OSI Approved :: MIT License',
@@ -40,6 +38,7 @@ setup(
 
     keywords='ai virtual assitant',
     packages=find_packages(),
+    include_package_data=True,
     package_data = {
     # If any package contains *.txt or *.rst files, include them:
     '': ['*.conf', '*.json', '*.txt', '.learnt'],
@@ -76,8 +75,8 @@ setup(
     
     entry_points={
         'console_scripts': [
-            'ai = run:start',
-            'cp = system.fun:start',
+            'ai = run.run:start',
+            'jarvis = run.run:start',
         ],
     },
 )

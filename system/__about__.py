@@ -1,5 +1,5 @@
 # Python Version: 3.x
-__package_name__ = 'ai-virtual-assitant'
+__package_name__ = 'ai-virtual-assistant'
 __author__ = 'Saurav Paul'
 __email__ = 'sauravpaul.sunny@gmail.com'
 __license__ = 'MIT License'

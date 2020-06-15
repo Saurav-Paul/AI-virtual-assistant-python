@@ -19,6 +19,8 @@ try :
     from termcolor import cprint
     from tools.downloader import wget_downloader
     from settings.config import if_config_type
+    from tools.credits import if_credit_type
+    from system.path import getpath
     import os
     import time
 except Exception as e:
@@ -63,6 +65,8 @@ def ai(msg,orginal_path) :
         return 'Good luck sir.'
     if if_run_type(msg):
         return 'Good luck sir.'
+    if if_credit_type(msg):
+        return 'Good luck sir.'
     else :
         try :
             msg = msg.strip().lower()
@@ -73,7 +77,7 @@ def ai(msg,orginal_path) :
             # logger.info('Not found in common data')
             # from history
             try :
-                f = orginal_path+'/tools/AI/.learnt'
+                f = getpath(__file__)+'.learnt'
                 history = JsonManager.json_read(f)
                 for line in history:
                     if is_matched(msg,line,95):

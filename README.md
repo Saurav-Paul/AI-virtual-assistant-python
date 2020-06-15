@@ -5,6 +5,16 @@ It is a terminal-based virtual assistant especially made for competitive program
 
 It can give voice reply and take your voice command. You can turn off or on these features. Basic settings can be easily changed from config option.
 
+For installing write the given commands,
+
+> pip install wheel
+
+and 
+
+> pip install ai-virtual-assistant
+
+
+I recommand after installing checkout the config file.
 The config can be open by the given command,
 
 > jarvis -config
@@ -57,9 +67,9 @@ The config can be open by the given command,
 
 ---
 
-### [setup competitive companion](#setup-competitive-companion)
+### [setup competitive companion](#Competitive-companion)
 
-### [click here to go to Installation](#Installation)
+### [Installation](#Installation)
 ---
 
 ## Run python or cpp program
@@ -360,7 +370,9 @@ If you want to change settings, write the given command,
 > jarvis -config
 
 
-## Setup Competitive Companion
+
+## Competitive companion
+
 
 Competitive companion is a browser extension that helps to parse problems from various online judges in just one click.
 
@@ -374,32 +386,21 @@ To open config write the following command,
 > jarvis -config
 
 ---
+
 # Installation
 
-Installation is simple, just follow these steps...
+For installing write the given commands,
 
-1. Clone or download this repository
-2. Open and find manual_setup.py
-3. Run manual_setup.py using your python3 , It will install all the dependency needed for this project.
-It might take several minutes.
-4. For accessing virtual assistant from any place, add this function to your ~/.bashrc, In my case, I like to call by the name "jarvis". You can replace the name jarvis by whatever name you want.
+> pip install wheel
 
+and 
 
-```bash
-jarvis () {
-python3 "path to the project folder"/run.py $PWD -arg $@
-}
-```
-
-It will work fine in Linux. It should also work on Mac Os.
-But unfortunately, it has some issues running on Windows(Because cmd has some problems). But still, it can be run on windows using windows subsystem for Linux.
-
-### Issues
-
-- If you face some problems while installation. In that case, you have to install these package manually. It occurs because some python module need a different version for a different distribution.
-
-- If your voice command does not work properly, you have to install pyaudio manually.
+> pip install ai-virtual-assistant
 
 
+I recommand after installing checkout the config file.
+The config can be open by the given command,
+
+> jarvis -config
 
 ### If you want to contribute on this project you are welcome.
