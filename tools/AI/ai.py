@@ -19,6 +19,7 @@ try :
     from termcolor import cprint
     from tools.downloader import wget_downloader
     from settings.config import if_config_type
+    from tools.credits import if_credit_type
     import os
     import time
 except Exception as e:
@@ -62,6 +63,8 @@ def ai(msg,orginal_path) :
     if if_shell_type(msg):
         return 'Good luck sir.'
     if if_run_type(msg):
+        return 'Good luck sir.'
+    if if_credit_type(msg):
         return 'Good luck sir.'
     else :
         try :

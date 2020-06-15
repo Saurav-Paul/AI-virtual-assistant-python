@@ -1,5 +1,0 @@
-
-
-
-def start():
-    print("Hello")
