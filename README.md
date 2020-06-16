@@ -24,7 +24,7 @@ The config can be open by the given command,
 ## Programming Features
 
 - [x] [Run c++ or python program](#run-python-or-cpp-program)
-- [x] [Competitive Companion Support](#)
+- [x] [Competitive Companion Support](#Competitive-companion)
 - [x] [parse problemset](#Parsing-Problem-from-online-judge)
 - [x] [generate file with template](#generate-file-with-template)
 - [x] [test code against testcases](#Test-solution)
@@ -454,5 +454,7 @@ I recommand after installing checkout the config file.
 The config can be open by the given command,
 
 > jarvis -config
+
+N.B : It works fine on Linux. It also should work on Mac os. Unfortunately, it has some problems with windows. If you want to install on windows, you have to install it via WSL(Windows Subsystem for Linux).
 
 ### If you want to contribute on this project you are welcome.
