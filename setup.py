@@ -31,7 +31,10 @@ setup(
     'Development Status :: 4 - Beta',
     'Environment :: Console',
     # Indicate who your project is intended for
+    'Intended Audience :: End Users/Desktop',
 
+    'Operating System :: POSIX :: Linux',
+    'Operating System :: MacOS :: MacOS X',
     # Pick your license as you wish
     'License :: OSI Approved :: MIT License',
     ],
@@ -77,6 +80,8 @@ setup(
         'console_scripts': [
             'ai = run.run:start',
             'jarvis = run.run:start',
+            'cp = run.run:cp_start',
+            
         ],
     },
 )

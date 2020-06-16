@@ -106,7 +106,15 @@ Competitive Companion support makes parsing problems really very easy. Just give
 
 or,
 
+> cp parse
+
+or,
+
 > jarvis -cp listen
+
+or,
+
+> cp listen
 
 Here -cp represent competitive programming,
 
@@ -120,6 +128,10 @@ Also, the problem can be parsed without competitive companion though I don't rec
 
 > jarvis -cp problem
 
+or
+
+> cp problem
+
 
 After giving the command it will ask for the problem URL. Just give the URL,it will parse the problem. There will be created a folder according to the problem name. And it will contain all the sample test cases of that problem.
 
@@ -130,6 +142,10 @@ After giving the command it will ask for the problem URL. Just give the URL,it w
 You can easily generate your file with the template by the given command,
 
 > jarvis -cp -t "file_name"
+
+or
+
+> cp -t "file_name"
 
 If you don't specify the file_name it will be automatically created as "sol.cpp". You can create a python or c++ file.
 
@@ -198,6 +214,10 @@ After parsing problem set, the solution can be tested by the given command,
 
 > jarvis -cp test
 
+or
+
+> cp test
+
 
 It will run all the sample and custom cases from the test folder(Test folder contains all the sample cases after parsing problem set) and check whether your solution is passed. It will show the taken time for running each case. If your code failed any test cases it will show the differences between the correct answer and your output. If every case passed then it will show passed.
 
@@ -211,6 +231,10 @@ It is not necessary to have a parsed problem set for using this command. You can
 Adding testcase is really very easy. Just give the command,
 
 > jarvis -cp add
+
+or
+
+> cp add
 
 Yes, that simple :sunglasses: .
 
@@ -230,6 +254,10 @@ Then run this command,
 
 > jarvis -cp brute
 
+or
+
+> cp brute
+
 It will ask for the number of times you want to generate random test cases and test solutions (Stress).
 
 It will match output with the brute-force solution's output. If it failed, it will show the differences and ask you to add this to your test case so that you can test this later. Otherwise, it will show Accepted :smile: .
@@ -242,12 +270,20 @@ Test case generator can be generated using the given command,
 
 > jarvis -cp gen
 
+or
+
+> cp gen
+
 It will analyze all the sample cases and generate gen.py(Test case generator) automatically. Yes, sometimes it might fail (In case of complex test cases).
 In this case, you have to write a generator manually (You can write in python or c++).
 
 There is also one command, to generate gen.py, brute.cpp(empty file) and sol.cpp(with your template). The command is given below,
 
 > jarvis -cp setup
+
+or
+
+> cp setup
 
 ![testcase generator](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20automatically%20setup.png)
 
@@ -257,11 +293,19 @@ For login write the given command,
 
 > jarvis -cp login
 
+or
+
+> cp login
+
 It will ask for a judge link, your username, and a password.
 
 For submitting code just write the given command,
 
 > jarvis -cp submit
+
+or
+
+> cp submit
 
 N.B.: I have used online-judge-api-client for login and submitting codes.
 
@@ -274,12 +318,20 @@ Parsing contest is the same as parsing problems using the competitive companion.
 
 > jarvis -cp parse
 
+or
+
+> cp parse
+
 then it will start listening, then just open the contest link and click the browser extension, it will parse all the problems and create a folder for each contest with their test cases.
 
 
 Also, the contest can be parsed without competitive companion though I don't recommend this. the command is given below,
 
 > jarvis -cp contest
+
+or
+
+> cp contest
 
 
 It will ask for the contest link. Then it will parse all the problems.
