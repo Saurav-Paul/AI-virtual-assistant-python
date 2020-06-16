@@ -2,7 +2,7 @@ from run.main import main
 import sys , os
 from settings.settings import read_bot
 from system.path import getpath
-
+from termcolor import cprint
 
 def get_args(lt,lim):
     get = ''
@@ -95,6 +95,11 @@ def cp_start():
         for w in lt:
             msg +=w+' '
         cp_manager(msg.strip())
+
+        pt = '-'*50
+        cprint(pt,'magenta')
+        cprint(f' (^-^) -> Good luck sir.','green')
+        cprint(pt,'magenta')
 
     except Exception as e:
         # print(e)
