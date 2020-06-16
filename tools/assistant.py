@@ -31,7 +31,7 @@ def ask_question(question) :
     p.start()
     # xt = time()
     try :
-        
+        raise Exception
         answer = 'no data available'
         # cprint('Hmm..Thinking....','yellow')
         # t = time()
