@@ -12,13 +12,15 @@ wiki_result = 'no data available'
 def wiki(msg):
     try :
         global wiki_result
-        # t = time()
+        t = time()
         # print("Calling")
         wiki_result = wiki_search(msg,1)
         # cprint(time()-t,'blue')
         # print(wiki_result)
+        logger.info('wiki time : '+time()-t +' sec')
     except Exception as e:
-        cprint(e,'red')
+        # cprint(e,'red')
+        pass
 
 def ask_question(question) :
     """Ask me anything, I will use give my reply using wolframalpha api.if I don't find the answer
