@@ -149,7 +149,7 @@ or
 
 If you don't specify the file_name it will be automatically created as "sol.cpp". You can create a python or c++ file.
 
-You have to specify your template path. Just open settins/compiler.py file and find template_path and give your path for c++ and python.
+You have to specify your template path. Just open config file and find template_path and give your path for c++ and python.
 
 You can use variables in your template file which you will be replaced,
 
@@ -158,7 +158,7 @@ variable available,
 - $%CODER%$
 - $%DATE_TIME%$
 
-$%CODER%$ will be replaced by your name. It can be specified in coder_name in settings/compiler.py file.
+$%CODER%$ will be replaced by your name. It can be specified in coder_name in config file. Otherwise just change boss name from config. Boss name will be automatically mirrored to the coder_name.
 
 $%DATE_TIME%$ will be replaced by your file creating time and date.
 
