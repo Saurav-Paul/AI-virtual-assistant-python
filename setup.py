@@ -62,7 +62,6 @@ setup(
         'pyfiglet',
         'python-Levenshtein',
         'python-Levenshtein-wheels',
-        'pyttsx3',
         'requests',
         'tcgen',
         'termcolor',
