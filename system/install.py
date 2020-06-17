@@ -1,6 +1,8 @@
 import os , subprocess
-from system.screen_text import command_sep
-
+try :
+    from system.screen_text import command_sep
+except:
+    pass
 
 def encode_to_bin(msg):
     return msg.encode('ascii')
@@ -34,5 +36,4 @@ def install(msg,no = 1):
     ans = 'Done, sir.'
     command_sep()
     return ans
-
 

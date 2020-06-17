@@ -22,6 +22,7 @@ settings/logs.py
 settings/settings.py
 system/__about__.py
 system/__init__.py
+system/features_installation.py
 system/get_time.py
 system/install.py
 system/internet.py

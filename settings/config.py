@@ -184,6 +184,11 @@ class Config:
                     cprint(f' Do you want to turn {key} to True?(Y/N) : ','cyan',end='')
                     confirm = input()
                     if confirm.lower() in yes:
+                        try :
+                            from system.features_installation import install_speaking_system
+                            install_speaking_system()
+                        except:
+                            pass
                         its[key] = True
                         section = 'interaction_setting'
                         x = self.obj.read(conf_path,section)
@@ -245,6 +250,12 @@ class Config:
                     cprint(f' Do you want to turn {key} to True?(Y/N) : ','cyan',end='')
                     confirm = input()
                     if confirm.lower() in yes:
+                        try :
+                            from system.features_installation import install_command_system
+                            install_command_system()
+                        except Exception as e:
+                            cprint(e,'red')
+
                         its[key] = True
                         section = 'interaction_setting'
                         x = self.obj.read(conf_path,section)
