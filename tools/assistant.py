@@ -61,19 +61,20 @@ def worker(procnum, return_dict):
 
 def ask_question(question):
     global wiki_result
+    answer = 'no data available'
     cprint('\t\t(Thinking)','yellow')
     manager = multiprocessing.Manager()
     return_dict = manager.dict()
     p = multiprocessing.Process(target=worker, args=(question,return_dict))
     p.start()
-    sleep_time = 1
-    for i in tqdm(range(10),desc='Thinking',unit='sec'):
+    sleep_time = 1/10
+    for i in tqdm(range(100),desc='Thinking',unit='sec'):
         sleep(sleep_time)
         if not p.is_alive():
             sleep_time = 0
     if p.is_alive():
         p.terminate()
-        p.join()
+    p.join()
     # jobs = []
     # for i in range(1):
     #     p = multiprocessing.Process(target=worker, args=(question,return_dict))
@@ -82,6 +83,8 @@ def ask_question(question):
 
     # for proc in jobs:
     #     proc.join()
+
+
     if len(return_dict) > 0 :
         answer =  return_dict.values()[0]
 

@@ -55,6 +55,7 @@ setup(
         'online-judge-api-client',
         'online-judge-tools',
         'pickle-mixin',
+        'ply',
         'plyer',
         'psutil',
         'pyfiglet',
@@ -73,7 +74,7 @@ setup(
         'console_scripts': [
             'ai = run.run:start',
             'jarvis = run.run:start',
-            'cp = run.run:cp_start',
+            'Cp = run.run:cp_start',
             
         ],
     },
