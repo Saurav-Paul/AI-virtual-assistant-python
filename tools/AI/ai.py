@@ -151,7 +151,7 @@ def ai(msg,orginal_path) :
                     # cprint(t,'red')
                     ok = True
                     for word in should_not_learn:
-                        if word in msg or word in reply:
+                        if word in msg.lower() or word in reply.lower():
                             ok = False
                             break
                     

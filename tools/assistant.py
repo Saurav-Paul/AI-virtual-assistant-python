@@ -1,6 +1,6 @@
 import  wolframalpha
 from settings.logs import *
-from tools.wiki_search import wiki_search
+from tools.wiki_search import wiki_search , wiki_summary
 from tools.browser.search import search_google
 from settings.settings import bot
 from termcolor import cprint
@@ -9,6 +9,9 @@ from threading import Thread
 import multiprocessing
 from tqdm import tqdm
 
+
+
+not_found = ['no data available']
 
 wiki_result = 'no data available'
 
@@ -52,7 +55,7 @@ def wiki_multi():
 def worker(procnum, return_dict):
     '''worker function'''
     st_time = time()
-    return_dict[procnum] = wiki_search(procnum,1)
+    return_dict[procnum] = wiki_summary(procnum,1)
     logger.info(time()-st_time)
 
 
@@ -80,9 +83,14 @@ def ask_question(question):
     # for proc in jobs:
     #     proc.join()
     if len(return_dict) > 0 :
-        wiki_result =  return_dict.values()[0]
+        answer =  return_dict.values()[0]
 
-    return wiki_result
+    if answer in not_found:
+        print("Here")
+        answer = 'Check browser'
+        # search_google(question)
+
+    return answer
 
 
 def ask_question2(question) :
