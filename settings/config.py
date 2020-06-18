@@ -349,12 +349,14 @@ class Config:
         section = 'developer'
         dev = self.obj.read(conf_path,section)
         options = {
-            'Debug Mode ': dev['debug']
+            'Debug Mode ': dev['debug'],
+            'Learning Mode ' : dev['learn']
         }
         for i , w in enumerate(options):
             cprint(f' {i+1}) {w} : {options[w]}','blue')
 
         cprint(f' 0) Back','red')
+        print()
 
         ok = True
         while ok:
@@ -377,6 +379,21 @@ class Config:
                     self.obj.update(conf_path,dev,section)
                     update_dev(dev)
                     cprint("Debug mode toggled successfully.",'green')
+                else :
+                    cprint("Cancelled.",'red')
+                self.dev_mode()
+            elif no == 2:
+                cprint("Do you want to toggle Learning mode ?(Y/N) : ",'cyan',end='')
+                confirm = input()
+                if confirm.lower() == 'y':
+                    if dev['learn'] == 'True':
+                        dev['learn'] = 'False'
+                    else :
+                        dev['learn'] = 'True'
+                
+                    self.obj.update(conf_path,dev,section)
+                    update_dev(dev)
+                    cprint("Learning mode toggled successfully.",'green')
                 else :
                     cprint("Cancelled.",'red')
                 self.dev_mode()

@@ -13,7 +13,7 @@ try :
     from tools.calculation import google_calculation
     from tools.run_program import if_run_type
     from system.notifications import notify
-    from settings.settings import bot , DEBUG
+    from settings.settings import bot , DEBUG , LEARN
     from tools.shell import if_shell_type
     from tools.OJ.cp import if_cp_type
     from termcolor import cprint
@@ -157,8 +157,8 @@ def ai(msg,orginal_path) :
                     
                     if ok:
                         logger.info('reply -> ' + reply)
-                        if DEBUG:
-                            cprint("(DUBUG MODE IS ON)Enter y to learn : ",'red',attrs=['bold'],end='')
+                        if LEARN == False:
+                            cprint("(Automatically LEARN MODE is disable)Enter y to learn : ",'red',attrs=['bold'],end='')
                             learn = input('')
                         else :
                             learn = 'y'
