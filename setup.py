@@ -69,7 +69,7 @@ setup(
         'console_scripts': [
             'ai = run.run:start',
             'jarvis = run.run:start',
-            'Cp = run.run:cp_start',
+            'Cp = run.cp_run:cp_start',
             
         ],
     },

@@ -4,13 +4,8 @@ google
 lxml
 online-judge-api-client
 online-judge-tools
-pickle-mixin
-ply
 plyer
-psutil
 pyfiglet
-python-Levenshtein
-python-Levenshtein-wheels
 requests
 tcgen
 termcolor
