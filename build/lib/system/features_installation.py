@@ -59,24 +59,5 @@ def install_speaking_system():
     print()
     cprint('-'*len(pt),'magenta')
 
-
-
-
-def speed_up():
-
-    pt = '-'*17 + "Speeding up system" + '-'*17
-    cprint(pt,'magenta')
-    print()
-    s =  """ Packages are need to install,\n\n\t1)python-Levenshtein-wheels\n\t2)python-Levenshtein\n\n If you face any problem, install them manually.\n"""
-    cprint(s,'yellow')
-
-    os.system("pip install python-Levenshtein-wheels")
-    os.system("pip install python-Levenshtein")
-
-    print()
-    cprint('-'*len(pt),'magenta')
-
-
-
 if __name__ == "__main__":
-    speed_up()
+    install_speaking_system()

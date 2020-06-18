@@ -13,7 +13,7 @@ yes = ['yes','y']
 
 class Config:
     obj = CM()
-    lt = ['Bot','Interaction','Competitive Programming','Features Installation']
+    lt = ['Bot','Interaction','Competitive Programming']
     cp = [
         'Coder Name',
         'Competitive companion port number',
@@ -739,45 +739,6 @@ class Config:
                 cprint(" You have selected wrong index. Please try again.",'red')
 
 
-    def features(self,no):
-        from system.features_installation import speed_up, install_speaking_system , install_command_system
-        options = [
-            'Speed Up',
-            'Speaking Capability',
-            'Voice Command'
-        ]
-        pt = '-'*22 + "Features Installaion" + '-'*22
-        cprint(pt,'magenta')
-        print()
-        cprint(" All the available options are given below : ",'yellow')
-
-        print()
-        # print(bt)
-        for i,w in enumerate(options):
-            cprint(f'  {i+1}) {w}','blue')
-        cprint('  0) Cancel','red')
-        print()
-        ok = True
-
-        while ok:
-            ok = False
-            cprint(" Enter the index number : ",'cyan',end='')
-            no = int(input())
-            if no == 0:
-                cprint(" Operation cancelled.",'red')
-                return
-            elif no == 1:
-                cprint(f' You have selected {options[no-1]} .','yellow')
-                speed_up()
-            elif no == 2:
-                cprint(f' You have selected {options[no-1]} .','yellow')
-                install_speaking_system()
-            elif no == 3:
-                cprint(f' You have selected {options[no-1]} .','yellow')
-                install_command_system()
-            else :
-                ok = True
-                cprint(" You have selected wrong index. Please try again.",'red')
 
 
     def config_list(self):
@@ -811,9 +772,6 @@ class Config:
                 elif no == 3:
                     cprint(f' You have selected {self.lt[no-1]} .','yellow')
                     self.competitve_programming(no-1)
-                elif no == 4 :
-                    cprint(f' You have selected {self.lt[no-1]} .','yellow')
-                    self.features(no-1)
                 elif no == 69:
                     self.dev_mode()
                 else :
