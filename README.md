@@ -9,7 +9,7 @@ For installing write the given commands,
 
 > pip install wheel
 
-and 
+and
 
 > pip install ai-virtual-assistant
 
@@ -106,7 +106,7 @@ Competitive Companion support makes parsing problems really very easy. Just give
 
 or,
 
-> cp parse
+> Cp parse
 
 or,
 
@@ -114,7 +114,7 @@ or,
 
 or,
 
-> cp listen
+> Cp listen
 
 Here -cp represent competitive programming,
 
@@ -130,7 +130,7 @@ Also, the problem can be parsed without competitive companion though I don't rec
 
 or
 
-> cp problem
+> Cp problem
 
 
 After giving the command it will ask for the problem URL. Just give the URL,it will parse the problem. There will be created a folder according to the problem name. And it will contain all the sample test cases of that problem.
@@ -145,7 +145,7 @@ You can easily generate your file with the template by the given command,
 
 or
 
-> cp -t "file_name"
+> Cp -t "file_name"
 
 If you don't specify the file_name it will be automatically created as "sol.cpp". You can create a python or c++ file.
 
@@ -216,7 +216,7 @@ After parsing problem set, the solution can be tested by the given command,
 
 or
 
-> cp test
+> Cp test
 
 
 It will run all the sample and custom cases from the test folder(Test folder contains all the sample cases after parsing problem set) and check whether your solution is passed. It will show the taken time for running each case. If your code failed any test cases it will show the differences between the correct answer and your output. If every case passed then it will show passed.
@@ -234,7 +234,7 @@ Adding testcase is really very easy. Just give the command,
 
 or
 
-> cp add
+> Cp add
 
 Yes, that simple :sunglasses: .
 
@@ -256,7 +256,7 @@ Then run this command,
 
 or
 
-> cp brute
+> Cp brute
 
 It will ask for the number of times you want to generate random test cases and test solutions (Stress).
 
@@ -272,7 +272,7 @@ Test case generator can be generated using the given command,
 
 or
 
-> cp gen
+> Cp gen
 
 It will analyze all the sample cases and generate gen.py(Test case generator) automatically. Yes, sometimes it might fail (In case of complex test cases).
 In this case, you have to write a generator manually (You can write in python or c++).
@@ -283,7 +283,7 @@ There is also one command, to generate gen.py, brute.cpp(empty file) and sol.cpp
 
 or
 
-> cp setup
+> Cp setup
 
 ![testcase generator](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20automatically%20setup.png)
 
@@ -295,7 +295,7 @@ For login write the given command,
 
 or
 
-> cp login
+> Cp login
 
 It will ask for a judge link, your username, and a password.
 
@@ -305,7 +305,7 @@ For submitting code just write the given command,
 
 or
 
-> cp submit
+> Cp submit
 
 N.B.: I have used online-judge-api-client for login and submitting codes.
 
@@ -320,7 +320,7 @@ Parsing contest is the same as parsing problems using the competitive companion.
 
 or
 
-> cp parse
+> Cp parse
 
 then it will start listening, then just open the contest link and click the browser extension, it will parse all the problems and create a folder for each contest with their test cases.
 
@@ -331,7 +331,7 @@ Also, the contest can be parsed without competitive companion though I don't rec
 
 or
 
-> cp contest
+> Cp contest
 
 
 It will ask for the contest link. Then it will parse all the problems.
