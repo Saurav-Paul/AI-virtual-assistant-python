@@ -1,8 +1,6 @@
 from setuptools import find_packages , setup
 import system.__about__ as version
 
-
-
 from os import path
 
 here = path.abspath(path.dirname(__file__))
@@ -50,7 +48,7 @@ setup(
 
     python_requires='>=3.5',
     install_requires=[
-       'beautifulsoup4',
+        'beautifulsoup4',
         'fuzzywuzzy',
         'google',
         'lxml',
@@ -67,9 +65,8 @@ setup(
         'termcolor',
         'tqdm',
         'wget',
-        'wikipedia',
+        'wikipedia-api',
         'wolframalpha',
-
     ],
     
     entry_points={

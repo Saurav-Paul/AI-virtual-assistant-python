@@ -30,7 +30,7 @@ def get_summary(msg , no):
 def wiki_summary(msg,no = 2):
     """ This function will reply the summary of the given text"""
 
-    print("wiki_summary")
+    # print("wiki_summary")
     got_error = 'no data available'
     try :
         import wikipediaapi
@@ -58,27 +58,30 @@ def wiki_summary(msg,no = 2):
     return summary
     
 
-def wiki_search(msg, no = 2) :
-    """ This function will search through wikipedia and will reply information
-        Written by Saurav Paul.
-    """
-    try :
-        import wikipedia
-    except Exception as e:
-        logger.inf(str(e))
-        return wiki_summary(msg,no)
+def wiki_search(msg,no =2):
+    return wiki_summary(msg,no)
+
+# def wiki_search(msg, no = 2) :
+#     """ This function will search through wikipedia and will reply information
+#         Written by Saurav Paul.
+#     """
+#     try :
+#         import wikipedia
+#     except Exception as e:
+#         logger.inf(str(e))
+#         return wiki_summary(msg,no)
     
-    logger.info('Searching to wikipedia.') 
-    cprint('\t\t(Thinking)','yellow')
-    rem = msg
-    msg = wiki_string(msg.lower())
-    msg = make_wiki_key(msg)
-    logger.info('after processing the string is : ' + msg)
-    try :
-        results = wikipedia.summary(msg,sentences=no)
-        return results
-    except :
-        logger.info("Haven't found anything relevant in wikipedia")
-        # search_google(rem)
-        return 'no data available'
+#     logger.info('Searching to wikipedia.') 
+#     cprint('\t\t(Thinking)','yellow')
+#     rem = msg
+#     msg = wiki_string(msg.lower())
+#     msg = make_wiki_key(msg)
+#     logger.info('after processing the string is : ' + msg)
+#     try :
+#         results = wikipedia.summary(msg,sentences=no)
+#         return results
+#     except :
+#         logger.info("Haven't found anything relevant in wikipedia")
+#         # search_google(rem)
+#         return 'no data available'
 

@@ -55,18 +55,18 @@ def wiki_multi():
 def worker(procnum, return_dict):
     '''worker function'''
     st_time = time()
-    return_dict[procnum] = wiki_summary(procnum,1)
+    return_dict[procnum] = wiki_summary(procnum,2)
     logger.info(time()-st_time)
 
 
 def ask_question(question):
     global wiki_result
+    cprint('\t\t(Thinking)','yellow')
     manager = multiprocessing.Manager()
     return_dict = manager.dict()
     p = multiprocessing.Process(target=worker, args=(question,return_dict))
     p.start()
     sleep_time = 1
-    sleep(sleep_time)
     for i in tqdm(range(10),desc='Thinking',unit='sec'):
         sleep(sleep_time)
         if not p.is_alive():
@@ -86,9 +86,8 @@ def ask_question(question):
         answer =  return_dict.values()[0]
 
     if answer in not_found:
-        print("Here")
         answer = 'Check browser'
-        # search_google(question)
+        search_google(question)
 
     return answer
 

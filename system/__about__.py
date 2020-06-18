@@ -4,7 +4,7 @@ __author__ = 'Saurav Paul'
 __email__ = 'sauravpaul.sunny@gmail.com'
 __license__ = 'MIT License'
 __url__ = 'https://github.com/Saurav-Paul/AI-virtual-assistant-python'
-__version_info__ = (0, 0, 5, 'beta', 1)
+__version_info__ = (0, 0, 6, 'beta', 1)
 __version__ = '.'.join(map(str, __version_info__[:3]))
 __description__ = 'CLI virtual assitant for competitive programming'
 

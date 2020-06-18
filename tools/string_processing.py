@@ -30,6 +30,16 @@ def string_process(msg):
 
 def wiki_string(msg):
     data = ['wiki' , 'wikipedia' , 'what' , 'is' ,'tell' , 'me', 'about' , 'information' ,'give' ,'who']
-    for word in data :
-        msg = msg.replace(word,'')
-    return msg.strip()
+    msg = msg.split()
+    key = ''
+    for w in msg:
+        if w not in data:
+            key += w+' '
+
+    return key.strip()
+# def wiki_string(msg):
+#     data = ['wiki' , 'wikipedia' , 'what' , 'is' ,'tell' , 'me', 'about' , 'information' ,'give' ,'who']
+#     for word in data :
+#         msg = msg.replace(word,'')
+        
+#     return msg.strip()
