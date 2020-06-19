@@ -1314,7 +1314,7 @@ def help():
     cprint('To generate tescase generator','cyan')
 
     cprint('\t-> setup : ','yellow',end='')
-    cprint('To generate sol.cpp , brute.cpp and tescase generator in a single command','cyan')
+    cprint('To generate sol.cpp , brute.cpp and tescase generator','cyan')
 
     cprint('\t-> -t "filename": ','yellow',end='')
     cprint('To generate "filename" from template','cyan')

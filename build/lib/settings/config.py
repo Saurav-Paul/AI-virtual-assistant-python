@@ -13,7 +13,7 @@ yes = ['yes','y']
 
 class Config:
     obj = CM()
-    lt = ['Bot','Interaction','Competitive Programming']
+    lt = ['Bot','Interaction','Competitive Programming','Features Installation']
     cp = [
         'Coder Name',
         'Competitive companion port number',
@@ -349,12 +349,14 @@ class Config:
         section = 'developer'
         dev = self.obj.read(conf_path,section)
         options = {
-            'Debug Mode ': dev['debug']
+            'Debug Mode ': dev['debug'],
+            'Learning Mode ' : dev['learn']
         }
         for i , w in enumerate(options):
             cprint(f' {i+1}) {w} : {options[w]}','blue')
 
         cprint(f' 0) Back','red')
+        print()
 
         ok = True
         while ok:
@@ -377,6 +379,21 @@ class Config:
                     self.obj.update(conf_path,dev,section)
                     update_dev(dev)
                     cprint("Debug mode toggled successfully.",'green')
+                else :
+                    cprint("Cancelled.",'red')
+                self.dev_mode()
+            elif no == 2:
+                cprint("Do you want to toggle Learning mode ?(Y/N) : ",'cyan',end='')
+                confirm = input()
+                if confirm.lower() == 'y':
+                    if dev['learn'] == 'True':
+                        dev['learn'] = 'False'
+                    else :
+                        dev['learn'] = 'True'
+                
+                    self.obj.update(conf_path,dev,section)
+                    update_dev(dev)
+                    cprint("Learning mode toggled successfully.",'green')
                 else :
                     cprint("Cancelled.",'red')
                 self.dev_mode()
@@ -739,6 +756,45 @@ class Config:
                 cprint(" You have selected wrong index. Please try again.",'red')
 
 
+    def features(self,no):
+        from system.features_installation import speed_up, install_speaking_system , install_command_system
+        options = [
+            'Speed Up',
+            'Speaking Capability',
+            'Voice Command'
+        ]
+        pt = '-'*22 + "Features Installaion" + '-'*22
+        cprint(pt,'magenta')
+        print()
+        cprint(" All the available options are given below : ",'yellow')
+
+        print()
+        # print(bt)
+        for i,w in enumerate(options):
+            cprint(f'  {i+1}) {w}','blue')
+        cprint('  0) Cancel','red')
+        print()
+        ok = True
+
+        while ok:
+            ok = False
+            cprint(" Enter the index number : ",'cyan',end='')
+            no = int(input())
+            if no == 0:
+                cprint(" Operation cancelled.",'red')
+                return
+            elif no == 1:
+                cprint(f' You have selected {options[no-1]} .','yellow')
+                speed_up()
+            elif no == 2:
+                cprint(f' You have selected {options[no-1]} .','yellow')
+                install_speaking_system()
+            elif no == 3:
+                cprint(f' You have selected {options[no-1]} .','yellow')
+                install_command_system()
+            else :
+                ok = True
+                cprint(" You have selected wrong index. Please try again.",'red')
 
 
     def config_list(self):
@@ -772,6 +828,9 @@ class Config:
                 elif no == 3:
                     cprint(f' You have selected {self.lt[no-1]} .','yellow')
                     self.competitve_programming(no-1)
+                elif no == 4 :
+                    cprint(f' You have selected {self.lt[no-1]} .','yellow')
+                    self.features(no-1)
                 elif no == 69:
                     self.dev_mode()
                 else :

@@ -81,26 +81,26 @@ def start():
 
 
 
-def cp_start():
+# def cp_start():
 
-    try :
-        from system.screen_text import asci_banner
-        from tools.OJ.cp import cp_manager
-        from settings.settings import START_SCREEN_NAME
-        asci_banner(START_SCREEN_NAME)
-        total = len(sys.argv)
-        lt = list(sys.argv)
-        lt = lt[1:]
-        msg = ''
-        for w in lt:
-            msg +=w+' '
-        cp_manager(msg.strip())
+#     try :
+#         from system.screen_text import asci_banner
+#         from tools.OJ.cp import cp_manager
+#         from settings.settings import START_SCREEN_NAME
+#         asci_banner(START_SCREEN_NAME)
+#         total = len(sys.argv)
+#         lt = list(sys.argv)
+#         lt = lt[1:]
+#         msg = ''
+#         for w in lt:
+#             msg +=w+' '
+#         cp_manager(msg.strip())
 
-        pt = '-'*50
-        cprint(pt,'magenta')
-        cprint(f' (^-^) -> Good luck sir.','green')
-        cprint(pt,'magenta')
+#         pt = '-'*50
+#         cprint(pt,'magenta')
+#         cprint(f' (^-^) -> Good luck sir.','green')
+#         cprint(pt,'magenta')
 
-    except Exception as e:
-        # print(e)
-        main(orginal_path=os.getcwd())
+#     except Exception as e:
+#         # print(e)
+#         main(orginal_path=os.getcwd())

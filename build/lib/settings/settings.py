@@ -22,6 +22,7 @@ bot = {
 }
 
 DEBUG = True
+LEARN = True
 
 conf_path = os.path.join(getpath(__file__),'settings.conf')
 
@@ -39,10 +40,16 @@ try :
             interaction_setting[i] = False
     section = 'developer'
     x = obj.read(conf_path,section=section)
+    
     if x['debug'].lower() in positive:
         DEBUG = True
     else :
         DEBUG = False
+    
+    if x['learn'].lower() in positive:
+        LEARN = True
+    else :
+        LEARN = False
 
 
 except Exception as e:

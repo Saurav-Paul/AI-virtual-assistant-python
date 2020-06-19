@@ -68,7 +68,7 @@ def ask_question(question):
     p = multiprocessing.Process(target=worker, args=(question,return_dict))
     p.start()
     sleep_time = 1/10
-    for i in tqdm(range(100),desc='Thinking',unit='sec'):
+    for i in tqdm(range(100),desc='Thinking',unit='it'):
         sleep(sleep_time)
         if not p.is_alive():
             sleep_time = 0
