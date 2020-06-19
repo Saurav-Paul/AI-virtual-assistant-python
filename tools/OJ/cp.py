@@ -950,6 +950,7 @@ class Cp_setup:
                     if want !='y' and want!='yes':
                         cprint(f"{file_name} creation cancelled.",'red')
                         return
+                
                 with open(path,'r') as f:
                     code = f.read()
 
