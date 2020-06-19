@@ -4,7 +4,6 @@ from system.path import getpath
 def get_template(fileName):
     path = getpath(__file__)
     writen = ''
-    print(path)
     with open(os.path.join(path,fileName),'r') as f:
         writen = f.read()
 

@@ -11,6 +11,7 @@ try :
     from settings.compiler import competitive_companion_port, parse_problem_with_template
     from settings.compiler import template_path , coder_name
     from system.get_time import digital_time
+    from data.get_template import get_template
 
 except Exception as e:
     print(e)
@@ -951,8 +952,14 @@ class Cp_setup:
                         cprint(f"{file_name} creation cancelled.",'red')
                         return
                 
-                with open(path,'r') as f:
-                    code = f.read()
+                if path == '$DEFAULT':
+                    if ext == 'py':
+                        code = get_template('py_template.txt')
+                    else :
+                        code = get_template('cpp_template.txt')
+                else :
+                    with open(path,'r') as f:
+                        code = f.read()
 
                 code = code.replace('$%CODER%$',coder_name)
                 code = code.replace('$%DATE_TIME%$',digital_time())
