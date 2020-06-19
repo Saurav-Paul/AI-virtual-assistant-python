@@ -952,17 +952,42 @@ class Cp_setup:
                         cprint(f"{file_name} creation cancelled.",'red')
                         return
                 
+                info_ase = False
+                if os.path.isfile('.info'):
+                    info_ase = True
+
                 if path == '$DEFAULT':
                     if ext == 'py':
-                        code = get_template('py_template.txt')
+                        if info_ase:
+                            code = get_template('py_template_info.txt')
+                        else :
+                            code = get_template('py_template.txt')
                     else :
-                        code = get_template('cpp_template.txt')
+                        if info_ase:
+                            code = get_template('cpp_template_info.txt')
+                        else :
+                            code = get_template('cpp_template.txt')
                 else :
                     with open(path,'r') as f:
                         code = f.read()
 
+                problem_name = '-X-'
+                problem_url = '-X-'
+
+                try :
+                    if info_ase :
+                        with open('.info','r') as f:
+                            info = f.read()
+                        info = json.loads(info)
+                        problem_name = info['name']
+                        problem_url = info['url']
+                except :
+                    pass
+
                 code = code.replace('$%CODER%$',coder_name)
                 code = code.replace('$%DATE_TIME%$',digital_time())
+                code = code.replace('$%PROBLEM_NAME%$',problem_name)
+                code = code.replace('$%PROBLEM_URL%$',problem_url)
 
                 with open(file_name,'w') as f:
                     f.write(code)
