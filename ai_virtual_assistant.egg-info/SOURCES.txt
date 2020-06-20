@@ -12,6 +12,7 @@ ai_virtual_assistant.egg-info/requires.txt
 ai_virtual_assistant.egg-info/top_level.txt
 data/__init__.py
 data/data.py
+data/get_template.py
 run/__init__.py
 run/cp_run.py
 run/main.py
