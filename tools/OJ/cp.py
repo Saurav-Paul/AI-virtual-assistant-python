@@ -12,7 +12,7 @@ try :
     from settings.compiler import template_path , coder_name
     from system.get_time import digital_time
     from data.get_template import get_template
-
+    from tools.run_program import if_run_type
 except Exception as e:
     print(e)
 
@@ -1396,6 +1396,8 @@ def cp_manager(msg):
     elif 'gen' in msg:
         obj = Cp_setup()
         obj.gen_py()
+    elif if_run_type(msg):
+        pass
     elif msg in help_keys:
         help()
     else :
