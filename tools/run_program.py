@@ -40,8 +40,12 @@ def run_prog(file_name , debug = False , com = False,no=1):
             try :
                 for i in range(no):
                     cprint(pt,'magenta')
-                    os.system(cmd_part[1])
+                    okk = os.system(cmd_part[1])
                     cprint(x,'magenta')
+                    if okk :
+                        cprint("Cancelled.",'red')
+                        cprint(x,'magenta')
+                        break
                 if com == False :
                     os.remove(ext[0])
             except:
@@ -55,8 +59,12 @@ def run_prog(file_name , debug = False , com = False,no=1):
             try :
                 for i in range(no):
                     cprint(x,'magenta')
-                    os.system(cmd)
+                    okk = os.system(cmd)
                     cprint(pt,'magenta')
+                    if okk :
+                        cprint("Cancelled.",'red')
+                        cprint(x,'magenta')
+                        break
             except:
                 cprint("Sorry sir can't run.",'red')
         else :

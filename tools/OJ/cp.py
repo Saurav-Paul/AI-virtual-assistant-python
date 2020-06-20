@@ -12,7 +12,7 @@ try :
     from settings.compiler import template_path , coder_name
     from system.get_time import digital_time
     from data.get_template import get_template
-
+    from tools.run_program import if_run_type
 except Exception as e:
     print(e)
 
@@ -1000,7 +1000,8 @@ class Cp_setup:
                 with open(file_name,'w') as f:
                     f.write(code)
                 # print(code)
-                cprint(f'{fName} created succussfully, sir. :D','green')
+                if parsingMode == False:
+                    cprint(f'{fName} created succussfully, sir. :D','green')
             except Exception as e:
                 # cprint(e,'red')
                 cprint("template path doesn't exist. Sorry sir.",'red')
@@ -1189,7 +1190,7 @@ class Cp_ext:
         except Exception as e:
             return ''
 
-    def create(self,problem):
+    def create(self,problem , cnt=0):
         # print("here")
         try :
             problem = self.rectify(problem)
@@ -1197,17 +1198,29 @@ class Cp_ext:
             # cprint(dic,'yellow')
 
             problem_name = dic['name']
-            contest_name = dic['group']
+            try :
+                contest_name = dic['group']
+            except :
+                contest_name = 'NULL'
             url = dic['url']
             # cprint(f'{problem_name} : {contest_name} : {url} ','cyan')
             base = os.getcwd()
             base_name = os.path.basename(base)
             # cprint(f'{base_name}','cyan')
-            if base_name != contest_name:
-                if not os.path.isdir(contest_name):
-                    os.mkdir(contest_name)
-                cprint(f"Folder '{contest_name}' is created. The problems will be parsed into this folder.",'green')
-                os.chdir(os.path.join(base,contest_name))
+            contest_path = os.path.join(base,contest_name)
+            if base_name != contest_name and contest_name != 'NULL':
+                if cnt == 0:
+                    if not os.path.isdir(contest_name):
+                        os.mkdir(contest_name)
+                        cprint(f" Folder {contest_name} is created.",'blue')
+                        info = '{"contest_name" : "$CONTEST" , "url" : "$URL"}'
+                        info = info.replace('$CONTEST',contest_name)
+                        info = info.replace('$URL',url)
+                        with open(os.path.join(contest_path,'.info'),'w') as f:
+                            f.write(info)
+                    cprint(f" All the problems will be parsed into {contest_name} folder.",'magenta')
+                os.chdir(contest_path)
+                
             
             # print(os.getcwd())
             if not os.path.isdir(problem_name):
@@ -1247,7 +1260,7 @@ class Cp_ext:
                     fout.write(case['output'])
             # cprint(result,'green')
             # print(info)
-            cprint(f'{problem_name} fetched successfully.','green')
+            cprint(f'  {problem_name} fetched successfully.','green')
             os.chdir(base)
 
         except Exception as e:
@@ -1284,13 +1297,13 @@ class Cp_ext:
                                 cnt += 1
                                 break
                             else:
-                                t = threading.Thread(target=self.create,args=(result,))
+                                t = threading.Thread(target=self.create,args=(result,cnt))
                                 t.start()
                                 
                 except :
                     ok = False
 
-        cprint(f'Total {cnt} problems fetched.','blue')
+        cprint(f' Total {cnt} problems is fetched.','blue')
 
 help_keys = ['-h','help']
 
@@ -1396,6 +1409,8 @@ def cp_manager(msg):
     elif 'gen' in msg:
         obj = Cp_setup()
         obj.gen_py()
+    elif if_run_type(msg):
+        pass
     elif msg in help_keys:
         help()
     else :
