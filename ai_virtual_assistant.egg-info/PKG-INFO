@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ai-virtual-assistant
-Version: 0.1.0
+Version: 0.1.1
 Summary: CLI virtual assitant for competitive programming
 Home-page: https://github.com/Saurav-Paul/AI-virtual-assistant-python
 Author: Saurav Paul
@@ -165,6 +165,8 @@ Description: # AI virtual assitant
         
         - $%CODER%$
         - $%DATE_TIME%$
+        - $%PROBLEM_NAME%$
+        - $%PROBLEM_URL%$
         
         $%CODER%$ will be replaced by your name. It can be specified in coder_name in config file. Otherwise just change boss name from config. Boss name will be automatically mirrored to the coder_name.
         

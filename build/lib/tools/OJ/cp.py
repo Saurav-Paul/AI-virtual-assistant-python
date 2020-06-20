@@ -921,7 +921,7 @@ class Cp_setup:
         except Exception as e:
             print(e)
             cprint("Sorry, Sir can't genarate automatically gen file. ")
-    def template(self,file_name='sol.cpp'):
+    def template(self,file_path='',file_name='sol.cpp',parsingMode=False):
         try :
             # print('Genarating template')
             from settings.compiler import template_path , coder_name
@@ -944,16 +944,24 @@ class Cp_setup:
             try :
                 # path = f"'{path}'"
                 # path = 't.cpp'
+                fName = file_name
+                info_path = '.info'
+                if file_path != '':
+                    file_name = os.path.join(file_path,file_name)
+                    info_path = os.path.join(file_path,info_path)
+                
                 if os.path.isfile(file_name):
-                    cprint(f"{file_name} already exist, do you want to replace it?(Y/N) :",'cyan',end='')
+                    if parsingMode:
+                        return
+                    cprint(f"{fName} already exist, do you want to replace it?(Y/N) :",'cyan',end='')
                     want = input()
                     want = want.lower()
                     if want !='y' and want!='yes':
-                        cprint(f"{file_name} creation cancelled.",'red')
+                        cprint(f"{fName} creation cancelled.",'red')
                         return
                 
                 info_ase = False
-                if os.path.isfile('.info'):
+                if os.path.isfile(info_path):
                     info_ase = True
 
                 if path == '$DEFAULT':
@@ -976,7 +984,7 @@ class Cp_setup:
 
                 try :
                     if info_ase :
-                        with open('.info','r') as f:
+                        with open(info_path,'r') as f:
                             info = f.read()
                         info = json.loads(info)
                         problem_name = info['name']
@@ -992,7 +1000,7 @@ class Cp_setup:
                 with open(file_name,'w') as f:
                     f.write(code)
                 # print(code)
-                cprint(f'{file_name} created succussfully, sir. :D','green')
+                cprint(f'{fName} created succussfully, sir. :D','green')
             except Exception as e:
                 # cprint(e,'red')
                 cprint("template path doesn't exist. Sorry sir.",'red')
@@ -1167,46 +1175,10 @@ class Cp_ext:
         try :
 
             
-            # print(template_path)
-            ext = file_name.rsplit(sep='.',maxsplit=1)
-            if(len(ext) == 1) :
-                ext = 'cpp'
-                file_name = file_name+'.cpp'
-            else :
-                ext = ext[1]
-            
-            if ext == 'cpp':
-                path = template_path['c++']
-            elif ext == 'py':
-                path = template_path['python']
-            else :
-                cprint('File format not supported. Currently only support c++ and python.','red')
-            try :
-                # path = f"'{path}'"
-                # path = 't.cpp'
-                if os.path.isfile(file_name):
-                    return
-
-                if os.path.isfile(path):
-                    with open(path,'r') as f:
-                        code = f.read()
-                else :
-                    code = ''
-
-                code = code.replace('$%CODER%$',coder_name)
-                code = code.replace('$%DATE_TIME%$',digital_time())
-                
-                with open(file_path+file_name,'w') as f:
-                    f.write(code)
-                # print(code)
-                # cprint(f'{file_name} created succussfully, sir. :D','green')
-            except Exception as e:
-                # print(e)
-                pass
-                return
+            obj_template = Cp_setup()
+            obj_template.template(file_path,file_name,parsingMode=True)
+            return
         except Exception as e:
-            # cprint(e,'red')
-            # cprint("Can't genarate  template.",'red')
             return        
 
     def rectify(self,s):
