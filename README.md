@@ -157,6 +157,8 @@ variable available,
 
 - $%CODER%$
 - $%DATE_TIME%$
+- $%PROBLEM_NAME%$
+- $%PROBLEM_URL%$
 
 $%CODER%$ will be replaced by your name. It can be specified in coder_name in config file. Otherwise just change boss name from config. Boss name will be automatically mirrored to the coder_name.
 

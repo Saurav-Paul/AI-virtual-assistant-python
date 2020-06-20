@@ -54,13 +54,8 @@ setup(
         'lxml',
         'online-judge-api-client',
         'online-judge-tools',
-        'pickle-mixin',
-        'ply',
         'plyer',
-        'psutil',
         'pyfiglet',
-        'python-Levenshtein',
-        'python-Levenshtein-wheels',
         'requests',
         'tcgen',
         'termcolor',
@@ -74,7 +69,7 @@ setup(
         'console_scripts': [
             'ai = run.run:start',
             'jarvis = run.run:start',
-            'Cp = run.run:cp_start',
+            'Cp = run.cp_run:cp_start',
             
         ],
     },

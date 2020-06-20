@@ -1,0 +1,7 @@
+"""
+      author:  $%CODER%$ 
+      created: $%DATE_TIME%$
+      Problem Name : $%PROBLEM_NAME%$
+      Problem Url : $%PROBLEM_URL%$
+
+"""
