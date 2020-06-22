@@ -830,7 +830,7 @@ class Config:
                 except Exception as e:
                     cprint(e)
             else :
-                cprint(" Ok, sir cancelled.")
+                cprint(" Ok, sir cancelled.",'red')
             
             cprint(len(pt)*'-','magenta')
             cprint(" Do you want to learn more ?(y/n) : ",'cyan',end='')
@@ -838,6 +838,8 @@ class Config:
 
             if confirm.lower() in self.confirm_keys :
                 ok = True
+            else :
+                cprint(" Cancelled." , 'red')
             
 
     def training_mode(self,no) :
