@@ -985,6 +985,8 @@ class Cp_setup:
                 problem_name = '-X-'
                 problem_url = '-X-'
 
+                problem_timeLimit = 'NULL'
+                problem_memoryLimit = 'NULL'
                 try :
                     if info_ase :
                         with open(info_path,'r') as f:
@@ -992,13 +994,18 @@ class Cp_setup:
                         info = json.loads(info)
                         problem_name = info['name']
                         problem_url = info['url']
+                        problem_timeLimit = info['timeLimit']
+                        problem_memoryLimit = info['memoryLimit']
                 except :
                     pass
+
 
                 code = code.replace('$%CODER%$',coder_name)
                 code = code.replace('$%DATE_TIME%$',digital_time())
                 code = code.replace('$%PROBLEM_NAME%$',problem_name)
                 code = code.replace('$%PROBLEM_URL%$',problem_url)
+                code = code.replace('$%TIMELIMIT%$',problem_timeLimit)
+                code = code.replace('$%MEMORYLIMIT%$',problem_memoryLimit)
 
                 with open(file_name,'w') as f:
                     f.write(code)
@@ -1199,13 +1206,20 @@ class Cp_ext:
             problem = self.rectify(problem)
             dic = json.loads(problem)
             # cprint(dic,'yellow')
-
             problem_name = dic['name']
             try :
                 contest_name = dic['group']
             except :
                 contest_name = 'NULL'
             url = dic['url']
+            problem_timeLimit = 'NULL'
+            problem_memoryLimit = 'NULL'
+            try :
+                problem_timeLimit = str(dic['timeLimit']) + ' sec'
+                problem_memoryLimit = str(dic['memoryLimit']) + ' MB'
+            except Exception as e:
+                cprint(e,'red')
+                pass
             # cprint(f'{problem_name} : {contest_name} : {url} ','cyan')
             base = os.getcwd()
             base_name = os.path.basename(base)
@@ -1230,10 +1244,12 @@ class Cp_ext:
                 os.mkdir(problem_name)
                 # print("problem created")
             
-            info = '{"name" : "$NAME" , "url" : "$URL" }'
+            info = '{"name" : "$NAME" , "url" : "$URL","timeLimit" : "$timeLimit" , "memoryLimit":"$memoryLimit"}'
 
             info = info.replace('$NAME',problem_name)
             info = info.replace('$URL',url)
+            info = info.replace('$memoryLimit',problem_memoryLimit)
+            info = info.replace('$timeLimit',problem_timeLimit)
 
             path = os.path.join(os.getcwd(),problem_name,"")
             # print(path)
