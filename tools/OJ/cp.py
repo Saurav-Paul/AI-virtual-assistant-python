@@ -1338,40 +1338,40 @@ def help():
     cprint(pt,'magenta')
     print()
 
-    cprint('\t-> parse : ','yellow',end='')
+    cprint('  -> parse : ','yellow',end='')
     cprint('To parse problem or contest via competitive companion extension','cyan')
 
-    cprint('\t-> listen : ','yellow',end='')
+    cprint('  -> listen : ','yellow',end='')
     cprint('To parse problem or contest via competitive companion extension','cyan')
 
-    cprint('\t-> test : ','yellow',end='')
+    cprint('  -> test : ','yellow',end='')
     cprint('To test code against testcases','cyan')
 
-    cprint('\t-> add : ','yellow',end='')
+    cprint('  -> add : ','yellow',end='')
     cprint('To add testcase','cyan')
 
-    cprint('\t-> brute : ','yellow',end='')
+    cprint('  -> brute : ','yellow',end='')
     cprint('To bruteforce solution','cyan')
 
-    cprint('\t-> gen : ','yellow',end='')
+    cprint('  -> gen : ','yellow',end='')
     cprint('To generate tescase generator','cyan')
 
-    cprint('\t-> setup : ','yellow',end='')
+    cprint('  -> setup : ','yellow',end='')
     cprint('To generate sol.cpp , brute.cpp and tescase generator','cyan')
 
-    cprint('\t-> -t "filename": ','yellow',end='')
+    cprint('  -> -t "filename": ','yellow',end='')
     cprint('To generate "filename" from template','cyan')
 
-    cprint('\t-> login: ','yellow',end='')
+    cprint('  -> login: ','yellow',end='')
     cprint('To login into online judge','cyan')
 
-    cprint('\t-> submit: ','yellow',end='')
+    cprint('  -> submit: ','yellow',end='')
     cprint('To submit problem','cyan')
 
-    cprint('\t-> problem : ','yellow',end='')
+    cprint('  -> problem : ','yellow',end='')
     cprint('To parse problem manually','cyan')
 
-    cprint('\t-> contest : ','yellow',end='')
+    cprint('  -> contest : ','yellow',end='')
     cprint('To parse contest manually','cyan')
 
     print()
