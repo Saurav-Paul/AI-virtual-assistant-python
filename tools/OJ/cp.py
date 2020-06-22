@@ -910,20 +910,20 @@ class Cp_setup:
             elif os.path.isdir('test'):
                 case_folder = 'test'
             else :
-                cprint("testcases folder not available, Can't generate gen.py file. :(",'red')
+                cprint(" testcases folder not available, Can't generate gen.py file. :(",'red')
                 return
             cmd = ['python3','-m','tcgen','--path',case_folder]
             result = self.sub_process(cmd)
             # print('result is \n',result)
             if result == '':
-                cprint("Can't generated gen file automatically. Sorry sir. :( ",'red')
+                cprint(" Can't generated gen file automatically. Sorry sir. :( ",'red')
                 return
             with open('gen.py','w') as f:
                 f.write(result)
-            cprint('gen.py genarated successfully, sir. :D','green')
+            cprint(' gen.py genarated successfully, sir. :D','green')
         except Exception as e:
             print(e)
-            cprint("Sorry, Sir can't genarate automatically gen file. ")
+            cprint(" Sorry, Sir can't genarate automatically gen file. ")
     def template(self,file_path='',file_name='sol.cpp',parsingMode=False):
         try :
             # print('Genarating template')
@@ -943,7 +943,7 @@ class Cp_setup:
             elif ext == 'py':
                 path = template_path['python']
             else :
-                cprint('File format not supported. Currently only support c++ and python.','red')
+                cprint(' File format not supported. Currently only support c++ and python.','red')
             try :
                 # path = f"'{path}'"
                 # path = 't.cpp'
@@ -956,11 +956,11 @@ class Cp_setup:
                 if os.path.isfile(file_name):
                     if parsingMode:
                         return
-                    cprint(f"{fName} already exist, do you want to replace it?(Y/N) :",'cyan',end='')
+                    cprint(f" {fName} already exist, do you want to replace it?(Y/N) :",'cyan',end='')
                     want = input()
                     want = want.lower()
                     if want !='y' and want!='yes':
-                        cprint(f"{fName} creation cancelled.",'red')
+                        cprint(f" {fName} creation cancelled.",'red')
                         return
                 
                 info_ase = False
@@ -1011,7 +1011,7 @@ class Cp_setup:
                     f.write(code)
                 # print(code)
                 if parsingMode == False:
-                    cprint(f'{fName} created succussfully, sir. :D','green')
+                    cprint(f' {fName} created succussfully, sir. :D','green')
             except Exception as e:
                 # cprint(e,'red')
                 cprint("template path doesn't exist. Sorry sir.",'red')
@@ -1024,21 +1024,27 @@ class Cp_setup:
     def brute(self,file_name='brute.cpp'):
         try :
             if os.path.isfile(file_name):
-                cprint(f"{file_name} already exist, do you want to replace it?(Y/N) :",'cyan',end='')
+                cprint(f" {file_name} already exist, do you want to replace it?(Y/N) :",'cyan',end='')
                 want = input()
                 want = want.lower()
                 if want !='y' and want!='yes':
-                    cprint(f"{file_name} creation cancelled.",'red')
+                    cprint(f" {file_name} creation cancelled.",'red')
                     return
             with open(file_name,'w') as f:
                 f.write('/* Bruteforce */\n')
-            cprint(f'{file_name} created successfully, sir. :D','green')
+            cprint(f' {file_name} created successfully, sir. :D','green')
         except :
-            cprint(f"Cant't create {file_name}",'red')
+            cprint(f" Cant't create {file_name}",'red')
 
-    def setup(self):
-        self.template()
-        self.brute()
+    def setup(self,t_name = 'sol.cpp',brute_name='brute.cpp'):
+        if not os.path.isfile(t_name) :
+            self.template()
+        else :
+            cprint(f" {t_name} exists.",'green')
+        if not os.path.isfile(brute_name):
+            self.brute()
+        else :
+            cprint(f" {brute_name} exists.",'green')
         self.gen_py()
         pass         
 
