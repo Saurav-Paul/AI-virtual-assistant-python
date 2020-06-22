@@ -23,7 +23,7 @@ def check_done(msg):
 def main(get='',orginal_path='') :
 
     logger.debug('Bot starts at ' + str(os.getcwd()))
-    asci_banner(START_SCREEN_NAME)
+    asci_banner('   '+START_SCREEN_NAME)
     if get == '':
         speak('Hello sir, how can I help you?')
         while True :

@@ -10,7 +10,7 @@ def cp_start():
         from system.screen_text import asci_banner
         from tools.OJ.cp import cp_manager
         from settings.settings import START_SCREEN_NAME
-        asci_banner(START_SCREEN_NAME)
+        asci_banner('   '+START_SCREEN_NAME)
         total = len(sys.argv)
         lt = list(sys.argv)
         lt = lt[1:]
