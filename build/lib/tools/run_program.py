@@ -30,8 +30,11 @@ def run_prog(file_name , debug = False , com = False,no=1):
             cmd = cmd.replace('{executable}',ext[0])
             cmd_part = cmd.split(sep='&&')
             with tqdm(total=1.0,desc='Compilation',initial=.25) as pbar:
-                os.system(cmd_part[0])
+                okk = os.system(cmd_part[0])
                 pbar.update(.75)
+            if okk != 0 :
+                cprint("Compilation Error.",'red')
+                return
             pt = ('-'*23+file_name+'-'*22+'\n')
             x = ('\n'+'-'*23+'-'*len(file_name)+'-'*22)
             if not os.path.isfile(ext[0]):

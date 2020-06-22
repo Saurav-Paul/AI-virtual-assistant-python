@@ -41,7 +41,8 @@ def wiki_summary(msg,no = 2):
     key_msg = wiki_string(msg)
     logger.info("After string process : "+key_msg)
     msg = make_wiki_key(key_msg)
-    logger.info("Wiki key : "+msg)
+    
+    logger.info("Wiki key : "+str(msg))
 
     matched = is_matched(key_msg,msg, need = 75)
     logger.info("Matched : " + str(matched))

@@ -125,7 +125,10 @@ class Cp_my_tester:
         if type == 'cpp':
             cmd = f"g++ '{file_name}' -o test.out"
             t = time.time()
-            os.system(cmd)
+            okk = os.system(cmd)
+            if okk != 0:
+                cprint("Compilation Error, sir.",'red')
+                return
             t = time.time() - t
             t = '{:.4f}'.format(t)
             pt = (f' #  Compilation time {t} s')

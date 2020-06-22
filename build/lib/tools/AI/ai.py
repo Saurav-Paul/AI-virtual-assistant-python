@@ -21,6 +21,7 @@ try :
     from settings.config import if_config_type
     from tools.credits import if_credit_type
     from system.path import getpath
+    from settings.config import train_path
     import os
     import time
 except Exception as e:
@@ -144,6 +145,17 @@ def ai(msg,orginal_path) :
                     command_sep()
                     reply = 'done sir'
                 else :
+                    try :
+                        f = train_path 
+                        history = JsonManager.json_read(f)
+                        for line in history:
+                            if is_matched(msg,line,95):
+                                logging.info('You have trained this before.')
+                                return history[line]
+        
+                    except :
+                        logger.info("Can't read trained data")
+                    
                     t = time.time()
                     reply = ask_question(msg)
                     t = time.time()-t
