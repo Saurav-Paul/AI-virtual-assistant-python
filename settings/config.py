@@ -5,15 +5,17 @@ from termcolor import cprint
 from settings.settings import bot as bt
 from settings.settings import interaction_setting as its
 from settings.settings import update_bot
+from tools.json_manager import JsonManager as JM
 
 config_keys = ['-config','-settings']
 conf_path = os.path.join(getpath(__file__),'settings.conf')
+train_path = os.path.join(getpath(__file__),'.trained')
 
 yes = ['yes','y']
 
 class Config:
     obj = CM()
-    lt = ['Bot','Interaction','Competitive Programming','Features Installation']
+    lt = ['Bot','Interaction','Competitive Programming','Features Installation','Training Mode']
     cp = [
         'Coder Name',
         'Competitive companion port number',
@@ -21,6 +23,7 @@ class Config:
         'Template Path',
         'Compiler'
     ]
+    confirm_keys = ['y','yes','ok']
     def change_gender(self):
         pt = '-'*22 + 'Gender Change' +'-'*22
         cprint(pt,'magenta')
@@ -795,6 +798,76 @@ class Config:
             else :
                 ok = True
                 cprint(" You have selected wrong index. Please try again.",'red')
+    
+    def train_answer(self):
+        
+        ok = True 
+        while ok :
+            ok = False
+            print()
+            cprint(" Enter the question : ",'cyan',end='')
+            question = input()
+            cprint(" Enter the answer : ",'cyan',end='')
+            answer = input()
+            print()
+            pt = '-'*18+"Question-Answer"+'-'*18
+            cprint(pt,"magenta")
+            print()
+            cprint(" Q. "+question,'yellow')
+            cprint(" Answer : "+answer,'green')
+            print()
+            cprint(len(pt)*'-','magenta')
+
+            cprint(" Do you want to learn it ?(y/n) : ",'cyan',end='')
+            confirm = input()
+
+            if confirm.lower() in self.confirm_keys :
+                try :
+                    dic = JM.json_read(train_path)
+                    dic[question] = answer
+                    JM.json_write(train_path,dic)
+                    cprint(" Learned successfully.",'green')
+                except Exception as e:
+                    cprint(e)
+            else :
+                cprint(" Ok, sir cancelled.")
+            
+            cprint(len(pt)*'-','magenta')
+            cprint(" Do you want to learn more ?(y/n) : ",'cyan',end='')
+            confirm = input()
+
+            if confirm.lower() in self.confirm_keys :
+                ok = True
+            
+
+    def training_mode(self,no) :
+        pt = 22*'-'+self.lt[no] + 22*'-'
+        cprint(pt,'magenta')
+        print()
+        cprint(" All the available settings are given below,",'yellow')
+        print()
+        options = [
+            'Train Answer',
+        ] 
+        for i,w in enumerate(options):
+            cprint(f'  {i+1}) {w}','blue')
+        cprint('  0) Cancel','red')
+        print()
+        ok = True
+
+        while ok:
+            ok = False
+            cprint(" Enter the index number : ",'cyan',end='')
+            no = int(input())
+            if no == 0:
+                cprint(" Operation cancelled.",'red')
+                return
+            elif no == 1:
+                cprint(f' You have selected {options[no-1]} .','yellow')
+                self.train_answer()
+            else :
+                ok = True
+                cprint(" You have selected wrong index. Please try again.",'red')
 
 
     def config_list(self):
@@ -831,6 +904,9 @@ class Config:
                 elif no == 4 :
                     cprint(f' You have selected {self.lt[no-1]} .','yellow')
                     self.features(no-1)
+                elif no == 5 :
+                    cprint(f' You have selected {self.lt[no-1]} .','yellow')
+                    self.training_mode(no-1)
                 elif no == 69:
                     self.dev_mode()
                 else :
