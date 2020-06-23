@@ -1299,7 +1299,8 @@ class Cp_ext:
         print()
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.bind((self.HOST,self.PORT))
-            cprint("Listening (Click competitive companion extension)....",'yellow')
+            cprint(" Listening (Click competitive companion extension)....",'yellow')
+            print()
             timeout = 60
             cnt = 0
             ok = True
@@ -1311,24 +1312,27 @@ class Cp_ext:
                     conn , addr = s.accept()
                     with conn:
                         # cprint("Connected...",'green')
+                        problem_json = ''
                         while True:
                             data = conn.recv(1024)
                             result = (data.decode('utf-8'))
                             # result = self.rectify(result)
                             
-                            # cprint(result,'cyan')
-
                             if not data :
                                 cnt += 1
+                                # cprint(problem_json,'cyan')
+                                t = threading.Thread(target=self.create,args=(problem_json,cnt))
+                                t.start()
                                 break
                             else:
-                                t = threading.Thread(target=self.create,args=(result,cnt))
-                                t.start()
-                                
+                                problem_json += result
+                                pass
+                               
                 except :
                     ok = False
 
-        cprint(f' Total {cnt} problems is fetched.','blue')
+        print()
+        cprint(f' # Total {cnt} problems is fetched.','blue')
 
 help_keys = ['-h','help']
 
