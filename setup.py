@@ -42,7 +42,7 @@ setup(
     include_package_data=True,
     package_data = {
     # If any package contains *.txt or *.rst files, include them:
-    '': ['*.conf', '*.json', '*.txt', '.learnt'],
+    '': ['*.conf', '*.json', '*.txt', '.learnt','.trained'],
     },
 
 

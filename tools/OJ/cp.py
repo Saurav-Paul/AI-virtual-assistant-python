@@ -1231,6 +1231,8 @@ class Cp_ext:
             base_name = os.path.basename(base)
             # cprint(f'{base_name}','cyan')
             contest_path = os.path.join(base,contest_name)
+            # cprint(f'{contest_path}','yellow')
+            # cprint(f'cnt = {cnt}','yellow')
             if base_name != contest_name and contest_name != 'NULL':
                 if cnt == 0:
                     if not os.path.isdir(contest_name):
@@ -1241,11 +1243,10 @@ class Cp_ext:
                         info = info.replace('$URL',url)
                         with open(os.path.join(contest_path,'.info'),'w') as f:
                             f.write(info)
-                    cprint(f" All the problems will be parsed into {contest_name} folder.",'magenta')
+                    cprint(f" All the problems will be parsed into '{contest_name}' folder.\n",'magenta')
                 os.chdir(contest_path)
-                
-            
-            # print(os.getcwd())
+           
+            # cprint(os.getcwd(),'red')
             if not os.path.isdir(problem_name):
                 os.mkdir(problem_name)
                 # print("problem created")
@@ -1289,7 +1290,7 @@ class Cp_ext:
             os.chdir(base)
 
         except Exception as e:
-            print(e)
+            cprint(e,'red')
             cprint("Can't fetch.",'red')
        
 
@@ -1299,7 +1300,8 @@ class Cp_ext:
         print()
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
             s.bind((self.HOST,self.PORT))
-            cprint("Listening (Click competitive companion extension)....",'yellow')
+            cprint(" Listening (Click competitive companion extension)....",'yellow')
+            print()
             timeout = 60
             cnt = 0
             ok = True
@@ -1311,24 +1313,27 @@ class Cp_ext:
                     conn , addr = s.accept()
                     with conn:
                         # cprint("Connected...",'green')
+                        problem_json = ''
                         while True:
                             data = conn.recv(1024)
                             result = (data.decode('utf-8'))
                             # result = self.rectify(result)
                             
-                            # cprint(result,'cyan')
-
                             if not data :
+                                # cprint(problem_json,'cyan')
+                                t = threading.Thread(target=self.create,args=(problem_json,cnt))
+                                t.start()
                                 cnt += 1
                                 break
                             else:
-                                t = threading.Thread(target=self.create,args=(result,cnt))
-                                t.start()
-                                
+                                problem_json += result
+                                pass
+                               
                 except :
                     ok = False
 
-        cprint(f' Total {cnt} problems is fetched.','blue')
+        print()
+        cprint(f' # Total {cnt} problems is fetched.','blue')
 
 help_keys = ['-h','help']
 
