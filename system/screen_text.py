@@ -29,7 +29,7 @@ def command_sep():
     cprint(x,'magenta')
 
 
-def clear_screen(): 
+def clear_screen(start = True): 
     from settings.settings import START_SCREEN_NAME
     # for windows 
     if name == 'nt': 
@@ -38,7 +38,8 @@ def clear_screen():
     # for mac and linux(here, os.name is 'posix') 
     else: 
         _ = system('clear') 
-    asci_banner(START_SCREEN_NAME)
+    if start:
+        asci_banner(START_SCREEN_NAME)
   
 
 

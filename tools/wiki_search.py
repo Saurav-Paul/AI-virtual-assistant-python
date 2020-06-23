@@ -44,6 +44,9 @@ def wiki_summary(msg,no = 2):
     
     logger.info("Wiki key : "+str(msg))
 
+    key_msg = str(key_msg)
+    msg = str(msg)
+    
     matched = is_matched(key_msg,msg, need = 75)
     logger.info("Matched : " + str(matched))
     if not matched:
