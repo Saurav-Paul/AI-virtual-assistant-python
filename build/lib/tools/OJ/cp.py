@@ -1231,6 +1231,8 @@ class Cp_ext:
             base_name = os.path.basename(base)
             # cprint(f'{base_name}','cyan')
             contest_path = os.path.join(base,contest_name)
+            # cprint(f'{contest_path}','yellow')
+            # cprint(f'cnt = {cnt}','yellow')
             if base_name != contest_name and contest_name != 'NULL':
                 if cnt == 0:
                     if not os.path.isdir(contest_name):
@@ -1241,11 +1243,10 @@ class Cp_ext:
                         info = info.replace('$URL',url)
                         with open(os.path.join(contest_path,'.info'),'w') as f:
                             f.write(info)
-                    cprint(f" All the problems will be parsed into {contest_name} folder.",'magenta')
+                    cprint(f" All the problems will be parsed into '{contest_name}' folder.\n",'magenta')
                 os.chdir(contest_path)
-                
-            
-            # print(os.getcwd())
+           
+            # cprint(os.getcwd(),'red')
             if not os.path.isdir(problem_name):
                 os.mkdir(problem_name)
                 # print("problem created")
@@ -1319,10 +1320,10 @@ class Cp_ext:
                             # result = self.rectify(result)
                             
                             if not data :
-                                cnt += 1
                                 # cprint(problem_json,'cyan')
                                 t = threading.Thread(target=self.create,args=(problem_json,cnt))
                                 t.start()
+                                cnt += 1
                                 break
                             else:
                                 problem_json += result
