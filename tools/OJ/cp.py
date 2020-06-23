@@ -1290,7 +1290,7 @@ class Cp_ext:
             os.chdir(base)
 
         except Exception as e:
-            print(e)
+            cprint(e,'red')
             cprint("Can't fetch.",'red')
        
 
