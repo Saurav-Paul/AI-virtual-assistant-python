@@ -34,7 +34,6 @@ The config can be open by the given command,
 - [x] [login online judge](#login-and-submit-to-online-judge)
 - [x] [submit code](#Login-and-Submit-to-online-Judge)
 - [x] [Parse contest](#parsing-contest)
-<!-- - [ ] parse contest -->
   
 ## Other Features
 
@@ -51,19 +50,6 @@ The config can be open by the given command,
 - [x] [learn from answer](#)
 - [x] [download files](#download-files)
 - [x] [access from anywhere](#)
-<!-- - [ ] tell to remember something
-- [ ] download youtube video
-- [ ] arrange files -->
-<!-- - [ ] coding environment
-- [ ] play game
-- [ ] cheak weather
-- [ ] todo_function 
-- [ ] gmail client
-- [ ] git 
-- [ ] system update && upgrade
-- [ ] Search facility -->
-
-
 
 ---
 
@@ -77,21 +63,30 @@ The config can be open by the given command,
 Any python or c++ files from the current directory can be run using one command. The command is given below,
 > jarvis -r "file_name"
 
+or,
+
+> Cp -r "file_name"
+
 If you don't specify the file_name, it will list all the available python and c++ files in the current directory and you have to choose.
 
 You can run in debug mode. Debug mode is running C++ file with custom flags. The command for running in debug mode is given below,
 
-> jarvis -r -d
+> Cp -r -d
 
-If you want to run the program more than one time you can do that. The command for running more than one time is given below,
+If you want to run the program more than one time you can do that. I thing this is one of the useful command because it helps to check mulitple tests in just one command and one compilation , that saves time. The command for running more than one time is given below,
 
-> jarvis -r -'number of times'
+> Cp -r -'number of times'
 
 If you want to keep executable file after running, you can use '-c' command,
 
 An example is given below,
 
-> jarvis -r -cd -3 'file_name'
+> Cp -r -c -3 'file_name'
+
+with debug,
+
+
+> Cp -r -cd -3 'file_name'
 
 it will run jarvis in debug mode and it will run 3 times. And after execution, it will keep the executable file.
 
