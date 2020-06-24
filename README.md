@@ -7,11 +7,11 @@ It can give voice reply and take your voice command. You can turn off or on thes
 
 For installing write the given commands,
 
-> pip install wheel
+> pip3 install wheel
 
 and
 
-> pip install ai-virtual-assistant
+> pip3 install ai-virtual-assistant
 
 
 I recommand after installing checkout the config file.
@@ -440,13 +440,19 @@ To open config write the following command,
 
 # Installation
 
+Pre-requirements :
+
+1. Python-3.5+
+2. Pip3
+
+
 For installing write the given commands,
 
-> pip install wheel
+> pip3 install wheel
 
 and 
 
-> pip install ai-virtual-assistant
+> pip3 install ai-virtual-assistant
 
 
 I recommand after installing checkout the config file.
