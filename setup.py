@@ -70,6 +70,7 @@ setup(
             'ai = run.run:start',
             'jarvis = run.run:start',
             'Cp = run.cp_run:cp_start',
+            'CP = run.cp_run:cp_start',
             
         ],
     },
