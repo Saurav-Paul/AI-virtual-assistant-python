@@ -1290,7 +1290,7 @@ class Cp_ext:
             os.chdir(base)
 
         except Exception as e:
-            print(e)
+            cprint(e,'red')
             cprint("Can't fetch.",'red')
        
 
@@ -1321,6 +1321,8 @@ class Cp_ext:
                             
                             if not data :
                                 # cprint(problem_json,'cyan')
+                                if problem_json == '':
+                                    break
                                 t = threading.Thread(target=self.create,args=(problem_json,cnt))
                                 t.start()
                                 cnt += 1

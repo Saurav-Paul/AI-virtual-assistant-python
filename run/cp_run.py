@@ -1,7 +1,7 @@
-
-
+from settings._first_load_ import check_if_first_time
 import sys , os
 from termcolor import cprint
+
 
 def cp_start():
 

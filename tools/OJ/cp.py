@@ -1321,6 +1321,8 @@ class Cp_ext:
                             
                             if not data :
                                 # cprint(problem_json,'cyan')
+                                if problem_json == '':
+                                    break
                                 t = threading.Thread(target=self.create,args=(problem_json,cnt))
                                 t.start()
                                 cnt += 1
