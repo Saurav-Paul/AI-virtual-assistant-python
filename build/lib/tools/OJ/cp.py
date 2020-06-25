@@ -1221,7 +1221,7 @@ class Cp_ext:
             problem_timeLimit = 'NULL'
             problem_memoryLimit = 'NULL'
             try :
-                problem_timeLimit = str(dic['timeLimit']) + ' sec'
+                problem_timeLimit = str(dic['timeLimit']) + ' ms'
                 problem_memoryLimit = str(dic['memoryLimit']) + ' MB'
             except Exception as e:
                 cprint(e,'red')

@@ -1,7 +1,6 @@
 LICENSE.txt
 MANIFEST.in
 README.md
-req.txt
 requirements.txt
 setup.py
 ai_virtual_assistant.egg-info/PKG-INFO

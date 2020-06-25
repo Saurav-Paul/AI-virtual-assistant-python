@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ai-virtual-assistant
-Version: 0.1.9
+Version: 0.2.1
 Summary: CLI virtual assitant for competitive programming
 Home-page: https://github.com/Saurav-Paul/AI-virtual-assistant-python
 Author: Saurav Paul
@@ -15,11 +15,11 @@ Description: # AI virtual assitant
         
         For installing write the given commands,
         
-        > pip install wheel
+        > pip3 install wheel
         
         and
         
-        > pip install ai-virtual-assistant
+        > pip3 install ai-virtual-assistant
         
         
         I recommand after installing checkout the config file.
@@ -448,13 +448,19 @@ Description: # AI virtual assitant
         
         # Installation
         
+        Pre-requirements :
+        
+        1. Python-3.5+
+        2. Pip3
+        
+        
         For installing write the given commands,
         
-        > pip install wheel
+        > pip3 install wheel
         
         and 
         
-        > pip install ai-virtual-assistant
+        > pip3 install ai-virtual-assistant
         
         
         I recommand after installing checkout the config file.
