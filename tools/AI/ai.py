@@ -1,7 +1,7 @@
 try :
     from tools.assistant import ask_question
     from tools.AI.data import data , youtube , wiki , google , youtube_play , goto_keys  
-    from tools.AI.data import install_keys , calc_keys , should_not_learn
+    from tools.AI.data import install_keys , calc_keys , should_not_learn , version_keys
     from tools.wiki_search import wiki_search 
     from settings.logs import *
     from tools.browser.search import *
@@ -35,6 +35,16 @@ def check(msg,mp,need = 90):
     return False
 
 
+def version_type(msg) :
+    try :
+        if msg in version_keys :
+            from system.__about__ import __version__
+            x = "Current version is : "+ __version__
+            return (True,x)
+        return (False,'')
+    except: 
+        return (False,'')
+
 def rep(msg,mp):
     msg = msg.lower()
     # for key in mp :
@@ -58,6 +68,9 @@ def ai(msg,orginal_path) :
     msg = msg.replace(bot['name'].capitalize(),'')
     reply = "I don't know what to do, sir ."
     # print('you said ' , msg, bot['name'])
+    is_type = version_type(msg)
+    if is_type[0]:
+        return is_type[1]
     if if_cp_type(msg):
         return 'Good luck sir.'
     if if_config_type(msg):
