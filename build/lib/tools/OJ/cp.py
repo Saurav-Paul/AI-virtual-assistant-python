@@ -8,6 +8,7 @@ try :
     from tqdm import tqdm
     import threading
     import socket
+    import getpass
     from settings.compiler import competitive_companion_port, parse_problem_with_template
     from settings.compiler import template_path , coder_name
     from system.get_time import digital_time
@@ -365,8 +366,7 @@ class Cp_login:
             oj = input()
             cprint('Enter your username : ','cyan',end='')
             username = input()
-            cprint('Enter your password : ','cyan',end='')
-            password = input()
+            password = getpass.getpass(prompt='Enter your password : ')
             cmd = "USERNAME=$USERNAME PASSWORD=$PASS oj-api login-service " + oj + '> .status'
             cmd = cmd.replace("$USERNAME",username) 
             cmd = cmd.replace("$PASS",password) 
