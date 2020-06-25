@@ -70,8 +70,8 @@ def speed_up():
     s =  """ Packages are need to install,\n\n\t1)python-Levenshtein-wheels\n\t2)python-Levenshtein\n\n If you face any problem, install them manually.\n"""
     cprint(s,'yellow')
 
-    os.system("pip install python-Levenshtein-wheels")
-    os.system("pip install python-Levenshtein")
+    os.system("pip3 install python-Levenshtein-wheels")
+    os.system("pip3 install python-Levenshtein")
 
     print()
     cprint('-'*len(pt),'magenta')
