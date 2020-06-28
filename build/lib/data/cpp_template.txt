@@ -1,0 +1,15 @@
+
+/**
+ *    author:  $%CODER%$ 
+ *    created: $%DATE_TIME%$
+**/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+
+	
+
+    return 0;
+}

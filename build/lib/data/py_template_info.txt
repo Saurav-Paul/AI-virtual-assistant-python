@@ -1,0 +1,9 @@
+"""
+      author        : $%CODER%$ 
+      created       : $%DATE_TIME%$
+      Problem Name  : $%PROBLEM_NAME%$
+      Problem Url   : $%PROBLEM_URL%$
+      Problem Limit : $%TIMELIMIT%$ , $%MEMORYLIMIT%$
+      Problem Url   : $%PROBLEM_URL%$
+      
+"""
