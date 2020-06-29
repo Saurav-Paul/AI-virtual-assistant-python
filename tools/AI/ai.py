@@ -90,16 +90,6 @@ def ai(msg,orginal_path) :
                     return reply
             # logger.info('Not found in common data')
             # from history
-            try :
-                f = getpath(__file__)+'.learnt'
-                history = JsonManager.json_read(f)
-                for line in history:
-                    if is_matched(msg,line,95):
-                        logging.info('Learnt this before')
-                        return history[line]
-
-            except :
-                logging.error("Can't read history file")
             if(check(msg,['change dir','change directory','chdir','-cd'],100)):
                 # print(os.getcwd())
                 cprint('Enter the path: ','cyan',end='')
@@ -159,8 +149,19 @@ def ai(msg,orginal_path) :
                     reply = 'done sir'
                 else :
                     try :
-                        f = train_path 
+                        f = getpath(__file__)+'.learnt'
                         history = JsonManager.json_read(f)
+                        for line in history:
+                            if is_matched(msg,line,95):
+                                logging.info('Learnt this before')
+                                return history[line]
+        
+                    except :
+                        logging.error("Can't read history file")
+        
+                    try :
+                        ft = train_path 
+                        history = JsonManager.json_read(ft)
                         for line in history:
                             if is_matched(msg,line,95):
                                 logging.info('You have trained this before.')
