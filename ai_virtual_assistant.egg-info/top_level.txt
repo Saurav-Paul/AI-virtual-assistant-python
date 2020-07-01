@@ -1,5 +1,0 @@
-data
-run
-settings
-system
-tools
