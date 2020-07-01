@@ -1,6 +1,0 @@
-[console_scripts]
-CP = run.cp_run:cp_start
-Cp = run.cp_run:cp_start
-ai = run.run:start
-jarvis = run.run:start
-
