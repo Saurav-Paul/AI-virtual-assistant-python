@@ -27,7 +27,7 @@ def speak_voice_pyttsx3(msg):
         engine.say(msg)
         engine.runAndWait()
     except Exception as e:
-        logger_info(str(e))
+        logger.info(str(e))
 
 def speak_voice_gtts(sentence):
     """" This function takes a text sentence and in return it will speak that sentence.

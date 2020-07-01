@@ -1302,7 +1302,7 @@ class Cp_ext:
             s.bind((self.HOST,self.PORT))
             cprint(" Listening (Click competitive companion extension)....",'yellow')
             print()
-            timeout = 60
+            timeout = 1000
             cnt = 0
             ok = True
             while ok:

@@ -909,7 +909,7 @@ class Config:
                 elif no == 5 :
                     cprint(f' You have selected {self.lt[no-1]} .','yellow')
                     self.training_mode(no-1)
-                elif no == 69:
+                elif no == 75:
                     self.dev_mode()
                 else :
                     ok = True
