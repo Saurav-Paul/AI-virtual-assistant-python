@@ -49,15 +49,11 @@ def run_prog(file_name, debug=False, com=False, no=1):
                         cprint("Cancelled.", 'red')
                         cprint(x, 'magenta')
                         break
-
-                    text = "Press enter to run again..."
-                    cprint(text, 'yellow', end='')
-
-                    confirm = input()
-
-                    #                     if confirm.lower() in donot_want:
-                    #                         break
-                    cprint(x, 'magenta')
+                    if no - i > 1:
+                        text = "Press enter to run again..."
+                        cprint(text, 'yellow', end='')
+                        confirm = input()
+                        cprint(x, 'magenta')
 
                 if com == False:
                     os.remove(ext[0])
@@ -79,10 +75,10 @@ def run_prog(file_name, debug=False, com=False, no=1):
                         cprint(x, 'magenta')
                         break
 
-                    text = "Press enter to run again..."
-                    cprint(text, 'yellow', end='')
-
-                    confirm = input()
+                    if no - i > 1:
+                        text = "Press enter to run again..."
+                        cprint(text, 'yellow', end='')
+                        confirm = input()
 
             except:
                 cprint("Sorry sir can't run.", 'red')
