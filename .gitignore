@@ -1,4 +1,6 @@
 __pycache__
+build
+ai_virtual_assistant.egg-info
 x.py 
 test.py
 *.log

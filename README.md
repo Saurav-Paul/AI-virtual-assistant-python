@@ -1,5 +1,4 @@
-# AI virtual assitant 
-
+# AI virtual assitant
 
 It is a terminal-based virtual assistant especially made for competitive programming. It has a lot of features, including running python or c++ file, parsing problem set with test cases and test against all the cases in one click, test with brute force solution, and many more. It will help you to boost your programming skill and help you to do a good performance in the programming contest.
 
@@ -12,7 +11,6 @@ For installing write the given commands,
 and
 
 > pip3 install ai-virtual-assistant
-
 
 I recommand after installing checkout the config file.
 The config can be open by the given command,
@@ -34,7 +32,7 @@ The config can be open by the given command,
 - [x] [login online judge](#login-and-submit-to-online-judge)
 - [x] [submit code](#Login-and-Submit-to-online-Judge)
 - [x] [Parse contest](#parsing-contest)
-  
+
 ## Other Features
 
 - [x] [Speaking Capability](#speaking-and-voice-command)
@@ -56,11 +54,13 @@ The config can be open by the given command,
 ### [setup competitive companion](#Competitive-companion)
 
 ### [Installation](#Installation)
+
 ---
 
 ## Run python or cpp program
 
 Any python or c++ files from the current directory can be run using one command. The command is given below,
+
 > jarvis -r "file_name"
 
 or,
@@ -85,15 +85,13 @@ An example is given below,
 
 with debug,
 
-
 > Cp -r -cd -3 'file_name'
 
 it will run jarvis in debug mode and it will run 3 times. And after execution, it will keep the executable file.
 
 ![Running program](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20run%20program.png)
 
- ## Parsing Problem from online judge
-
+## Parsing Problem from online judge
 
 Competitive Companion support makes parsing problems really very easy. Just give the command,
 
@@ -126,7 +124,6 @@ Also, the problem can be parsed without competitive companion though I don't rec
 or
 
 > Cp problem
-
 
 After giving the command it will ask for the problem URL. Just give the URL,it will parse the problem. There will be created a folder according to the problem name. And it will contain all the sample test cases of that problem.
 
@@ -168,7 +165,7 @@ Template file,
 ```c++
 
 /**
- *    author:  $%CODER%$ 
+ *    author:  $%CODER%$
  *    created: $%DATE_TIME%$
 **/
 
@@ -177,7 +174,7 @@ using namespace std;
 
 int main(){
 
-	
+
 
     return 0;
 }
@@ -189,7 +186,7 @@ Genarated file,
 ```c++
 
 /**
- *    author:  Saurav Paul 
+ *    author:  Saurav Paul
  *    created: Jun 06 2020 9:05 PM
 **/
 
@@ -198,7 +195,7 @@ using namespace std;
 
 int main(){
 
-	
+
 
     return 0;
 }
@@ -217,11 +214,9 @@ or
 
 > Cp test
 
-
 It will run all the sample and custom cases from the test folder(Test folder contains all the sample cases after parsing problem set) and check whether your solution is passed. It will show the taken time for running each case. If your code failed any test cases it will show the differences between the correct answer and your output. If every case passed then it will show passed.
 
 It is not necessary to have a parsed problem set for using this command. You can make a test folder and add input(.in) and output(.out) case into that folder and then run this command.
-
 
 ![Test-solution](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20testing%20program.png)
 
@@ -310,7 +305,6 @@ N.B.: I have used online-judge-api-client for login and submitting codes.
 
 ![login and submitting demo](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20login%20and%20submit.png)
 
-
 ## Parsing contest
 
 Parsing contest is the same as parsing problems using the competitive companion. Just write command,
@@ -323,7 +317,6 @@ or
 
 then it will start listening, then just open the contest link and click the browser extension, it will parse all the problems and create a folder for each contest with their test cases.
 
-
 Also, the contest can be parsed without competitive companion though I don't recommend this. the command is given below,
 
 > jarvis -cp contest
@@ -331,7 +324,6 @@ Also, the contest can be parsed without competitive companion though I don't rec
 or
 
 > Cp contest
-
 
 It will ask for the contest link. Then it will parse all the problems.
 
@@ -345,7 +337,7 @@ You can also give voice commands. But you have turned this feature on from confi
 
 For opening config option just write the following command,
 
->jarvis -config
+> jarvis -config
 
 ## Speech Recognition
 
@@ -361,15 +353,13 @@ To be honest this is one of my favorite features. You can ask Jarvis to go to an
 
 The command is given below,
 
->Jarvis goto "website name"
+> Jarvis goto "website name"
 
 It will open codeforces contest page for you. Basically, you can ask him to go to any website you want.
 
 It is okay to make some typing mistakes while writing a website name. It will still find it out.
 
 ![goto-demo](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20goto.png)
-
-
 
 ## Solve Math
 
@@ -410,7 +400,6 @@ For downloading the command is given below,
 > jarvis download
 
 Then it will ask for the download link.
-        
 
 ---
 
@@ -420,10 +409,7 @@ If you want to change settings, write the given command,
 
 > jarvis -config
 
-
-
 ## Competitive companion
-
 
 Competitive companion is a browser extension that helps to parse problems from various online judges in just one click.
 
@@ -445,15 +431,13 @@ Pre-requirements :
 1. Python-3.5+
 2. Pip3
 
-
 For installing write the given commands,
 
 > pip3 install wheel
 
-and 
+and
 
 > pip3 install ai-virtual-assistant
-
 
 I recommand after installing checkout the config file.
 The config can be open by the given command,
