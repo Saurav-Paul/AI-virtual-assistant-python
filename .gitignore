@@ -1,11 +1,12 @@
 __pycache__
 build
 ai_virtual_assistant.egg-info
+.vim
+.vscode
 x.py 
 test.py
 *.log
 *.pickle 
 test.py
 test_main.py
-settings/settings.conf
 
