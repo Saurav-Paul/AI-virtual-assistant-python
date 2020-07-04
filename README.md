@@ -415,8 +415,7 @@ Competitive companion is a browser extension that helps to parse problems from v
 
 For setting the competitive companion, you have to install the extension to your browser. Just search google, you will find the extension.
 
-After installing, right-click on the extension and click manage extension. Then go to 'Preference' and write custom port 8080.
-Because the default port number in my project is 8080. If you want to change the port, you can change from the config.
+By default this project listens on port 10043, which is a port Competitive Companion already sends parsed problems to by default. If you change the port this project listens on for problems received from Competitive Companion, you'll need to make sure Competitive Companion is properly configured to send problems to that port. To do this, right-click on the extension icon and click "Manage Extension". Then go to "Preferences" and add the port to the "Custom ports" field.
 
 To open config write the following command,
 
