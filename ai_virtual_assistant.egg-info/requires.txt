@@ -1,0 +1,15 @@
+beautifulsoup4
+fuzzywuzzy
+google
+lxml
+online-judge-api-client
+online-judge-tools
+plyer
+pyfiglet
+requests
+tcgen
+termcolor
+tqdm
+wget
+wikipedia-api
+wolframalpha
