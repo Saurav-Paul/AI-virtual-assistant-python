@@ -359,14 +359,63 @@ class Cp_Problem:
 
 class Cp_login:
 
+    def get_login_link(self):
+        judges = [
+            'Codeforces',
+            'Atcoder',
+            'HackerRank',
+            'Toph',
+            'Others'
+        ]
+        links = {
+            'Codeforces' : 'https://codeforces.com/',
+            'Atcoder' : 'https://atcoder.jp/',
+            'HackerRank' : 'https://www.hackerrank.com/',
+            'Toph' : 'https://toph.co/',
+        }
+
+        print()
+        for no,name in enumerate(judges):
+            name = f' {no+1} ) {name} '
+            cprint(name,'yellow')
+
+        print()
+        cprint(" Select the index : ",'cyan',end='')
+        index = int(input())
+        if index < len(judges) :
+            value = judges[index-1]
+
+            print()
+            cprint(f"\t\tJudge  : {value}",'yellow')
+            # cprint("You have choosen "+ value,'yellow')
+            get_link = links.get(value,'None')
+        else :
+            get_link = 'None'
+
+        if get_link == 'None':
+
+            print()
+            cprint(' Enter judge link : ','cyan',end='')
+            get_link = input()
+            print()
+            print()
+            cprint(f"\t\tJudge link: {get_link}",'yellow')
+
+
+        return  get_link
+
+
     def login(self):
         try :
             cprint(' '*17+'...Log In Service...'+' '*17,'blue')
-            cprint('Enter judge link : ','cyan',end='')
-            oj = input()
-            cprint('Enter your username : ','cyan',end='')
+
+            oj = self.get_login_link()
+            
+            print()
+
+            cprint(' Enter your username : ','cyan',end='')
             username = input()
-            password = getpass.getpass(prompt='Enter your password : ')
+            password = getpass.getpass(prompt=' Enter your password : ')
             cmd = "USERNAME=$USERNAME PASSWORD=$PASS oj-api login-service " + oj + '> .status'
             cmd = cmd.replace("$USERNAME",username) 
             cmd = cmd.replace("$PASS",password) 
@@ -381,7 +430,7 @@ class Cp_login:
                 cprint("Login failed.",'red')
             os.remove('.status')
         except Exception as e:
-            # print(e)
+            print(e)
             cprint("Login failed. (Sad)",'red')
             pass
 
