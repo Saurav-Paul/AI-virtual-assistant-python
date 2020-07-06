@@ -9,13 +9,15 @@ from tools.json_manager import JsonManager as JM
 
 config_keys = ['-config','-settings']
 conf_path = os.path.join(getpath(__file__),'settings.conf')
+default_path = os.path.join(getpath(__file__),'default.conf')
 train_path = os.path.join(getpath(__file__),'.trained')
 
 yes = ['yes','y']
 
 class Config:
+    export_file_name = 'ai_virtual_assistant_configs.conf'
     obj = CM()
-    lt = ['Bot','Interaction','Competitive Programming','Features Installation','Training Mode']
+    lt = ['Bot','Interaction','Competitive Programming','Features Installation','Training Mode','Export/Import settins']
     cp = [
         'Coder Name',
         'Competitive companion port number',
@@ -842,6 +844,7 @@ class Config:
                 cprint(" Cancelled." , 'red')
             
 
+
     def training_mode(self,no) :
         pt = 22*'-'+self.lt[no] + 22*'-'
         cprint(pt,'magenta')
@@ -870,6 +873,71 @@ class Config:
             else :
                 ok = True
                 cprint(" You have selected wrong index. Please try again.",'red')
+
+    def export_settings(self):
+        try :
+            with open(default_path,'r') as f :
+                value = f.read()
+            with open(self.export_file_name,'w') as f:
+                f.write(value)
+            cprint(" File exported successfully.",'green')
+        except Exception as e :
+            cprint(f' Got error : {e}','red')
+        pass
+
+    def import_settings(self):
+        if not os.path.exists(self.export_file_name):
+            cprint(" Sorry sir, export file not exists. Can't import.",'red')
+        else :
+            cprint(' Export file exists. Do you want import(y/n) : ','cyan',end='')
+            confirm = input()
+            positive = ['y', 'yes', 'ok', 'okay']
+            if confirm.lower() in positive :
+                cprint(" Okay sir updating configs.",'green')
+                try :
+                    with open(self.export_file_name,'r') as f :
+                        value = f.read()
+                    with open(conf_path,'w') as f :
+                        f.write(value)
+                except Exception as e:
+                    cprint(f" Sorry sir can't import. Error : {e}",'red')
+            else :
+                cprint(" Okay sir operation cancelled.",'red')
+        pass
+
+    def export_import_settings(self,no) :
+        pt = 22*'-'+self.lt[no] + 22*'-'
+        cprint(pt,'magenta')
+        print()
+        cprint(" All the available settings are given below,",'yellow')
+        print()
+        options = [
+            'Export Settings',
+            'Import settings'
+        ] 
+        for i,w in enumerate(options):
+            cprint(f'  {i+1}) {w}','blue')
+        cprint('  0) Cancel','red')
+        print()
+        ok = True
+
+        while ok:
+            ok = False
+            cprint(" Enter the index number : ",'cyan',end='')
+            no = int(input())
+            if no == 0:
+                cprint(" Operation cancelled.",'red')
+                return
+            elif no == 1:
+                cprint(f' You have selected {options[no-1]} .','yellow')
+                self.export_settings()
+            elif no == 2:
+                cprint(f' You have selected {options[no-1]} .','yellow')
+                self.import_settings()
+            else :
+                ok = True
+                cprint(" You have selected wrong index. Please try again.",'red')
+
 
 
     def config_list(self):
@@ -909,6 +977,9 @@ class Config:
                 elif no == 5 :
                     cprint(f' You have selected {self.lt[no-1]} .','yellow')
                     self.training_mode(no-1)
+                elif no == 6 :
+                    cprint(f" You have selected {self.lt[no-1]} .",'yellow')
+                    self.export_import_settings(no-1)
                 elif no == 75:
                     self.dev_mode()
                 else :
