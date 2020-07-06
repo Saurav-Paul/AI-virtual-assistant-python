@@ -363,8 +363,6 @@ class Cp_login:
         judges = [
             'Codeforces',
             'Atcoder',
-            'HackerRank',
-            'Toph',
             'Others'
         ]
         links = {
@@ -420,18 +418,27 @@ class Cp_login:
             cmd = cmd.replace("$USERNAME",username) 
             cmd = cmd.replace("$PASS",password) 
             # print(cmd)
+
+            print()
+            xt = '-'*15+'Api-client-Interface'+'-'*15
+            cprint(xt,'magenta')
             os.system(cmd)
+            print()
+            cprint('-'*len(xt),'magenta')
+            print()
+
             with open('.status','r') as f:
                 cp = f.read()
             cp = json.loads(cp)
             if cp["result"]['loggedIn']:
-                cprint("Logged in successfully....",'green')
+                cprint(" (^-^) Logged in successfully....",'green')
             else :
-                cprint("Login failed.",'red')
+                cprint(" (-_-) Login failed. May be wrong wrong username or password.",'red')
             os.remove('.status')
         except Exception as e:
-            print(e)
-            cprint("Login failed. (Sad)",'red')
+            # print(e)
+            # cprint("Login failed. (Sad)",'red')
+            cprint(" (^_^) Login failed. May be wrong wrong username or password.",'red')
             pass
 
 class Cp_Test:
