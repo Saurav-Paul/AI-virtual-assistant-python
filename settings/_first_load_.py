@@ -4,9 +4,18 @@ from system.path import getpath
 from termcolor import cprint
 
 conf_path = os.path.join(getpath(__file__),'settings.conf')
+default_path = os.path.join(getpath(__file__),'default.conf')
 
 def first_time() :
     pt = 22 * '-' + 'First time setup' + 22 * '-'
+    try :
+        with open(default_path) as f :
+            default_value = f.read()
+        with open(conf_path,'w') as f :
+            f.write(default_value)
+    except Exception as e:
+        cprint(e,'red')
+
     cprint(pt,'magenta')
     print()
     cprint(" (^-^) Enter your name : ",'cyan',end='')
