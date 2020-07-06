@@ -18,6 +18,7 @@ template_path = {
     'python':'/media/saurav/Programming/GIthub/Code-Lab/geany/ai_template.py',
 }
 
+
 coder_name = bot['boss']
 competitive_companion_port = 10043
 
