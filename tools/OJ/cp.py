@@ -570,6 +570,8 @@ class Cp_Test:
 
 class Cp_Submit:
 
+    from settings.compiler import cf_tool_mode 
+
     def submit_it(self,file_name):
         try :
             with open('.info','r') as f:
