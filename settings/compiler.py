@@ -18,9 +18,9 @@ template_path = {
     'python':'/media/saurav/Programming/GIthub/Code-Lab/geany/ai_template.py',
 }
 
+cf_tool_mode = False
 coder_name = bot['boss']
 competitive_companion_port = 10043
-
 parse_problem_with_template = True # If true, after parsing all the codes will contain a file name sol.cpp (with your template)
 
 
@@ -32,6 +32,8 @@ try :
     obj = CM()
     x = obj.read(conf_path,section = section)
     coder_name = x['coder_name']
+    cf_tool_mode = x['cf_tool_mode']
+
     if coder_name == "${boss}":
         coder_name = bot['boss']
 
@@ -72,3 +74,7 @@ def update_tp(x):
 def update_compiler(x):
     global compiler
     compiler = x
+
+def update_cf_mode(x) :
+    global cf_tool_mode
+    cf_tool_mode = x

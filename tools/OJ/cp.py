@@ -10,7 +10,7 @@ try :
     import socket
     import getpass
     from settings.compiler import competitive_companion_port, parse_problem_with_template
-    from settings.compiler import template_path , coder_name
+    from settings.compiler import template_path , coder_name  
     from system.get_time import digital_time
     from data.get_template import get_template
     from tools.run_program import if_run_type
@@ -18,6 +18,8 @@ except Exception as e:
     print(e)
 
 cp_keys = ['-cp','-Cp']
+
+cf_tool = True
 
 class bcolors:
     HEADER = '\033[95m'
@@ -91,6 +93,56 @@ class Cp_my_tester:
         
         return (result,False)
 
+    def make_testfolder(self) :
+
+        ok = False
+        
+        for file in os.listdir(os.getcwd()) :
+            try :
+                if 'in' in file and '.txt' in file :
+                    file_num = file.replace('in','')
+                    file_num = file_num.replace('.txt','')
+                    ans_file_name = 'ans'+file_num+'.txt'
+
+                    if os.path.exists(ans_file_name) :
+                        ok = True
+                        
+                        name = 'Sample-'
+                        folder_name = 'testcases'
+                        if os.path.isdir(folder_name):
+                            pass
+                        elif os.path.isdir('test'):
+                            folder_name = 'test'
+                        else :
+                            os.mkdir(folder_name)
+                        
+                        path_name = os.path.join(os.getcwd(),folder_name)
+                        # print(path_name)
+                        lt = os.listdir(path_name)
+                        # print(lt)
+                        ase = len(lt)
+                        no = int(ase/2)+1
+
+                        with open(file) as f:
+                            x = f.read()
+                        with open(ans_file_name) as f:
+                            y = f.read()
+
+                        fileName_in = name+str(no).zfill(2)+'.in'
+                        fileName_out = name+str(no).zfill(2)+'.out'
+                        print()
+
+                        with open(os.path.join(path_name,fileName_in),'w') as fin:
+                            fin.write(x)
+                        with open(os.path.join(path_name,fileName_out) ,'w') as fout:
+                            fout.write(y)
+            except :
+                    pass
+
+        return ok
+
+
+
     def test(self,file_name):
         path = os.getcwd()
         # print(path, file_name)
@@ -105,6 +157,11 @@ class Cp_my_tester:
             pass
         elif os.path.isdir('test'):
             case_folder = 'test'
+        elif cf_tool :
+            cf_test = self.make_testfolder() 
+            if cf_test == False :
+                cprint("Test folder not available.",'red',attrs=['bold'])
+                return
         else:
             cprint("Test folder not available.",'red',attrs=['bold'])
             return

@@ -720,11 +720,63 @@ class Config:
             cprint(e,'red')
 
 
+    def cf_tool_function(self) :
+        Nb =""" N.B: If you use cf tool, then enable this option.It will help you to use cf tool options and also your codeforces submit and other options will execute by cf tool.If you don't have cf tool and enable this option, it might break your submit system. """
+
+        try :
+            from settings.compiler import  cf_tool_mode , update_cf_mode
+            pt = '-'*22 + 'Cf tool mode' +'-'*22
+            cprint(pt,'magenta')
+            print()
+
+            cprint(" Cf tool mode : " + str(cf_tool_mode),'yellow')
+            print()
+
+            cprint('  1) Toggle Mode.','blue')
+            cprint('  0) Back.','red')
+            print()
+
+            print()
+            cprint(Nb,'magenta')
+            print()
+            
+            ok = True
+            while ok:
+                ok = False
+                cprint(' Enter the index number : ','cyan',end='')
+                no = int(input())
+                if no == 0:
+                    cprint(" Going back.",'red')
+                    return 
+                elif no == 1:
+                    print()
+                    changeto = 'False'
+                    if cf_tool_mode == 'False' :
+                        changeto = 'True'
+                    section = 'cp'
+                    x = self.obj.read(conf_path,section)
+                    cf_tool_mode = changeto
+                    x['cf_tool_mode'] = changeto
+                    self.obj.update(conf_path,x,section)
+                    update_cf_mode(changeto)
+
+                    cprint(f' Cf tool mode change to {changeto}','green')
+                    self.cf_tool_function()
+                else:
+                    cprint(" You have choosen wrong index.",'red')
+                    ok = True
+        except Exception as e:
+            cprint(e,'red')
+
+
+
     def competitve_programming(self,no=2):
+
         optinos = [
             'Competitive Companion.',
             'Template Path.',
-            'Compiler'
+            'Compiler',
+            'Cf Tool Mode'
         ]
 
         pt = '-'*22 + self.lt[no] +'-'*22
@@ -756,6 +808,9 @@ class Config:
             elif no == 3:
                 cprint(f' You have selected {optinos[no-1]} .','yellow')
                 self.compiler_option()
+            elif no == 4:
+                cprint(f' You have selected {optinos[no-1]} .','yellow')
+                self.cf_tool_function()
             else :
                 ok = True
                 cprint(" You have selected wrong index. Please try again.",'red')
