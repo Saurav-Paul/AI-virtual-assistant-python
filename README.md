@@ -32,6 +32,7 @@ The config can be open by the given command,
 - [x] [login online judge](#login-and-submit-to-online-judge)
 - [x] [submit code](#Login-and-Submit-to-online-Judge)
 - [x] [Parse contest](#parsing-contest)
+- [x] [Cf tool mode](#cf-tool-mode)
 
 ## Other Features
 
@@ -326,6 +327,33 @@ or
 > Cp contest
 
 It will ask for the contest link. Then it will parse all the problems.
+
+## cf tool mode
+
+If you use cf tool for submiting and racing contest. You can use enable this mode.
+If cf tool mode is enable it will use cf-tool for submitting problem in codeforces.
+
+You can enable this mode from config option.
+
+## Open problem page in browser
+
+You can open problem in browser by the given command,
+
+> Cp open
+
+You have to be in problem folder.
+
+## Open standing page in browser
+
+You can open standing page in browser by the given command,
+
+> Cp stand
+
+or
+
+> Cp stand
+
+You have to be in problem folder.
 
 ---
 

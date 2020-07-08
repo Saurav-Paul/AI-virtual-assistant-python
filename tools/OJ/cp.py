@@ -1706,6 +1706,12 @@ def help():
     cprint('  -> contest : ','yellow',end='')
     cprint('To parse contest manually','cyan')
 
+    cprint('  -> open : ','yellow',end='')
+    cprint('To open current problem in browser','cyan')
+
+    cprint('  -> stand : ','yellow',end='')
+    cprint('To open standing page in browser','cyan')
+
     print()
     cprint('-'*len(pt),'magenta')
     

@@ -5,6 +5,18 @@ from system.path import getpath
 import os
 from termcolor import cprint
 
+all_sections = [
+    'bot',
+    'default',
+    'interaction_setting',
+    'cp',
+    'template_path',
+    'compiler',
+    'developer',
+    'start_time'
+
+]
+
 positive = ['yes','1','true']
 
 interaction_setting = {
