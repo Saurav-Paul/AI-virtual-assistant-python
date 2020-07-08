@@ -32,7 +32,9 @@ try :
     obj = CM()
     x = obj.read(conf_path,section = section)
     coder_name = x['coder_name']
-    cf_tool_mode = x['cf_tool_mode']
+
+    if x['cf_tool_mode'] == 'True':
+        cf_tool_mode = True
 
     if coder_name == "${boss}":
         coder_name = bot['boss']

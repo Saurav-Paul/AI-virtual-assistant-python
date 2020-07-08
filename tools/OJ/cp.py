@@ -572,6 +572,30 @@ class Cp_Submit:
 
     from settings.compiler import cf_tool_mode 
 
+    def cf_url(self,url):
+        codeforces = 'codeforces.com'
+        if codeforces in url :
+            return True
+        else :
+            return False
+
+
+    def cf_submit(self,url,file_name) :
+
+        pt = '-'*22 + 'Cf tool' + '-' * 22
+        cprint(pt,'magenta')
+        url = url.split(sep='/')
+
+        submission_id = url[-3] + ' '+ url[-1]
+
+        cmd = 'cf submit '+submission_id+ ' ' + file_name
+        done = os.system(cmd)
+
+        cprint(len(pt)*'-','magenta')
+
+        return True if done==0 else False
+    
+
     def submit_it(self,file_name):
         try :
             with open('.info','r') as f:
@@ -596,10 +620,15 @@ class Cp_Submit:
         x = input()
         if x.lower() == 'y' or x.lower == 'yes':
             cprint('Submitting...','green')
-            cmd = 'oj submit --wait=0 --yes $URL $FILENAME'
-            cmd = cmd.replace('$URL',url)
-            cmd = cmd.replace('$FILENAME',file_name)
-            os.system(cmd)
+            submitted = False
+            if self.cf_tool_mode==True and self.cf_url(url) :
+                submitted = self.cf_submit(url,file_name)
+
+            if submitted == False:
+                cmd = 'oj submit --wait=0 --yes $URL $FILENAME'
+                cmd = cmd.replace('$URL',url)
+                cmd = cmd.replace('$FILENAME',file_name)
+                os.system(cmd)
         else :
             cprint('Submitting Cancelled.','red')
 
