@@ -579,14 +579,10 @@ class Cp_Submit:
         else :
             return False
 
-
-    def cf_submit(self,url,file_name) :
+    def cf_submit(self,submission_id,file_name) :
 
         pt = '-'*22 + 'Cf tool' + '-' * 22
         cprint(pt,'magenta')
-        url = url.split(sep='/')
-
-        submission_id = url[-3] + ' '+ url[-1]
 
         cmd = 'cf submit '+submission_id+ ' ' + file_name
         done = os.system(cmd)
@@ -596,6 +592,52 @@ class Cp_Submit:
         return True if done==0 else False
     
 
+    def cf_submit_manager(self,url,file_name='') :
+        url = url.split(sep='/')
+        submission_id = url[-3] + ' '+ url[-1]
+
+        return self.cf_submit(submission_id,file_name)
+
+
+    def cf_id_from_cwd(self) :
+        try :
+            curr_path = os.getcwd()
+            problem_id = curr_path.split(sep='/')
+            problem_id = problem_id[-2] + ' ' + problem_id[-1]
+            return problem_id
+        except :
+            return ''
+
+    def check_cf_id(self,id) :
+        try :
+            id = id.split(' ')
+            if len(id) != 2 :
+                return False
+            x = int(id[0])
+            y = id[1]
+            return True
+        except :
+            cprint('not cf id' , 'red')
+            return False
+
+
+    def cf_submit_from_cwd(self,file_name='') :
+        
+        try :
+            if self.cf_tool_mode == False:
+                return False
+
+            submission_id = self.cf_id_from_cwd()
+
+            if self.check_cf_id(submission_id) :
+                self.cf_submit(submission_id,file_name)
+                return True
+
+            return False
+
+        except :
+            return False
+
     def submit_it(self,file_name):
         try :
             with open('.info','r') as f:
@@ -604,6 +646,8 @@ class Cp_Submit:
             problem_name = info['name']
             url = info['url']
         except :
+            if self.cf_submit_from_cwd():
+                return
             cprint("Enter the problem url : ",'cyan',end='')
             url = input()
             problem_name = url
@@ -622,7 +666,7 @@ class Cp_Submit:
             cprint('Submitting...','green')
             submitted = False
             if self.cf_tool_mode==True and self.cf_url(url) :
-                submitted = self.cf_submit(url,file_name)
+                submitted = self.cf_submit_manager(url,file_name)
 
             if submitted == False:
                 cmd = 'oj submit --wait=0 --yes $URL $FILENAME'
@@ -1481,6 +1525,13 @@ class Cp_ext:
         print()
         cprint(f' # Total {cnt} problems is fetched.','blue')
 
+class Cp_url_manager:
+
+    def open(self):
+        pass
+
+
+
 help_keys = ['-h','help']
 
 def help():
@@ -1603,17 +1654,3 @@ def if_cp_type(msg):
     return False
 
 
-
-if __name__ == "__main__":
-    # obj = Cp_Problem()
-    # Cp_Problem.fetch_problem()
-    # obj = Cp_Submit()
-    # obj.find_files()
-    # Cp_login.login()
-    obj = Cp_add_test()
-    obj.add_case()
-    # obj = Cp_Test()
-    # obj.find_files()
-    # cprint("Enter something for testing purpose : ",'cyan',end='')
-    # x = input()
-    # cprint(x,'blue')
