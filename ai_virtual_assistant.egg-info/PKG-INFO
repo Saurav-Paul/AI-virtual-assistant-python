@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ai-virtual-assistant
-Version: 0.2.7
+Version: 0.2.9
 Summary: CLI virtual assitant for competitive programming
 Home-page: https://github.com/Saurav-Paul/AI-virtual-assistant-python
 Author: Saurav Paul
@@ -40,6 +40,7 @@ Description: # AI virtual assitant
         - [x] [login online judge](#login-and-submit-to-online-judge)
         - [x] [submit code](#Login-and-Submit-to-online-Judge)
         - [x] [Parse contest](#parsing-contest)
+        - [x] [Cf tool mode](#cf-tool-mode)
         
         ## Other Features
         
@@ -334,6 +335,33 @@ Description: # AI virtual assitant
         > Cp contest
         
         It will ask for the contest link. Then it will parse all the problems.
+        
+        ## cf tool mode
+        
+        If you use cf tool for submiting and racing contest. You can use enable this mode.
+        If cf tool mode is enable it will use cf-tool for submitting problem in codeforces.
+        
+        You can enable this mode from config option.
+        
+        ## Open problem page in browser
+        
+        You can open problem in browser by the given command,
+        
+        > Cp open
+        
+        You have to be in problem folder.
+        
+        ## Open standing page in browser
+        
+        You can open standing page in browser by the given command,
+        
+        > Cp stand
+        
+        or
+        
+        > Cp stand
+        
+        You have to be in problem folder.
         
         ---
         

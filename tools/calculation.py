@@ -23,13 +23,20 @@ def api_math(msg):
     pass
 def google_calculation(msg):
     try :
+        headers = {
+            'user-agent' : 'Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101 Firefox/78.0'
+        }
+        # headers = {
+        # 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36',
+        # }
+        # print(headers)
         url = 'https://www.google.com/search?q='
         msg = rep(msg)
         lt = msg.split()
         for word in lt :
             url += word + '+'
         logger.info('Got url : ' + url)
-        source = requests.get(url).text
+        source = requests.get(url,headers).text
         bs = BeautifulSoup(source,'lxml')
         # print(bs)
         key = 'BNeawe iBp4i AP7Wnd'
