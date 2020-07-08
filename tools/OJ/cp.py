@@ -38,11 +38,23 @@ class Cp_my_tester:
 
     TLE = 4
 
-    def diff_print(self,name,value):
-        print('  '+name+' :')
+    def diff_print(self,name,value,color):
+        cprint('  '+name+' :','yellow',attrs=['bold'])
         for x in value:
             x = '  '+ x
-            print(x)
+            cprint(x,color)
+
+    def colorfull_diff_print(self,x,y) :
+        cprint("  Output :",'yellow',attrs=['bold'])
+        for wx,wy in zip_longest(x,y,fillvalue=''):
+            print('  ',end='')
+            for o , e in zip_longest(wx,wy,fillvalue=''):
+                if(o == e):
+                    cprint(o,'green',end='')
+                else :
+                    cprint(o,'red',end='')
+                    # cprint(e,'yellow',end='')
+            print()
         
     def different(self,value,output,expected,case):
         x = output.split('\n')
@@ -52,13 +64,15 @@ class Cp_my_tester:
         cprint(pt,'yellow')
         # print('Input :')
         # print(value)
-        self.diff_print('Input',i)
-        self.diff_print('Output',x)
-        self.diff_print('Expected',y)
+        self.diff_print('Input',i,'cyan')
+        # self.diff_print('Output',x)
+        self.colorfull_diff_print(x,y)
+        self.diff_print('Expected',y,'green')
         # print('Output :')
         # print(output)
         # print("Expected :")
         # print(expected)
+        return 
         print("  Difference :")
         for wx,wy in zip_longest(x,y,fillvalue=''):
             print('  ',end='')
@@ -1610,7 +1624,15 @@ class Cp_url_manager:
             id = url.split(sep='/')
             stand_url = stand_url.replace('$CONTEST_ID',id[-3])
             webbrowser.open(stand_url)
+            cprint(' Check Browser.','yellow')
 
+        elif 'atcoder.jp' in url:
+            url = url.split(sep='/')
+            url[-1]=''
+            url[-2]='standings'
+            url = '/'.join(url)
+            webbrowser.open(url)
+            cprint(' Check Browser.','yellow')
 
         else :
             cprint(' Sorry sir, standing option has not implemented for this OJ.','red')
@@ -1625,7 +1647,6 @@ class Cp_url_manager:
             url = info['url']
             
             self.stand_open(url)
-            cprint(' Check Browser.','yellow')
 
         except :
             if self.stand_from_cwd() == False:
@@ -1681,6 +1702,8 @@ def help():
     
 
 def cp_manager(msg):
+
+    msg = msg.lower()
     
     if 'parse' in msg or 'listen' in msg:
         obj = Cp_ext()
