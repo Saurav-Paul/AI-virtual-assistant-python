@@ -1,5 +1,6 @@
 try :
     import os
+    import webbrowser
     import subprocess
     import json
     from termcolor import colored as clr , cprint
@@ -1527,10 +1528,61 @@ class Cp_ext:
 
 class Cp_url_manager:
 
+
+    def cf_id_from_cwd(self) :
+        try :
+            curr_path = os.getcwd()
+            problem_id = curr_path.split(sep='/')
+            problem_id = problem_id[-2] + ' ' + problem_id[-1]
+            return problem_id
+        except :
+            return ''
+
+    def check_cf_id(self,id) :
+        try :
+            id = id.split(' ')
+            if len(id) != 2 :
+                return False
+            x = int(id[0])
+            y = id[1]
+            return True
+        except :
+            cprint('not cf id' , 'red')
+            return False
+
+    def open_from_cwd(self):
+        try :
+            id = self.cf_id_from_cwd()
+
+            if self.check_cf_id(id) == False:
+                return False
+            
+            url = 'https://codeforces.com/contest/$CONTEST_ID/problem/$ALPHABET'
+            id = id.split(sep=' ')
+            url = url.replace('$CONTEST_ID',id[0])
+            url = url.replace('$ALPHABET',id[1])
+
+            webbrowser.open(url)
+            cprint(' Check Browser.\n','yellow')
+            return True
+
+        except :
+            return False 
+
+
     def open(self):
-        pass
+        try :
+            with open('.info','r') as f:
+                info = f.read()
+            info = json.loads(info)
+            url = info['url']
+            
+            webbrowser.open(url)
+            cprint(' Check Browser.\n','yellow')
 
-
+        except :
+            if self.open_from_cwd() == False:
+                cprint(" Can't find valid url.",'red')
 
 help_keys = ['-h','help']
 
@@ -1638,6 +1690,9 @@ def cp_manager(msg):
         obj.gen_py()
     elif if_run_type(msg):
         pass
+    elif 'open' in msg:
+        obj = Cp_url_manager()
+        obj.open()
     elif msg in help_keys:
         help()
     else :
