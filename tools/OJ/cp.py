@@ -1,5 +1,6 @@
 try :
     import os
+    import webbrowser
     import subprocess
     import json
     from termcolor import colored as clr , cprint
@@ -570,6 +571,74 @@ class Cp_Test:
 
 class Cp_Submit:
 
+    from settings.compiler import cf_tool_mode 
+
+    def cf_url(self,url):
+        codeforces = 'codeforces.com'
+        if codeforces in url :
+            return True
+        else :
+            return False
+
+    def cf_submit(self,submission_id,file_name) :
+
+        pt = '-'*22 + 'Cf tool' + '-' * 22
+        cprint(pt,'magenta')
+
+        cmd = 'cf submit '+submission_id+ ' ' + file_name
+        done = os.system(cmd)
+
+        cprint(len(pt)*'-','magenta')
+
+        return True if done==0 else False
+    
+
+    def cf_submit_manager(self,url,file_name='') :
+        url = url.split(sep='/')
+        submission_id = url[-3] + ' '+ url[-1]
+
+        return self.cf_submit(submission_id,file_name)
+
+
+    def cf_id_from_cwd(self) :
+        try :
+            curr_path = os.getcwd()
+            problem_id = curr_path.split(sep='/')
+            problem_id = problem_id[-2] + ' ' + problem_id[-1]
+            return problem_id
+        except :
+            return ''
+
+    def check_cf_id(self,id) :
+        try :
+            id = id.split(' ')
+            if len(id) != 2 :
+                return False
+            x = int(id[0])
+            y = id[1]
+            return True
+        except :
+            cprint('not cf id' , 'red')
+            return False
+
+
+    def cf_submit_from_cwd(self,file_name='') :
+        
+        try :
+            if self.cf_tool_mode == False:
+                return False
+
+            submission_id = self.cf_id_from_cwd()
+
+            if self.check_cf_id(submission_id) :
+                self.cf_submit(submission_id,file_name)
+                return True
+
+            return False
+
+        except :
+            return False
+
     def submit_it(self,file_name):
         try :
             with open('.info','r') as f:
@@ -578,6 +647,8 @@ class Cp_Submit:
             problem_name = info['name']
             url = info['url']
         except :
+            if self.cf_submit_from_cwd():
+                return
             cprint("Enter the problem url : ",'cyan',end='')
             url = input()
             problem_name = url
@@ -594,10 +665,15 @@ class Cp_Submit:
         x = input()
         if x.lower() == 'y' or x.lower == 'yes':
             cprint('Submitting...','green')
-            cmd = 'oj submit --wait=0 --yes $URL $FILENAME'
-            cmd = cmd.replace('$URL',url)
-            cmd = cmd.replace('$FILENAME',file_name)
-            os.system(cmd)
+            submitted = False
+            if self.cf_tool_mode==True and self.cf_url(url) :
+                submitted = self.cf_submit_manager(url,file_name)
+
+            if submitted == False:
+                cmd = 'oj submit --wait=0 --yes $URL $FILENAME'
+                cmd = cmd.replace('$URL',url)
+                cmd = cmd.replace('$FILENAME',file_name)
+                os.system(cmd)
         else :
             cprint('Submitting Cancelled.','red')
 
@@ -1450,6 +1526,112 @@ class Cp_ext:
         print()
         cprint(f' # Total {cnt} problems is fetched.','blue')
 
+class Cp_url_manager:
+
+
+    def cf_id_from_cwd(self) :
+        try :
+            curr_path = os.getcwd()
+            problem_id = curr_path.split(sep='/')
+            problem_id = problem_id[-2] + ' ' + problem_id[-1]
+            return problem_id
+        except :
+            return ''
+
+    def check_cf_id(self,id) :
+        try :
+            id = id.split(' ')
+            if len(id) != 2 :
+                return False
+            x = int(id[0])
+            y = id[1]
+            return True
+        except :
+            cprint('not cf id' , 'red')
+            return False
+
+    def open_from_cwd(self):
+        try :
+            id = self.cf_id_from_cwd()
+
+            if self.check_cf_id(id) == False:
+                return False
+            
+            url = 'https://codeforces.com/contest/$CONTEST_ID/problem/$ALPHABET'
+            id = id.split(sep=' ')
+            url = url.replace('$CONTEST_ID',id[0])
+            url = url.replace('$ALPHABET',id[1])
+
+            webbrowser.open(url)
+            cprint(' Check Browser.','yellow')
+            return True
+
+        except :
+            return False 
+
+
+    def open(self):
+        try :
+            with open('.info','r') as f:
+                info = f.read()
+            info = json.loads(info)
+            url = info['url']
+            
+            webbrowser.open(url)
+            cprint(' Check Browser.','yellow')
+
+        except :
+            if self.open_from_cwd() == False:
+                cprint(" Can't find valid url.",'red')
+
+    
+    def stand_from_cwd(self):
+        try :
+            id = self.cf_id_from_cwd()
+
+            if self.check_cf_id(id) == False:
+                return False
+            
+            stand_url = 'https://codeforces.com/contest/$CONTEST_ID/standings/friends/true'
+            id = id.split(sep=' ')
+            url = stand_url.replace('$CONTEST_ID',id[0])
+
+            webbrowser.open(url)
+            cprint(' Check Browser.','yellow')
+            return True
+
+        except Exception as e:
+            print(e)
+            return False 
+    def stand_open(self,url) :
+
+        if 'codeforces.com' in url:
+            stand_url = 'https://codeforces.com/contest/$CONTEST_ID/standings/friends/true'
+            id = url.split(sep='/')
+            stand_url = stand_url.replace('$CONTEST_ID',id[-3])
+            webbrowser.open(stand_url)
+
+
+        else :
+            cprint(' Sorry sir, standing option has not implemented for this OJ.','red')
+     
+    def stand(self):
+
+
+        try :
+            with open('.info','r') as f:
+                info = f.read()
+            info = json.loads(info)
+            url = info['url']
+            
+            self.stand_open(url)
+            cprint(' Check Browser.','yellow')
+
+        except :
+            if self.stand_from_cwd() == False:
+                cprint(" Can't find valid url.",'red')
+
+
 help_keys = ['-h','help']
 
 def help():
@@ -1556,6 +1738,12 @@ def cp_manager(msg):
         obj.gen_py()
     elif if_run_type(msg):
         pass
+    elif 'open' in msg:
+        obj = Cp_url_manager()
+        obj.open()
+    elif 'stand' in msg or 'standing' in msg:
+        obj = Cp_url_manager()
+        obj.stand()
     elif msg in help_keys:
         help()
     else :
@@ -1572,17 +1760,3 @@ def if_cp_type(msg):
     return False
 
 
-
-if __name__ == "__main__":
-    # obj = Cp_Problem()
-    # Cp_Problem.fetch_problem()
-    # obj = Cp_Submit()
-    # obj.find_files()
-    # Cp_login.login()
-    obj = Cp_add_test()
-    obj.add_case()
-    # obj = Cp_Test()
-    # obj.find_files()
-    # cprint("Enter something for testing purpose : ",'cyan',end='')
-    # x = input()
-    # cprint(x,'blue')
