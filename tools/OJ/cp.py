@@ -73,17 +73,17 @@ class Cp_my_tester:
         # print("Expected :")
         # print(expected)
         return 
-        print("  Difference :")
-        for wx,wy in zip_longest(x,y,fillvalue=''):
-            print('  ',end='')
-            for o , e in zip_longest(wx,wy,fillvalue=''):
-                if(o == e):
-                    cprint(o,'green',end='')
-                else :
-                    cprint(o,'red',end='')
-                    cprint(e,'yellow',end='')
-            print()
-        cprint('  '+'-'*(len(pt)-2),'yellow')
+        # print("  Difference :")
+        # for wx,wy in zip_longest(x,y,fillvalue=''):
+        #     print('  ',end='')
+        #     for o , e in zip_longest(wx,wy,fillvalue=''):
+        #         if(o == e):
+        #             cprint(o,'green',end='')
+        #         else :
+        #             cprint(o,'red',end='')
+        #             cprint(e,'yellow',end='')
+        #     print()
+        # cprint('  '+'-'*(len(pt)-2),'yellow')
 
     # def sub_process(self,cmd,value):
     #     tle = False
@@ -857,38 +857,22 @@ class Cp_bruteforce:
                 if index == 0:
                     cprint("Bruteforcing operation cancelled.",'red')
                     return ('Cancelled',False)
-                    break
                 elif index < no:
                     return (file_list[index-1],True)
-                    break
                 else:
                     cprint("You have entered the wrong index.Please try again.",'red')
         else :
             cprint("NO FILE FOUND :(",'red')
             return ('FILE NOT FOUND',False)
 
-    def diff_print(self,name,value):
-        print('  '+name+' :')
+    def diff_print(self,name,value,color):
+        cprint('  '+name+' :','yellow',attrs=['bold'])
         for x in value:
             x = '  '+ x
-            print(x)
-        
-    def different(self,value,output,expected):
-        x = output.split('\n')
-        y = expected.split('\n')
-        i = value.split('\n')
-        pt  = '  '+'-'*5+'Problem Found'+'-'*5
-        cprint(pt,'yellow')
-        # print('Input :')
-        # print(value)
-        self.diff_print('Input',i)
-        self.diff_print('Output',x)
-        self.diff_print('Expected',y)
-        # print('Output :')
-        # print(output)
-        # print("Expected :")
-        # print(expected)
-        print("  Difference :")
+            cprint(x,color)
+
+    def colorfull_diff_print(self,x,y) :
+        cprint("  Output :",'yellow',attrs=['bold'])
         for wx,wy in zip_longest(x,y,fillvalue=''):
             print('  ',end='')
             for o , e in zip_longest(wx,wy,fillvalue=''):
@@ -896,9 +880,28 @@ class Cp_bruteforce:
                     cprint(o,'green',end='')
                 else :
                     cprint(o,'red',end='')
-                    cprint(e,'yellow',end='')
+                    # cprint(e,'yellow',end='')
             print()
-        cprint('  '+'-'*(len(pt)-2),'yellow')
+        
+    def different(self,value,output,expected):
+        print()
+        x = output.split('\n')
+        y = expected.split('\n')
+        i = value.split('\n')
+        pt  = '  '+'-'*5+'Problem Found' +'-'*5
+        cprint(pt,'yellow')
+        print()
+        # print('Input :')
+        # print(value)
+        self.diff_print('Input',i,'cyan')
+        # self.diff_print('Output',x)
+        self.colorfull_diff_print(x,y)
+        self.diff_print('Expected',y,'green')
+        # print('Output :')
+        # print(output)
+        # print("Expected :")
+        # print(expected)
+        return 
 
 
 
@@ -998,18 +1001,24 @@ class Cp_bruteforce:
             # print('cpp = ',brute_file)
             ext = brute_file.rsplit(sep='.',maxsplit=1)[0]
             cmd = "g++ "+brute_file+" -o "+ext
+            
             with tqdm(total=1.0,desc=brute_file+' compiling',initial=.25) as pbar:
-                os.system(cmd)
+                exc_code = os.system(cmd)
                 pbar.update(.75)
             print()
+            if exc_code != 0 :
+                return
         if gen_ext == 'cpp':
             # print('cpp = ',gen_file)
             ext = gen_file.rsplit(sep='.',maxsplit=1)[0]
             cmd = "g++ "+gen_file+" -o "+ext
             with tqdm(total=1.0,desc=gen_file+' compiling',initial=.25) as pbar:
-                os.system(cmd)
+                exc_code = os.system(cmd)
                 pbar.update(.75)
             print()
+            if exc_code != 0 :
+                return
+
         if test_ext == 'cpp':
             # print('cpp = ',test_file)
             ext = test_file.rsplit(sep='.',maxsplit=1)[0]
