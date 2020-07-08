@@ -1563,7 +1563,7 @@ class Cp_url_manager:
             url = url.replace('$ALPHABET',id[1])
 
             webbrowser.open(url)
-            cprint(' Check Browser.\n','yellow')
+            cprint(' Check Browser.','yellow')
             return True
 
         except :
@@ -1578,11 +1578,59 @@ class Cp_url_manager:
             url = info['url']
             
             webbrowser.open(url)
-            cprint(' Check Browser.\n','yellow')
+            cprint(' Check Browser.','yellow')
 
         except :
             if self.open_from_cwd() == False:
                 cprint(" Can't find valid url.",'red')
+
+    
+    def stand_from_cwd(self):
+        try :
+            id = self.cf_id_from_cwd()
+
+            if self.check_cf_id(id) == False:
+                return False
+            
+            stand_url = 'https://codeforces.com/contest/$CONTEST_ID/standings/friends/true'
+            id = id.split(sep=' ')
+            url = stand_url.replace('$CONTEST_ID',id[0])
+
+            webbrowser.open(url)
+            cprint(' Check Browser.','yellow')
+            return True
+
+        except Exception as e:
+            print(e)
+            return False 
+    def stand_open(self,url) :
+
+        if 'codeforces.com' in url:
+            stand_url = 'https://codeforces.com/contest/$CONTEST_ID/standings/friends/true'
+            id = url.split(sep='/')
+            stand_url = stand_url.replace('$CONTEST_ID',id[-3])
+            webbrowser.open(stand_url)
+
+
+        else :
+            cprint(' Sorry sir, standing option has not implemented for this OJ.','red')
+     
+    def stand(self):
+
+
+        try :
+            with open('.info','r') as f:
+                info = f.read()
+            info = json.loads(info)
+            url = info['url']
+            
+            self.stand_open(url)
+            cprint(' Check Browser.','yellow')
+
+        except :
+            if self.stand_from_cwd() == False:
+                cprint(" Can't find valid url.",'red')
+
 
 help_keys = ['-h','help']
 
@@ -1693,6 +1741,9 @@ def cp_manager(msg):
     elif 'open' in msg:
         obj = Cp_url_manager()
         obj.open()
+    elif 'stand' in msg or 'standing' in msg:
+        obj = Cp_url_manager()
+        obj.stand()
     elif msg in help_keys:
         help()
     else :
