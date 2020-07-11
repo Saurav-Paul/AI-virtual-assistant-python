@@ -923,7 +923,7 @@ class Cp_bruteforce:
             cmd = ['python3',file_name]
         elif ext == 'cpp':
             ext = file_name.rsplit(sep='.',maxsplit=1)
-            cmd = './'+ext[0]
+            cmd = './'+ext[0]+'.out'
             cmd = [cmd]
         else:
             cprint('command manager failed.','red')
@@ -965,8 +965,18 @@ class Cp_bruteforce:
         except:
             cprint("Can't add testcase. :( ",'red',attrs=['bold'])
 
+
+    def remove_unnecessary(self,lt) :
+        for x in lt :
+            try :
+                os.remove(x)
+            except :
+                pass
+
     def run(self):
         pass
+
+        need_to_removed = []
         
         brute_file = self.find_files('brute')
         # print(brute_file)
@@ -999,8 +1009,9 @@ class Cp_bruteforce:
         # print(brute_ext,gen_ext,test_ext)
         if brute_ext == 'cpp':
             # print('cpp = ',brute_file)
-            ext = brute_file.rsplit(sep='.',maxsplit=1)[0]
+            ext = brute_file.rsplit(sep='.',maxsplit=1)[0] + '.out'
             cmd = "g++ "+brute_file+" -o "+ext
+            need_to_removed.append(ext)
             
             with tqdm(total=1.0,desc=brute_file+' compiling',initial=.25) as pbar:
                 exc_code = os.system(cmd)
@@ -1010,8 +1021,10 @@ class Cp_bruteforce:
                 return
         if gen_ext == 'cpp':
             # print('cpp = ',gen_file)
-            ext = gen_file.rsplit(sep='.',maxsplit=1)[0]
+            ext = gen_file.rsplit(sep='.',maxsplit=1)[0]+ '.out'
             cmd = "g++ "+gen_file+" -o "+ext
+            need_to_removed.append(ext)
+
             with tqdm(total=1.0,desc=gen_file+' compiling',initial=.25) as pbar:
                 exc_code = os.system(cmd)
                 pbar.update(.75)
@@ -1021,8 +1034,10 @@ class Cp_bruteforce:
 
         if test_ext == 'cpp':
             # print('cpp = ',test_file)
-            ext = test_file.rsplit(sep='.',maxsplit=1)[0]
+            ext = test_file.rsplit(sep='.',maxsplit=1)[0]+ '.out'
             cmd = "g++ "+test_file+" -o "+ext
+            need_to_removed.append(ext)
+
             with tqdm(total=1.0,desc=test_file+' compiling',initial=.25) as pbar:
                 os.system(cmd)
                 pbar.update(.75)
@@ -1082,6 +1097,7 @@ class Cp_bruteforce:
                 with open('hack.out','w') as f:
                     f.write(ans)
                 
+                self.remove_unnecessary(need_to_removed)
                 print()
                 cprint('Do you want to add this case to your testcases list? (Y/N) : ','cyan',attrs = ['bold'],end='')
                 want = input()
@@ -1096,6 +1112,8 @@ class Cp_bruteforce:
         print()
         cprint(f' # Slowest : {st:.4f} sec.','blue')
         cprint(f' # Accepted.','green')
+
+        self.remove_unnecessary(need_to_removed)
 
         print()
         pt='-'*20+'-'*len(test_file)+'-'*20
@@ -1720,7 +1738,9 @@ def cp_manager(msg):
 
     msg = msg.lower()
     
-    if 'parse' in msg or 'listen' in msg:
+    if if_run_type(msg):
+        pass
+    elif 'parse' in msg or 'listen' in msg:
         obj = Cp_ext()
         obj.listen()
     elif 'problem' in msg:
@@ -1774,8 +1794,6 @@ def cp_manager(msg):
     elif 'gen' in msg:
         obj = Cp_setup()
         obj.gen_py()
-    elif if_run_type(msg):
-        pass
     elif 'open' in msg:
         obj = Cp_url_manager()
         obj.open()
