@@ -20,6 +20,7 @@ def run_prog(file_name, debug=False, com=False, no=1):
         pt = ("Running the " + file_name + '......')
         cprint(pt, 'yellow')
         ext = file_name.rsplit(sep='.', maxsplit=1)
+        ext[0] += '.out'
         if ext[1] == 'cpp':
             if debug:
                 cmd = compiler['c++ debug']
