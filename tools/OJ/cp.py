@@ -1611,13 +1611,22 @@ class Cp_url_manager:
             return False 
 
 
-    def open(self):
+    def open(self,all=False):
         try :
             with open('.info','r') as f:
                 info = f.read()
             info = json.loads(info)
             url = info['url']
-            
+
+            if all==True:
+                if 'codeforces.com' in url:
+                    lab = url.rsplit('/',maxsplit=1)
+                    lab[-1]=''
+                    url = lab[0]+'s'
+                elif 'atcoder.jp' in url:
+                    lab = url.rsplit('/',maxsplit=1)
+                    url = lab[0] 
+
             webbrowser.open(url)
             cprint(' Check Browser.','yellow')
 
@@ -1737,21 +1746,22 @@ def help():
 def cp_manager(msg):
 
     msg = msg.lower()
+    ar = msg.split(sep=' ')
     
     if if_run_type(msg):
         pass
-    elif 'parse' in msg or 'listen' in msg:
+    elif 'parse' in ar or 'listen' in ar:
         obj = Cp_ext()
         obj.listen()
-    elif 'problem' in msg:
+    elif 'problem' in ar:
         obj = Cp_Problem()
         obj.fetch_problem()
-    elif 'submit' in msg:
+    elif 'submit' in ar:
         msg = msg.replace('submit','')
         msg = msg.replace(' ','')
         obj = Cp_Submit()
         obj.find_files(msg)
-    elif '-t' in msg or 'template' in msg:
+    elif '-t' in ar or 'template' in ar:
         msg = msg.replace('-t','')
         msg = msg.replace('template','')
         msg = msg.split()
@@ -1764,40 +1774,44 @@ def cp_manager(msg):
         obj = Cp_setup()
         obj.template(file_name=msg)
     
-    elif 'contest' in msg:
+    elif 'contest' in ar:
         obj = Cp_contest()
         obj.parse_contest()
 
-    elif 'login' in msg:
+    elif 'login' in ar:
         obj = Cp_login()
         obj.login()
-    elif 'add' in msg:
+    elif 'add' in ar:
         obj = Cp_add_test()
         obj.add_case()
-    elif 'test -oj' in msg:
+    elif 'test -oj' in ar:
         msg = msg.replace('test -oj','')
         msg = msg.replace(' ','')
         obj = Cp_Test()
         obj.find_files(msg)
-    elif 'test' in msg:
+    elif 'test' in ar:
         msg = msg.replace('test','')
         msg = msg.replace(' ','')
         obj = Cp_my_tester()
         # obj.TLE = 1
         obj.find_files(msg)
-    elif 'setup' in msg:
+    elif 'setup' in ar:
         obj = Cp_setup()
         obj.setup()
-    elif 'brute' in msg:
+    elif 'brute' in ar:
         obj = Cp_bruteforce()
         obj.run()
-    elif 'gen' in msg:
+    elif 'gen' in ar:
         obj = Cp_setup()
         obj.gen_py()
-    elif 'open' in msg:
+    elif 'open' in ar:
+        all = False
+        if 'all' in ar:
+            all = True
+         
         obj = Cp_url_manager()
-        obj.open()
-    elif 'stand' in msg or 'standing' in msg:
+        obj.open(all)
+    elif 'stand' in ar or 'standing' in ar:
         obj = Cp_url_manager()
         obj.stand()
     elif msg in help_keys:
