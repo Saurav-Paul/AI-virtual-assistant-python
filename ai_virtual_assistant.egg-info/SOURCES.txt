@@ -32,6 +32,7 @@ system/notifications.py
 system/path.py
 system/screen_text.py
 tools/ConfigParser.py
+tools/TODO_management.py
 tools/__init__.py
 tools/assistant.py
 tools/calculation.py
