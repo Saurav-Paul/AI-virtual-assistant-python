@@ -1444,7 +1444,7 @@ class Cp_ext:
             if link==True:
                 dic = dic['result']
 
-            cprint(dic,'yellow')
+            # cprint(dic,'yellow')
             # return
             problem_name = dic['name']
             try :
@@ -1575,59 +1575,114 @@ class Cp_ext:
 
         cprint(' '*17+'...Parsing Problem...'+' '*17,'blue')
         print()
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.bind((self.HOST,self.PORT))
-            cprint(" Enter the link of the problem : ",'cyan',end='')
-            url = input()
-            print()
-            cnt = 0
-            ok = True
-            while ok:
-                try :
-                           
-                    cmd = 'oj-api get-problem --compatibility ' + url
-                    cmd = list(cmd.split())
+        cprint(" Enter the link of the problem : ",'cyan',end='')
+        url = input()
+        print()
+        cnt = 0
+        ok = True
+        while ok:
+            try :
+                       
+                cmd = 'oj-api get-problem --compatibility ' + url
+                cmd = list(cmd.split())
 
-                    problem_json = subprocess.run(cmd, universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                    # print(problem_json.stdout)
-                    t = threading.Thread(target=self.create,args=(problem_json.stdout,cnt,True))
-                    t.start()
-                    ok = False   
-                    cnt += 1
-                except :
-                    ok = False
+                problem_json = subprocess.run(cmd, universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                # print(problem_json.stdout)
+                t = threading.Thread(target=self.create,args=(problem_json.stdout,cnt,True))
+                t.start()
+                ok = False   
+                cnt += 1
+            except :
+                ok = False
 
         print()
+        t.join()
+        print()
         cprint(f' # Total {cnt} problems is fetched.','blue')
+
 
     def id(self):
 
         cprint(' '*17+'...Parsing Problem...'+' '*17,'blue')
         print()
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.bind((self.HOST,self.PORT))
-            cprint(" Enter the link of the problem : ",'cyan',end='')
-            url = input()
-            print()
+        cprint(" Enter the codeforces contest id : ",'cyan',end='')
+        contest_id = input()
+        cprint(" Enter the codeforces problems id : ",'cyan',end='')
+        problems = input()
+        problems = problems.split(sep=' ')
+        url = 'https://codeforces.com/contest/$CONTEST_ID/problem/$PROBLEM_ID'
+        url = url.replace('$CONTEST_ID',contest_id)
+        rem = url
+        print()
+        cnt = 0
+        
+        for prob in problems: 
+            try :
+                url = rem.replace('$PROBLEM_ID',prob)
+                cmd = 'oj-api get-problem --compatibility ' + url
+                cmd = list(cmd.split())
+
+                problem_json = subprocess.run(cmd, universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                t = threading.Thread(target=self.create,args=(problem_json.stdout,cnt,True))
+                t.start()
+                cnt += 1
+            except :
+                cprint(" Invalid id : "+ prob,'red')
+
+        print()
+        t.join()
+        print()
+        cprint(f' # Total {cnt} problems is fetched.','blue')
+
+
+    def parse_contest(self,url=''):
+        try :
+
+            cprint(' '*17+'...Parsing Contest...'+' '*17,'blue')
+            if url == '':
+                cprint('Enter the url : ','cyan',end='')
+                url = input()
+            cprint('-'*55,'magenta')
+            # os.system(cmd)
+            t = time.time()
+            cmd = 'oj-api get-contest ' + url
+            cmd = list(cmd.split())
+
+            cp = subprocess.run(cmd, universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            contest = json.loads(cp.stdout)
+
+            result = "\tFetched Contest info..."
+            if contest['status'] == 'ok':
+                cprint(result,'green')
+            else :
+                cprint("Sorry contest can't be fetched. Sorry sir. :( ",'red')
+                return
+            problems = contest['result']['problems']
+
             cnt = 0
-            ok = True
-            while ok:
+
+            for prob in problems: 
                 try :
-                           
+
+                    url = prob['url']
                     cmd = 'oj-api get-problem --compatibility ' + url
                     cmd = list(cmd.split())
 
                     problem_json = subprocess.run(cmd, universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                    # print(problem_json.stdout)
                     t = threading.Thread(target=self.create,args=(problem_json.stdout,cnt,True))
                     t.start()
-                    ok = False   
                     cnt += 1
                 except :
-                    ok = False
+                    cprint(" Invalid id : "+ prob,'red')
 
-        print()
-        cprint(f' # Total {cnt} problems is fetched.','blue')
+            print()
+            t.join()
+            print()
+            cprint(f' # Total {cnt} problems is fetched.','blue')
+        
+        except Exception as e:
+            cprint(e,'red')
+
 class Cp_url_manager:
 
 
@@ -1817,7 +1872,14 @@ def cp_manager(msg):
         obj.link()
     elif 'parse' in ar or 'listen' in ar:
         obj = Cp_ext()
-        obj.listen()
+        if 'link' in ar :
+            obj.link()
+        elif 'id' in ar :
+            obj.id()
+        elif 'contest' in ar:
+            obj.parse_contest()
+        else :
+            obj.listen()
     elif 'problem' in ar:
         obj = Cp_Problem()
         obj.fetch_problem()
