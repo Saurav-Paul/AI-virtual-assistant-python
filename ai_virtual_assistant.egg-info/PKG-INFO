@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ai-virtual-assistant
-Version: 0.3.2
+Version: 0.3.3
 Summary: CLI virtual assitant for competitive programming
 Home-page: https://github.com/Saurav-Paul/AI-virtual-assistant-python
 Author: Saurav Paul
@@ -128,11 +128,18 @@ Description: # AI virtual assitant
         
         Also, the problem can be parsed without competitive companion though I don't recommend this. the command is given below,
         
-        > jarvis -cp problem
+        > jarvis -cp parse link
         
         or
         
-        > Cp problem
+        > Cp parse link
+        
+        
+        There is another way possible for parsing problem using id, which only works for
+        codeforces. The command is,
+        
+        > Cp parse id
+        
         
         After giving the command it will ask for the problem URL. Just give the URL,it will parse the problem. There will be created a folder according to the problem name. And it will contain all the sample test cases of that problem.
         
@@ -300,7 +307,9 @@ Description: # AI virtual assitant
         
         > Cp login
         
-        It will ask for a judge link, your username, and a password.
+        It will open login page in browser. You need webdriver for that purpose.
+        Install webdriver for your browser. It's really very easy.
+        
         
         For submitting code just write the given command,
         
@@ -328,11 +337,11 @@ Description: # AI virtual assitant
         
         Also, the contest can be parsed without competitive companion though I don't recommend this. the command is given below,
         
-        > jarvis -cp contest
+        > jarvis -cp parse contest
         
         or
         
-        > Cp contest
+        > Cp parse contest
         
         It will ask for the contest link. Then it will parse all the problems.
         
