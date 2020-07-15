@@ -203,8 +203,8 @@ class Cp_my_tester:
             print()
         
     def different(self,value,output,expected,case):
-        x = output.split('\n')
-        y = expected.split('\n')
+        # x = output.split('\n')
+        # y = expected.split('\n')
         i = value.split('\n')
         pt  = '  '+'-'*5+'Problem Found in '+case+'-'*5
         cprint(pt,'yellow')
@@ -1038,8 +1038,8 @@ class Cp_bruteforce:
         
     def different(self,value,output,expected):
         print()
-        x = output.split('\n')
-        y = expected.split('\n')
+        # x = output.split('\n')
+        # y = expected.split('\n')
         i = value.split('\n')
         pt  = '  '+'-'*5+'Problem Found' +'-'*5
         cprint(pt,'yellow')
@@ -1048,8 +1048,12 @@ class Cp_bruteforce:
         # print(value)
         self.diff_print('Input',i,'cyan')
         # self.diff_print('Output',x)
-        self.colorfull_diff_print(x,y)
-        self.diff_print('Expected',y,'green')
+        # self.colorfull_diff_print(x,y)
+        # self.diff_print('Expected',y,'green')
+
+        obj = table()
+        obj.print(output,expected)
+
         # print('Output :')
         # print(output)
         # print("Expected :")
