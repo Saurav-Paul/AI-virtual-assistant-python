@@ -120,11 +120,18 @@ After parsing there will create a new folder according to the contest name and i
 
 Also, the problem can be parsed without competitive companion though I don't recommend this. the command is given below,
 
-> jarvis -cp problem
+> jarvis -cp parse link
 
 or
 
-> Cp problem
+> Cp parse link
+
+
+There is another way possible for parsing problem using id, which only works for
+codeforces. The command is,
+
+> Cp parse id
+
 
 After giving the command it will ask for the problem URL. Just give the URL,it will parse the problem. There will be created a folder according to the problem name. And it will contain all the sample test cases of that problem.
 
@@ -292,7 +299,9 @@ or
 
 > Cp login
 
-It will ask for a judge link, your username, and a password.
+It will open login page in browser. You need webdriver for that purpose.
+Install webdriver for your browser. It's really very easy.
+
 
 For submitting code just write the given command,
 
@@ -320,11 +329,11 @@ then it will start listening, then just open the contest link and click the brow
 
 Also, the contest can be parsed without competitive companion though I don't recommend this. the command is given below,
 
-> jarvis -cp contest
+> jarvis -cp parse contest
 
 or
 
-> Cp contest
+> Cp parse contest
 
 It will ask for the contest link. Then it will parse all the problems.
 

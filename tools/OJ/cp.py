@@ -33,6 +33,152 @@ class bcolors:
     UNDERLINE = '\033[4m'
 
 
+class table:
+    box_weight = 50
+
+    table_color = 'white'
+    keyword = 'yellow'
+    accepted = 'green'
+    wrong = 'red'
+    information = 'white'
+
+    dif_sign = clr('|',table_color,attrs=['bold'])
+
+    def multiple(self,n,value= ' ') :
+        s = value*n
+        return s
+
+    def separator(self,value='-') :
+        cprint(self.multiple(self.box_weight*2+3+7,clr(value,self.table_color,attrs=['bold']) ),self.table_color)
+
+    def header(self,col1,col2):
+
+        self.separator()
+
+
+        print(self.dif_sign +clr(' Line ',self.keyword)+ self.dif_sign , end='')
+
+        before = (self.box_weight - len(col1))/2
+        before = int(before)
+        after = self.box_weight - before - len(col1)
+
+        print(self.multiple(before,' ')+clr(col1,self.keyword)+self.multiple(after,' '),end='')
+        print(self.dif_sign,end='')
+
+        before = (self.box_weight - len(col2))/2
+        before = int(before)
+        after = self.box_weight - before - len(col2)
+
+        print(self.multiple(before)+clr(col2,self.keyword)+self.multiple(after),end='')
+        print(self.dif_sign,end='')
+
+        print()
+
+        self.separator()
+
+    def line_print(self,no,x,y) :
+
+
+        # p =''
+
+        # for o , e in zip_longest(x,y,fillvalue=''):
+        #     if(o == e):
+        #         p += clr(o,self.accepted)
+        #     else :
+        #         p += clr(o,self.wrong)
+
+
+        pt =[] 
+
+        for o , e in zip_longest(x,y,fillvalue=''):
+            if(o == e):
+                pt.append(clr(o,self.accepted) )
+            else :
+                pt.append(clr(o,self.wrong))
+
+
+        sx = len(x)
+        sy = len(y)
+        curr = 0 
+
+        xNull = False
+        yNull = False
+
+        if x == '(#$null$#)' :
+            xNull = True
+
+        if y == '(#$null$#)' :
+            yNull = True
+        
+
+        smax = max(sx,sy)
+
+        while curr <= smax :
+            print(self.dif_sign + ' ' + clr(no,'cyan') + ' '*(5 - len(no)) + self.dif_sign,end = '')
+            tx = ''
+            if xNull == True :
+                tx = clr('(null)',self.information) + ' ' * (self.box_weight - 6)
+            else :
+                for i in range(curr,curr+self.box_weight):
+                    if i < sx :
+                        tx += pt[i]
+                    else:
+                        tx += ' ' * (self.box_weight - (i - curr ))
+                        break
+
+            print(tx + self.dif_sign,end='')
+
+
+            tx = ''
+            if yNull == True :
+                tx = clr('(null)',self.information) + ' ' * (self.box_weight - 6)
+            else :
+                for i in range(curr,curr+self.box_weight):
+                    if i < sy :
+                        tx += clr(y[i],self.accepted)
+                    else:
+                        tx += ' ' * (self.box_weight - (i - curr ))
+                        break
+        
+
+            print(tx + self.dif_sign)
+
+            curr += self.box_weight
+            no = ''
+                
+        # after = self.box_weight - len(x)
+        # print(p+after*' ' + self.dif_sign, end = '')
+
+        # after = self.box_weight - len(y)
+        # print(clr(y,self.accepted)+after*' ' + self.dif_sign)
+
+        # self.separator('-')
+
+    def print(self,output,expected,col1='Output',col2='Expected'):
+
+        self.header(col1,col2)
+
+        x = output.split(sep='\n')
+        y = expected.split(sep='\n')
+
+        sx = len(x)
+        sy = len(y)
+
+        total_line = max(sx,sy)
+
+        for no in range(total_line) : 
+            try :
+                vx = x[no]
+            except :
+                vx = '(#$null$#)'
+            try :
+                vy = y[no]
+            except :
+                vy = '(#$null$#)'
+            self.line_print(str(no+1),vx,vy)
+
+        self.separator()
+
 
 class Cp_my_tester:
 
@@ -57,8 +203,8 @@ class Cp_my_tester:
             print()
         
     def different(self,value,output,expected,case):
-        x = output.split('\n')
-        y = expected.split('\n')
+        # x = output.split('\n')
+        # y = expected.split('\n')
         i = value.split('\n')
         pt  = '  '+'-'*5+'Problem Found in '+case+'-'*5
         cprint(pt,'yellow')
@@ -66,8 +212,11 @@ class Cp_my_tester:
         # print(value)
         self.diff_print('Input',i,'cyan')
         # self.diff_print('Output',x)
-        self.colorfull_diff_print(x,y)
-        self.diff_print('Expected',y,'green')
+        # self.colorfull_diff_print(x,y)
+        # self.diff_print('Expected',y,'green')
+
+        obj = table()
+        obj.print(output,expected)
         # print('Output :')
         # print(output)
         # print("Expected :")
@@ -435,6 +584,7 @@ class Cp_login:
         judges = [
             'Codeforces',
             'Atcoder',
+            'HackerRank',
             'Others'
         ]
         links = {
@@ -469,7 +619,7 @@ class Cp_login:
             get_link = input()
             print()
             print()
-            cprint(f"\t\tJudge link: {get_link}",'yellow')
+            cprint(f"\tJudge link: {get_link}",'yellow')
 
 
         return  get_link
@@ -483,30 +633,33 @@ class Cp_login:
             
             print()
 
-            cprint(' Enter your username : ','cyan',end='')
-            username = input()
-            password = getpass.getpass(prompt=' Enter your password : ')
-            cmd = "USERNAME=$USERNAME PASSWORD=$PASS oj-api login-service " + oj + '> .status'
-            cmd = cmd.replace("$USERNAME",username) 
-            cmd = cmd.replace("$PASS",password) 
-            # print(cmd)
+            # cprint(' Enter your username : ','cyan',end='')
+            # username = input()
+            # password = getpass.getpass(prompt=' Enter your password : ')
+            # cmd = "USERNAME=$USERNAME PASSWORD=$PASS oj-api login-service " + oj + '> .status'
+            # cmd = cmd.replace("$USERNAME",username) 
+            # cmd = cmd.replace("$PASS",password) 
 
+            cmd = 'oj login ' + oj
+
+            # print(cmd)
             print()
-            xt = '-'*15+'Api-client-Interface'+'-'*15
+            xt = '-'*15+'Oj-Tools-Interface'+'-'*15
             cprint(xt,'magenta')
+            print()
             os.system(cmd)
             print()
             cprint('-'*len(xt),'magenta')
             print()
 
-            with open('.status','r') as f:
-                cp = f.read()
-            cp = json.loads(cp)
-            if cp["result"]['loggedIn']:
-                cprint(" (^-^) Logged in successfully....",'green')
-            else :
-                cprint(" (-_-) Login failed. May be wrong wrong username or password.",'red')
-            os.remove('.status')
+            # with open('.status','r') as f:
+            #     cp = f.read()
+            # cp = json.loads(cp)
+            # if cp["result"]['loggedIn']:
+            #     cprint(" (^-^) Logged in successfully....",'green')
+            # else :
+            #     cprint(" (-_-) Login failed. May be wrong wrong username or password.",'red')
+            # os.remove('.status')
         except Exception as e:
             # print(e)
             # cprint("Login failed. (Sad)",'red')
@@ -885,8 +1038,8 @@ class Cp_bruteforce:
         
     def different(self,value,output,expected):
         print()
-        x = output.split('\n')
-        y = expected.split('\n')
+        # x = output.split('\n')
+        # y = expected.split('\n')
         i = value.split('\n')
         pt  = '  '+'-'*5+'Problem Found' +'-'*5
         cprint(pt,'yellow')
@@ -895,8 +1048,12 @@ class Cp_bruteforce:
         # print(value)
         self.diff_print('Input',i,'cyan')
         # self.diff_print('Output',x)
-        self.colorfull_diff_print(x,y)
-        self.diff_print('Expected',y,'green')
+        # self.colorfull_diff_print(x,y)
+        # self.diff_print('Expected',y,'green')
+
+        obj = table()
+        obj.print(output,expected)
+
         # print('Output :')
         # print(output)
         # print("Expected :")
@@ -1436,12 +1593,16 @@ class Cp_ext:
         except Exception as e:
             return ''
 
-    def create(self,problem , cnt=0):
-        # print("here")
+    def create(self,problem , cnt=0, link=False):
+        # print(problem)
         try :
             problem = self.rectify(problem)
             dic = json.loads(problem)
+            if link==True:
+                dic = dic['result']
+
             # cprint(dic,'yellow')
+            # return
             problem_name = dic['name']
             try :
                 contest_name = dic['group']
@@ -1566,6 +1727,118 @@ class Cp_ext:
 
         print()
         cprint(f' # Total {cnt} problems is fetched.','blue')
+
+    def link(self):
+
+        cprint(' '*17+'...Parsing Problem...'+' '*17,'blue')
+        print()
+        cprint(" Enter the link of the problem : ",'cyan',end='')
+        url = input()
+        print()
+        cnt = 0
+        ok = True
+        while ok:
+            try :
+                       
+                cmd = 'oj-api get-problem --compatibility ' + url
+                cmd = list(cmd.split())
+
+                problem_json = subprocess.run(cmd, universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                # print(problem_json.stdout)
+                t = threading.Thread(target=self.create,args=(problem_json.stdout,cnt,True))
+                t.start()
+                ok = False   
+                cnt += 1
+            except :
+                ok = False
+
+        print()
+        t.join()
+        print()
+        cprint(f' # Total {cnt} problems is fetched.','blue')
+
+
+    def id(self):
+
+        cprint(' '*17+'...Parsing Problem...'+' '*17,'blue')
+        print()
+        cprint(" Enter the codeforces contest id : ",'cyan',end='')
+        contest_id = input()
+        cprint(" Enter the codeforces problems id : ",'cyan',end='')
+        problems = input()
+        problems = problems.split(sep=' ')
+        url = 'https://codeforces.com/contest/$CONTEST_ID/problem/$PROBLEM_ID'
+        url = url.replace('$CONTEST_ID',contest_id)
+        rem = url
+        print()
+        cnt = 0
+        
+        for prob in problems: 
+            try :
+                url = rem.replace('$PROBLEM_ID',prob)
+                cmd = 'oj-api get-problem --compatibility ' + url
+                cmd = list(cmd.split())
+
+                problem_json = subprocess.run(cmd, universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                t = threading.Thread(target=self.create,args=(problem_json.stdout,cnt,True))
+                t.start()
+                cnt += 1
+            except :
+                cprint(" Invalid id : "+ prob,'red')
+
+        print()
+        t.join()
+        print()
+        cprint(f' # Total {cnt} problems is fetched.','blue')
+
+
+    def parse_contest(self,url=''):
+        try :
+
+            cprint(' '*17+'...Parsing Contest...'+' '*17,'blue')
+            if url == '':
+                cprint('Enter the url : ','cyan',end='')
+                url = input()
+            cprint('-'*55,'magenta')
+            # os.system(cmd)
+            t = time.time()
+            cmd = 'oj-api get-contest ' + url
+            cmd = list(cmd.split())
+
+            cp = subprocess.run(cmd, universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            contest = json.loads(cp.stdout)
+
+            result = "\tFetched Contest info..."
+            if contest['status'] == 'ok':
+                cprint(result,'green')
+            else :
+                cprint("Sorry contest can't be fetched. Sorry sir. :( ",'red')
+                return
+            problems = contest['result']['problems']
+
+            cnt = 0
+
+            for prob in problems: 
+                try :
+
+                    url = prob['url']
+                    cmd = 'oj-api get-problem --compatibility ' + url
+                    cmd = list(cmd.split())
+
+                    problem_json = subprocess.run(cmd, universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                    t = threading.Thread(target=self.create,args=(problem_json.stdout,cnt,True))
+                    t.start()
+                    cnt += 1
+                except :
+                    cprint(" Invalid id : "+ prob,'red')
+
+            print()
+            t.join()
+            print()
+            cprint(f' # Total {cnt} problems is fetched.','blue')
+        
+        except Exception as e:
+            cprint(e,'red')
 
 class Cp_url_manager:
 
@@ -1750,9 +2023,20 @@ def cp_manager(msg):
     
     if if_run_type(msg):
         pass
+
+    elif 'dev' in ar or 'dev' in ar:
+        obj = Cp_ext()
+        obj.link()
     elif 'parse' in ar or 'listen' in ar:
         obj = Cp_ext()
-        obj.listen()
+        if 'link' in ar :
+            obj.link()
+        elif 'id' in ar :
+            obj.id()
+        elif 'contest' in ar:
+            obj.parse_contest()
+        else :
+            obj.listen()
     elif 'problem' in ar:
         obj = Cp_Problem()
         obj.fetch_problem()

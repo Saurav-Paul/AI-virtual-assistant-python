@@ -13,3 +13,4 @@ tqdm
 wget
 wikipedia-api
 wolframalpha
+selenium

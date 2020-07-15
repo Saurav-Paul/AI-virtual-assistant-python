@@ -57,6 +57,7 @@ setup(
         'wget',
         'wikipedia-api',
         'wolframalpha',
+        'selenium'
     ],
     entry_points={
         'console_scripts': [
