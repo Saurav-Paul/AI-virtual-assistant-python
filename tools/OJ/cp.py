@@ -49,14 +49,13 @@ class table:
         return s
 
     def separator(self,value='-') :
-        cprint(self.multiple(self.box_weight*2+3+7,clr(value,self.table_color,attrs=['bold']) ),self.table_color)
+        cprint(self.multiple(self.box_weight*2+5+8,clr(value,self.table_color,attrs=['bold']) ),self.table_color)
 
     def header(self,col1,col2):
 
         self.separator()
 
-
-        print(self.dif_sign +clr(' Line ',self.keyword)+ self.dif_sign , end='')
+        print(self.dif_sign +clr(' LN ',self.keyword)+ self.dif_sign , end='')
 
         before = (self.box_weight - len(col1))/2
         before = int(before)
@@ -64,6 +63,9 @@ class table:
 
         print(self.multiple(before,' ')+clr(col1,self.keyword)+self.multiple(after,' '),end='')
         print(self.dif_sign,end='')
+
+
+        print(clr(' LN ',self.keyword)+ self.dif_sign , end='')
 
         before = (self.box_weight - len(col2))/2
         before = int(before)
@@ -114,7 +116,7 @@ class table:
         smax = max(sx,sy)
 
         while curr <= smax :
-            print(self.dif_sign + ' ' + clr(no,'cyan') + ' '*(5 - len(no)) + self.dif_sign,end = '')
+            print(self.dif_sign + ' ' + clr(no,'cyan') + ' '*(3 - len(no)) + self.dif_sign,end = '')
             tx = ''
             if xNull == True :
                 tx = clr('(null)',self.information) + ' ' * (self.box_weight - 6)
@@ -129,6 +131,7 @@ class table:
             print(tx + self.dif_sign,end='')
 
 
+            print( ' ' + clr(no,'cyan') + ' '*(3 - len(no)) + self.dif_sign,end = '')
             tx = ''
             if yNull == True :
                 tx = clr('(null)',self.information) + ' ' * (self.box_weight - 6)
@@ -203,8 +206,8 @@ class Cp_my_tester:
             print()
         
     def different(self,value,output,expected,case):
-        # x = output.split('\n')
-        # y = expected.split('\n')
+        x = output.split('\n')
+        y = expected.split('\n')
         i = value.split('\n')
         pt  = '  '+'-'*5+'Problem Found in '+case+'-'*5
         cprint(pt,'yellow')
@@ -212,7 +215,7 @@ class Cp_my_tester:
         # print(value)
         self.diff_print('Input',i,'cyan')
         # self.diff_print('Output',x)
-        # self.colorfull_diff_print(x,y)
+        self.colorfull_diff_print(x,y)
         # self.diff_print('Expected',y,'green')
 
         obj = table()
@@ -307,7 +310,7 @@ class Cp_my_tester:
 
 
 
-    def test(self,file_name):
+    def test(self,file_name,show=False):
         path = os.getcwd()
         # print(path, file_name)
         pt='-'*20+file_name+'-'*20
@@ -423,6 +426,8 @@ class Cp_my_tester:
             if result == ans:
                 cprint('  * Passed','green')
                 passed += 1
+                if show == True :
+                    self.different(value,result,ans,ext[0])
             else :
                 cprint('  * WA','red')
                 failed += 1
@@ -454,7 +459,7 @@ class Cp_my_tester:
         pt='-'*20+'-'*len(file_name)+'-'*20
         cprint(pt,'magenta')
 
-    def find_files(self,file_name=''):
+    def find_files(self,file_name='',show=False):
 
         file_list = []
         # print(file_name)
@@ -472,7 +477,7 @@ class Cp_my_tester:
         # print(file_list)
         sz = len(file_list)
         if sz == 1:
-            self.test(file_list[0])
+            self.test(file_list[0],show)
         elif sz > 1:
             no = 1
             cprint("All the available files are given below.\n",'yellow')
@@ -489,7 +494,7 @@ class Cp_my_tester:
                     cprint("Testing operation cancelled.",'red')
                     break
                 elif index < no:
-                    self.test(file_list[index-1])
+                    self.test(file_list[index-1],show)
                     break
                 else:
                     cprint("You have entered the wrong index.Please try again.",'red')
@@ -1678,11 +1683,12 @@ class Cp_ext:
             # cprint(result,'green')
             # print(info)
             cprint(f'  {problem_name} fetched successfully.','green')
-            os.chdir(base)
+            os.chdir(contest_path)
 
         except Exception as e:
-            cprint(e,'red')
-            cprint("Can't fetch.",'red')
+            # cprint(e,'red')
+            # cprint("Can't fetch.",'red')
+            pass
        
 
     def listen(self):
@@ -2018,6 +2024,7 @@ def help():
 
 def cp_manager(msg):
 
+    status = ''
     msg = msg.lower()
     ar = msg.split(sep=' ')
     
@@ -2037,6 +2044,7 @@ def cp_manager(msg):
             obj.parse_contest()
         else :
             obj.listen()
+        status = '$SHELL'
     elif 'problem' in ar:
         obj = Cp_Problem()
         obj.fetch_problem()
@@ -2068,7 +2076,7 @@ def cp_manager(msg):
     elif 'add' in ar:
         obj = Cp_add_test()
         obj.add_case()
-    elif 'test -oj' in ar:
+    elif 'test-oj' in ar:
         msg = msg.replace('test -oj','')
         msg = msg.replace(' ','')
         obj = Cp_Test()
@@ -2078,7 +2086,11 @@ def cp_manager(msg):
         msg = msg.replace(' ','')
         obj = Cp_my_tester()
         # obj.TLE = 1
-        obj.find_files(msg)
+        show = False
+        if '--show' in ar :
+            msg = msg.replace('--show','')
+            show = True
+        obj.find_files(msg,show)
     elif 'setup' in ar:
         obj = Cp_setup()
         obj.setup()
@@ -2103,6 +2115,8 @@ def cp_manager(msg):
     else :
         cprint('Arguments Error','red')
         help()
+    
+    return status
 
 def if_cp_type(msg):
     # print(msg)
