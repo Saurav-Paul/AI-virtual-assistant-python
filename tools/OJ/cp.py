@@ -1683,11 +1683,12 @@ class Cp_ext:
             # cprint(result,'green')
             # print(info)
             cprint(f'  {problem_name} fetched successfully.','green')
-            os.chdir(base)
+            os.chdir(contest_path)
 
         except Exception as e:
-            cprint(e,'red')
-            cprint("Can't fetch.",'red')
+            # cprint(e,'red')
+            # cprint("Can't fetch.",'red')
+            pass
        
 
     def listen(self):
@@ -2023,6 +2024,7 @@ def help():
 
 def cp_manager(msg):
 
+    status = ''
     msg = msg.lower()
     ar = msg.split(sep=' ')
     
@@ -2042,6 +2044,7 @@ def cp_manager(msg):
             obj.parse_contest()
         else :
             obj.listen()
+        status = '$SHELL'
     elif 'problem' in ar:
         obj = Cp_Problem()
         obj.fetch_problem()
@@ -2112,6 +2115,8 @@ def cp_manager(msg):
     else :
         cprint('Arguments Error','red')
         help()
+    
+    return status
 
 def if_cp_type(msg):
     # print(msg)

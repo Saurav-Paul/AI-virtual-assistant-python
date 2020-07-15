@@ -7,6 +7,8 @@ def cp_start():
 
     try :
 
+        pt = '-'*50
+        cprint(pt,'magenta')
         # from system.screen_text import asci_banner
         from tools.OJ.cp import cp_manager
         # from settings.settings import START_SCREEN_NAME
@@ -17,12 +19,14 @@ def cp_start():
         msg = ''
         for w in lt:
             msg +=w+' '
-        cp_manager(msg.strip())
+        status = cp_manager(msg.strip())
 
-        pt = '-'*50
         cprint(pt,'magenta')
         cprint(f' (^-^) -> Good luck sir.','green')
         cprint(pt,'magenta')
+
+        if status == '$SHELL' :
+            os.system('$SHELL')
 
     except :
         cprint("Can't open sir.",'red')
