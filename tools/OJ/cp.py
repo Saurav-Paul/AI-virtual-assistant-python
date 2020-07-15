@@ -310,7 +310,7 @@ class Cp_my_tester:
 
 
 
-    def test(self,file_name):
+    def test(self,file_name,show=False):
         path = os.getcwd()
         # print(path, file_name)
         pt='-'*20+file_name+'-'*20
@@ -426,6 +426,8 @@ class Cp_my_tester:
             if result == ans:
                 cprint('  * Passed','green')
                 passed += 1
+                if show == True :
+                    self.different(value,result,ans,ext[0])
             else :
                 cprint('  * WA','red')
                 failed += 1
@@ -457,7 +459,7 @@ class Cp_my_tester:
         pt='-'*20+'-'*len(file_name)+'-'*20
         cprint(pt,'magenta')
 
-    def find_files(self,file_name=''):
+    def find_files(self,file_name='',show=False):
 
         file_list = []
         # print(file_name)
@@ -475,7 +477,7 @@ class Cp_my_tester:
         # print(file_list)
         sz = len(file_list)
         if sz == 1:
-            self.test(file_list[0])
+            self.test(file_list[0],show)
         elif sz > 1:
             no = 1
             cprint("All the available files are given below.\n",'yellow')
@@ -492,7 +494,7 @@ class Cp_my_tester:
                     cprint("Testing operation cancelled.",'red')
                     break
                 elif index < no:
-                    self.test(file_list[index-1])
+                    self.test(file_list[index-1],show)
                     break
                 else:
                     cprint("You have entered the wrong index.Please try again.",'red')
@@ -2071,7 +2073,7 @@ def cp_manager(msg):
     elif 'add' in ar:
         obj = Cp_add_test()
         obj.add_case()
-    elif 'test -oj' in ar:
+    elif 'test-oj' in ar:
         msg = msg.replace('test -oj','')
         msg = msg.replace(' ','')
         obj = Cp_Test()
@@ -2081,7 +2083,11 @@ def cp_manager(msg):
         msg = msg.replace(' ','')
         obj = Cp_my_tester()
         # obj.TLE = 1
-        obj.find_files(msg)
+        show = False
+        if '--show' in ar :
+            msg = msg.replace('--show','')
+            show = True
+        obj.find_files(msg,show)
     elif 'setup' in ar:
         obj = Cp_setup()
         obj.setup()
