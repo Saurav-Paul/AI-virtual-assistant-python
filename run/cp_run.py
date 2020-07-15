@@ -6,8 +6,9 @@ from termcolor import cprint
 def cp_start():
 
     try :
-
-        pt = '-'*50
+        nm = 'ai-virtual-assistant'
+        st = int((56 - len(nm))/2)
+        pt = '-' * st + nm + '-' * st
         cprint(pt,'magenta')
         # from system.screen_text import asci_banner
         from tools.OJ.cp import cp_manager
@@ -21,6 +22,7 @@ def cp_start():
             msg +=w+' '
         status = cp_manager(msg.strip())
 
+        pt = '-'*len(pt)
         cprint(pt,'magenta')
         cprint(f' (^-^) -> Good luck sir.','green')
         cprint(pt,'magenta')
