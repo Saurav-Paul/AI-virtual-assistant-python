@@ -49,14 +49,13 @@ class table:
         return s
 
     def separator(self,value='-') :
-        cprint(self.multiple(self.box_weight*2+3+7,clr(value,self.table_color,attrs=['bold']) ),self.table_color)
+        cprint(self.multiple(self.box_weight*2+5+8,clr(value,self.table_color,attrs=['bold']) ),self.table_color)
 
     def header(self,col1,col2):
 
         self.separator()
 
-
-        print(self.dif_sign +clr(' Line ',self.keyword)+ self.dif_sign , end='')
+        print(self.dif_sign +clr(' LN ',self.keyword)+ self.dif_sign , end='')
 
         before = (self.box_weight - len(col1))/2
         before = int(before)
@@ -64,6 +63,9 @@ class table:
 
         print(self.multiple(before,' ')+clr(col1,self.keyword)+self.multiple(after,' '),end='')
         print(self.dif_sign,end='')
+
+
+        print(clr(' LN ',self.keyword)+ self.dif_sign , end='')
 
         before = (self.box_weight - len(col2))/2
         before = int(before)
@@ -114,7 +116,7 @@ class table:
         smax = max(sx,sy)
 
         while curr <= smax :
-            print(self.dif_sign + ' ' + clr(no,'cyan') + ' '*(5 - len(no)) + self.dif_sign,end = '')
+            print(self.dif_sign + ' ' + clr(no,'cyan') + ' '*(3 - len(no)) + self.dif_sign,end = '')
             tx = ''
             if xNull == True :
                 tx = clr('(null)',self.information) + ' ' * (self.box_weight - 6)
@@ -129,6 +131,7 @@ class table:
             print(tx + self.dif_sign,end='')
 
 
+            print( ' ' + clr(no,'cyan') + ' '*(3 - len(no)) + self.dif_sign,end = '')
             tx = ''
             if yNull == True :
                 tx = clr('(null)',self.information) + ' ' * (self.box_weight - 6)
@@ -203,8 +206,8 @@ class Cp_my_tester:
             print()
         
     def different(self,value,output,expected,case):
-        # x = output.split('\n')
-        # y = expected.split('\n')
+        x = output.split('\n')
+        y = expected.split('\n')
         i = value.split('\n')
         pt  = '  '+'-'*5+'Problem Found in '+case+'-'*5
         cprint(pt,'yellow')
@@ -212,7 +215,7 @@ class Cp_my_tester:
         # print(value)
         self.diff_print('Input',i,'cyan')
         # self.diff_print('Output',x)
-        # self.colorfull_diff_print(x,y)
+        self.colorfull_diff_print(x,y)
         # self.diff_print('Expected',y,'green')
 
         obj = table()
