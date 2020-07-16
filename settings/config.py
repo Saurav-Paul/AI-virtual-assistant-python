@@ -768,7 +768,105 @@ class Config:
         except Exception as e:
             cprint(e,'red')
 
+    def after_parsing_open_with_and_editor(self):
 
+
+        try :
+            from settings.compiler import editor , editor_name
+            pt = '-'*22 + 'Preferred Editor' +'-'*22
+            cprint(pt,'magenta')
+            print()
+
+            cprint(" Current Editor : " + editor_name ,'yellow')
+            print()
+
+            cprint('  1) Update Editor.','blue')
+            cprint('  0) Back.','red')
+            print()
+
+            ok = True
+            while ok:
+                ok = False
+                cprint(' Enter the index number : ','cyan',end='')
+                no = int(input())
+                if no == 0:
+                    cprint(" Going back.",'red')
+                    return 
+                elif no == 1:
+                    print()
+                    editors = {
+                        "Vs Code" : 'code',
+                        "Subline" : 'subl',
+                        "Neo Vim" : 'nvim',
+                        "Vim" : 'vim',
+                        "Others" : "",
+                        "NONE" : "$NONE"
+                    }
+
+                    i = 0
+
+                    options = []
+
+                    for w in editors:
+                        cprint(f'  {i+1}) {w}','blue')
+                        i += 1
+                        options.append(w)
+                    cprint('  0) Cancel','red')
+                    print()
+                    ko = True
+                    
+
+                    while ko:
+                        ko = False
+                        cprint(" Enter the index number : ",'cyan',end='')
+                        no = int(input())
+                        if no == 0:
+                            cprint(" Operation cancelled.",'red')
+                            return
+                        elif no == 1:
+                            cprint(f' You have selected {options[no-1]} .','yellow')
+                            editor_name = options[no-1]
+                            editor = editors[editor_name]
+                        elif no == 2:
+                            cprint(f' You have selected {options[no-1]} .','yellow')
+                            editor_name = options[no-1]
+                            editor = editors[editor_name]
+                        elif no == 3:
+                            cprint(f' You have selected {options[no-1]} .','yellow')
+                            editor_name = options[no-1]
+                            editor = editors[editor_name]
+                        elif no == 4:
+                            cprint(f' You have selected {options[no-1]} .','yellow')
+                            editor_name = options[no-1]
+                            editor = editors[editor_name]
+                        elif no == 5:
+                            cprint(f' You have selected {options[no-1]} .','yellow')
+                            cprint(" Enter your preferred editor name : ",'cyan',end='')
+                            editor_name = input()
+                            cprint(" Enter your editor run command : ",'cyan',end='')
+                            editor = input() 
+                        elif no == 6:
+                            cprint(f' You have selected {options[no-1]} .','yellow')
+                            editor_name = options[no-1]
+                            editor = editors[editor_name]
+                        else :
+                            ko = True
+                            cprint(" You have selected wrong index. Please try again.",'red')
+                        # print(editor_name, editor)
+                        section = 'cp'
+                        obx= CM()
+                        data = obx.read(conf_path,section = section)
+                        data['editor'] = editor
+                        data['editor_name'] = editor_name
+                        obx.update(conf_path,data,section=section)
+                        cprint(' Editor updated successfully.')
+
+                        return
+                    else:
+                        cprint(" You have choosen wrong index.",'red')
+                        ok = True
+        except Exception as e:
+            cprint(e,'red')
 
     def competitve_programming(self,no=2):
 
@@ -776,7 +874,8 @@ class Config:
             'Competitive Companion.',
             'Template Path.',
             'Compiler',
-            'Cf Tool Mode'
+            'Cf Tool Mode',
+            'After parsing open with an editor'
         ]
 
         pt = '-'*22 + self.lt[no] +'-'*22
@@ -811,6 +910,9 @@ class Config:
             elif no == 4:
                 cprint(f' You have selected {optinos[no-1]} .','yellow')
                 self.cf_tool_function()
+            elif no == 5:
+                cprint(f' You have selected {optinos[no-1]} .','yellow')
+                self.after_parsing_open_with_and_editor()
             else :
                 ok = True
                 cprint(" You have selected wrong index. Please try again.",'red')
