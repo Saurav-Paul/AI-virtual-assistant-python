@@ -17,7 +17,7 @@ yes = ['yes','y']
 class Config:
     export_file_name = 'ai_virtual_assistant_configs.conf'
     obj = CM()
-    lt = ['Bot','Interaction','Competitive Programming','Features Installation','Training Mode','Export/Import settins']
+    lt = ['Bot','Interaction','Competitive Programming','Features Installation','Training Mode','Export/Import settings']
     cp = [
         'Coder Name',
         'Competitive companion port number',
@@ -948,14 +948,40 @@ class Config:
             confirm = input()
             positive = ['y', 'yes', 'ok', 'okay']
             if confirm.lower() in positive :
-                cprint(" Okay sir updating configs.",'green')
+                from settings.settings import all_sections
+                # print(all_sections)
                 try :
-                    with open(self.export_file_name,'r') as f :
-                        value = f.read()
-                    with open(conf_path,'w') as f :
-                        f.write(value)
+                    obj = CM()
+                    for section in all_sections :
+                        data = obj.read(self.export_file_name,section = section)
+                        # cprint(data,'yellow')
+                        conf_data = obj.read(conf_path,section = section)
+                        # cprint(conf_data,'cyan')
+
+                        for key in conf_data:
+                            try :
+                                x = data[key]
+                                conf_data[key] = x
+                                # cprint(key+' '+x , 'blue')
+                            except:
+                                pass
+                        # cprint(conf_data,'magenta')
+                        obj.update(conf_path,conf_data,section = section)
+
+                    cprint(" Configs are successfully imported.",'green')
+                    cprint(" You need to restart to see the new changes.",'yellow')
+                    
                 except Exception as e:
                     cprint(f" Sorry sir can't import. Error : {e}",'red')
+                # return
+                # cprint(" Okay sir updating configs.",'green')
+                # try :
+                #     with open(self.export_file_name,'r') as f :
+                #         value = f.read()
+                #     with open(conf_path,'w') as f :
+                #         f.write(value)
+                # except Exception as e:
+                #     cprint(f" Sorry sir can't import. Error : {e}",'red')
             else :
                 cprint(" Okay sir operation cancelled.",'red')
         pass
@@ -968,7 +994,7 @@ class Config:
         print()
         options = [
             'Export Settings',
-            'Import settings'
+            'Import Settings'
         ] 
         for i,w in enumerate(options):
             cprint(f'  {i+1}) {w}','blue')
