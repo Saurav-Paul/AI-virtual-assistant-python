@@ -35,7 +35,6 @@ bot = {
 
 DEBUG = True
 LEARN = True
-
 conf_path = os.path.join(getpath(__file__),'settings.conf')
 
 try :

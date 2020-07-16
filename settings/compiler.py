@@ -19,6 +19,7 @@ template_path = {
 }
 cf_tool_mode = False
 
+editor = '$NONE'
 coder_name = bot['boss']
 competitive_companion_port = 10043
 parse_problem_with_template = True # If true, after parsing all the codes will contain a file name sol.cpp (with your template)
@@ -32,6 +33,11 @@ try :
     obj = CM()
     x = obj.read(conf_path,section = section)
     coder_name = x['coder_name']
+    
+    try :
+        editor = x['editor']
+    except :
+        pass 
 
     if x['cf_tool_mode'] == 'True':
         cf_tool_mode = True

@@ -11,7 +11,7 @@ try :
     import socket
     import getpass
     from settings.compiler import competitive_companion_port, parse_problem_with_template
-    from settings.compiler import template_path , coder_name  
+    from settings.compiler import template_path , coder_name  , editor
     from system.get_time import digital_time
     from data.get_template import get_template
     from tools.run_program import if_run_type
