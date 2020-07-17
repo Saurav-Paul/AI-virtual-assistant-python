@@ -164,6 +164,14 @@ class table:
 
         self.header(col1,col2)
 
+        xempty = False
+        yempty = False
+
+        if output == '':
+            xempty = True
+
+        if expected == '':
+            yempty = True
         x = output.split(sep='\n')
         y = expected.split(sep='\n')
 
@@ -176,10 +184,15 @@ class table:
             try :
                 vx = x[no]
             except :
-                vx = '(#$null$#)'
+                xempty = True
             try :
                 vy = y[no]
             except :
+                yempty = True
+
+            if xempty :
+                vx = '(#$null$#)'
+            if yempty :
                 vy = '(#$null$#)'
             self.line_print(str(no+1),vx,vy)
 
@@ -197,6 +210,8 @@ class Cp_my_tester:
             cprint(x,color)
 
     def colorfull_diff_print(self,x,y) :
+        sz = len(x)
+        cnt = 0
         cprint("  Output :",'yellow',attrs=['bold'])
         for wx,wy in zip_longest(x,y,fillvalue=''):
             print('  ',end='')
@@ -205,8 +220,10 @@ class Cp_my_tester:
                     cprint(o,'green',end='')
                 else :
                     cprint(o,'red',end='')
-                    # cprint(e,'yellow',end='')
             print()
+            cnt += 1
+            if cnt >= sz :
+                break
         
     def different(self,value,output,expected,case):
         x = output.split('\n')
