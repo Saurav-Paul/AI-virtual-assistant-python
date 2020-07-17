@@ -135,6 +135,10 @@ codeforces. The command is,
 
 After giving the command it will ask for the problem URL. Just give the URL,it will parse the problem. There will be created a folder according to the problem name. And it will contain all the sample test cases of that problem.
 
+
+*If you want to automtically open in editor after parsing you need to specify your editor from config option. By default it is set as None.*
+
+
 ![parsing-problem](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/parsing%20problem.png)
 
 ## Generate File with Template
@@ -216,15 +220,21 @@ int main(){
 
 After parsing problem set, the solution can be tested by the given command,
 
-> jarvis -cp test
+> jarvis -cp test "filename"
 
 or
 
-> Cp test
+> Cp test "filename"
+
+*Giving filename is optional*
 
 It will run all the sample and custom cases from the test folder(Test folder contains all the sample cases after parsing problem set) and check whether your solution is passed. It will show the taken time for running each case. If your code failed any test cases it will show the differences between the correct answer and your output. If every case passed then it will show passed.
 
 It is not necessary to have a parsed problem set for using this command. You can make a test folder and add input(.in) and output(.out) case into that folder and then run this command.
+
+> Cp test --show
+
+This command will show full datails even solution passed against testcases.
 
 ![Test-solution](https://github.com/Saurav-Paul/Saurav-Paul.github.io/blob/master/images/jarvis%20testing%20program.png)
 
