@@ -8,7 +8,7 @@ def cp_start():
     try :
         nm = 'ai-virtual-assistant'
         st = int((56 - len(nm))/2)
-        pt = '-' * st + nm + '-' * st
+        pt = '-' * (st-1) + nm + '-' * (st+1)
         cprint(pt,'magenta')
         # from system.screen_text import asci_banner
         from tools.OJ.cp import cp_manager

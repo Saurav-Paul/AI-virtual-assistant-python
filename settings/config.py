@@ -17,7 +17,7 @@ yes = ['yes','y']
 class Config:
     export_file_name = 'ai_virtual_assistant_configs.conf'
     obj = CM()
-    lt = ['Bot','Interaction','Competitive Programming','Features Installation','Training Mode','Export/Import settins']
+    lt = ['Bot','Interaction','Competitive Programming','Features Installation','Training Mode','Export/Import settings']
     cp = [
         'Coder Name',
         'Competitive companion port number',
@@ -768,7 +768,105 @@ class Config:
         except Exception as e:
             cprint(e,'red')
 
+    def after_parsing_open_with_and_editor(self):
 
+
+        try :
+            from settings.compiler import editor , editor_name
+            pt = '-'*22 + 'Preferred Editor' +'-'*22
+            cprint(pt,'magenta')
+            print()
+
+            cprint(" Current Editor : " + editor_name ,'yellow')
+            print()
+
+            cprint('  1) Update Editor.','blue')
+            cprint('  0) Back.','red')
+            print()
+
+            ok = True
+            while ok:
+                ok = False
+                cprint(' Enter the index number : ','cyan',end='')
+                no = int(input())
+                if no == 0:
+                    cprint(" Going back.",'red')
+                    return 
+                elif no == 1:
+                    print()
+                    editors = {
+                        "Vs Code" : 'code',
+                        "Subline" : 'subl',
+                        "Neo Vim" : 'nvim',
+                        "Vim" : 'vim',
+                        "Others" : "",
+                        "NONE" : "$NONE"
+                    }
+
+                    i = 0
+
+                    options = []
+
+                    for w in editors:
+                        cprint(f'  {i+1}) {w}','blue')
+                        i += 1
+                        options.append(w)
+                    cprint('  0) Cancel','red')
+                    print()
+                    ko = True
+                    
+
+                    while ko:
+                        ko = False
+                        cprint(" Enter the index number : ",'cyan',end='')
+                        no = int(input())
+                        if no == 0:
+                            cprint(" Operation cancelled.",'red')
+                            return
+                        elif no == 1:
+                            cprint(f' You have selected {options[no-1]} .','yellow')
+                            editor_name = options[no-1]
+                            editor = editors[editor_name]
+                        elif no == 2:
+                            cprint(f' You have selected {options[no-1]} .','yellow')
+                            editor_name = options[no-1]
+                            editor = editors[editor_name]
+                        elif no == 3:
+                            cprint(f' You have selected {options[no-1]} .','yellow')
+                            editor_name = options[no-1]
+                            editor = editors[editor_name]
+                        elif no == 4:
+                            cprint(f' You have selected {options[no-1]} .','yellow')
+                            editor_name = options[no-1]
+                            editor = editors[editor_name]
+                        elif no == 5:
+                            cprint(f' You have selected {options[no-1]} .','yellow')
+                            cprint(" Enter your preferred editor name : ",'cyan',end='')
+                            editor_name = input()
+                            cprint(" Enter your editor run command : ",'cyan',end='')
+                            editor = input() 
+                        elif no == 6:
+                            cprint(f' You have selected {options[no-1]} .','yellow')
+                            editor_name = options[no-1]
+                            editor = editors[editor_name]
+                        else :
+                            ko = True
+                            cprint(" You have selected wrong index. Please try again.",'red')
+                        # print(editor_name, editor)
+                        section = 'cp'
+                        obx= CM()
+                        data = obx.read(conf_path,section = section)
+                        data['editor'] = editor
+                        data['editor_name'] = editor_name
+                        obx.update(conf_path,data,section=section)
+                        cprint(' Editor updated successfully.')
+
+                        return
+                    else:
+                        cprint(" You have choosen wrong index.",'red')
+                        ok = True
+        except Exception as e:
+            cprint(e,'red')
 
     def competitve_programming(self,no=2):
 
@@ -776,7 +874,8 @@ class Config:
             'Competitive Companion.',
             'Template Path.',
             'Compiler',
-            'Cf Tool Mode'
+            'Cf Tool Mode',
+            'After parsing open with an editor'
         ]
 
         pt = '-'*22 + self.lt[no] +'-'*22
@@ -811,6 +910,9 @@ class Config:
             elif no == 4:
                 cprint(f' You have selected {optinos[no-1]} .','yellow')
                 self.cf_tool_function()
+            elif no == 5:
+                cprint(f' You have selected {optinos[no-1]} .','yellow')
+                self.after_parsing_open_with_and_editor()
             else :
                 ok = True
                 cprint(" You have selected wrong index. Please try again.",'red')
@@ -931,7 +1033,7 @@ class Config:
 
     def export_settings(self):
         try :
-            with open(default_path,'r') as f :
+            with open(conf_path,'r') as f :
                 value = f.read()
             with open(self.export_file_name,'w') as f:
                 f.write(value)
@@ -948,14 +1050,40 @@ class Config:
             confirm = input()
             positive = ['y', 'yes', 'ok', 'okay']
             if confirm.lower() in positive :
-                cprint(" Okay sir updating configs.",'green')
+                from settings.settings import all_sections
+                # print(all_sections)
                 try :
-                    with open(self.export_file_name,'r') as f :
-                        value = f.read()
-                    with open(conf_path,'w') as f :
-                        f.write(value)
+                    obj = CM()
+                    for section in all_sections :
+                        data = obj.read(self.export_file_name,section = section)
+                        # cprint(data,'yellow')
+                        conf_data = obj.read(conf_path,section = section)
+                        # cprint(conf_data,'cyan')
+
+                        for key in conf_data:
+                            try :
+                                x = data[key]
+                                conf_data[key] = x
+                                # cprint(key+' '+x , 'blue')
+                            except:
+                                pass
+                        # cprint(conf_data,'magenta')
+                        obj.update(conf_path,conf_data,section = section)
+
+                    cprint(" Configs are successfully imported.",'green')
+                    cprint(" You need to restart to see the new changes.",'yellow')
+                    
                 except Exception as e:
                     cprint(f" Sorry sir can't import. Error : {e}",'red')
+                # return
+                # cprint(" Okay sir updating configs.",'green')
+                # try :
+                #     with open(self.export_file_name,'r') as f :
+                #         value = f.read()
+                #     with open(conf_path,'w') as f :
+                #         f.write(value)
+                # except Exception as e:
+                #     cprint(f" Sorry sir can't import. Error : {e}",'red')
             else :
                 cprint(" Okay sir operation cancelled.",'red')
         pass
@@ -968,7 +1096,7 @@ class Config:
         print()
         options = [
             'Export Settings',
-            'Import settings'
+            'Import Settings'
         ] 
         for i,w in enumerate(options):
             cprint(f'  {i+1}) {w}','blue')

@@ -11,7 +11,7 @@ try :
     import socket
     import getpass
     from settings.compiler import competitive_companion_port, parse_problem_with_template
-    from settings.compiler import template_path , coder_name  
+    from settings.compiler import template_path , coder_name , editor
     from system.get_time import digital_time
     from data.get_template import get_template
     from tools.run_program import if_run_type
@@ -21,6 +21,9 @@ except Exception as e:
 cp_keys = ['-cp','-Cp']
 
 cf_tool = True
+
+editor_file_path =[] 
+editor_file_name =[] 
 
 class bcolors:
     HEADER = '\033[95m'
@@ -1316,11 +1319,12 @@ class Cp_setup:
         except Exception as e:
             print(e)
             cprint(" Sorry, Sir can't genarate automatically gen file. ")
-    def template(self,file_path='',file_name='sol.cpp',parsingMode=False):
+    def template(self,file_path='',file_name='sol.cpp',parsingMode=False,open_editor=False):
         try :
             # print('Genarating template')
             from settings.compiler import template_path , coder_name
             from system.get_time import digital_time
+
             
             # print(template_path)
             ext = file_name.rsplit(sep='.',maxsplit=1)
@@ -1401,11 +1405,21 @@ class Cp_setup:
 
                 with open(file_name,'w') as f:
                     f.write(code)
+
+
+                if open_editor and editor != '$NONE':
+                    try :
+                        base = os.getcwd()
+                        filename_partion = file_name.rsplit(sep='/',maxsplit=1)
+                        editor_file_path.append(filename_partion[0])
+                        editor_file_name.append(filename_partion[1])
+                    except Exception as e :
+                        cprint(e,'red')
                 # print(code)
                 if parsingMode == False:
                     cprint(f' {fName} created succussfully, sir. :D','green')
             except Exception as e:
-                # cprint(e,'red')
+                cprint(e,'red')
                 cprint("template path doesn't exist. Sorry sir.",'red')
                 cprint("check settings/compiler.py to change your template path :D .",'yellow')
                 return
@@ -1443,8 +1457,6 @@ class Cp_setup:
 
 
 class Cp_contest():
-
-
 
     def fetch_problem(self,url = ''):
         try :
@@ -1579,13 +1591,14 @@ class Cp_ext:
 
     HOST = '127.0.0.1'
     PORT = competitive_companion_port
+    
 
-    def template(self,file_path,file_name='sol.cpp'):
+    def template(self,file_path,file_name='sol.cpp',open_editor=False):
         try :
 
-            
+            # print(open)
             obj_template = Cp_setup()
-            obj_template.template(file_path,file_name,parsingMode=True)
+            obj_template.template(file_path,file_name,parsingMode=True,open_editor=open_editor)
             return
         except Exception as e:
             return        
@@ -1641,6 +1654,7 @@ class Cp_ext:
                             f.write(info)
                     cprint(f" All the problems will be parsed into '{contest_name}' folder.\n",'magenta')
                 os.chdir(contest_path)
+
            
             # cprint(os.getcwd(),'red')
             if not os.path.isdir(problem_name):
@@ -1660,7 +1674,10 @@ class Cp_ext:
                 f.write(info)
             
             if parse_problem_with_template:
-                self.template(path)
+                open_editor = False
+                if cnt == 0 :
+                    open_editor = True
+                self.template(path,open_editor=open_editor)
 
             testcases = dic['tests']
             # print(testcases)
@@ -1732,7 +1749,18 @@ class Cp_ext:
                     ok = False
 
         print()
+        t.join()
         cprint(f' # Total {cnt} problems is fetched.','blue')
+
+        if cnt > 0 and editor != '$NONE':
+            cli_editors = ['nvim','vim','nano']
+            if editor not in cli_editors:
+                os.system(editor+' .')
+            base = os.getcwd()
+            for file_path,file_name in zip(editor_file_path,editor_file_name):
+                os.chdir(file_path)
+                os.system(editor + ' ' + file_name)
+            os.chdir(base)
 
     def link(self):
 
