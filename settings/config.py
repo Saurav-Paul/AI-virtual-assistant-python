@@ -1033,7 +1033,7 @@ class Config:
 
     def export_settings(self):
         try :
-            with open(default_path,'r') as f :
+            with open(conf_path,'r') as f :
                 value = f.read()
             with open(self.export_file_name,'w') as f:
                 f.write(value)

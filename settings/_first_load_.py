@@ -5,9 +5,48 @@ from termcolor import cprint
 
 conf_path = os.path.join(getpath(__file__),'settings.conf')
 default_path = os.path.join(getpath(__file__),'default.conf')
+export_file_name = 'ai_virtual_assistant_configs.conf'
+
+def import_settings():
+    if not os.path.exists(export_file_name):
+        return False
+    else :
+        cprint(' Export file exists. Do you want import(y/n) : ','cyan',end='')
+        confirm = input()
+        positive = ['y', 'yes', 'ok', 'okay']
+        if confirm.lower() in positive :
+            from settings.settings import all_sections
+            try :
+                obj = CM()
+                for section in all_sections :
+                    data = obj.read(export_file_name,section = section)
+                    conf_data = obj.read(conf_path,section = section)
+
+                    for key in conf_data:
+                        try :
+                            x = data[key]
+                            conf_data[key] = x
+                        except:
+                            pass
+                    obj.update(conf_path,conf_data,section = section)
+
+                cprint(" Configs are successfully imported.",'green')
+                return True
+
+            except Exception as e:
+                cprint(f" Sorry sir can't import. Error : {e}",'red')
+                return False
+        else :
+            return False
+
 
 def first_time() :
     pt = 22 * '-' + 'First time setup' + 22 * '-'
+    done = import_settings()
+
+    if done :
+        return
+
     try :
         with open(default_path) as f :
             default_value = f.read()
