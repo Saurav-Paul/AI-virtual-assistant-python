@@ -37,7 +37,12 @@ class bcolors:
 
 
 class table:
-    box_weight = 50
+    try :
+        columns, rows = os.get_terminal_size(0)
+        columns -= 15
+    except :
+        columns = 100
+    box_weight = columns // 2
 
     table_color = 'white'
     keyword = 'yellow'
