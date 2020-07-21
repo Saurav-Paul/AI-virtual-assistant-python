@@ -19,7 +19,7 @@ def cp_start():
     try :
 
         color = ['magenta','yellow','cyan','blue']
-        pt = 50
+        pt = 50 
         name_col = random.choice(color) 
         border_col = random.choice(color) 
         print_start_name('ai-virtual-assistant',50 ,name_col,border_col)
