@@ -859,7 +859,7 @@ class Config:
                         data['editor'] = editor
                         data['editor_name'] = editor_name
                         obx.update(conf_path,data,section=section)
-                        cprint(' Editor updated successfully.')
+                        cprint(' Editor updated successfully.','green')
 
                         return
                     else:

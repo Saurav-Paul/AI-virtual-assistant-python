@@ -21,6 +21,26 @@ def rep(msg):
 def api_math(msg):
     # https://api.mathjs.org/v4/?expr=2%2B3*sqrt(4)
     pass
+
+def make_ans(ans) :
+    try :
+        start = ans
+        ext =''
+        if '×' in ans :
+            msg = ans.rsplit(sep='×',maxsplit=1)
+            start = msg[0]
+            start = start.strip()
+            msg[1] = str(msg[1])
+            msg[1] = msg[1][:3] + '^' + msg[1][3:]
+            ext = ' x' + msg[1]
+
+        start = start.split('\xa0')
+        ans = ','.join(start) + ext
+        return ans
+    except Exception as e:
+        print(e)
+        return ans 
+
 def google_calculation(msg):
     try :
         headers = {
@@ -41,7 +61,7 @@ def google_calculation(msg):
         # print(bs)
         key = 'BNeawe iBp4i AP7Wnd'
         ans = bs.find(class_= key).div.text
-        return 'Solution is ' + ans
+        return 'Solution is ' + make_ans(ans)
     except Exception as e :
         logger.info(str(e))
         return "sorry"
