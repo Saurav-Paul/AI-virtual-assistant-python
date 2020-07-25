@@ -11,7 +11,7 @@ try :
     import socket
     import getpass
     from settings.compiler import competitive_companion_port, parse_problem_with_template
-    from settings.compiler import template_path , coder_name , editor
+    from settings.compiler import template_path , coder_name , editor , DEBUG 
     from system.get_time import digital_time
     from data.get_template import get_template
     from tools.run_program import if_run_type
@@ -718,8 +718,10 @@ class Cp_login:
                     cprint(" (-_-) Login failed. May be wrong wrong username or password.",'red')
                 os.remove('.status')
 
+
         except Exception as e:
-            # print(e)
+            if DEBUG :
+                cprint('Error : ' + e , 'red')
             # cprint("Login failed. (Sad)",'red')
             cprint(" (^_^) Login failed. May be wrong wrong username or password.",'red')
             pass
@@ -748,7 +750,8 @@ class Cp_Test:
             pt = ('-'*20+'-'*len(file_name)+'-'*20)
             cprint(pt,'magenta')
         except Exception as e:
-            print(e)
+            if DEBUG :
+                print(e)
             cprint("Got some error. :(",'red')
 
     def find_files(self,file_name=''):
