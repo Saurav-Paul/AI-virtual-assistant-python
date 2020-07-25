@@ -663,14 +663,40 @@ class Cp_login:
             
             print()
 
-            # cprint(' Enter your username : ','cyan',end='')
-            # username = input()
-            # password = getpass.getpass(prompt=' Enter your password : ')
-            # cmd = "USERNAME=$USERNAME PASSWORD=$PASS oj-api login-service " + oj + '> .status'
-            # cmd = cmd.replace("$USERNAME",username) 
-            # cmd = cmd.replace("$PASS",password) 
+            cli = False 
 
-            cmd = 'oj login ' + oj
+            cli_available = [
+                'codeforces.com',
+                'atcoder.jp'
+            ]
+
+            for judge in cli_available: 
+                if judge in oj :
+                    cprint(' Login using,', 'yellow')
+
+                    print()
+                    cprint('  1) Command line interface.','blue')
+                    cprint('  2) Using browser (Need Webdriver installed in the system).','blue')
+                    print()
+
+                    cprint(' Enter the index no : ','cyan',end='')
+                    index = int(input())
+
+                    print()
+
+                    if index == 1 :
+                        cli = True
+
+            if cli :
+                cprint(' Enter your username : ','cyan',end='')
+                username = input()
+                password = getpass.getpass(prompt=' Enter your password : ')
+                cmd = "USERNAME=$USERNAME PASSWORD=$PASS oj-api login-service " + oj + '> .status'
+                cmd = cmd.replace("$USERNAME",username) 
+                cmd = cmd.replace("$PASS",password) 
+
+            else :
+                cmd = 'oj login ' + oj
 
             # print(cmd)
             print()
@@ -682,14 +708,16 @@ class Cp_login:
             cprint('-'*len(xt),'magenta')
             print()
 
-            # with open('.status','r') as f:
-            #     cp = f.read()
-            # cp = json.loads(cp)
-            # if cp["result"]['loggedIn']:
-            #     cprint(" (^-^) Logged in successfully....",'green')
-            # else :
-            #     cprint(" (-_-) Login failed. May be wrong wrong username or password.",'red')
-            # os.remove('.status')
+            if cli :
+                with open('.status','r') as f:
+                    cp = f.read()
+                cp = json.loads(cp)
+                if cp["result"]['loggedIn']:
+                    cprint(" (^-^) Logged in successfully....",'green')
+                else :
+                    cprint(" (-_-) Login failed. May be wrong wrong username or password.",'red')
+                os.remove('.status')
+
         except Exception as e:
             # print(e)
             # cprint("Login failed. (Sad)",'red')
