@@ -5,6 +5,6 @@
       Problem Url   : $%PROBLEM_URL%$
       Problem Limit : $%TIMELIMIT%$ , $%MEMORYLIMIT%$
       Problem Url   : $%PROBLEM_URL%$
-      @genarated by ai-virtual-assistant
+      @genarated by : ai-virtual-assistant
       
 """
