@@ -110,6 +110,7 @@ class table:
         sx = len(x)
         sy = len(y)
         curr = 0 
+        
 
         xNull = False
         yNull = False
@@ -122,9 +123,14 @@ class table:
         
 
         smax = max(sx,sy)
+        line_col = 'cyan' 
+
+        if x!=y :
+            line_col = 'red' 
 
         while curr <= smax :
-            print(self.dif_sign + ' ' + clr(no,'cyan') + ' '*(3 - len(no)) + self.dif_sign,end = '')
+
+            print(self.dif_sign + ' ' + clr(no,line_col) + ' '*(3 - len(no)) + self.dif_sign,end = '')
             tx = ''
             if xNull == True :
                 tx = clr('(null)',self.information) + ' ' * (self.box_weight - 6)
