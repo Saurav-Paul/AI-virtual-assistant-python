@@ -19,6 +19,7 @@ template_path = {
 }
 cf_tool_mode = False
 
+DEBUG = True
 editor = '$NONE'
 editor_name = 'NONE'
 coder_name = bot['boss']
@@ -67,6 +68,13 @@ try :
     compiler['c++ debug'] = x['cpp_debug']
     compiler['python'] = x['python']
 
+    section = 'developer'
+    x = obj.read(conf_path,section=section)
+    
+    if x['debug'].lower() in positive:
+        DEBUG = True
+    else :
+        DEBUG = False
 
 
 except Exception as e:

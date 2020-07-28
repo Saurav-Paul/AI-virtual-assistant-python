@@ -11,7 +11,7 @@ try :
     import socket
     import getpass
     from settings.compiler import competitive_companion_port, parse_problem_with_template
-    from settings.compiler import template_path , coder_name , editor
+    from settings.compiler import template_path , coder_name , editor , DEBUG 
     from system.get_time import digital_time
     from data.get_template import get_template
     from tools.run_program import if_run_type
@@ -110,6 +110,7 @@ class table:
         sx = len(x)
         sy = len(y)
         curr = 0 
+        
 
         xNull = False
         yNull = False
@@ -122,9 +123,14 @@ class table:
         
 
         smax = max(sx,sy)
+        line_col = 'cyan' 
+
+        if x!=y :
+            line_col = 'red' 
 
         while curr <= smax :
-            print(self.dif_sign + ' ' + clr(no,'cyan') + ' '*(3 - len(no)) + self.dif_sign,end = '')
+
+            print(self.dif_sign + ' ' + clr(no,line_col) + ' '*(3 - len(no)) + self.dif_sign,end = '')
             tx = ''
             if xNull == True :
                 tx = clr('(null)',self.information) + ' ' * (self.box_weight - 6)
@@ -663,14 +669,40 @@ class Cp_login:
             
             print()
 
-            # cprint(' Enter your username : ','cyan',end='')
-            # username = input()
-            # password = getpass.getpass(prompt=' Enter your password : ')
-            # cmd = "USERNAME=$USERNAME PASSWORD=$PASS oj-api login-service " + oj + '> .status'
-            # cmd = cmd.replace("$USERNAME",username) 
-            # cmd = cmd.replace("$PASS",password) 
+            cli = False 
 
-            cmd = 'oj login ' + oj
+            cli_available = [
+                'codeforces.com',
+                'atcoder.jp'
+            ]
+
+            for judge in cli_available: 
+                if judge in oj :
+                    cprint(' Login using,', 'yellow')
+
+                    print()
+                    cprint('  1) Command line interface.','blue')
+                    cprint('  2) Using browser (Need Webdriver installed in the system).','blue')
+                    print()
+
+                    cprint(' Enter the index no : ','cyan',end='')
+                    index = int(input())
+
+                    print()
+
+                    if index == 1 :
+                        cli = True
+
+            if cli :
+                cprint(' Enter your username : ','cyan',end='')
+                username = input()
+                password = getpass.getpass(prompt=' Enter your password : ')
+                cmd = "USERNAME=$USERNAME PASSWORD=$PASS oj-api login-service " + oj + '> .status'
+                cmd = cmd.replace("$USERNAME",username) 
+                cmd = cmd.replace("$PASS",password) 
+
+            else :
+                cmd = 'oj login ' + oj
 
             # print(cmd)
             print()
@@ -682,16 +714,20 @@ class Cp_login:
             cprint('-'*len(xt),'magenta')
             print()
 
-            # with open('.status','r') as f:
-            #     cp = f.read()
-            # cp = json.loads(cp)
-            # if cp["result"]['loggedIn']:
-            #     cprint(" (^-^) Logged in successfully....",'green')
-            # else :
-            #     cprint(" (-_-) Login failed. May be wrong wrong username or password.",'red')
-            # os.remove('.status')
+            if cli :
+                with open('.status','r') as f:
+                    cp = f.read()
+                cp = json.loads(cp)
+                if cp["result"]['loggedIn']:
+                    cprint(" (^-^) Logged in successfully....",'green')
+                else :
+                    cprint(" (-_-) Login failed. May be wrong wrong username or password.",'red')
+                os.remove('.status')
+
+
         except Exception as e:
-            # print(e)
+            if DEBUG :
+                cprint('Error : ' + e , 'red')
             # cprint("Login failed. (Sad)",'red')
             cprint(" (^_^) Login failed. May be wrong wrong username or password.",'red')
             pass
@@ -720,7 +756,8 @@ class Cp_Test:
             pt = ('-'*20+'-'*len(file_name)+'-'*20)
             cprint(pt,'magenta')
         except Exception as e:
-            print(e)
+            if DEBUG :
+                print(e)
             cprint("Got some error. :(",'red')
 
     def find_files(self,file_name=''):
