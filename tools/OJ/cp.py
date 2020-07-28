@@ -3,6 +3,7 @@ try :
     import webbrowser
     import subprocess
     import json
+    from threading import Timer
     from termcolor import colored as clr , cprint
     import time
     from itertools import zip_longest
@@ -280,8 +281,34 @@ class Cp_my_tester:
     #         tle = True
     #     return (result,tle)
 
+    def sub_process(self,cmd,value) :
 
-    def sub_process(self,cmd,value):
+        t = time.time()
+
+        tle = False
+        kill = lambda process: process.kill()
+        x = subprocess.Popen(
+            cmd, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+        my_timer = Timer(self.TLE, kill, [x])
+
+        try:
+            my_timer.start()
+            with x.stdin as f:
+                f.write(value.encode())
+                result = (x.communicate()[0]).decode('utf-8')
+        finally:
+            my_timer.cancel()
+        pass
+        
+        t = time.time() - t
+
+        if(t >= self.TLE) :
+            tle = True
+
+        return (result,tle)
+
+
+    def sub_process_old(self,cmd,value):
 
         x = subprocess.Popen(cmd,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
         with x.stdin as f:
@@ -347,7 +374,7 @@ class Cp_my_tester:
         pt='-'*20+file_name+'-'*20
         cprint(pt,'magenta')
         pt = (' '*17+"...Testing...")
-        cprint(pt,'blue')
+        cprint(pt,'cyan')
         print()
 
         case_folder = 'testcases'
@@ -388,7 +415,7 @@ class Cp_my_tester:
             t = time.time() - t
             t = '{:.4f}'.format(t)
             pt = (f' #  Compilation time {t} s')
-            cprint(pt,'blue')
+            cprint(pt,'cyan')
         passed = 0 
         failed = 0
         test_files =[]
@@ -426,6 +453,8 @@ class Cp_my_tester:
             with open(os.path.join(file_path,file),'r') as f:
                 value = f.read()
             t = time.time()
+            print()
+            cprint('  * '+ext[0],'yellow')
             if type == 'cpp':
                 result = self.sub_process(['./test.out'],value)
             elif type =='py':
@@ -442,8 +471,6 @@ class Cp_my_tester:
             # t = '{:.4}'.format(t)
             t = f'{t:.4f}'
             # print('code :\n',result)
-            print()
-            cprint('  * '+ext[0],'yellow')
             cprint('  * Time : ','cyan',end='')
             if tle :
                 cprint('TLE','red')
