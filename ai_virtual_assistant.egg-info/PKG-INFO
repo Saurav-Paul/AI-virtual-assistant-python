@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ai-virtual-assistant
-Version: 1.0.2
+Version: 1.0.3
 Summary: CLI virtual assitant for competitive programming
 Home-page: https://github.com/Saurav-Paul/AI-virtual-assistant-python
 Author: Saurav Paul
@@ -506,7 +506,7 @@ Description: # AI virtual assitant
         
 Keywords: ai virtual assitant
 Platform: UNKNOWN
-Classifier: Development Status :: 4 - Beta
+Classifier: Development Status :: 5 - Production/Stable
 Classifier: Environment :: Console
 Classifier: Intended Audience :: End Users/Desktop
 Classifier: Operating System :: POSIX :: Linux

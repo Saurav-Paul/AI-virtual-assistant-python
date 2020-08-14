@@ -215,6 +215,11 @@ class Cp_my_tester:
 
     TLE = 4
 
+    def empty_line_remover(self,text) :
+        # text = "".join([text for text in text.strip().splitlines(True) if text.strip("\r\n")])
+        text = "".join([text for text in text.strip().splitlines(True) if text.strip()])
+        return text 
+
     def diff_print(self,name,value,color):
         cprint('  '+name+' :','yellow',attrs=['bold'])
         for x in value:
@@ -296,9 +301,14 @@ class Cp_my_tester:
             with x.stdin as f:
                 f.write(value.encode())
                 result = (x.communicate()[0]).decode('utf-8')
+
+        except Exception as e:
+            cprint(e,'red')
+            pass
+
         finally:
             my_timer.cancel()
-        pass
+
         
         t = time.time() - t
 
@@ -452,6 +462,7 @@ class Cp_my_tester:
             ext = file.rsplit(sep='.',maxsplit=1)
             with open(os.path.join(file_path,file),'r') as f:
                 value = f.read()
+            value = self.empty_line_remover(value)
             t = time.time()
             print()
             cprint('  * '+ext[0],'yellow')
