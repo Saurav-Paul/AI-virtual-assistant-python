@@ -283,8 +283,6 @@ class Cp_my_tester:
         
         t = time.time() - t
 
-        print(x.returncode)
-
         if( x.returncode != 0 ) :
             self.RTE = True
 
