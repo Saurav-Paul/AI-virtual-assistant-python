@@ -214,6 +214,7 @@ class table:
 class Cp_my_tester:
 
     TLE = 4
+    RTE = False
 
     def empty_line_remover(self,text) :
         # text = "".join([text for text in text.strip().splitlines(True) if text.strip("\r\n")])
@@ -248,43 +249,11 @@ class Cp_my_tester:
         i = value.split('\n')
         pt  = '  '+'-'*5+'Problem Found in '+case+'-'*5
         cprint(pt,'yellow')
-        # print('Input :')
-        # print(value)
         self.diff_print('Input',i,'cyan')
-        # self.diff_print('Output',x)
         self.colorfull_diff_print(x,y)
-        # self.diff_print('Expected',y,'green')
 
         obj = table()
         obj.print(output,expected)
-        # print('Output :')
-        # print(output)
-        # print("Expected :")
-        # print(expected)
-        return 
-        # print("  Difference :")
-        # for wx,wy in zip_longest(x,y,fillvalue=''):
-        #     print('  ',end='')
-        #     for o , e in zip_longest(wx,wy,fillvalue=''):
-        #         if(o == e):
-        #             cprint(o,'green',end='')
-        #         else :
-        #             cprint(o,'red',end='')
-        #             cprint(e,'yellow',end='')
-        #     print()
-        # cprint('  '+'-'*(len(pt)-2),'yellow')
-
-    # def sub_process(self,cmd,value):
-    #     tle = False
-    #     try :
-    #         x = subprocess.call(cmd,stdin=subprocess.PIPE,stdout=subprocess.PIPE,timeout=self.TLE)
-    #         with x.stdin as f:
-    #             f.write(value.encode())
-    #             result = (x.communicate()[0]).decode('utf-8')
-    #     except :
-    #         result = "$TLE$"
-    #         tle = True
-    #     return (result,tle)
 
     def sub_process(self,cmd,value) :
 
@@ -293,8 +262,10 @@ class Cp_my_tester:
         tle = False
         kill = lambda process: process.kill()
         x = subprocess.Popen(
-            cmd, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+            cmd, stdout=subprocess.PIPE, stdin=subprocess.PIPE,stderr=subprocess.STDOUT)
         my_timer = Timer(self.TLE, kill, [x])
+
+
 
         try:
             my_timer.start()
@@ -311,6 +282,11 @@ class Cp_my_tester:
 
         
         t = time.time() - t
+
+        print(x.returncode)
+
+        if( x.returncode != 0 ) :
+            self.RTE = True
 
         if(t >= self.TLE) :
             tle = True
@@ -378,7 +354,7 @@ class Cp_my_tester:
 
 
 
-    def test(self,file_name,show=False):
+    def test(self,file_name,show=False,debug_run=False):
         path = os.getcwd()
         # print(path, file_name)
         pt='-'*20+file_name+'-'*20
@@ -386,6 +362,10 @@ class Cp_my_tester:
         pt = (' '*17+"...Testing...")
         cprint(pt,'cyan')
         print()
+
+        debug_flag = ''
+        if debug_run :
+            debug_flag = '-DPAUL -DLOCAL'
 
         case_folder = 'testcases'
         if os.path.isdir(case_folder):
@@ -416,7 +396,7 @@ class Cp_my_tester:
                 type = 'py'
         
         if type == 'cpp':
-            cmd = f"g++ '{file_name}' -o test.out"
+            cmd = f"g++ {debug_flag} '{file_name}' -o test.out"
             t = time.time()
             okk = os.system(cmd)
             if okk != 0:
@@ -458,10 +438,12 @@ class Cp_my_tester:
         for f in test_files:
             file = f[0]
             out = f[1]
+            self.RTE = False
             # print(f'testing {file} with {out}')
             ext = file.rsplit(sep='.',maxsplit=1)
             with open(os.path.join(file_path,file),'r') as f:
                 value = f.read()
+            old_value = value
             value = self.empty_line_remover(value)
             t = time.time()
             print()
@@ -474,6 +456,8 @@ class Cp_my_tester:
                 result = ('',False)
             tle = result[1]
             result = result[0]
+
+            value = old_value # returning the old value
 
             t = time.time() - t
             if t > st:
@@ -492,7 +476,12 @@ class Cp_my_tester:
             with open(os.path.join(file_path,out)) as f:
                 ans = f.read()
             # print('Expected :\n',ans)
-            if result == ans:
+            if self.RTE :
+                cprint('  * RTE', 'yellow',attrs=['bold'])
+                self.different(value,result,ans,ext[0])
+                failed += 1
+
+            elif result == ans:
                 cprint('  * Passed','green')
                 passed += 1
                 if show == True :
@@ -528,7 +517,7 @@ class Cp_my_tester:
         pt='-'*20+'-'*len(file_name)+'-'*20
         cprint(pt,'magenta')
 
-    def find_files(self,file_name='',show=False):
+    def find_files(self,file_name='',show=False,debug_run=False):
 
         file_list = []
         # print(file_name)
@@ -546,7 +535,7 @@ class Cp_my_tester:
         # print(file_list)
         sz = len(file_list)
         if sz == 1:
-            self.test(file_list[0],show)
+            self.test(file_list[0],show,debug_run)
         elif sz > 1:
             no = 1
             cprint("All the available files are given below.\n",'yellow')
@@ -563,7 +552,7 @@ class Cp_my_tester:
                     cprint("Testing operation cancelled.",'red')
                     break
                 elif index < no:
-                    self.test(file_list[index-1],show)
+                    self.test(file_list[index-1],show,debug_run)
                     break
                 else:
                     cprint("You have entered the wrong index.Please try again.",'red')
@@ -2212,10 +2201,14 @@ def cp_manager(msg):
         obj = Cp_my_tester()
         # obj.TLE = 1
         show = False
+        debug_run = False
+        if '-d' in ar :
+            msg = msg.replace('-d','')
+            debug_run = True
         if '--show' in ar :
             msg = msg.replace('--show','')
             show = True
-        obj.find_files(msg,show)
+        obj.find_files(msg,show,debug_run)
     elif 'setup' in ar:
         obj = Cp_setup()
         obj.setup()
