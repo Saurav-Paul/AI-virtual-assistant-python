@@ -213,7 +213,7 @@ class table:
 
 class Cp_my_tester:
 
-    TLE = 4
+    TLE = 5
     RTE = False
 
     def empty_line_remover(self,text) :
@@ -264,8 +264,6 @@ class Cp_my_tester:
         x = subprocess.Popen(
             cmd, stdout=subprocess.PIPE, stdin=subprocess.PIPE,stderr=subprocess.STDOUT)
         my_timer = Timer(self.TLE, kill, [x])
-
-
 
         try:
             my_timer.start()
@@ -394,7 +392,9 @@ class Cp_my_tester:
                 type = 'py'
         
         if type == 'cpp':
-            cmd = f"g++ {debug_flag} '{file_name}' -o test.out"
+            sanitizer = "-Wshadow -Wconversion -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC -g"
+
+            cmd = f"g++ {debug_flag} {sanitizer} '{file_name}' -o test.out"
             t = time.time()
             okk = os.system(cmd)
             if okk != 0:
@@ -475,7 +475,7 @@ class Cp_my_tester:
                 ans = f.read()
             # print('Expected :\n',ans)
             if self.RTE :
-                cprint('  * RTE', 'yellow',attrs=['bold'])
+                cprint('  * RTE', 'red')
                 self.different(value,result,ans,ext[0])
                 failed += 1
 
