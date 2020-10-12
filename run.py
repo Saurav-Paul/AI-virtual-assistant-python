@@ -1,7 +1,7 @@
-from settings._first_load_ import check_if_first_time
+import os
+import sys
+
 from main import main
-import sys , os
-from settings.settings import read_bot
 from system.path import getpath
 
 
